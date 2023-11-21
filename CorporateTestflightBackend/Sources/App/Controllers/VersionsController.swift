@@ -1,5 +1,6 @@
 import Fluent
 import Vapor
+import CorporateTestflightDomain
 
 struct VersionsController: RouteCollection {
 
@@ -8,7 +9,7 @@ struct VersionsController: RouteCollection {
         versions.get(use: index)
     }
 
-    func index(req: Request) async throws -> [Version] {
-        try await Version.query(on: req.db).all()
+    func index(req: Request) async throws -> [CorporateTestflightDomain.Version] {
+        try await req.factory.versionsRepository().getVersions()
     }
 }

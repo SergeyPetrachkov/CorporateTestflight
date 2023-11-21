@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:CorporateTestflightClient/../CorporateTestflightPlatform/CorporateTestflightPlatform.xcodeproj">
+      location = "group:CorporateTestflightShared">
+   </FileRef>
+   <FileRef
+      location = "group:CorporateTestflightPlatform/../CorporateTestflightBackend">
+   </FileRef>
+   <FileRef
+      location = "group:CorporateTestflightPlatform/../CorporateTestflightClient/CorporateTestflightClient.xcodeproj">
    </FileRef>
 </Workspace>

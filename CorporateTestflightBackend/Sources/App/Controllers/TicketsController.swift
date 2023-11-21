@@ -1,5 +1,6 @@
 import Fluent
 import Vapor
+import CorporateTestflightDomain
 
 struct TicketsController: RouteCollection {
 
@@ -11,24 +12,14 @@ struct TicketsController: RouteCollection {
         }
     }
 
-    func index(req: Request) async throws -> [Ticket] {
-        try await Ticket.query(on: req.db).all()
+    func index(req: Request) async throws -> [CorporateTestflightDomain.Ticket] {
+        try await req.factory.ticketsRepository().getTickets()
     }
 
-    func show(req: Request) async throws -> Ticket {
+    func show(req: Request) async throws -> CorporateTestflightDomain.Ticket {
         guard let keyParam = req.parameters.get("key") else {
             throw Abort(.badRequest)
         }
-
-        guard
-            let ticket = try await Ticket
-                .query(on: req.db)
-                .filter(\.$key == keyParam)
-                .all()
-                .last
-        else {
-            throw Abort(.notFound)
-        }
-        return ticket
+        return try await req.factory.ticketsRepository().getTicket(request: .byKey(keyParam))
     }
 }

@@ -1,5 +1,6 @@
 import Fluent
 import Vapor
+import CorporateTestflightDomain
 
 struct ProjectsController: RouteCollection {
 
@@ -11,14 +12,17 @@ struct ProjectsController: RouteCollection {
         }
     }
 
-    func index(req: Request) async throws -> [Project] {
-        try await Project.query(on: req.db).all()
+    func index(req: Request) async throws -> [CorporateTestflightDomain.Project] {
+        try await req.factory.projectsRepository().getProjects()
     }
 
-    func show(req: Request) async throws -> Project {
-        guard let project = try await Project.find(req.parameters.get("id"), on: req.db) else {
-            throw Abort(.notFound)
+    func show(req: Request) async throws -> CorporateTestflightDomain.Project {
+        guard
+            let uuidString = req.parameters.get("id"),
+            let uuid = UUID(uuidString: uuidString)
+        else {
+            throw Abort(.badRequest)
         }
-        return project
+        return try await req.factory.projectsRepository().getProject(by: uuid)
     }
 }
