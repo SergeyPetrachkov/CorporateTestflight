@@ -14,6 +14,8 @@
 		3974E6602B08B3F3003C408E /* CorporateTestflightClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3974E65F2B08B3F3003C408E /* CorporateTestflightClientTests.swift */; };
 		3974E66A2B08B3F3003C408E /* CorporateTestflightClientUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3974E6692B08B3F3003C408E /* CorporateTestflightClientUITests.swift */; };
 		3974E66C2B08B3F3003C408E /* CorporateTestflightClientUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3974E66B2B08B3F3003C408E /* CorporateTestflightClientUITestsLaunchTests.swift */; };
+		39C4A1882B10AAF3005F1912 /* TestflightNetworking in Frameworks */ = {isa = PBXBuildFile; productRef = 39C4A1872B10AAF3005F1912 /* TestflightNetworking */; };
+		39C4A18A2B10AAF3005F1912 /* CorporateTestflightDomain in Frameworks */ = {isa = PBXBuildFile; productRef = 39C4A1892B10AAF3005F1912 /* CorporateTestflightDomain */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39C4A18A2B10AAF3005F1912 /* CorporateTestflightDomain in Frameworks */,
+				39C4A1882B10AAF3005F1912 /* TestflightNetworking in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +82,7 @@
 				3974E65E2B08B3F3003C408E /* CorporateTestflightClientTests */,
 				3974E6682B08B3F3003C408E /* CorporateTestflightClientUITests */,
 				3974E64C2B08B3F0003C408E /* Products */,
+				39C4A1862B10AAF3005F1912 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -127,6 +132,13 @@
 			path = CorporateTestflightClientUITests;
 			sourceTree = "<group>";
 		};
+		39C4A1862B10AAF3005F1912 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,6 +155,10 @@
 			dependencies = (
 			);
 			name = CorporateTestflightClient;
+			packageProductDependencies = (
+				39C4A1872B10AAF3005F1912 /* TestflightNetworking */,
+				39C4A1892B10AAF3005F1912 /* CorporateTestflightDomain */,
+			);
 			productName = CorporateTestflightClient;
 			productReference = 3974E64B2B08B3F0003C408E /* CorporateTestflightClient.app */;
 			productType = "com.apple.product-type.application";
@@ -582,6 +598,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		39C4A1872B10AAF3005F1912 /* TestflightNetworking */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TestflightNetworking;
+		};
+		39C4A1892B10AAF3005F1912 /* CorporateTestflightDomain */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CorporateTestflightDomain;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3974E6432B08B3F0003C408E /* Project object */;
 }
