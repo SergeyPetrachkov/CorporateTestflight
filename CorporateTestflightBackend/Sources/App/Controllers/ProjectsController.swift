@@ -18,11 +18,11 @@ struct ProjectsController: RouteCollection {
 
     func show(req: Request) async throws -> CorporateTestflightDomain.Project {
         guard
-            let uuidString = req.parameters.get("id"),
-            let uuid = UUID(uuidString: uuidString)
+            let stringId = req.parameters.get("id"),
+            let intId = Int(stringId)
         else {
             throw Abort(.badRequest)
         }
-        return try await req.factory.projectsRepository().getProject(by: uuid)
+        return try await req.factory.projectsRepository().getProject(by: intId)
     }
 }

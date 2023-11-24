@@ -2,12 +2,12 @@ import Foundation
 
 public struct Project {
 
-    public typealias ID = UUID
+    public typealias ID = Int
 
     public let id: ID
     public let name: String
 
-    public init(id: UUID, name: String) {
+    public init(id: ID, name: String) {
         self.id = id
         self.name = name
     }

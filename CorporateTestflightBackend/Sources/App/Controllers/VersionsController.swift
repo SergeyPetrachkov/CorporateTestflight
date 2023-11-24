@@ -10,6 +10,9 @@ struct VersionsController: RouteCollection {
     }
 
     func index(req: Request) async throws -> [CorporateTestflightDomain.Version] {
-        try await req.factory.versionsRepository().getVersions()
+        guard let projectId = req.query[Int.self, at: "projectId"] else {
+            throw Abort(.badRequest)
+        }
+        return try await req.factory.versionsRepository().getVersions(request: .init(projectId: projectId))
     }
 }

@@ -3,15 +3,18 @@ import Fluent
 
 final class Project {
 
-    @ID(key: .id)
-    var id: UUID?
+    @ID(custom: "id")
+    var id: Int?
 
     @Field(key: "name")
     var name: String
 
+    @Children(for: \.$project)
+    var versions: [Version]
+
     init() { }
 
-    init(id: UUID? = nil, name: String) {
+    init(id: Int? = nil, name: String) {
         self.id = id
         self.name = name
     }

@@ -9,7 +9,7 @@ public struct Version {
     public let releaseNotes: String?
     public let associatedTicketKeys: [String]
 
-    public init(id: UUID, buildNumber: Int, releaseNotes: String? = nil, associatedTicketKeys: [String]) {
+    public init(id: ID, buildNumber: Int, releaseNotes: String? = nil, associatedTicketKeys: [String]) {
         self.id = id
         self.buildNumber = buildNumber
         self.releaseNotes = releaseNotes

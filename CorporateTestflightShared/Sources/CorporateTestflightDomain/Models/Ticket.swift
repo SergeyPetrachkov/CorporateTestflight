@@ -9,7 +9,7 @@ public struct Ticket {
     public let title: String
     public let description: String
 
-    public init(id: UUID, key: String, title: String, description: String) {
+    public init(id: ID, key: String, title: String, description: String) {
         self.id = id
         self.key = key
         self.title = title

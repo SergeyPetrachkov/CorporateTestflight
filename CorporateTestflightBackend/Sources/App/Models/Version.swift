@@ -19,11 +19,15 @@ final class Version: Model, Content {
     @Field(key: "associatedTicketKeys")
     var associatedTicketKeys: [String]
 
-    init(id: UUID? = nil, buildNumber: Int, releaseNotes: String? = nil, associatedTicketKeys: [String]) {
+    @Parent(key: "projectId")
+    var project: Project
+
+    init(id: UUID? = nil, buildNumber: Int, releaseNotes: String? = nil, associatedTicketKeys: [String], projectId: Project.IDValue) {
         self.id = id
         self.buildNumber = buildNumber
         self.releaseNotes = releaseNotes
         self.associatedTicketKeys = associatedTicketKeys
+        self.$project.id = projectId
     }
 
     init() { }

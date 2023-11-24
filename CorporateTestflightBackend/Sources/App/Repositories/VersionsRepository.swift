@@ -10,8 +10,16 @@ struct VersionsRepositoryImpl: VersionsRepository {
         self.database = database
     }
 
-    func getVersions() async throws -> [CorporateTestflightDomain.Version] {
-        let persistedEntities = try await Version.query(on: database).all()
+    func getVersions(request: CorporateTestflightDomain.VersionsRequest) async throws -> [CorporateTestflightDomain.Version] {
+
+        guard let persistedProject = try await Project.find(request.projectId, on: database) else {
+            throw Abort(.notFound)
+        }
+
+        let persistedEntities = try await persistedProject
+            .$versions
+            .query(on: database)
+            .all()
 
         return persistedEntities.compactMap { persistedEntity in
             guard let id = persistedEntity.id else {

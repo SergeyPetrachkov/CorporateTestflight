@@ -3,7 +3,8 @@ import Fluent
 struct CreateProjects: AsyncMigration {
 
     private let prepopulatedData: [Project] = [
-        .init(name: "Successful Startup")
+        .init(id: 1, name: "Successful Startup"),
+        .init(id: 2, name: "Less than ideal Startup")
     ]
 
     func prepare(on database: Database) async throws {

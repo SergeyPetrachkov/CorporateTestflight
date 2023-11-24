@@ -11,9 +11,9 @@ public func configure(_ app: Application) async throws {
 
     app.databases.use(DatabaseConfigurationFactory.sqlite(.file("db.sqlite")), as: .sqlite)
 
+    app.migrations.add(CreateProjects())
     app.migrations.add(CreateTickets())
     app.migrations.add(CreateVersions())
-    app.migrations.add(CreateProjects())
 
     try await app.autoMigrate()
     // register routes
