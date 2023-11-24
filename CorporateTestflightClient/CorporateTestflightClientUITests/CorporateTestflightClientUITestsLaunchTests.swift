@@ -2,7 +2,7 @@
 //  CorporateTestflightClientUITestsLaunchTests.swift
 //  CorporateTestflightClientUITests
 //
-//  Created by Sergey Petrachkov on 18.11.2023.
+//  Created by Sergey Petrachkov on 24.11.2023.
 //
 
 import XCTest

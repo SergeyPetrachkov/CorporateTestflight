@@ -11,6 +11,6 @@
       location = "group:CorporateTestflightClientCore">
    </FileRef>
    <FileRef
-      location = "group:CorporateTestflightPlatform/../CorporateTestflightClient/CorporateTestflightClient.xcodeproj">
+      location = "group:CorporateTestflightClient/CorporateTestflightClient.xcodeproj">
    </FileRef>
 </Workspace>
