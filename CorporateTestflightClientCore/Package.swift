@@ -15,12 +15,17 @@ let testflightNetworking = "TestflightNetworking"
 let testflightNetworkingTarget = Target.target(name: testflightNetworking, dependencies: [domainTargetDependency, coreNetworkingDependency], path: path(for: testflightNetworking))
 let testflightNetworkingProduct = Product.library(name: testflightNetworking, targets: [testflightNetworking])
 
+let testflightUIKit = "TestflightUIKit"
+let testflightUIKitTarget = Target.target(name: testflightUIKit, path: path(for: testflightUIKit))
+let testflightUIKitProduct = Product.library(name: testflightUIKit, targets: [testflightUIKit])
+
 let package = Package(
     name: "CorporateTestflightClientCore",
     platforms: [.macOS(.v13), .iOS(.v16)],
     products: [
         coreNetworkingProduct,
-        testflightNetworkingProduct
+        testflightNetworkingProduct,
+        testflightUIKitProduct
     ],
     dependencies: [
         sharedPackage,
@@ -28,6 +33,7 @@ let package = Package(
     targets: [
         coreNetworkingTarget,
         testflightNetworkingTarget,
+        testflightUIKitTarget
     ]
 )
 

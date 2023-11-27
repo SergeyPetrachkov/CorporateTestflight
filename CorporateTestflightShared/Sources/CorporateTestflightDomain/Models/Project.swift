@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Project {
+public struct Project: Sendable {
 
     public typealias ID = Int
 
