@@ -15,6 +15,8 @@
 		3998F24D2B14EDD600D7CB90 /* VersionListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3998F24C2B14EDD600D7CB90 /* VersionListCell.swift */; };
 		3998F24F2B14EEB200D7CB90 /* TestflightUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3998F24E2B14EEB200D7CB90 /* TestflightUIKit */; };
 		3998F2512B14F07300D7CB90 /* VersionsListViewController+Build.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3998F2502B14F07300D7CB90 /* VersionsListViewController+Build.swift */; };
+		3998F2552B18843700D7CB90 /* VersionsListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3998F2542B18843700D7CB90 /* VersionsListCoordinator.swift */; };
+		3998F2582B188C2800D7CB90 /* VersionsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3998F2572B188C2800D7CB90 /* VersionsRepository.swift */; };
 		39C3BFEF2B10B07A00F5D10D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C3BFEE2B10B07A00F5D10D /* AppDelegate.swift */; };
 		39C3BFF12B10B07A00F5D10D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C3BFF02B10B07A00F5D10D /* SceneDelegate.swift */; };
 		39C3BFF32B10B07A00F5D10D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C3BFF22B10B07A00F5D10D /* ViewController.swift */; };
@@ -55,6 +57,8 @@
 		3998F24A2B14ED8E00D7CB90 /* VersionsListModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionsListModels.swift; sourceTree = "<group>"; };
 		3998F24C2B14EDD600D7CB90 /* VersionListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionListCell.swift; sourceTree = "<group>"; };
 		3998F2502B14F07300D7CB90 /* VersionsListViewController+Build.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VersionsListViewController+Build.swift"; sourceTree = "<group>"; };
+		3998F2542B18843700D7CB90 /* VersionsListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionsListCoordinator.swift; sourceTree = "<group>"; };
+		3998F2572B188C2800D7CB90 /* VersionsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionsRepository.swift; sourceTree = "<group>"; };
 		39C3BFEB2B10B07A00F5D10D /* CorporateTestflightClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CorporateTestflightClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39C3BFEE2B10B07A00F5D10D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		39C3BFF02B10B07A00F5D10D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -112,13 +116,8 @@
 		3998F2402B14ECED00D7CB90 /* VersionsList */ = {
 			isa = PBXGroup;
 			children = (
-				3998F2422B14ED0900D7CB90 /* VersionsListViewController.swift */,
-				3998F2442B14ED1100D7CB90 /* VersionsListInteractor.swift */,
-				3998F2462B14ED1A00D7CB90 /* VersionsListPresenter.swift */,
-				3998F2482B14ED2700D7CB90 /* VersionsListWorker.swift */,
-				3998F24A2B14ED8E00D7CB90 /* VersionsListModels.swift */,
-				3998F24C2B14EDD600D7CB90 /* VersionListCell.swift */,
-				3998F2502B14F07300D7CB90 /* VersionsListViewController+Build.swift */,
+				3998F2532B18842400D7CB90 /* Flow */,
+				3998F2522B18841E00D7CB90 /* VIP */,
 			);
 			path = VersionsList;
 			sourceTree = "<group>";
@@ -128,6 +127,36 @@
 			children = (
 			);
 			path = VersionDetails;
+			sourceTree = "<group>";
+		};
+		3998F2522B18841E00D7CB90 /* VIP */ = {
+			isa = PBXGroup;
+			children = (
+				3998F2422B14ED0900D7CB90 /* VersionsListViewController.swift */,
+				3998F2442B14ED1100D7CB90 /* VersionsListInteractor.swift */,
+				3998F2462B14ED1A00D7CB90 /* VersionsListPresenter.swift */,
+				3998F2482B14ED2700D7CB90 /* VersionsListWorker.swift */,
+				3998F24A2B14ED8E00D7CB90 /* VersionsListModels.swift */,
+				3998F24C2B14EDD600D7CB90 /* VersionListCell.swift */,
+				3998F2502B14F07300D7CB90 /* VersionsListViewController+Build.swift */,
+			);
+			path = VIP;
+			sourceTree = "<group>";
+		};
+		3998F2532B18842400D7CB90 /* Flow */ = {
+			isa = PBXGroup;
+			children = (
+				3998F2542B18843700D7CB90 /* VersionsListCoordinator.swift */,
+			);
+			path = Flow;
+			sourceTree = "<group>";
+		};
+		3998F2562B188C0D00D7CB90 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				3998F2572B188C2800D7CB90 /* VersionsRepository.swift */,
+			);
+			path = Repositories;
 			sourceTree = "<group>";
 		};
 		39C3BFE22B10B07A00F5D10D = {
@@ -155,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				39C3C0232B10B10800F5D10D /* Application */,
+				3998F2562B188C0D00D7CB90 /* Repositories */,
 				39C3C0242B10B11300F5D10D /* Flow */,
 				3998F23F2B14ECC900D7CB90 /* Scenes */,
 				39C3BFF22B10B07A00F5D10D /* ViewController.swift */,
@@ -346,7 +376,9 @@
 			files = (
 				39C3C0262B10B12200F5D10D /* AppCoordinator.swift in Sources */,
 				39C3C0282B10B14100F5D10D /* DependencyContainer.swift in Sources */,
+				3998F2582B188C2800D7CB90 /* VersionsRepository.swift in Sources */,
 				39C3BFF32B10B07A00F5D10D /* ViewController.swift in Sources */,
+				3998F2552B18843700D7CB90 /* VersionsListCoordinator.swift in Sources */,
 				3998F2472B14ED1A00D7CB90 /* VersionsListPresenter.swift in Sources */,
 				3998F2512B14F07300D7CB90 /* VersionsListViewController+Build.swift in Sources */,
 				3998F2452B14ED1100D7CB90 /* VersionsListInteractor.swift in Sources */,

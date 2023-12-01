@@ -1,7 +1,10 @@
 import UIKit
 import TestflightUIKit
 
-protocol VersionsListViewControlling: AnyObject {}
+@MainActor
+protocol VersionsListViewControlling: AnyObject {
+    func showVersions(_ versions: [VersionsListModels.VersionViewModel])
+}
 
 final class VersionsListViewController: UIViewController, VersionsListViewControlling {
 
@@ -33,9 +36,27 @@ final class VersionsListViewController: UIViewController, VersionsListViewContro
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
+        makeLayout()
+        interactor.viewDidLoad()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        interactor.viewWillUnload()
+    }
+
+    override func willMove(toParent parent: UIViewController?) {
+        super.willMove(toParent: parent)
+    }
+
+    func showVersions(_ versions: [VersionsListModels.VersionViewModel]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Int, VersionsListModels.VersionViewModel>()
+        snapshot.appendSections([0])
+        snapshot.appendItems(versions, toSection: 0)
+        dataSource.apply(snapshot)
     }
 }
-
 
 private extension VersionsListViewController {
 
@@ -70,7 +91,7 @@ private extension VersionsListViewController {
 
     func makeLayout() {
         view.addSubview(collectionView)
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .systemBackground
 //        collectionView.delegate = self
         collectionView.dataSource = dataSource
         collectionView.register(cellType: VersionListCell.self)
