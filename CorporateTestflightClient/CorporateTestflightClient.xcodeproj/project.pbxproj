@@ -17,6 +17,8 @@
 		3998F2512B14F07300D7CB90 /* VersionsListViewController+Build.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3998F2502B14F07300D7CB90 /* VersionsListViewController+Build.swift */; };
 		3998F2552B18843700D7CB90 /* VersionsListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3998F2542B18843700D7CB90 /* VersionsListCoordinator.swift */; };
 		3998F2582B188C2800D7CB90 /* VersionsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3998F2572B188C2800D7CB90 /* VersionsRepository.swift */; };
+		39B116DA2B1E269B00909C09 /* ArchHelpers in Frameworks */ = {isa = PBXBuildFile; productRef = 39B116D92B1E269B00909C09 /* ArchHelpers */; };
+		39B116DC2B1E272600909C09 /* ProjectsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B116DB2B1E272600909C09 /* ProjectsRepository.swift */; };
 		39C3BFEF2B10B07A00F5D10D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C3BFEE2B10B07A00F5D10D /* AppDelegate.swift */; };
 		39C3BFF12B10B07A00F5D10D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C3BFF02B10B07A00F5D10D /* SceneDelegate.swift */; };
 		39C3BFF32B10B07A00F5D10D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C3BFF22B10B07A00F5D10D /* ViewController.swift */; };
@@ -59,6 +61,7 @@
 		3998F2502B14F07300D7CB90 /* VersionsListViewController+Build.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VersionsListViewController+Build.swift"; sourceTree = "<group>"; };
 		3998F2542B18843700D7CB90 /* VersionsListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionsListCoordinator.swift; sourceTree = "<group>"; };
 		3998F2572B188C2800D7CB90 /* VersionsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionsRepository.swift; sourceTree = "<group>"; };
+		39B116DB2B1E272600909C09 /* ProjectsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsRepository.swift; sourceTree = "<group>"; };
 		39C3BFEB2B10B07A00F5D10D /* CorporateTestflightClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CorporateTestflightClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39C3BFEE2B10B07A00F5D10D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		39C3BFF02B10B07A00F5D10D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39B116DA2B1E269B00909C09 /* ArchHelpers in Frameworks */,
 				3998F24F2B14EEB200D7CB90 /* TestflightUIKit in Frameworks */,
 				39C3C0222B10B0F000F5D10D /* CorporateTestflightDomain in Frameworks */,
 				39C3C0202B10B0F000F5D10D /* TestflightNetworking in Frameworks */,
@@ -155,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				3998F2572B188C2800D7CB90 /* VersionsRepository.swift */,
+				39B116DB2B1E272600909C09 /* ProjectsRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -258,6 +263,7 @@
 				39C3C01F2B10B0F000F5D10D /* TestflightNetworking */,
 				39C3C0212B10B0F000F5D10D /* CorporateTestflightDomain */,
 				3998F24E2B14EEB200D7CB90 /* TestflightUIKit */,
+				39B116D92B1E269B00909C09 /* ArchHelpers */,
 			);
 			productName = CorporateTestflightClient;
 			productReference = 39C3BFEB2B10B07A00F5D10D /* CorporateTestflightClient.app */;
@@ -386,6 +392,7 @@
 				3998F24D2B14EDD600D7CB90 /* VersionListCell.swift in Sources */,
 				3998F2492B14ED2700D7CB90 /* VersionsListWorker.swift in Sources */,
 				3998F2432B14ED0900D7CB90 /* VersionsListViewController.swift in Sources */,
+				39B116DC2B1E272600909C09 /* ProjectsRepository.swift in Sources */,
 				3998F24B2B14ED8E00D7CB90 /* VersionsListModels.swift in Sources */,
 				39C3BFF12B10B07A00F5D10D /* SceneDelegate.swift in Sources */,
 			);
@@ -735,6 +742,10 @@
 		3998F24E2B14EEB200D7CB90 /* TestflightUIKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = TestflightUIKit;
+		};
+		39B116D92B1E269B00909C09 /* ArchHelpers */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ArchHelpers;
 		};
 		39C3C01F2B10B0F000F5D10D /* TestflightNetworking */ = {
 			isa = XCSwiftPackageProductDependency;

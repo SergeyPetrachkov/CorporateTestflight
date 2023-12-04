@@ -19,13 +19,18 @@ let testflightUIKit = "TestflightUIKit"
 let testflightUIKitTarget = Target.target(name: testflightUIKit, path: path(for: testflightUIKit))
 let testflightUIKitProduct = Product.library(name: testflightUIKit, targets: [testflightUIKit])
 
+let archHelpers = "ArchHelpers"
+let archHelpersTarget = Target.target(name: archHelpers, path: path(for: archHelpers))
+let archHelpersProduct = Product.library(name: archHelpers, targets: [archHelpers])
+
 let package = Package(
     name: "CorporateTestflightClientCore",
     platforms: [.macOS(.v13), .iOS(.v16)],
     products: [
         coreNetworkingProduct,
         testflightNetworkingProduct,
-        testflightUIKitProduct
+        testflightUIKitProduct,
+        archHelpersProduct
     ],
     dependencies: [
         sharedPackage,
@@ -33,7 +38,8 @@ let package = Package(
     targets: [
         coreNetworkingTarget,
         testflightNetworkingTarget,
-        testflightUIKitTarget
+        testflightUIKitTarget,
+        archHelpersTarget
     ]
 )
 

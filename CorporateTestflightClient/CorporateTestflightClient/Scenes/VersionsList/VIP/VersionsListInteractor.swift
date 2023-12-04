@@ -1,18 +1,5 @@
-
-protocol ViewControllerLifeCycleBoundInteractor: AnyObject {
-    func viewDidLoad()
-    func viewWillUnload()
-}
-
-protocol AsyncSingleTaskInteractor: AnyObject {
-    var currentTask: Task<Void, Never>? { get }
-}
-
-extension AsyncSingleTaskInteractor where Self: ViewControllerLifeCycleBoundInteractor {
-    func viewWillUnload() {
-        currentTask?.cancel()
-    }
-}
+import ArchHelpers
+import CorporateTestflightDomain
 
 protocol VersionsListInteractorProtocol: ViewControllerLifeCycleBoundInteractor, AsyncSingleTaskInteractor {
     func viewDidLoad()
@@ -33,15 +20,15 @@ final class VersionsListInteractor: VersionsListInteractorProtocol {
     }
 
     func viewDidLoad() {
-        currentTask = Task(operation: fetchVersions)
+        currentTask = Task(operation: fetchData)
     }
 
     @Sendable
     @MainActor
-    private func fetchVersions() async {
+    func fetchData() async {
         do {
-            let versions = try await worker.getVersions(projectId: projectId)
-            presenter.showVersions(versions)
+            let data = try await worker.fetchData(projectId: projectId)
+            presenter.showData(versions: data.versions, project: data.project)
         } catch {
             print(error)
         }

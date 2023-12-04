@@ -2,7 +2,7 @@ import Foundation
 import CorporateTestflightDomain
 import CoreNetworking
 
-public protocol TestflightAPIProviding {
+public protocol TestflightAPIProviding: Sendable {
     func getProject(id: Project.ID) async throws -> Project
     func getVersions(for projectId: Project.ID) async throws -> [Version]
     func getTicket(key: String) async throws -> Ticket

@@ -8,6 +8,8 @@ protocol DependencyContaining {
 
     var versionsRepository: VersionsRepository { get }
 
+    var projectsRepository: ProjectsRepository { get }
+
 }
 
 final class AppDependencies: DependencyContaining {
@@ -16,5 +18,9 @@ final class AppDependencies: DependencyContaining {
 
     var versionsRepository: VersionsRepository {
         VersionsRepositoryImpl(api: api)
+    }
+
+    var projectsRepository: ProjectsRepository {
+        ProjectsRepositoryImpl(api: api)
     }
 }

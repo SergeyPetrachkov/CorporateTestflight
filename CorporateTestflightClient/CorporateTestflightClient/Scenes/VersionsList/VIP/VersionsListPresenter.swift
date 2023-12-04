@@ -2,15 +2,15 @@ import CorporateTestflightDomain
 
 protocol VersionsListPresenting {
     @MainActor
-    func showVersions(_ versions: [Version])
+    func showData(versions: [Version], project: Project)
 }
 
 final class VersionsListPresenter: VersionsListPresenting {
 
     weak var controller: VersionsListViewControlling?
 
-    @MainActor
-    func showVersions(_ versions: [Version]) {
+    @MainActor // TODO: make mapping outside of the main thread
+    func showData(versions: [Version], project: Project) {
         let mappedViewModels = versions.map { version in
             let subtitle = buildSubtitle(for: version)
             return VersionsListModels.VersionViewModel(
@@ -20,6 +20,7 @@ final class VersionsListPresenter: VersionsListPresenting {
             )
         }
         controller?.showVersions(mappedViewModels)
+        controller?.showProjectName(project.name)
     }
 
     private func buildSubtitle(for version: Version) -> String {

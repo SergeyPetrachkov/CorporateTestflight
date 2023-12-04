@@ -4,6 +4,7 @@ import TestflightUIKit
 @MainActor
 protocol VersionsListViewControlling: AnyObject {
     func showVersions(_ versions: [VersionsListModels.VersionViewModel])
+    func showProjectName(_ projectName: String)
 }
 
 final class VersionsListViewController: UIViewController, VersionsListViewControlling {
@@ -41,11 +42,6 @@ final class VersionsListViewController: UIViewController, VersionsListViewContro
         interactor.viewDidLoad()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        interactor.viewWillUnload()
-    }
-
     override func willMove(toParent parent: UIViewController?) {
         super.willMove(toParent: parent)
     }
@@ -55,6 +51,10 @@ final class VersionsListViewController: UIViewController, VersionsListViewContro
         snapshot.appendSections([0])
         snapshot.appendItems(versions, toSection: 0)
         dataSource.apply(snapshot)
+    }
+
+    func showProjectName(_ projectName: String) {
+        title = projectName
     }
 }
 
