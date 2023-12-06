@@ -3,24 +3,34 @@ import CorporateTestflightDomain
 protocol VersionsListPresenting {
     @MainActor
     func showData(versions: [Version], project: Project)
+
+    @MainActor
+    func showError(_ error: Error)
 }
 
 final class VersionsListPresenter: VersionsListPresenting {
 
     weak var controller: VersionsListViewControlling?
 
-    @MainActor // TODO: make mapping outside of the main thread
     func showData(versions: [Version], project: Project) {
-        let mappedViewModels = versions.map { version in
+        let mappedViewModels = map(versions: versions)
+        controller?.showVersions(mappedViewModels)
+        controller?.showProjectName(project.name)
+    }
+
+    func showError(_ error: Error) {
+        
+    }
+
+    private func map(versions: [Version]) -> [VersionsListModels.VersionViewModel] {
+        versions.map { version in
             let subtitle = buildSubtitle(for: version)
             return VersionsListModels.VersionViewModel(
                 id: version.id,
-                title: "Build: \(version.buildNumber)", 
+                title: "Build: \(version.buildNumber)",
                 subtitle: subtitle
             )
         }
-        controller?.showVersions(mappedViewModels)
-        controller?.showProjectName(project.name)
     }
 
     private func buildSubtitle(for version: Version) -> String {

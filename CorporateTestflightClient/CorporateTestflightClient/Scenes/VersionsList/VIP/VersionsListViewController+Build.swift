@@ -6,7 +6,8 @@ extension VersionsListViewController {
     static func build(
         projectId: Int,
         versionsRepository: VersionsRepository,
-        projectsRepository: ProjectsRepository
+        projectsRepository: ProjectsRepository,
+        output: VersionsListInteractorOutput
     ) -> VersionsListViewController {
 
         let presenter = VersionsListPresenter()
@@ -18,6 +19,7 @@ extension VersionsListViewController {
                 projectsRepository: projectsRepository
             )
         )
+        interactor.output = output
 
         let controller = VersionsListViewController(interactor: interactor)
         presenter.controller = controller

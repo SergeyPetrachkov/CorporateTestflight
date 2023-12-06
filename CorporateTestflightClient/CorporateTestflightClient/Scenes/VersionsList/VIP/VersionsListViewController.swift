@@ -5,6 +5,7 @@ import TestflightUIKit
 protocol VersionsListViewControlling: AnyObject {
     func showVersions(_ versions: [VersionsListModels.VersionViewModel])
     func showProjectName(_ projectName: String)
+    func showError(_ error: Error)
 }
 
 final class VersionsListViewController: UIViewController, VersionsListViewControlling {
@@ -19,6 +20,9 @@ final class VersionsListViewController: UIViewController, VersionsListViewContro
             cellProvider: { collectionView, indexPath, version in
                 let cell = collectionView.dequeueReusableCell(for: VersionListCell.self, indexPath: indexPath)
                 cell.configure(title: version.title, subtitle: version.subtitle)
+                var configuration = UIBackgroundConfiguration.listPlainCell()
+                configuration.backgroundColorTransformer = .grayscale
+                cell.backgroundConfiguration = configuration
                 return cell
             }
         )
@@ -42,10 +46,6 @@ final class VersionsListViewController: UIViewController, VersionsListViewContro
         interactor.viewDidLoad()
     }
 
-    override func willMove(toParent parent: UIViewController?) {
-        super.willMove(toParent: parent)
-    }
-
     func showVersions(_ versions: [VersionsListModels.VersionViewModel]) {
         var snapshot = NSDiffableDataSourceSnapshot<Int, VersionsListModels.VersionViewModel>()
         snapshot.appendSections([0])
@@ -55,6 +55,22 @@ final class VersionsListViewController: UIViewController, VersionsListViewContro
 
     func showProjectName(_ projectName: String) {
         title = projectName
+    }
+
+    func showError(_ error: Error) {
+        let alertVC = UIAlertController(title: "Oops!", message: error.localizedDescription, preferredStyle: .alert)
+        alertVC.addAction(.init(title: "Ok", style: .default))
+        present(alertVC, animated: true)
+    }
+}
+
+extension VersionsListViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        guard let row = dataSource.itemIdentifier(for: indexPath) else {
+            return
+        }
+        interactor.didSelect(row: row)
     }
 }
 
@@ -92,7 +108,7 @@ private extension VersionsListViewController {
     func makeLayout() {
         view.addSubview(collectionView)
         collectionView.backgroundColor = .systemBackground
-//        collectionView.delegate = self
+        collectionView.delegate = self
         collectionView.dataSource = dataSource
         collectionView.register(cellType: VersionListCell.self)
         collectionView.translatesAutoresizingMaskIntoConstraints = false

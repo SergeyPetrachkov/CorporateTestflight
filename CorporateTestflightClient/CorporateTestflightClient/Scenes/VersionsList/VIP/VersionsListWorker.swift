@@ -6,7 +6,7 @@ protocol VersionsListWorking {
     func getProject(projectId: Int) async throws -> CorporateTestflightDomain.Project
 }
 
-final class VersionsListWorker: VersionsListWorking, Sendable {
+final class VersionsListWorker: VersionsListWorking, @unchecked Sendable {
 
     private let versionsRepository: VersionsRepository
     private let projectsRepository: ProjectsRepository
@@ -20,13 +20,8 @@ final class VersionsListWorker: VersionsListWorking, Sendable {
         async let versions = getVersions(projectId: projectId)
         async let project = getProject(projectId: projectId)
 
-        do {
-            let result = try await (project, versions)
-            return result
-        } catch {
-            print(error)
-            fatalError()
-        }
+        let result = try await (project, versions)
+        return result
     }
 
     func getVersions(projectId: Int) async throws -> [CorporateTestflightDomain.Version] {

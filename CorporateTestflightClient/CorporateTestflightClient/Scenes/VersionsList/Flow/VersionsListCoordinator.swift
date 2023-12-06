@@ -1,4 +1,5 @@
 import UIKit
+import SwiftUI
 
 struct VersionsListFlowParameters {
     let projectId: Int
@@ -23,8 +24,20 @@ final class VersionsListCoordinator {
         let versionsVC = VersionsListViewController.build(
             projectId: projectId,
             versionsRepository: dependenciesContainer.versionsRepository,
-            projectsRepository: dependenciesContainer.projectsRepository
+            projectsRepository: dependenciesContainer.projectsRepository,
+            output: self
         )
         rootViewController.setViewControllers([versionsVC], animated: true)
+    }
+}
+
+
+extension VersionsListCoordinator: VersionsListInteractorOutput {
+
+    func didEmitEvent(_ event: VersionsListEvent) {
+        let viewModel = VersionDetailsViewModel()
+        let view = VersionDetailsView(viewModel: viewModel)
+        let hostingVC = UIHostingController(rootView: view)
+        rootViewController.pushViewController(hostingVC, animated: true)
     }
 }
