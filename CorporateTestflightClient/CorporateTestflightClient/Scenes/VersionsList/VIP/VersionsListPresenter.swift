@@ -10,7 +10,11 @@ protocol VersionsListPresenting {
 
 final class VersionsListPresenter: VersionsListPresenting {
 
+    // MARK: - Injectables
+
     weak var controller: VersionsListViewControlling?
+
+    // MARK: - Class interface
 
     func showData(versions: [Version], project: Project) {
         let mappedViewModels = map(versions: versions)
@@ -19,7 +23,7 @@ final class VersionsListPresenter: VersionsListPresenting {
     }
 
     func showError(_ error: Error) {
-        
+        controller?.showError(error)
     }
 
     private func map(versions: [Version]) -> [VersionsListModels.VersionViewModel] {

@@ -1,5 +1,6 @@
 import UIKit
 import SwiftUI
+import CorporateTestflightDomain
 
 struct VersionsListFlowParameters {
     let projectId: Int
@@ -35,7 +36,14 @@ final class VersionsListCoordinator {
 extension VersionsListCoordinator: VersionsListInteractorOutput {
 
     func didEmitEvent(_ event: VersionsListEvent) {
-        let viewModel = VersionDetailsViewModel()
+        switch event {
+        case .requestVersionDetails(let version):
+            showVersionDetails(version)
+        }
+    }
+
+    private func showVersionDetails(_ version: Version) {
+        let viewModel = VersionDetailsViewModel(state: .loading(version))
         let view = VersionDetailsView(viewModel: viewModel)
         let hostingVC = UIHostingController(rootView: view)
         rootViewController.pushViewController(hostingVC, animated: true)

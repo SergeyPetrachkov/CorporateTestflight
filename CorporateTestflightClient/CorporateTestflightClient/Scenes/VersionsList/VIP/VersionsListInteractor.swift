@@ -22,7 +22,7 @@ final class VersionsListInteractor: VersionsListInteractorProtocol {
     // MARK: - Injectables
     private let projectId: Int
     private let presenter: VersionsListPresenting
-    private let worker: VersionsListWorking
+    private let usecase: FetchProjectOverviewUseCaseProtocol
     weak var output: VersionsListInteractorOutput?
 
     // MARK: - State
@@ -30,10 +30,10 @@ final class VersionsListInteractor: VersionsListInteractorProtocol {
     private var versions: [Version] = []
 
     // MARK: - Init
-    init(projectId: Int, presenter: VersionsListPresenting, worker: VersionsListWorking) {
+    init(projectId: Int, presenter: VersionsListPresenting, usecase: FetchProjectOverviewUseCaseProtocol) {
         self.projectId = projectId
         self.presenter = presenter
-        self.worker = worker
+        self.usecase = usecase
     }
 
     // MARK: - Class interface
@@ -45,11 +45,11 @@ final class VersionsListInteractor: VersionsListInteractorProtocol {
     @MainActor
     private func fetchData() async {
         do {
-            let data = try await worker.fetchData(projectId: projectId)
+            let data = try await usecase.fetchData(projectId: projectId)
             versions = data.versions
             presenter.showData(versions: data.versions, project: data.project)
         } catch {
-            print(error)
+            presenter.showError(error)
         }
     }
 

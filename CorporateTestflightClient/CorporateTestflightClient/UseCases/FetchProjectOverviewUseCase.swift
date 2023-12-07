@@ -1,12 +1,10 @@
 import CorporateTestflightDomain
 
-protocol VersionsListWorking {
+protocol FetchProjectOverviewUseCaseProtocol {
     func fetchData(projectId: Int) async throws -> (project: Project, versions: [Version])
-    func getVersions(projectId: Int) async throws -> [CorporateTestflightDomain.Version]
-    func getProject(projectId: Int) async throws -> CorporateTestflightDomain.Project
 }
 
-final class VersionsListWorker: VersionsListWorking, @unchecked Sendable {
+final class FetchProjectOverviewUseCase: FetchProjectOverviewUseCaseProtocol, @unchecked Sendable {
 
     private let versionsRepository: VersionsRepository
     private let projectsRepository: ProjectsRepository
@@ -24,11 +22,11 @@ final class VersionsListWorker: VersionsListWorking, @unchecked Sendable {
         return result
     }
 
-    func getVersions(projectId: Int) async throws -> [CorporateTestflightDomain.Version] {
+    private func getVersions(projectId: Int) async throws -> [CorporateTestflightDomain.Version] {
         try await versionsRepository.getVersions(request: .init(projectId: projectId))
     }
 
-    func getProject(projectId: Int) async throws -> CorporateTestflightDomain.Project {
+    private func getProject(projectId: Int) async throws -> CorporateTestflightDomain.Project {
         try await projectsRepository.getProject(by: projectId)
     }
 }
