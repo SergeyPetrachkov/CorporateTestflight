@@ -1,11 +1,6 @@
 import Foundation
 
-public enum TicketRequest {
-    case byId(UUID)
-    case byKey(String)
-}
-
-public protocol TicketsRepository {
+public protocol TicketsRepository: Sendable {
     func getTickets() async throws -> [Ticket]
-    func getTicket(request: TicketRequest) async throws -> Ticket
+    func getTicket(key: String) async throws -> Ticket
 }

@@ -43,7 +43,10 @@ extension VersionsListCoordinator: VersionsListInteractorOutput {
     }
 
     private func showVersionDetails(_ version: Version) {
-        let viewModel = VersionDetailsViewModel(state: .loading(version))
+        let viewModel = VersionDetailsViewModel(
+            version: version,
+            ticketsRepository: dependenciesContainer.ticketsRepository
+        )
         let view = VersionDetailsView(viewModel: viewModel)
         let hostingVC = UIHostingController(rootView: view)
         rootViewController.pushViewController(hostingVC, animated: true)

@@ -16,6 +16,6 @@ struct VersionsRepositoryImpl: VersionsRepository {
     }
 
     func getVersion(by id: CorporateTestflightDomain.Version.ID) async throws -> CorporateTestflightDomain.Version {
-        throw NSError()
+        throw NSError(domain: "com.corporatetestflight.playground::getVersion", code: -1)
     }
 }

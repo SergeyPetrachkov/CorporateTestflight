@@ -10,6 +10,8 @@ protocol DependencyContaining {
 
     var projectsRepository: ProjectsRepository { get }
 
+    var ticketsRepository: TicketsRepository { get }
+
 }
 
 final class AppDependencies: DependencyContaining {
@@ -23,4 +25,10 @@ final class AppDependencies: DependencyContaining {
     var projectsRepository: ProjectsRepository {
         ProjectsRepositoryImpl(api: api)
     }
+
+//    var ticketsRepository: TicketsRepository {
+//        TicketsRepositoryImpl(api: api)
+//    }
+
+    private(set) lazy var ticketsRepository: TicketsRepository = TicketsCacheActor(repository: TicketsRepositoryImpl(api: api))
 }

@@ -16,6 +16,6 @@ public extension APIEndpoint {
     }
 
     static func ticket(ticketKey: String) -> APIEndpoint<Ticket> {
-        APIEndpoint<Ticket>(path: "\(Environment.baseUrl)/ticket/\(ticketKey)", customHeaders: nil)
+        APIEndpoint<Ticket>(path: "\(Environment.baseUrl)/tickets/\(ticketKey)", customHeaders: nil)
     }
 }

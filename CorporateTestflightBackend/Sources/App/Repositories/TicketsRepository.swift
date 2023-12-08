@@ -1,6 +1,6 @@
 import CorporateTestflightDomain
-import Fluent
 import Vapor
+@preconcurrency import Fluent
 
 struct TicketsRepositoryImpl: TicketsRepository {
 
@@ -26,27 +26,22 @@ struct TicketsRepositoryImpl: TicketsRepository {
         }
     }
 
-    func getTicket(request: TicketRequest) async throws -> CorporateTestflightDomain.Ticket {
-        switch request {
-        case .byId:
-            throw Abort(.notImplemented)
-        case .byKey(let key):
-            guard
-                let persistedEntity = try await Ticket
-                    .query(on: database)
-                    .filter(\.$key == key)
-                    .all()
-                    .last
-            else {
-                throw Abort(.notFound)
-            }
-
-            return try CorporateTestflightDomain.Ticket(
-                id: persistedEntity.requireID(),
-                key: persistedEntity.key,
-                title: persistedEntity.title,
-                description: persistedEntity.description
-            )
+    func getTicket(key: String) async throws -> CorporateTestflightDomain.Ticket {
+        guard
+            let persistedEntity = try await Ticket
+                .query(on: database)
+                .filter(\.$key == key)
+                .all()
+                .last
+        else {
+            throw Abort(.notFound)
         }
+
+        return try CorporateTestflightDomain.Ticket(
+            id: persistedEntity.requireID(),
+            key: persistedEntity.key,
+            title: persistedEntity.title,
+            description: persistedEntity.description
+        )
     }
 }

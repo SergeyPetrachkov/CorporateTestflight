@@ -20,6 +20,6 @@ struct TicketsController: RouteCollection {
         guard let keyParam = req.parameters.get("key") else {
             throw Abort(.badRequest)
         }
-        return try await req.factory.ticketsRepository().getTicket(request: .byKey(keyParam))
+        return try await req.factory.ticketsRepository().getTicket(key: keyParam)
     }
 }
