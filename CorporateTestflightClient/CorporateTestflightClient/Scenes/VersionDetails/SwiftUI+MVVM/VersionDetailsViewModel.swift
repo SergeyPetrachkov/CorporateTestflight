@@ -51,7 +51,7 @@ final class VersionDetailsViewModel: ObservableObject, ViewModelLifeCycle {
 
     private func fetchTickets(for version: Version) async -> [Ticket] {
         await withTaskGroup(of: Ticket?.self) { group in
-            self.version.associatedTicketKeys.forEach { ticketKey in
+            version.associatedTicketKeys.forEach { ticketKey in
                 group.addTask { [ticketsRepository] in
                     do {
                         return try await ticketsRepository.getTicket(key: ticketKey)

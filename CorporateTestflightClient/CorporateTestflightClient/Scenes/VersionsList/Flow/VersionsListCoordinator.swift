@@ -43,6 +43,32 @@ extension VersionsListCoordinator: VersionsListInteractorOutput {
     }
 
     private func showVersionDetails(_ version: Version) {
+        let alternativeVC = UIAlertController(title: "Time to choose", message: "Which side are you on?", preferredStyle: .actionSheet)
+        
+        let uikitAction = UIAlertAction(title: "UIKit", style: .default) { [weak self] _ in
+            self?.showUIKit(version: version)
+        }
+
+        let swiftUIAction = UIAlertAction(title: "SwiftUI", style: .destructive) { [weak self] _ in
+            self?.showSwiftUI(version: version)
+        }
+
+        let cancelAction = UIAlertAction(title: "Flutter", style: .cancel) { _ in
+            fatalError("How dare you!")
+        }
+
+        alternativeVC.addAction(uikitAction)
+        alternativeVC.addAction(swiftUIAction)
+        alternativeVC.addAction(cancelAction)
+        rootViewController.present(alternativeVC, animated: true)
+    }
+
+    private func showUIKit(version: Version) {
+        let controller = VersionDetailsViewController.build(version: version, ticketsRepository: dependenciesContainer.ticketsRepository)
+        rootViewController.pushViewController(controller, animated: true)
+    }
+
+    private func showSwiftUI(version: Version) {
         let viewModel = VersionDetailsViewModel(
             version: version,
             ticketsRepository: dependenciesContainer.ticketsRepository
