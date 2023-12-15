@@ -31,6 +31,7 @@ final class VersionDetailsInteractor: VersionDetailsInteractorProtocol {
     @MainActor
     private func fetchData() async {
         do {
+            presenter.showState(.loading(.init(version: version)))
             let tickets = try await worker.fetchTickets(for: version)
             try Task.checkCancellation()
             presenter.showState(

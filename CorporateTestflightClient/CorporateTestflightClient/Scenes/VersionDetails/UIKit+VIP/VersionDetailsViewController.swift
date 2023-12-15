@@ -1,4 +1,6 @@
 import UIKit
+import SwiftUI
+import TestflightUIKit
 
 @MainActor
 protocol VersionDetailsViewControlling: AnyObject {
@@ -10,6 +12,8 @@ protocol VersionDetailsViewControlling: AnyObject {
 final class VersionDetailsViewController: UIViewController, VersionDetailsViewControlling {
 
     private let interactor: VersionDetailsInteractor
+
+    private var currentHostingController: UIViewController?
 
     init(interactor: VersionDetailsInteractor) {
         self.interactor = interactor
@@ -39,11 +43,21 @@ final class VersionDetailsViewController: UIViewController, VersionDetailsViewCo
     }
 
     func showLoadedState(_ state: VersionDetailsViewModel.State.LoadedVersionDetailsViewModel) {
-        print(state)
+        let loadedView = VersionDetailsLoadedView(viewModel: state)
+        let hostingController = UIHostingController(rootView: loadedView)
+        if let currentHostingController {
+            detachChild(currentHostingController)
+        }
+        currentHostingController = attachChild(hostingController, fillParent: true)
     }
 
     func showLoadingState(_ state: VersionDetailsViewModel.State.VersionPreviewViewModel) {
-        
+        let loadedView = VersionDetailsLoadingView(viewModel: state)
+        let hostingController = UIHostingController(rootView: loadedView)
+        if let currentHostingController {
+            detachChild(currentHostingController)
+        }
+        currentHostingController = attachChild(hostingController, fillParent: true)
     }
 
     func showError(_ error: Error) {
