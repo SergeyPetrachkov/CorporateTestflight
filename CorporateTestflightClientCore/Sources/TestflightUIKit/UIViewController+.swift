@@ -13,8 +13,15 @@ public extension UIViewController {
         addChild(viewController)
         view.addSubview(viewController.view)
         if fillParent {
-            viewController.view.frame = view.bounds
-            viewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            viewController.view.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate(
+                [
+                    viewController.view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+                    viewController.view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+                    viewController.view.safeAreaLayoutGuide.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+                    viewController.view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+                ]
+            )
         }
         viewController.didMove(toParent: self)
         return viewController

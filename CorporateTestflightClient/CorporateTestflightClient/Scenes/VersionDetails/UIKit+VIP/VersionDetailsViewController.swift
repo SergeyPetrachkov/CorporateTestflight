@@ -43,7 +43,10 @@ final class VersionDetailsViewController: UIViewController, VersionDetailsViewCo
     }
 
     func showLoadedState(_ state: VersionDetailsViewModel.State.LoadedVersionDetailsViewModel) {
-        let loadedView = VersionDetailsLoadedView(viewModel: state)
+        let loadedView = ScrollView {
+            VersionDetailsLoadedView(viewModel: state)
+        }
+            .padding(.horizontal, 8)
         let hostingController = UIHostingController(rootView: loadedView)
         if let currentHostingController {
             detachChild(currentHostingController)
@@ -52,8 +55,12 @@ final class VersionDetailsViewController: UIViewController, VersionDetailsViewCo
     }
 
     func showLoadingState(_ state: VersionDetailsViewModel.State.VersionPreviewViewModel) {
-        let loadedView = VersionDetailsLoadingView(viewModel: state)
-        let hostingController = UIHostingController(rootView: loadedView)
+        let loadingView = ScrollView {
+            VersionDetailsLoadingView(viewModel: state)
+        }
+            .padding(.horizontal, 8)
+
+        let hostingController = UIHostingController(rootView: loadingView)
         if let currentHostingController {
             detachChild(currentHostingController)
         }
