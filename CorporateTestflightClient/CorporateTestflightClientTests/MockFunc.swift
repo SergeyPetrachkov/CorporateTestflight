@@ -28,6 +28,12 @@ final class MockFunc<Input, Output> {
         result(input)
     }
 
+    var asyncOutput: Output {
+        get async {
+            result(input)
+        }
+    }
+
     var input: Input {
         parameters[count - 1]
     }
@@ -37,7 +43,11 @@ final class MockFunc<Input, Output> {
     }
 
     static func mock(for function: (Input) throws -> Output) -> MockFunc {
-        return MockFunc()
+        MockFunc()
+    }
+
+    static func mock(for function: (Input) async throws -> Output) -> MockFunc {
+        MockFunc()
     }
 
     func call(with input: Input) {
@@ -122,5 +132,90 @@ extension MockFunc where Output == Void {
     ) {
         call(with: input)
         storeCompletionAndCallIfNeeded(completion, output: ())
+    }
+}
+
+
+final class MockThrowingFunc<Input, Output> {
+
+    typealias Pipeline = (Input) throws -> Output
+
+    var parameters: [Input] = []
+    var completions: [(Output) -> Void] = []
+    var result: Pipeline = { _ in fatalError("Not implemented") }
+    var didCall: (Input) -> Void = { _ in }
+    var callsCompletionImmediately = true
+
+    init() {}
+
+    init(result: @escaping Pipeline) {
+        self.result = result
+    }
+
+    var count: Int {
+        parameters.count
+    }
+
+    var called: Bool {
+        !parameters.isEmpty
+    }
+
+    var asyncOutput: Output {
+        get async throws {
+            try result(input)
+        }
+    }
+
+    var input: Input {
+        parameters[count - 1]
+    }
+
+    var completion: (Output) -> Void {
+        completions[count - 1]
+    }
+
+    static func mock(for function: (Input) throws -> Output) -> MockThrowingFunc {
+        MockThrowingFunc()
+    }
+
+    static func mock(for function: (Input) async throws -> Output) -> MockThrowingFunc {
+        MockThrowingFunc()
+    }
+
+    func call(with input: Input) {
+        parameters.append(input)
+        didCall(input)
+    }
+}
+
+// MARK: Syntactic Sugar
+
+extension MockThrowingFunc {
+    func returns(_ value: Output) {
+        result = { _ in value }
+    }
+
+    func returns() where Output == Void {
+        result = { _ in () }
+    }
+
+    func returnsNil<T>() where Output == Optional<T> {
+        result = { _ in nil }
+    }
+
+    func succeeds<T, Error>(_ value: T) where Output == Result<T, Error> {
+        result = { _ in .success(value) }
+    }
+
+    func succeeds<Error>() where Output == Result<Void, Error> {
+        result = { _ in .success(()) }
+    }
+
+    func fails<T, Error>(_ error: Error) where Output == Result<T, Error> {
+        result = { _ in .failure(error) }
+    }
+
+    func `throws`(_ error: Error) {
+        result = { _ in throw error }
     }
 }

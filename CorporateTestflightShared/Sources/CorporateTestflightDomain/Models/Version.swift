@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Version: Sendable {
+public struct Version: Sendable, Equatable {
 
     public typealias ID = UUID
 

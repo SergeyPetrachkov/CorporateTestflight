@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Ticket: Sendable {
+public struct Ticket: Sendable, Equatable {
 
     public typealias ID = UUID
 
