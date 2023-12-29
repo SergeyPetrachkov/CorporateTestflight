@@ -9,7 +9,15 @@
     }
   ],
   "defaultOptions" : {
-
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:CorporateTestflightClient.xcodeproj",
+          "identifier" : "39C3BFEA2B10B07A00F5D10D",
+          "name" : "CorporateTestflightClient"
+        }
+      ]
+    }
   },
   "testTargets" : [
     {
