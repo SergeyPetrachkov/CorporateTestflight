@@ -48,6 +48,9 @@
 		39FAACA52B3C72F6004E564A /* VersionsListInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FAACA42B3C72F6004E564A /* VersionsListInteractorTests.swift */; };
 		39FAACA82B3C7381004E564A /* MockVersionsListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FAACA72B3C7381004E564A /* MockVersionsListPresenter.swift */; };
 		39FAACAA2B3C739F004E564A /* MockFetchProjectOverviewUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FAACA92B3C739F004E564A /* MockFetchProjectOverviewUseCase.swift */; };
+		39FAACAD2B3F0166004E564A /* MockVersionsListInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FAACAC2B3F0166004E564A /* MockVersionsListInteractorOutput.swift */; };
+		39FAACAF2B3F02C9004E564A /* VersionsListPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FAACAE2B3F02C9004E564A /* VersionsListPresenterTests.swift */; };
+		39FAACB12B3F030E004E564A /* MockVersionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FAACB02B3F030E004E564A /* MockVersionsListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +112,9 @@
 		39FAACA42B3C72F6004E564A /* VersionsListInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionsListInteractorTests.swift; sourceTree = "<group>"; };
 		39FAACA72B3C7381004E564A /* MockVersionsListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockVersionsListPresenter.swift; sourceTree = "<group>"; };
 		39FAACA92B3C739F004E564A /* MockFetchProjectOverviewUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFetchProjectOverviewUseCase.swift; sourceTree = "<group>"; };
+		39FAACAC2B3F0166004E564A /* MockVersionsListInteractorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockVersionsListInteractorOutput.swift; sourceTree = "<group>"; };
+		39FAACAE2B3F02C9004E564A /* VersionsListPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionsListPresenterTests.swift; sourceTree = "<group>"; };
+		39FAACB02B3F030E004E564A /* MockVersionsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockVersionsListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -288,10 +294,10 @@
 		39C3C0042B10B07C00F5D10D /* CorporateTestflightClientTests */ = {
 			isa = PBXGroup;
 			children = (
+				39FAACA22B3C6E35004E564A /* MockFunc.swift */,
 				39FAACA62B3C7371004E564A /* Mocks */,
 				39C3C0052B10B07C00F5D10D /* CorporateTestflightClientTests.swift */,
-				39FAACA22B3C6E35004E564A /* MockFunc.swift */,
-				39FAACA42B3C72F6004E564A /* VersionsListInteractorTests.swift */,
+				39FAACAB2B3EFF21004E564A /* VersionsListTests */,
 			);
 			path = CorporateTestflightClientTests;
 			sourceTree = "<group>";
@@ -335,8 +341,19 @@
 			children = (
 				39FAACA72B3C7381004E564A /* MockVersionsListPresenter.swift */,
 				39FAACA92B3C739F004E564A /* MockFetchProjectOverviewUseCase.swift */,
+				39FAACAC2B3F0166004E564A /* MockVersionsListInteractorOutput.swift */,
+				39FAACB02B3F030E004E564A /* MockVersionsListViewController.swift */,
 			);
 			path = Mocks;
+			sourceTree = "<group>";
+		};
+		39FAACAB2B3EFF21004E564A /* VersionsListTests */ = {
+			isa = PBXGroup;
+			children = (
+				39FAACA42B3C72F6004E564A /* VersionsListInteractorTests.swift */,
+				39FAACAE2B3F02C9004E564A /* VersionsListPresenterTests.swift */,
+			);
+			path = VersionsListTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -513,7 +530,10 @@
 				39C3C0062B10B07C00F5D10D /* CorporateTestflightClientTests.swift in Sources */,
 				39FAACA82B3C7381004E564A /* MockVersionsListPresenter.swift in Sources */,
 				39FAACA52B3C72F6004E564A /* VersionsListInteractorTests.swift in Sources */,
+				39FAACAF2B3F02C9004E564A /* VersionsListPresenterTests.swift in Sources */,
 				39FAACA32B3C6E35004E564A /* MockFunc.swift in Sources */,
+				39FAACB12B3F030E004E564A /* MockVersionsListViewController.swift in Sources */,
+				39FAACAD2B3F0166004E564A /* MockVersionsListInteractorOutput.swift in Sources */,
 				39FAACAA2B3C739F004E564A /* MockFetchProjectOverviewUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

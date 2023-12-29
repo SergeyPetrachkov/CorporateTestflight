@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "F4DD3CF8-E6FB-4958-85F7-D3A12A7896F9",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:CorporateTestflightClient.xcodeproj",
+        "identifier" : "39C3C0002B10B07C00F5D10D",
+        "name" : "CorporateTestflightClientTests"
+      }
+    }
+  ],
+  "version" : 1
+}

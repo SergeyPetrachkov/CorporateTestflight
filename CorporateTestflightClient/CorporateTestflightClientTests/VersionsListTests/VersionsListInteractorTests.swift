@@ -36,6 +36,27 @@ final class VersionsListInteractorTests: XCTestCase {
         await fulfillment(of: [expectation], timeout: 2)
         XCTAssertTrue(env.presenter.showErrorMock.called)
     }
+
+    @MainActor
+    func test_whenVersionClicked_outputGetsCalled() async {
+        let env = Environment()
+        let mockOutput = MockVersionsListInteractorOutput()
+        let sut = env.makeSUT(output: mockOutput)
+        let sampleVersion = Version(id: UUID(), buildNumber: 1, associatedTicketKeys: [])
+        let sample = (project: Project(id: 2, name: "Name"),
+                      versions: [sampleVersion])
+        env.usecase.fetchDataMock.returns(sample)
+        let expectation = expectation(description: "Show data expectation")
+        env.presenter.showDataMock.didCall = { _ in
+            expectation.fulfill()
+        }
+
+        sut.viewDidLoad()
+        await fulfillment(of: [expectation], timeout: 2)
+
+        sut.didSelect(row: .init(id: sampleVersion.id, title: "", subtitle: ""))
+        XCTAssertTrue(mockOutput.didEmitEventMock.called)
+    }
 }
 
 private final class Environment {
@@ -43,7 +64,9 @@ private final class Environment {
     let presenter = MockVersionsListPresenter()
     let usecase = MockFetchProjectOverviewUseCase()
 
-    func makeSUT() -> VersionsListInteractor {
-        VersionsListInteractor(projectId: 1, presenter: presenter, usecase: usecase)
+    func makeSUT(output: VersionsListInteractorOutput? = nil) -> VersionsListInteractor {
+        let sut = VersionsListInteractor(projectId: 1, presenter: presenter, usecase: usecase)
+        sut.output = output
+        return sut
     }
 }
