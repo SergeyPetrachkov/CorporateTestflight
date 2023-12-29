@@ -6,7 +6,7 @@ import TestflightUIKit
 protocol VersionDetailsViewControlling: AnyObject {
     func showLoadedState(_ state: VersionDetailsViewModel.State.LoadedVersionDetailsViewModel)
     func showLoadingState(_ state: VersionDetailsViewModel.State.VersionPreviewViewModel)
-    func showError(_ error: Error)
+    func showError(_ error: VersionDetailsViewModel.State.ErrorViewModel)
 }
 
 final class VersionDetailsViewController: UIViewController, VersionDetailsViewControlling {
@@ -67,8 +67,8 @@ final class VersionDetailsViewController: UIViewController, VersionDetailsViewCo
         currentHostingController = attachChild(hostingController, fillParent: true)
     }
 
-    func showError(_ error: Error) {
-        let alertVC = UIAlertController(title: "Oops!", message: error.localizedDescription, preferredStyle: .alert)
+    func showError(_ error: VersionDetailsViewModel.State.ErrorViewModel) {
+        let alertVC = UIAlertController(title: "Oops!", message: error.message, preferredStyle: .alert)
         alertVC.addAction(.init(title: "Ok", style: .default))
         present(alertVC, animated: true)
     }

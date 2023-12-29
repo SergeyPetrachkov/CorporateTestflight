@@ -50,6 +50,8 @@
 		39FAACAD2B3F0166004E564A /* MockVersionsListInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FAACAC2B3F0166004E564A /* MockVersionsListInteractorOutput.swift */; };
 		39FAACAF2B3F02C9004E564A /* VersionsListPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FAACAE2B3F02C9004E564A /* VersionsListPresenterTests.swift */; };
 		39FAACB12B3F030E004E564A /* MockVersionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FAACB02B3F030E004E564A /* MockVersionsListViewController.swift */; };
+		39FAACB42B3F064B004E564A /* VersionDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FAACB32B3F064B004E564A /* VersionDetailsViewModelTests.swift */; };
+		39FAACB62B3F06FF004E564A /* MockTicketsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FAACB52B3F06FF004E564A /* MockTicketsRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +115,8 @@
 		39FAACAC2B3F0166004E564A /* MockVersionsListInteractorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockVersionsListInteractorOutput.swift; sourceTree = "<group>"; };
 		39FAACAE2B3F02C9004E564A /* VersionsListPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionsListPresenterTests.swift; sourceTree = "<group>"; };
 		39FAACB02B3F030E004E564A /* MockVersionsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockVersionsListViewController.swift; sourceTree = "<group>"; };
+		39FAACB32B3F064B004E564A /* VersionDetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionDetailsViewModelTests.swift; sourceTree = "<group>"; };
+		39FAACB52B3F06FF004E564A /* MockTicketsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTicketsRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -295,6 +299,7 @@
 				39FAACA22B3C6E35004E564A /* MockFunc.swift */,
 				39FAACA62B3C7371004E564A /* Mocks */,
 				39FAACAB2B3EFF21004E564A /* VersionsListTests */,
+				39FAACB22B3F063B004E564A /* VersionDetailsTests */,
 			);
 			path = CorporateTestflightClientTests;
 			sourceTree = "<group>";
@@ -340,6 +345,7 @@
 				39FAACA92B3C739F004E564A /* MockFetchProjectOverviewUseCase.swift */,
 				39FAACAC2B3F0166004E564A /* MockVersionsListInteractorOutput.swift */,
 				39FAACB02B3F030E004E564A /* MockVersionsListViewController.swift */,
+				39FAACB52B3F06FF004E564A /* MockTicketsRepository.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -351,6 +357,14 @@
 				39FAACAE2B3F02C9004E564A /* VersionsListPresenterTests.swift */,
 			);
 			path = VersionsListTests;
+			sourceTree = "<group>";
+		};
+		39FAACB22B3F063B004E564A /* VersionDetailsTests */ = {
+			isa = PBXGroup;
+			children = (
+				39FAACB32B3F064B004E564A /* VersionDetailsViewModelTests.swift */,
+			);
+			path = VersionDetailsTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -524,11 +538,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39FAACB42B3F064B004E564A /* VersionDetailsViewModelTests.swift in Sources */,
 				39FAACA82B3C7381004E564A /* MockVersionsListPresenter.swift in Sources */,
 				39FAACA52B3C72F6004E564A /* VersionsListInteractorTests.swift in Sources */,
 				39FAACAF2B3F02C9004E564A /* VersionsListPresenterTests.swift in Sources */,
 				39FAACA32B3C6E35004E564A /* MockFunc.swift in Sources */,
 				39FAACB12B3F030E004E564A /* MockVersionsListViewController.swift in Sources */,
+				39FAACB62B3F06FF004E564A /* MockTicketsRepository.swift in Sources */,
 				39FAACAD2B3F0166004E564A /* MockVersionsListInteractorOutput.swift in Sources */,
 				39FAACAA2B3C739F004E564A /* MockFetchProjectOverviewUseCase.swift in Sources */,
 			);

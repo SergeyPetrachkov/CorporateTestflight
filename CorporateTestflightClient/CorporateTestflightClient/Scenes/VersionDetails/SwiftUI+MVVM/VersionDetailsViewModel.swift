@@ -25,7 +25,7 @@ final class VersionDetailsViewModel: ObservableObject, ViewModelLifeCycle {
 
     // MARK: - Async interface controlled by SwiftUI
     @MainActor
-    func start() async {
+    func startAsync() async {
         let tickets = await fetchTickets(for: version)
         state = .loaded(.init(version: version, tickets: tickets))
     }

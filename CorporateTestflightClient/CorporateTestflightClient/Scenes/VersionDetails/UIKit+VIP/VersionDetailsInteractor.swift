@@ -44,7 +44,7 @@ final class VersionDetailsInteractor: VersionDetailsInteractorProtocol {
             )
         } catch {
             if !Task.isCancelled {
-                presenter.showState(.failed(error))
+                presenter.showState(.failed(.init(message: error.localizedDescription)))
             }
         }
     }

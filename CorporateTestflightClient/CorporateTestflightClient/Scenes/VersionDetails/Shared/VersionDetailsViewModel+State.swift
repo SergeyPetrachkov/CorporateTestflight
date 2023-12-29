@@ -2,11 +2,11 @@ import CorporateTestflightDomain
 
 extension VersionDetailsViewModel {
 
-    enum State {
+    enum State: Equatable {
 
         // MARK: - Nested VMs
 
-        struct VersionHeaderViewModel {
+        struct VersionHeaderViewModel: Equatable {
             let title: String
             let body: String?
 
@@ -16,7 +16,7 @@ extension VersionDetailsViewModel {
             }
         }
 
-        struct VersionPreviewViewModel {
+        struct VersionPreviewViewModel: Equatable {
             let headerViewModel: VersionHeaderViewModel
             let ticketPlaceholdersCount: Int
 
@@ -26,9 +26,9 @@ extension VersionDetailsViewModel {
             }
         }
 
-        struct LoadedVersionDetailsViewModel {
+        struct LoadedVersionDetailsViewModel: Equatable {
 
-            struct TicketViewModel: Identifiable {
+            struct TicketViewModel: Equatable, Identifiable {
                 let key: String
                 let title: String
                 let body: String
@@ -53,10 +53,14 @@ extension VersionDetailsViewModel {
             }
         }
 
+        struct ErrorViewModel: Equatable {
+            let message: String
+        }
+
         // MARK: - Cases
 
         case loading(VersionPreviewViewModel)
         case loaded(LoadedVersionDetailsViewModel)
-        case failed(Error)
+        case failed(ErrorViewModel)
     }
 }

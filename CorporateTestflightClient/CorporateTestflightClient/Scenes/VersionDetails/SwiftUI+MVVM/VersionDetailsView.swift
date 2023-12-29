@@ -20,7 +20,7 @@ struct VersionDetailsView: View {
             case .failed(let error):
                 VStack {
                     Text("Something went wrong")
-                    Text(error.localizedDescription)
+                    Text(error.message)
                     Button("Retry", action: viewModel.start)
                 }
             }
