@@ -5,9 +5,9 @@ let sharedPackage = Package.Dependency.package(path: "../CorporateTestflightShar
 let domainTargetDependency = Target.Dependency.product(name: "CorporateTestflightDomain", package: "CorporateTestflightShared")
 
 let package = Package(
-    name: "CorporateTestflightBackend",
+    name: "CorporateTestflightBackend-Package",
     platforms: [
-       .macOS(.v13)
+        .macOS(.v13)
     ],
     dependencies: [
         // 💧 A server-side Swift web framework.
@@ -21,7 +21,7 @@ let package = Package(
     ],
     targets: [
         .executableTarget(
-            name: "App",
+            name: "CorporateTestflightBackend",
             dependencies: [
                 .product(name: "Fluent", package: "fluent"),
                 .product(name: "FluentSQLiteDriver", package: "fluent-sqlite-driver"),
@@ -29,14 +29,17 @@ let package = Package(
                 domainTargetDependency
             ]
         ),
-        .testTarget(name: "AppTests", dependencies: [
-            .target(name: "App"),
-            .product(name: "XCTVapor", package: "vapor"),
+        .testTarget(
+            name: "AppTests",
+            dependencies: [
+                .target(name: "CorporateTestflightBackend"),
+                .product(name: "XCTVapor", package: "vapor"),
 
-            // Workaround for https://github.com/apple/swift-package-manager/issues/6940
-            .product(name: "Vapor", package: "vapor"),
-            .product(name: "Fluent", package: "Fluent"),
-            .product(name: "FluentSQLiteDriver", package: "fluent-sqlite-driver"),
-        ])
+                // Workaround for https://github.com/apple/swift-package-manager/issues/6940
+                .product(name: "Vapor", package: "vapor"),
+                .product(name: "Fluent", package: "Fluent"),
+                .product(name: "FluentSQLiteDriver", package: "fluent-sqlite-driver"),
+            ]
+        )
     ]
 )
