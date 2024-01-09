@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  CorporateTestflightClient
-//
-//  Created by Sergey Petrachkov on 24.11.2023.
-//
-
 import UIKit
 
 @main
