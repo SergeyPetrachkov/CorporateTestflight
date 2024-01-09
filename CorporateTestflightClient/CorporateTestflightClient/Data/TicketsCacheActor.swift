@@ -1,10 +1,9 @@
 import CorporateTestflightDomain
 
-// TODO: re-entrancy check + avoid double work
 actor TicketsCacheActor: TicketsRepository {
 
     private let repository: TicketsRepository
-    private var tickets: [String: Ticket] = [:]
+    private var tickets: [String: Task<Ticket, Error>] = [:]
 
     init(repository: TicketsRepository) {
         self.repository = repository
@@ -16,15 +15,15 @@ actor TicketsCacheActor: TicketsRepository {
 
     func getTicket(key: String) async throws -> CorporateTestflightDomain.Ticket {
         print("Entering actor for \(key)")
-        if let ticket = tickets[key] {
+        if let ticketTask = tickets[key] {
             print("Return cached value by \(key)")
-            return ticket
+            return try await ticketTask.value
         }
         print("Fetching value by \(key)")
-        let ticket = try await repository.getTicket(key: key)
+        let ticketTask = Task { try await repository.getTicket(key: key) }
         print("Caching value by \(key)")
-        tickets[key] = ticket
+        tickets[key] = ticketTask
         print("Return value by \(key)")
-        return ticket
+        return try await ticketTask.value
     }
 }
