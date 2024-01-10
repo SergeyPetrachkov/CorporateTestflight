@@ -24,4 +24,28 @@ The purpose of this repo is not to create a system, but to serve a sample projec
 This is a monorepo for the whole system, which includes the backend, frontend and shared codebase (all in Swift).
 We will be working in the Client part to go through the steps of our workshop.
 
-TODO: add the steps  
+## Task #1 (We all do stuff together)
+
+Create the first screen of the app.
+For that you'll need to:
+
+* Update the interfaces of the `VersionsList` VIP stack. All the entities are created and connected.
+* Inject all the necessary dependencies (`VersionsRepository`, `ProjectsRepository`). Use `AppDependencies` for that.
+* Implement the async request(s) and make the result display in the UI.
+* Implement navigation from the list to the details.
+
+## Task #2 (UIKit vs SwiftUI)
+
+Upgrade the version details screen with business logic.
+You'll need:
+
+* An instance of `TicketsRepository` to download tickets details.
+* Either updated ViewModel or VIP stack of the VersionDetails. 
+* Every `Version` has `associatedTicketKeys` and we need to send requests for each of them. Any request can fail and/or can throw an error. This must not interfere with the rest of the requests.
+* The screen must have 3 states: Loading/Loaded/Failed.
+* If we exit the screen (swipe to pop), we must cancel all the ongoing requests.
+* (Advanced) we must not load the same ticket multiple times, we should have a (runtime) cache and we should check if we are already loading the ticket before loading it again.
+
+## Task #3 (Tests)
+
+Let's write some tests together for interactors, presenters, view models (if we have time).

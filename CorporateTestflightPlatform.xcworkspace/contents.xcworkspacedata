@@ -16,4 +16,7 @@
    <FileRef
       location = "group:CorporateTestflightClient/CorporateTestflightClientTests/CorporateTestflightClientTests.xctestplan">
    </FileRef>
+   <FileRef
+      location = "group:Readme.md">
+   </FileRef>
 </Workspace>
