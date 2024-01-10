@@ -17,26 +17,6 @@ final class VersionDetailsWorker: VersionDetailsWorking {
     }
 
     func fetchTickets(for version: Version) async throws -> [Ticket] {
-        try await withThrowingTaskGroup(of: Ticket?.self) { group in
-            version.associatedTicketKeys.forEach { ticketKey in
-                group.addTask { [ticketsRepository] in
-                    do {
-                        return try await ticketsRepository.getTicket(key: ticketKey)
-                    } catch {
-                        print(error)
-                        return nil
-                    }
-                }
-            }
-            var tickets: [Ticket] = []
-            try Task.checkCancellation()
-            for try await ticket in group {
-                
-                if let ticket {
-                    tickets.append(ticket)
-                }
-            }
-            return tickets
-        }
+        []
     }
 }

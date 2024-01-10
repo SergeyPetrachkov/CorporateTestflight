@@ -1,7 +1,6 @@
 import UIKit
 import TestflightUIKit
 
-@MainActor
 protocol VersionsListViewControlling: AnyObject {
     func showVersions(_ versions: [VersionsListModels.VersionViewModel])
     func showProjectName(_ projectName: String)
@@ -42,8 +41,8 @@ final class VersionsListViewController: UIViewController, VersionsListViewContro
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        title = "Hello, workshop!"
         makeLayout()
-        interactor.viewDidLoad()
     }
 
     func showVersions(_ versions: [VersionsListModels.VersionViewModel]) {
@@ -70,7 +69,6 @@ extension VersionsListViewController: UICollectionViewDelegate {
         guard let row = dataSource.itemIdentifier(for: indexPath) else {
             return
         }
-        interactor.didSelect(row: row)
     }
 }
 

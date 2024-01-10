@@ -11,7 +11,6 @@
 		397D9DDD2B20CFB900012C43 /* VersionDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397D9DDC2B20CFB900012C43 /* VersionDetailsViewModel.swift */; };
 		397D9DE02B2330DA00012C43 /* TicketsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397D9DDF2B2330DA00012C43 /* TicketsRepository.swift */; };
 		397D9DE22B23499500012C43 /* VersionDetailsViewModel+State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397D9DE12B23499500012C43 /* VersionDetailsViewModel+State.swift */; };
-		397D9DE62B235AE100012C43 /* TicketsCacheActor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397D9DE52B235AE100012C43 /* TicketsCacheActor.swift */; };
 		397D9DEA2B2465B000012C43 /* VersionDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397D9DE92B2465B000012C43 /* VersionDetailsViewController.swift */; };
 		397D9DEC2B2465D000012C43 /* VersionDetailsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397D9DEB2B2465D000012C43 /* VersionDetailsInteractor.swift */; };
 		397D9DEE2B24665B00012C43 /* VersionDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397D9DED2B24665B00012C43 /* VersionDetailsPresenter.swift */; };
@@ -20,7 +19,6 @@
 		3998F2432B14ED0900D7CB90 /* VersionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3998F2422B14ED0900D7CB90 /* VersionsListViewController.swift */; };
 		3998F2452B14ED1100D7CB90 /* VersionsListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3998F2442B14ED1100D7CB90 /* VersionsListInteractor.swift */; };
 		3998F2472B14ED1A00D7CB90 /* VersionsListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3998F2462B14ED1A00D7CB90 /* VersionsListPresenter.swift */; };
-		3998F2492B14ED2700D7CB90 /* FetchProjectOverviewUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3998F2482B14ED2700D7CB90 /* FetchProjectOverviewUseCase.swift */; };
 		3998F24B2B14ED8E00D7CB90 /* VersionsListModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3998F24A2B14ED8E00D7CB90 /* VersionsListModels.swift */; };
 		3998F24D2B14EDD600D7CB90 /* VersionListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3998F24C2B14EDD600D7CB90 /* VersionListCell.swift */; };
 		3998F24F2B14EEB200D7CB90 /* TestflightUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3998F24E2B14EEB200D7CB90 /* TestflightUIKit */; };
@@ -67,7 +65,6 @@
 		397D9DDC2B20CFB900012C43 /* VersionDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionDetailsViewModel.swift; sourceTree = "<group>"; };
 		397D9DDF2B2330DA00012C43 /* TicketsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketsRepository.swift; sourceTree = "<group>"; };
 		397D9DE12B23499500012C43 /* VersionDetailsViewModel+State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VersionDetailsViewModel+State.swift"; sourceTree = "<group>"; };
-		397D9DE52B235AE100012C43 /* TicketsCacheActor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketsCacheActor.swift; sourceTree = "<group>"; };
 		397D9DE92B2465B000012C43 /* VersionDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionDetailsViewController.swift; sourceTree = "<group>"; };
 		397D9DEB2B2465D000012C43 /* VersionDetailsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionDetailsInteractor.swift; sourceTree = "<group>"; };
 		397D9DED2B24665B00012C43 /* VersionDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionDetailsPresenter.swift; sourceTree = "<group>"; };
@@ -76,7 +73,6 @@
 		3998F2422B14ED0900D7CB90 /* VersionsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionsListViewController.swift; sourceTree = "<group>"; };
 		3998F2442B14ED1100D7CB90 /* VersionsListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionsListInteractor.swift; sourceTree = "<group>"; };
 		3998F2462B14ED1A00D7CB90 /* VersionsListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionsListPresenter.swift; sourceTree = "<group>"; };
-		3998F2482B14ED2700D7CB90 /* FetchProjectOverviewUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchProjectOverviewUseCase.swift; sourceTree = "<group>"; };
 		3998F24A2B14ED8E00D7CB90 /* VersionsListModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionsListModels.swift; sourceTree = "<group>"; };
 		3998F24C2B14EDD600D7CB90 /* VersionListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionListCell.swift; sourceTree = "<group>"; };
 		3998F2502B14F07300D7CB90 /* VersionsListViewController+Build.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VersionsListViewController+Build.swift"; sourceTree = "<group>"; };
@@ -129,14 +125,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		397D9DDE2B22035E00012C43 /* UseCases */ = {
-			isa = PBXGroup;
-			children = (
-				3998F2482B14ED2700D7CB90 /* FetchProjectOverviewUseCase.swift */,
-			);
-			path = UseCases;
-			sourceTree = "<group>";
-		};
 		397D9DE32B23597800012C43 /* SwiftUI+MVVM */ = {
 			isa = PBXGroup;
 			children = (
@@ -150,8 +138,6 @@
 			isa = PBXGroup;
 			children = (
 				3998F2562B188C0D00D7CB90 /* Repositories */,
-				397D9DDE2B22035E00012C43 /* UseCases */,
-				397D9DE52B235AE100012C43 /* TicketsCacheActor.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -463,8 +449,6 @@
 				397D9DDB2B20CFA400012C43 /* VersionDetailsView.swift in Sources */,
 				397D9DEC2B2465D000012C43 /* VersionDetailsInteractor.swift in Sources */,
 				39E93F682B2C837F005C9E1D /* VersionDetailsHeaderView.swift in Sources */,
-				397D9DE62B235AE100012C43 /* TicketsCacheActor.swift in Sources */,
-				3998F2492B14ED2700D7CB90 /* FetchProjectOverviewUseCase.swift in Sources */,
 				3998F2432B14ED0900D7CB90 /* VersionsListViewController.swift in Sources */,
 				397FA8DF2B2B528400E24CAA /* VersionDetailsViewController+Build.swift in Sources */,
 				39B116DC2B1E272600909C09 /* ProjectsRepository.swift in Sources */,

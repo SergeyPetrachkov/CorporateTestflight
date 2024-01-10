@@ -5,19 +5,13 @@ extension VersionsListViewController {
     
     static func build(
         projectId: Int,
-        versionsRepository: VersionsRepository,
-        projectsRepository: ProjectsRepository,
         output: VersionsListInteractorOutput
     ) -> VersionsListViewController {
 
         let presenter = VersionsListPresenter()
         let interactor = VersionsListInteractor(
             projectId: projectId,
-            presenter: presenter,
-            usecase: FetchProjectOverviewUseCase(
-                versionsRepository: versionsRepository,
-                projectsRepository: projectsRepository
-            )
+            presenter: presenter
         )
         interactor.output = output
 

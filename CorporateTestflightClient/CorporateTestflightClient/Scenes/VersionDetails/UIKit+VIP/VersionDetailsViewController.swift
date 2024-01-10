@@ -32,14 +32,6 @@ final class VersionDetailsViewController: UIViewController, VersionDetailsViewCo
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        interactor.viewDidLoad()
-    }
-
-    override func willMove(toParent parent: UIViewController?) {
-        if parent == nil {
-            interactor.viewWillUnload()
-        }
-        super.willMove(toParent: parent)
     }
 
     func showLoadedState(_ state: VersionDetailsViewModel.State.LoadedVersionDetailsViewModel) {

@@ -1,10 +1,7 @@
 import CorporateTestflightDomain
 
 protocol VersionsListPresenting {
-    @MainActor
     func showData(versions: [Version], project: Project)
-
-    @MainActor
     func showError(_ error: Error)
 }
 
@@ -17,13 +14,11 @@ final class VersionsListPresenter: VersionsListPresenting {
     // MARK: - Class interface
 
     func showData(versions: [Version], project: Project) {
-        let mappedViewModels = map(versions: versions)
-        controller?.showVersions(mappedViewModels)
-        controller?.showProjectName(project.name)
+        // show data in the controller
     }
 
     func showError(_ error: Error) {
-        controller?.showError(error)
+        // show error
     }
 
     private func map(versions: [Version]) -> [VersionsListModels.VersionViewModel] {
