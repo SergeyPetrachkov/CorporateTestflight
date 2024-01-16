@@ -19,10 +19,12 @@ The purpose of this repo is not to create a system, but to serve a sample projec
 * Before launching the iOS app you need to launch an instance of our Backend. Choose `CorporateTestflightBackend` as your active scheme and run the scheme (it'll ask you for admin access, it's fine, it's the way Vapor works)
 * Without stopping the backend, choose `CorporateTestflightClient` as your active scheme, select your favorite simulator and run the project.
 
-## The structure
+## The workshop structure
 
 This is a monorepo for the whole system, which includes the backend, frontend and shared codebase (all in Swift).
-We will be working in the Client part to go through the steps of our workshop.
+We will be working in the Client part to go through the steps of our workshop. 
+To start, you need to checkout `workshop` branch. Main branch is the reference. 
+We only gonna work in the client project, backend and the shared codebase are not in the scope of the workshop.
 
 ## Task #1 (We all do stuff together)
 
@@ -31,10 +33,10 @@ For that you'll need to:
 
 * Update the interfaces of the `VersionsList` VIP stack. All the entities are created and connected.
 * Inject all the necessary dependencies (`VersionsRepository`, `ProjectsRepository`). Use `AppDependencies` for that.
-* Implement the async request(s) and make the result display in the UI.
+* Implement the async request(s) and make the result display in the UI. You need to fetch the project by ID and then fetch versions for that project. (You'll see that some of the requests are not implemented in the repo. It's intended, you don't need those.)
 * Implement navigation from the list to the details.
 
-## Task #2 (UIKit vs SwiftUI)
+## Task #2 (UIKit vs SwiftUI, based on the timeline we either do both or choose one.)
 
 Upgrade the version details screen with business logic.
 You'll need:
