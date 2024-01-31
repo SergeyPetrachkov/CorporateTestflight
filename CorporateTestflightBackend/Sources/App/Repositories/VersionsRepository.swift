@@ -1,5 +1,5 @@
 import CorporateTestflightDomain
-import Fluent
+@preconcurrency import Fluent
 import Vapor
 
 struct VersionsRepositoryImpl: VersionsRepository {

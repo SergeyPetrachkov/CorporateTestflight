@@ -1,5 +1,5 @@
-public struct VersionsRequest {
-    
+public struct VersionsRequest: Sendable {
+
     public let projectId: Project.ID
 
     public init(projectId: Project.ID) {
@@ -7,7 +7,7 @@ public struct VersionsRequest {
     }
 }
 
-public protocol VersionsRepository {
+public protocol VersionsRepository: Sendable {
     func getVersions(request: VersionsRequest) async throws -> [Version]
     func getVersion(by id: Version.ID) async throws -> Version
 }
