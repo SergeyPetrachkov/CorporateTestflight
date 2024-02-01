@@ -46,7 +46,11 @@ final class VersionDetailsViewModel: ObservableObject, ViewModelLifeCycle {
     @MainActor
     private func fetchData() async {
         let tickets = await fetchTickets(for: version)
-        state = .loaded(.init(version: version, tickets: tickets))
+        if !Task.isCancelled {
+            state = .loaded(.init(version: version, tickets: tickets))
+        } else {
+            print("VM is stopped. State won't be published")
+        }
     }
 
     private func fetchTickets(for version: Version) async -> [Ticket] {
