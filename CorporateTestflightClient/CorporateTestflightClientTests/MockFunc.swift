@@ -1,6 +1,6 @@
 import Foundation
 
-final class MockFunc<Input, Output> {
+final class MockFunc<Input, Output>: @unchecked Sendable {
 
     typealias Pipeline = (Input) -> Output
 
@@ -42,11 +42,11 @@ final class MockFunc<Input, Output> {
         completions[count - 1]
     }
 
-    static func mock(for function: (Input) throws -> Output) -> MockFunc {
+    static func mock(for function: @MainActor (Input) throws -> Output) -> MockFunc {
         MockFunc()
     }
 
-    static func mock(for function: (Input) async throws -> Output) -> MockFunc {
+    static func mock(for function: @MainActor (Input) async throws -> Output) -> MockFunc {
         MockFunc()
     }
 
@@ -136,7 +136,7 @@ extension MockFunc where Output == Void {
 }
 
 
-final class MockThrowingFunc<Input, Output> {
+final class MockThrowingFunc<Input, Output>: @unchecked Sendable {
 
     typealias Pipeline = (Input) throws -> Output
 
@@ -174,11 +174,11 @@ final class MockThrowingFunc<Input, Output> {
         completions[count - 1]
     }
 
-    static func mock(for function: (Input) throws -> Output) -> MockThrowingFunc {
+    static func mock(for function: @MainActor (Input) throws -> Output) -> MockThrowingFunc {
         MockThrowingFunc()
     }
 
-    static func mock(for function: (Input) async throws -> Output) -> MockThrowingFunc {
+    static func mock(for function: @MainActor (Input) async throws -> Output) -> MockThrowingFunc {
         MockThrowingFunc()
     }
 

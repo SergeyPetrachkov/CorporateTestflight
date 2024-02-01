@@ -1,7 +1,7 @@
 @testable import CorporateTestflightClient
 import CorporateTestflightDomain
 
-final class MockVersionsListPresenter: VersionsListPresenting {
+final class MockVersionsListPresenter: VersionsListPresenting, @unchecked Sendable {
 
     lazy var showDataMock = MockFunc.mock(for: showData)
     func showData(versions: [CorporateTestflightDomain.Version], project: CorporateTestflightDomain.Project) {

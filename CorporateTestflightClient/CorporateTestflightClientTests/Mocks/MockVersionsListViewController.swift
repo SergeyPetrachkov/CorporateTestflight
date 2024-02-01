@@ -1,6 +1,6 @@
 @testable import CorporateTestflightClient
 
-final class MockVersionsListViewController: VersionsListViewControlling {
+final class MockVersionsListViewController: VersionsListViewControlling, @unchecked Sendable {
 
     lazy var showVersionsMock = MockFunc.mock(for: showVersions(_:))
     func showVersions(_ versions: [CorporateTestflightClient.VersionsListModels.VersionViewModel]) {
