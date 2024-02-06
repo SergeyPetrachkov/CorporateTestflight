@@ -32,7 +32,6 @@ Create the first screen of the app.
 For that you'll need to:
 
 * Update the interfaces of the `VersionsList` VIP stack. All the entities are created and connected.
-* Inject all the necessary dependencies (`VersionsRepository`, `ProjectsRepository`). Use `AppDependencies` for that.
 * Implement the async request(s) and make the result display in the UI. You need to fetch the project by ID and then fetch versions for that project. (You'll see that some of the requests are not implemented in the repo. It's intended, you don't need those.)
 * Implement navigation from the list to the details.
 

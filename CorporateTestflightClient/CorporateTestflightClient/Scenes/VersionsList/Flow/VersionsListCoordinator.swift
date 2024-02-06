@@ -24,7 +24,9 @@ final class VersionsListCoordinator {
     func start() {
         let versionsVC = VersionsListViewController.build(
             projectId: projectId,
-            output: self
+            output: self,
+            projectsRepository: dependenciesContainer.projectsRepository,
+            versionsRepository: dependenciesContainer.versionsRepository
         )
         rootViewController.setViewControllers([versionsVC], animated: true)
     }
