@@ -6,16 +6,16 @@ final class VersionDetailsViewModel: ObservableObject, ViewModelLifeCycle {
 
     // MARK: - Injectables
     private let version: Version
-    private let ticketsRepository: TicketsRepository
+    private let fetchTicketsUsecase: FetchTicketsUseCaseProtocol
 
     // MARK: - State
     @Published private(set) var state: State
     private var currentTask: Task<Void, Never>?
 
     // MARK: - Init
-    init(version: Version, ticketsRepository: TicketsRepository) {
+    init(version: Version, fetchTicketsUsecase: FetchTicketsUseCaseProtocol) {
         self.version = version
-        self.ticketsRepository = ticketsRepository
+        self.fetchTicketsUsecase = fetchTicketsUsecase
         self.state = .loading(State.VersionPreviewViewModel(version: version))
     }
 
@@ -26,7 +26,7 @@ final class VersionDetailsViewModel: ObservableObject, ViewModelLifeCycle {
     // MARK: - Async interface controlled by SwiftUI
     @MainActor
     func startAsync() async {
-        let tickets = await fetchTickets(for: version)
+        let tickets = await fetchTicketsUsecase.execute(for: version)
         state = .loaded(.init(version: version, tickets: tickets))
     }
 
@@ -45,33 +45,11 @@ final class VersionDetailsViewModel: ObservableObject, ViewModelLifeCycle {
     @Sendable
     @MainActor
     private func fetchData() async {
-        let tickets = await fetchTickets(for: version)
+        let tickets = await fetchTicketsUsecase.execute(for: version)
         if !Task.isCancelled {
             state = .loaded(.init(version: version, tickets: tickets))
         } else {
             print("VM is stopped. State won't be published")
-        }
-    }
-
-    private func fetchTickets(for version: Version) async -> [Ticket] {
-        await withTaskGroup(of: Ticket?.self) { group in
-            version.associatedTicketKeys.forEach { ticketKey in
-                group.addTask { [ticketsRepository] in
-                    do {
-                        return try await ticketsRepository.getTicket(key: ticketKey)
-                    } catch {
-                        print(error)
-                        return nil
-                    }
-                }
-            }
-            var tickets: [Ticket] = []
-            for await ticket in group {
-                if let ticket {
-                    tickets.append(ticket)
-                }
-            }
-            return tickets
         }
     }
 }

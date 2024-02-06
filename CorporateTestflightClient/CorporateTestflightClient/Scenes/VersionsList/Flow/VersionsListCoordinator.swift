@@ -71,7 +71,7 @@ extension VersionsListCoordinator: VersionsListInteractorOutput {
     private func showSwiftUI(version: Version) {
         let viewModel = VersionDetailsViewModel(
             version: version,
-            ticketsRepository: dependenciesContainer.ticketsRepository
+            fetchTicketsUsecase: FetchTicketsUseCase(ticketsRepository: dependenciesContainer.ticketsRepository)
         )
         let view = VersionDetailsView(viewModel: viewModel)
         let hostingVC = UIHostingController(rootView: view)

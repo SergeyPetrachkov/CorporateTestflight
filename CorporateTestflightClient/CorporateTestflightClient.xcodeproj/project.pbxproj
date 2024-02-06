@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		39137D642B725C26003336C3 /* FetchTicketsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39137D632B725C26003336C3 /* FetchTicketsUseCase.swift */; };
 		397D9DDB2B20CFA400012C43 /* VersionDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397D9DDA2B20CFA400012C43 /* VersionDetailsView.swift */; };
 		397D9DDD2B20CFB900012C43 /* VersionDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397D9DDC2B20CFB900012C43 /* VersionDetailsViewModel.swift */; };
 		397D9DE02B2330DA00012C43 /* TicketsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397D9DDF2B2330DA00012C43 /* TicketsRepository.swift */; };
@@ -63,6 +64,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		39137D632B725C26003336C3 /* FetchTicketsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchTicketsUseCase.swift; sourceTree = "<group>"; };
 		397D9DDA2B20CFA400012C43 /* VersionDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionDetailsView.swift; sourceTree = "<group>"; };
 		397D9DDC2B20CFB900012C43 /* VersionDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionDetailsViewModel.swift; sourceTree = "<group>"; };
 		397D9DDF2B2330DA00012C43 /* TicketsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketsRepository.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				3998F2482B14ED2700D7CB90 /* FetchProjectOverviewUseCase.swift */,
+				39137D632B725C26003336C3 /* FetchTicketsUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -449,6 +452,7 @@
 				397D9DEA2B2465B000012C43 /* VersionDetailsViewController.swift in Sources */,
 				397D9DEE2B24665B00012C43 /* VersionDetailsPresenter.swift in Sources */,
 				3998F2582B188C2800D7CB90 /* VersionsRepository.swift in Sources */,
+				39137D642B725C26003336C3 /* FetchTicketsUseCase.swift in Sources */,
 				3998F2552B18843700D7CB90 /* VersionsListCoordinator.swift in Sources */,
 				3998F2472B14ED1A00D7CB90 /* VersionsListPresenter.swift in Sources */,
 				3998F2512B14F07300D7CB90 /* VersionsListViewController+Build.swift in Sources */,

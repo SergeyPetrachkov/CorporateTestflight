@@ -25,7 +25,22 @@ final class VersionDetailsViewModelTests: XCTestCase {
             .store(in: &env.cancellables)
         await fulfillment(of: [expectation], timeout: 5)
 
-        XCTAssertEqual(states.last, .loaded(.init(version: env.version, tickets: [returnValue])))
+        XCTAssertEqual(
+            states,
+            [
+                .loading(
+                    .init(
+                        version: env.version
+                    )
+                ),
+                .loaded(
+                    .init(
+                        version: env.version,
+                        tickets: [returnValue]
+                    )
+                )
+            ]
+        )
     }
 
     func test_whenStartingViewModelAndCancelling_LoadedStateShouldNotBePublished() async {
@@ -56,11 +71,17 @@ final class VersionDetailsViewModelTests: XCTestCase {
 
 private final class Environment {
 
-    let version = Version(id: UUID(uuidString: "00000000-0000-0000-0000-000000000000")!, buildNumber: 1, associatedTicketKeys: ["Key-1"])
+    let version = Version(
+        id: UUID(
+            uuidString: "00000000-0000-0000-0000-000000000000"
+        )!,
+        buildNumber: 1,
+        associatedTicketKeys: ["Key-1"]
+    )
     var repository = MockTicketsRepository()
     var cancellables: Set<AnyCancellable> = []
 
     func makeSUT() -> VersionDetailsViewModel {
-        VersionDetailsViewModel(version: version, ticketsRepository: repository)
+        VersionDetailsViewModel(version: version, fetchTicketsUsecase: FetchTicketsUseCase(ticketsRepository: repository))
     }
 }
