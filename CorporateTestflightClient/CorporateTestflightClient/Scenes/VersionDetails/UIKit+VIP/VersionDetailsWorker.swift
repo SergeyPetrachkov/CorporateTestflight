@@ -1,6 +1,6 @@
 import CorporateTestflightDomain
 
-protocol VersionDetailsWorking {
+protocol VersionDetailsWorking: Sendable {
     func fetchTickets(for version: Version) async throws -> [Ticket]
 }
 

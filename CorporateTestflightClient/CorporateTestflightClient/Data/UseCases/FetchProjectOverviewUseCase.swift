@@ -1,6 +1,6 @@
 import CorporateTestflightDomain
 
-protocol FetchProjectOverviewUseCaseProtocol {
+protocol FetchProjectOverviewUseCaseProtocol: Sendable {
     func fetchData(projectId: Int) async throws -> (project: Project, versions: [Version])
 }
 

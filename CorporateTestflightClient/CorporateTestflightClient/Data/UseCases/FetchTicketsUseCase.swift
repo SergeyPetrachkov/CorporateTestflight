@@ -1,6 +1,6 @@
 import CorporateTestflightDomain
 
-protocol FetchTicketsUseCaseProtocol {
+protocol FetchTicketsUseCaseProtocol: Sendable {
     func execute(for version: Version) async -> [Ticket]
 }
 
