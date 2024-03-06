@@ -1,7 +1,7 @@
 @testable import CorporateTestflightClient
 import CorporateTestflightDomain
 
-final class MockFetchProjectOverviewUseCase: FetchProjectOverviewUseCaseProtocol {
+final class MockVersionsListWorker: VersionsListWorkerProtocol {
 
     lazy var fetchDataMock = MockThrowingFunc.mock(for: fetchData)
     func fetchData(projectId: Int) async throws -> (project: CorporateTestflightDomain.Project, versions: [CorporateTestflightDomain.Version]) {

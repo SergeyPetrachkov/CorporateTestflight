@@ -1,10 +1,10 @@
 import CorporateTestflightDomain
 
-protocol FetchProjectOverviewUseCaseProtocol: Sendable {
+protocol VersionsListWorkerProtocol: Sendable {
     func fetchData(projectId: Int) async throws -> (project: Project, versions: [Version])
 }
 
-struct FetchProjectOverviewUseCase: FetchProjectOverviewUseCaseProtocol {
+struct VersionsListWorker: VersionsListWorkerProtocol {
 
     private let versionsRepository: VersionsRepository
     private let projectsRepository: ProjectsRepository

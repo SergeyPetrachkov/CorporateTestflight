@@ -9,7 +9,7 @@ final class VersionsListInteractorTests: XCTestCase {
         let sut = env.makeSUT()
         let sample = (project: Project(id: 2, name: "Name"),
                       versions: [Version(id: UUID(), buildNumber: 1, associatedTicketKeys: [])])
-        env.usecase.fetchDataMock.returns(sample)
+        env.worker.fetchDataMock.returns(sample)
         let expectation = expectation(description: "Show data expectation")
         env.presenter.showDataMock.didCall = { _ in
             expectation.fulfill()
@@ -27,7 +27,7 @@ final class VersionsListInteractorTests: XCTestCase {
         let env = Environment()
         let sut = env.makeSUT()
         let error = NSError(domain: "com.tests.error", code: -1)
-        env.usecase.fetchDataMock.throws(error)
+        env.worker.fetchDataMock.throws(error)
         let expectation = expectation(description: "Show error expectation")
         env.presenter.showErrorMock.didCall = { _ in
             expectation.fulfill()
@@ -45,7 +45,7 @@ final class VersionsListInteractorTests: XCTestCase {
         let sampleVersion = Version(id: UUID(), buildNumber: 1, associatedTicketKeys: [])
         let sample = (project: Project(id: 2, name: "Name"),
                       versions: [sampleVersion])
-        env.usecase.fetchDataMock.returns(sample)
+        env.worker.fetchDataMock.returns(sample)
         let expectation = expectation(description: "Show data expectation")
         env.presenter.showDataMock.didCall = { _ in
             expectation.fulfill()
@@ -62,10 +62,10 @@ final class VersionsListInteractorTests: XCTestCase {
 private final class Environment {
 
     let presenter = MockVersionsListPresenter()
-    let usecase = MockFetchProjectOverviewUseCase()
+    let worker = MockVersionsListWorker()
 
     func makeSUT(output: VersionsListInteractorOutput? = nil) -> VersionsListInteractor {
-        let sut = VersionsListInteractor(projectId: 1, presenter: presenter, usecase: usecase)
+        let sut = VersionsListInteractor(projectId: 1, presenter: presenter, worker: worker)
         sut.output = output
         return sut
     }

@@ -14,7 +14,7 @@ extension VersionsListViewController {
         let interactor = VersionsListInteractor(
             projectId: projectId,
             presenter: presenter,
-            usecase: FetchProjectOverviewUseCase(
+            worker: VersionsListWorker(
                 versionsRepository: versionsRepository,
                 projectsRepository: projectsRepository
             )

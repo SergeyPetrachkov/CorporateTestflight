@@ -23,13 +23,6 @@ final class VersionDetailsViewModel: ObservableObject, ViewModelLifeCycle {
         print("Deinit \(self)")
     }
 
-    // MARK: - Async interface controlled by SwiftUI
-    @MainActor
-    func startAsync() async {
-        let tickets = await fetchTicketsUsecase.execute(for: version)
-        state = .loaded(.init(version: version, tickets: tickets))
-    }
-
     // MARK: - Sync interface controlled by us
     func start() {
         currentTask?.cancel()
