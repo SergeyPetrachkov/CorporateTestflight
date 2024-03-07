@@ -1,10 +1,11 @@
-import XCTest
+@preconcurrency import XCTest
 import CorporateTestflightDomain
 import Combine
 @testable import CorporateTestflightClient
 
 final class VersionDetailsViewModelTests: XCTestCase {
 
+    @MainActor
     func test_whenStartingViewModel_loadingAndLoadedStatesShouldBePublished() async {
         let env = Environment()
         let returnValue = Ticket(id: UUID(), key: "Key-1", title: "", description: "")
@@ -43,6 +44,7 @@ final class VersionDetailsViewModelTests: XCTestCase {
         )
     }
 
+    @MainActor
     func test_whenStartingViewModelAndCancelling_LoadedStateShouldNotBePublished() async {
         let env = Environment()
         let returnValue = Ticket(id: UUID(), key: "Key-1", title: "", description: "")

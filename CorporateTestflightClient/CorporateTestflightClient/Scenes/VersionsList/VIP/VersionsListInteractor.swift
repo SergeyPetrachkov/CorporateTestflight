@@ -1,7 +1,8 @@
 import ArchHelpers
 import CorporateTestflightDomain
 
-protocol VersionsListInteractorProtocol: ViewControllerLifeCycleBoundInteractor, AsyncSingleTaskInteractor {
+protocol VersionsListInteractorProtocol {
+    @MainActor
     func viewDidLoad()
     func viewWillUnload()
     @MainActor
@@ -37,11 +38,18 @@ final class VersionsListInteractor: VersionsListInteractorProtocol {
     }
 
     // MARK: - Class interface
+
+    @MainActor
     func viewDidLoad() {
-        currentTask = Task(operation: fetchData)
+        currentTask = Task {
+            await fetchData()
+        }
     }
 
-    @Sendable
+    func viewWillUnload() {
+        currentTask?.cancel()
+    }
+
     @MainActor
     private func fetchData() async {
         do {

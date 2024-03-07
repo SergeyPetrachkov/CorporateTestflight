@@ -1,9 +1,10 @@
-import XCTest
+@preconcurrency import XCTest
 @testable import CorporateTestflightClient
 import CorporateTestflightDomain
 
 final class VersionsListInteractorTests: XCTestCase {
 
+    @MainActor
     func test_whenCallSucceeds_showDataGetsCalled() async {
         let env = Environment()
         let sut = env.makeSUT()
@@ -23,6 +24,7 @@ final class VersionsListInteractorTests: XCTestCase {
         XCTAssertEqual(env.presenter.showDataMock.input.1, sample.project)
     }
 
+    @MainActor
     func test_whenCallFails_showErrorGetsCalled() async {
         let env = Environment()
         let sut = env.makeSUT()

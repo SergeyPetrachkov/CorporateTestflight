@@ -1,9 +1,15 @@
 import ArchHelpers
 import CorporateTestflightDomain
 
-protocol VersionDetailsInteractorProtocol: ViewControllerLifeCycleBoundInteractor, AsyncSingleTaskInteractor { }
+protocol VersionDetailsInteractorProtocol: AsyncSingleTaskInteractor {
+    @MainActor
+    func viewDidLoad()
+
+    func viewWillUnload()
+}
 
 final class VersionDetailsInteractor: VersionDetailsInteractorProtocol {
+
     
     private(set) var currentTask: Task<Void, Never>?
     private let version: Version
@@ -20,14 +26,20 @@ final class VersionDetailsInteractor: VersionDetailsInteractorProtocol {
         print("Deinit \(self)")
     }
 
+    @MainActor
     func viewDidLoad() {
         currentTask?.cancel()
-        currentTask = Task(operation: fetchData)
+        currentTask = Task {
+            await fetchData()
+        }
+    }
+
+    func viewWillUnload() {
+        currentTask?.cancel()
     }
 
     // MARK: - Private logic
 
-    @Sendable
     @MainActor
     private func fetchData() async {
         do {

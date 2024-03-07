@@ -24,18 +24,21 @@ final class VersionDetailsViewModel: ObservableObject, ViewModelLifeCycle {
     }
 
     // MARK: - Sync interface controlled by us
+    @MainActor
     func start() {
         currentTask?.cancel()
-        currentTask = Task(operation: fetchData)
+        currentTask = Task {
+            await fetchData()
+        }
     }
 
+    @MainActor
     func stop() {
         currentTask?.cancel()
     }
 
     // MARK: - Private logic
 
-    @Sendable
     @MainActor
     private func fetchData() async {
         let tickets = await fetchTicketsUsecase.execute(for: version)
