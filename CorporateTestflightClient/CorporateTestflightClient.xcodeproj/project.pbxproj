@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		39137D642B725C26003336C3 /* FetchTicketsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39137D632B725C26003336C3 /* FetchTicketsUseCase.swift */; };
+		3973F7022B99AACF00CC3D91 /* AsyncThrowingMockFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3973F7012B99AACF00CC3D91 /* AsyncThrowingMockFunc.swift */; };
 		397D9DDB2B20CFA400012C43 /* VersionDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397D9DDA2B20CFA400012C43 /* VersionDetailsView.swift */; };
 		397D9DDD2B20CFB900012C43 /* VersionDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397D9DDC2B20CFB900012C43 /* VersionDetailsViewModel.swift */; };
 		397D9DE02B2330DA00012C43 /* TicketsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397D9DDF2B2330DA00012C43 /* TicketsRepository.swift */; };
@@ -65,6 +66,7 @@
 
 /* Begin PBXFileReference section */
 		39137D632B725C26003336C3 /* FetchTicketsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchTicketsUseCase.swift; sourceTree = "<group>"; };
+		3973F7012B99AACF00CC3D91 /* AsyncThrowingMockFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncThrowingMockFunc.swift; sourceTree = "<group>"; };
 		397D9DDA2B20CFA400012C43 /* VersionDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionDetailsView.swift; sourceTree = "<group>"; };
 		397D9DDC2B20CFB900012C43 /* VersionDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionDetailsViewModel.swift; sourceTree = "<group>"; };
 		397D9DDF2B2330DA00012C43 /* TicketsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketsRepository.swift; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 		39C3C0042B10B07C00F5D10D /* CorporateTestflightClientTests */ = {
 			isa = PBXGroup;
 			children = (
+				3973F7012B99AACF00CC3D91 /* AsyncThrowingMockFunc.swift */,
 				39FAACA22B3C6E35004E564A /* MockFunc.swift */,
 				39FAACA62B3C7371004E564A /* Mocks */,
 				39FAACAB2B3EFF21004E564A /* VersionsListTests */,
@@ -482,6 +485,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3973F7022B99AACF00CC3D91 /* AsyncThrowingMockFunc.swift in Sources */,
 				39FAACB42B3F064B004E564A /* VersionDetailsViewModelTests.swift in Sources */,
 				39FAACA82B3C7381004E564A /* MockVersionsListPresenter.swift in Sources */,
 				39FAACA52B3C72F6004E564A /* VersionsListInteractorTests.swift in Sources */,

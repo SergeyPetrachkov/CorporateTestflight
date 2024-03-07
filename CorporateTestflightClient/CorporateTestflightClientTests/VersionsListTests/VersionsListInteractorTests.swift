@@ -10,7 +10,7 @@ final class VersionsListInteractorTests: XCTestCase {
         let sut = env.makeSUT()
         let sample = (project: Project(id: 2, name: "Name"),
                       versions: [Version(id: UUID(), buildNumber: 1, associatedTicketKeys: [])])
-        env.worker.fetchDataMock.returns(sample)
+        await env.worker.fetchDataMock.returns(sample)
         let expectation = expectation(description: "Show data expectation")
         env.presenter.showDataMock.didCall = { _ in
             expectation.fulfill()
@@ -29,7 +29,7 @@ final class VersionsListInteractorTests: XCTestCase {
         let env = Environment()
         let sut = env.makeSUT()
         let error = NSError(domain: "com.tests.error", code: -1)
-        env.worker.fetchDataMock.throws(error)
+        await env.worker.fetchDataMock.throws(error)
         let expectation = expectation(description: "Show error expectation")
         env.presenter.showErrorMock.didCall = { _ in
             expectation.fulfill()
@@ -47,7 +47,7 @@ final class VersionsListInteractorTests: XCTestCase {
         let sampleVersion = Version(id: UUID(), buildNumber: 1, associatedTicketKeys: [])
         let sample = (project: Project(id: 2, name: "Name"),
                       versions: [sampleVersion])
-        env.worker.fetchDataMock.returns(sample)
+        await env.worker.fetchDataMock.returns(sample)
         let expectation = expectation(description: "Show data expectation")
         env.presenter.showDataMock.didCall = { _ in
             expectation.fulfill()
