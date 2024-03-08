@@ -1,9 +1,9 @@
 @testable import CorporateTestflightClient
 import CorporateTestflightDomain
 
-final class MockVersionsListWorker: VersionsListWorkerProtocol {
+actor MockVersionsListWorker: VersionsListWorkerProtocol {
 
-    nonisolated(unsafe) private(set) lazy var fetchDataMock = AsyncThrowingMockFunc.mock(for: fetchData)
+    private(set) lazy var fetchDataMock = AsyncThrowingMockFunc.mock(for: fetchData)
 
     func fetchData(projectId: Int) async throws -> (project: CorporateTestflightDomain.Project, versions: [CorporateTestflightDomain.Version]) {
         await fetchDataMock.call(with: projectId)
