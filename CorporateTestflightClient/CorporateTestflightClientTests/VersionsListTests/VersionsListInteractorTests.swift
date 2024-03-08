@@ -8,8 +8,10 @@ final class VersionsListInteractorTests: XCTestCase {
     func test_whenCallSucceeds_showDataGetsCalled() async {
         let env = Environment()
         let sut = env.makeSUT()
-        let sample = (project: Project(id: 2, name: "Name"),
-                      versions: [Version(id: UUID(), buildNumber: 1, associatedTicketKeys: [])])
+        let sample = (
+            project: Project(id: 2, name: "Name"),
+            versions: [Version(id: UUID(), buildNumber: 1, associatedTicketKeys: [])]
+        )
         await env.worker.fetchDataMock.returns(sample)
         let expectation = expectation(description: "Show data expectation")
         env.presenter.showDataMock.didCall = { _ in
@@ -45,8 +47,10 @@ final class VersionsListInteractorTests: XCTestCase {
         let mockOutput = MockVersionsListInteractorOutput()
         let sut = env.makeSUT(output: mockOutput)
         let sampleVersion = Version(id: UUID(), buildNumber: 1, associatedTicketKeys: [])
-        let sample = (project: Project(id: 2, name: "Name"),
-                      versions: [sampleVersion])
+        let sample = (
+            project: Project(id: 2, name: "Name"),
+            versions: [sampleVersion]
+        )
         await env.worker.fetchDataMock.returns(sample)
         let expectation = expectation(description: "Show data expectation")
         env.presenter.showDataMock.didCall = { _ in

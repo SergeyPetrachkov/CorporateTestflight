@@ -6,9 +6,14 @@ struct CreateVersions: AsyncMigration {
         .init(buildNumber: 1, releaseNotes: "The very first build 🥇", associatedTicketKeys: [], projectId: 1),
         .init(buildNumber: 2, releaseNotes: "Added analytics dependencies and set up the welcome screen 🤗", associatedTicketKeys: ["JIRA-1"], projectId: 1),
         .init(buildNumber: 3, releaseNotes: "Created the onboarding flow ⛴️", associatedTicketKeys: ["JIRA-2", "JIRA-3", "JIRA-4"], projectId: 1),
-        .init(buildNumber: 4, releaseNotes: "Created the dashboard for the authorized user 🎛️", associatedTicketKeys: ["JIRA-4", "JIRA-5", "JIRA-6", "JIRA-7", "JIRA-8", "JIRA-9"], projectId: 1),
+        .init(
+            buildNumber: 4,
+            releaseNotes: "Created the dashboard for the authorized user 🎛️",
+            associatedTicketKeys: ["JIRA-4", "JIRA-5", "JIRA-6", "JIRA-7", "JIRA-8", "JIRA-9"],
+            projectId: 1
+        ),
         .init(buildNumber: 5, releaseNotes: "💰Created the in-app-purchase flow 💸", associatedTicketKeys: ["JIRA-9", "JIRA-10"], projectId: 1),
-        .init(buildNumber: 1, releaseNotes: "Do something irrelevant", associatedTicketKeys: [], projectId: 2),
+        .init(buildNumber: 1, releaseNotes: "Do something irrelevant", associatedTicketKeys: [], projectId: 2)
     ]
 
     func prepare(on database: Database) async throws {

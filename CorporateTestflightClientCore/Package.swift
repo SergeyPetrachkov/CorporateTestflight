@@ -12,7 +12,11 @@ let coreNetworkingProduct = Product.library(name: coreNetworking, targets: [core
 let coreNetworkingDependency = Target.Dependency.target(name: coreNetworking)
 
 let testflightNetworking = "TestflightNetworking"
-let testflightNetworkingTarget = Target.target(name: testflightNetworking, dependencies: [domainTargetDependency, coreNetworkingDependency], path: path(for: testflightNetworking))
+let testflightNetworkingTarget = Target.target(
+    name: testflightNetworking,
+    dependencies: [domainTargetDependency, coreNetworkingDependency],
+    path: path(for: testflightNetworking)
+)
 let testflightNetworkingProduct = Product.library(name: testflightNetworking, targets: [testflightNetworking])
 
 let testflightUIKit = "TestflightUIKit"
@@ -33,7 +37,7 @@ let package = Package(
         archHelpersProduct
     ],
     dependencies: [
-        sharedPackage,
+        sharedPackage
     ],
     targets: [
         coreNetworkingTarget,

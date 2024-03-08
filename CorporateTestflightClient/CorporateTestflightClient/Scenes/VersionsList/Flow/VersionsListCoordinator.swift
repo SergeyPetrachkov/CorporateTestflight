@@ -32,7 +32,6 @@ final class VersionsListCoordinator {
     }
 }
 
-
 extension VersionsListCoordinator: VersionsListInteractorOutput {
 
     func didEmitEvent(_ event: VersionsListEvent) {
@@ -44,7 +43,7 @@ extension VersionsListCoordinator: VersionsListInteractorOutput {
 
     private func showVersionDetails(_ version: Version) {
         let alternativeVC = UIAlertController(title: "Time to choose", message: "Which side are you on?", preferredStyle: .actionSheet)
-        
+
         let uikitAction = UIAlertAction(title: "UIKit", style: .default) { [weak self] _ in
             self?.showUIKit(version: version)
         }

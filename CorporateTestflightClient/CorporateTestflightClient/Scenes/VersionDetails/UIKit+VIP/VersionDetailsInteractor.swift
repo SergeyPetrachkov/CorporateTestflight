@@ -10,7 +10,6 @@ protocol VersionDetailsInteractorProtocol: AsyncSingleTaskInteractor {
 
 final class VersionDetailsInteractor: VersionDetailsInteractorProtocol {
 
-    
     private(set) var currentTask: Task<Void, Never>?
     private let version: Version
     private let worker: VersionDetailsWorking

@@ -16,7 +16,8 @@ struct VersionsRepositoryImpl: VersionsRepository {
             throw Abort(.notFound)
         }
 
-        let persistedEntities = try await persistedProject
+        let persistedEntities =
+            try await persistedProject
             .$versions
             .query(on: database)
             .all()
@@ -33,7 +34,7 @@ struct VersionsRepositoryImpl: VersionsRepository {
             )
         }
     }
-    
+
     func getVersion(by id: CorporateTestflightDomain.Version.ID) async throws -> CorporateTestflightDomain.Version {
         throw Abort(.notImplemented)
     }

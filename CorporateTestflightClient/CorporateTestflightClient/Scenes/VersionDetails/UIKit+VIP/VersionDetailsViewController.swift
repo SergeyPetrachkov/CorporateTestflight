@@ -19,7 +19,7 @@ final class VersionDetailsViewController: UIViewController, VersionDetailsViewCo
         self.interactor = interactor
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -46,7 +46,7 @@ final class VersionDetailsViewController: UIViewController, VersionDetailsViewCo
         let loadedView = ScrollView {
             VersionDetailsLoadedView(viewModel: state)
         }
-            .padding(.horizontal, 8)
+        .padding(.horizontal, 8)
         let hostingController = UIHostingController(rootView: loadedView)
         if let currentHostingController {
             detachChild(currentHostingController)
@@ -58,7 +58,7 @@ final class VersionDetailsViewController: UIViewController, VersionDetailsViewCo
         let loadingView = ScrollView {
             VersionDetailsLoadingView(viewModel: state)
         }
-            .padding(.horizontal, 8)
+        .padding(.horizontal, 8)
 
         let hostingController = UIHostingController(rootView: loadingView)
         if let currentHostingController {

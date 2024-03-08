@@ -5,7 +5,7 @@ protocol FetchTicketsUseCaseProtocol: Sendable {
 }
 
 struct FetchTicketsUseCase: FetchTicketsUseCaseProtocol {
-    
+
     private let ticketsRepository: TicketsRepository
 
     init(ticketsRepository: TicketsRepository) {

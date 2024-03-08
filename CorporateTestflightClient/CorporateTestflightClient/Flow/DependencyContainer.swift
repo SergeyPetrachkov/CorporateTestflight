@@ -15,7 +15,7 @@ protocol DependencyContaining {
 }
 
 final class AppDependencies: DependencyContaining {
-    
+
     private(set) lazy var api: TestflightAPIProviding = TestflightAPIProvider(session: .shared, decoder: JSONDecoder())
 
     var versionsRepository: VersionsRepository {
@@ -26,9 +26,9 @@ final class AppDependencies: DependencyContaining {
         ProjectsRepositoryImpl(api: api)
     }
 
-//    var ticketsRepository: TicketsRepository {
-//        TicketsRepositoryImpl(api: api)
-//    }
+    //    var ticketsRepository: TicketsRepository {
+    //        TicketsRepositoryImpl(api: api)
+    //    }
 
     private(set) lazy var ticketsRepository: TicketsRepository = TicketsCacheActor(repository: TicketsRepositoryImpl(api: api))
 }

@@ -38,7 +38,7 @@ let package = Package(
                 // Workaround for https://github.com/apple/swift-package-manager/issues/6940
                 .product(name: "Vapor", package: "vapor"),
                 .product(name: "Fluent", package: "Fluent"),
-                .product(name: "FluentSQLiteDriver", package: "fluent-sqlite-driver"),
+                .product(name: "FluentSQLiteDriver", package: "fluent-sqlite-driver")
             ]
         )
     ]

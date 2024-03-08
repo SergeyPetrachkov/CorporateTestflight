@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct TicketView: View {
-    
+
     let viewModel: VersionDetailsViewModel.State.LoadedVersionDetailsViewModel.TicketViewModel
 
     var body: some View {

@@ -14,7 +14,7 @@ let package = Package(
         domainProduct
     ],
     targets: [
-        domainTarget,
+        domainTarget
     ]
 )
 

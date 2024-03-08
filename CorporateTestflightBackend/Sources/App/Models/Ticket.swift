@@ -19,7 +19,7 @@ final class Ticket: Model, Content {
     @Field(key: "description")
     var description: String
 
-    init() { }
+    init() {}
 
     init(id: UUID? = nil, key: String, title: String, description: String) {
         self.id = id

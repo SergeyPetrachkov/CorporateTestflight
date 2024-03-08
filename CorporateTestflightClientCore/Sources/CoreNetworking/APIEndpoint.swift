@@ -12,11 +12,13 @@ public struct APIEndpoint<T> {
     /// any custom headers if needed
     let customHeaders: [String: String]?
 
-    public init(path: String,
-                method: HTTPMethod = .get,
-                customHeaders: [String: String]?,
-                parameters: [String: Any]? = nil,
-                body: Data? = nil) {
+    public init(
+        path: String,
+        method: HTTPMethod = .get,
+        customHeaders: [String: String]?,
+        parameters: [String: Any]? = nil,
+        body: Data? = nil
+    ) {
         self.path = path
         self.method = method
         self.customHeaders = customHeaders
@@ -47,12 +49,16 @@ extension APIEndpoint {
         }
 
         if urlRequest.value(forHTTPHeaderField: HttpRequestHeaderKeys.contentType.rawValue) == nil {
-            urlRequest.setValue(contentType?.rawValue ?? ContentType.applicationJson.rawValue,
-                                forHTTPHeaderField: HttpRequestHeaderKeys.contentType.rawValue)
+            urlRequest.setValue(
+                contentType?.rawValue ?? ContentType.applicationJson.rawValue,
+                forHTTPHeaderField: HttpRequestHeaderKeys.contentType.rawValue
+            )
         }
         if urlRequest.value(forHTTPHeaderField: HttpRequestHeaderKeys.accept.rawValue) == nil {
-            urlRequest.setValue(contentType?.rawValue ?? ContentType.applicationJson.rawValue,
-                                forHTTPHeaderField: HttpRequestHeaderKeys.accept.rawValue)
+            urlRequest.setValue(
+                contentType?.rawValue ?? ContentType.applicationJson.rawValue,
+                forHTTPHeaderField: HttpRequestHeaderKeys.accept.rawValue
+            )
         }
         if let body = self.body {
             urlRequest.httpBody = body
@@ -65,8 +71,9 @@ extension APIEndpoint {
 private extension URLRequest {
     mutating func encodeParameters(_ parameters: [String: Any]?) {
         guard let parameters = parameters,
-              parameters.isEmpty == false,
-              let url = url else {
+            parameters.isEmpty == false,
+            let url = url
+        else {
             return
         }
 
@@ -121,7 +128,7 @@ private extension CharacterSet {
     /// query strings to include a URL. Therefore, all "reserved" characters with the exception of "?" and "/"
     /// should be percent-escaped in the query string.
     static let afURLQueryAllowed: CharacterSet = {
-        let generalDelimitersToEncode = ":#[]@" // does not include "?" or "/" due to RFC 3986 - Section 3.4
+        let generalDelimitersToEncode = ":#[]@"  // does not include "?" or "/" due to RFC 3986 - Section 3.4
         let subDelimitersToEncode = "!$&'()*+,;="
         let encodableDelimiters = CharacterSet(charactersIn: "\(generalDelimitersToEncode)\(subDelimitersToEncode)")
 

@@ -6,7 +6,7 @@ public enum Environment {
 }
 
 public extension APIEndpoint {
-    
+
     static func project(id: Project.ID) -> APIEndpoint<Project> {
         APIEndpoint<Project>(path: "\(Environment.baseUrl)/projects/\(id)", customHeaders: nil)
     }

@@ -30,5 +30,5 @@ final class Version: Model, Content {
         self.$project.id = projectId
     }
 
-    init() { }
+    init() {}
 }

@@ -7,7 +7,7 @@ final class MockTicketsRepository: TicketsRepository, @unchecked Sendable {
         getTicketsMock.call(with: ())
         return try await getTicketsMock.asyncOutput
     }
-    
+
     var getTicketCallsCount = 0
     var getTicketCalled: Bool {
         getTicketCallsCount > 0

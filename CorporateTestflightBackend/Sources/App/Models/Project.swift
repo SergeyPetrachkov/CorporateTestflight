@@ -12,7 +12,7 @@ final class Project {
     @Children(for: \.$project)
     var versions: [Version]
 
-    init() { }
+    init() {}
 
     init(id: Int? = nil, name: String) {
         self.id = id

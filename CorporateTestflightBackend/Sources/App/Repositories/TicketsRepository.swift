@@ -28,7 +28,8 @@ struct TicketsRepositoryImpl: TicketsRepository {
 
     func getTicket(key: String) async throws -> CorporateTestflightDomain.Ticket {
         guard
-            let persistedEntity = try await Ticket
+            let persistedEntity =
+                try await Ticket
                 .query(on: database)
                 .filter(\.$key == key)
                 .all()

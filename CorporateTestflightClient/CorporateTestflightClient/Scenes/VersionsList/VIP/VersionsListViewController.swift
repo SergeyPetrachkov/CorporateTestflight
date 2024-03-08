@@ -11,7 +11,7 @@ protocol VersionsListViewControlling: AnyObject {
 final class VersionsListViewController: UIViewController, VersionsListViewControlling {
 
     private let interactor: VersionsListInteractorProtocol
-    
+
     private lazy var collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: makeCollectionLayout())
 
     private lazy var dataSource: UICollectionViewDiffableDataSource<Int, VersionsListModels.VersionViewModel> = {
@@ -117,7 +117,7 @@ private extension VersionsListViewController {
                 collectionView.topAnchor.constraint(equalTo: view.topAnchor),
                 collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
                 collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
             ]
         )
     }

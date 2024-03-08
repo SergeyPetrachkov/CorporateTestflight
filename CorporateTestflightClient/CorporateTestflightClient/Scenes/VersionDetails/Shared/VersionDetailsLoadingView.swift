@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct VersionDetailsLoadingView: View {
-    
+
     let viewModel: VersionDetailsViewModel.State.VersionPreviewViewModel
 
     var body: some View {

@@ -7,7 +7,7 @@ final class MockVersionsListPresenter: VersionsListPresenting, @unchecked Sendab
     func showData(versions: [CorporateTestflightDomain.Version], project: CorporateTestflightDomain.Project) {
         showDataMock.call(with: (versions, project))
     }
-    
+
     lazy var showErrorMock = MockFunc.mock(for: showError)
     func showError(_ error: Error) {
         showErrorMock.call(with: error)

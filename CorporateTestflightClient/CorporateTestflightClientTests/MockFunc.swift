@@ -135,7 +135,6 @@ extension MockFunc where Output == Void {
     }
 }
 
-
 final class MockThrowingFunc<Input, Output>: @unchecked Sendable {
 
     typealias Pipeline = (Input) throws -> Output

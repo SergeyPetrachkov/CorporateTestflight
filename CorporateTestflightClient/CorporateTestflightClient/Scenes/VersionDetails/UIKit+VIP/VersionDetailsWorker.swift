@@ -31,7 +31,7 @@ final class VersionDetailsWorker: VersionDetailsWorking {
             var tickets: [Ticket] = []
             try Task.checkCancellation()
             for try await ticket in group {
-                
+
                 if let ticket {
                     tickets.append(ticket)
                 }

@@ -2,7 +2,7 @@ import UIKit
 import CorporateTestflightDomain
 
 extension VersionsListViewController {
-    
+
     static func build(
         projectId: Int,
         versionsRepository: VersionsRepository,

@@ -53,7 +53,7 @@ private extension VersionListCell {
                 subtitleView.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 8),
                 subtitleView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
                 subtitleView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-                subtitleView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8),
+                subtitleView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8)
             ]
         )
     }
