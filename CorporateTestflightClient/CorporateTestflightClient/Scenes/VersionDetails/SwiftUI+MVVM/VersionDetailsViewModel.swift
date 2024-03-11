@@ -2,7 +2,7 @@ import Foundation
 import CorporateTestflightDomain
 import ArchHelpers
 
-final class VersionDetailsViewModel: ObservableObject, ViewModelLifeCycle {
+final class VersionDetailsViewModel: ObservableObject {
 
     // MARK: - Injectables
     private let version: Version
@@ -24,6 +24,7 @@ final class VersionDetailsViewModel: ObservableObject, ViewModelLifeCycle {
     }
 
     // MARK: - Sync interface controlled by us
+
     @MainActor
     func start() {
         currentTask?.cancel()
@@ -32,7 +33,6 @@ final class VersionDetailsViewModel: ObservableObject, ViewModelLifeCycle {
         }
     }
 
-    @MainActor
     func stop() {
         currentTask?.cancel()
     }

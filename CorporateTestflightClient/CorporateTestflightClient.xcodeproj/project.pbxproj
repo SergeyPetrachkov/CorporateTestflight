@@ -133,19 +133,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		397D9DDE2B22035E00012C43 /* UseCases */ = {
-			isa = PBXGroup;
-			children = (
-				39137D632B725C26003336C3 /* FetchTicketsUseCase.swift */,
-			);
-			path = UseCases;
-			sourceTree = "<group>";
-		};
 		397D9DE32B23597800012C43 /* SwiftUI+MVVM */ = {
 			isa = PBXGroup;
 			children = (
 				397D9DDA2B20CFA400012C43 /* VersionDetailsView.swift */,
 				397D9DDC2B20CFB900012C43 /* VersionDetailsViewModel.swift */,
+				39137D632B725C26003336C3 /* FetchTicketsUseCase.swift */,
 			);
 			path = "SwiftUI+MVVM";
 			sourceTree = "<group>";
@@ -154,7 +147,6 @@
 			isa = PBXGroup;
 			children = (
 				3998F2562B188C0D00D7CB90 /* Repositories */,
-				397D9DDE2B22035E00012C43 /* UseCases */,
 				397D9DE52B235AE100012C43 /* TicketsCacheActor.swift */,
 			);
 			path = Data;

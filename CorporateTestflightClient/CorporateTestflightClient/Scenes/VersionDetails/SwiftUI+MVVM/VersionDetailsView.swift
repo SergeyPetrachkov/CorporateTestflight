@@ -39,9 +39,6 @@ struct VersionDetailsView: View {
             .onDisappear {
                 viewModel.stop()
             }
-        //        .task {
-        //            await viewModel.start()
-        //        }
     }
 
     @ViewBuilder
