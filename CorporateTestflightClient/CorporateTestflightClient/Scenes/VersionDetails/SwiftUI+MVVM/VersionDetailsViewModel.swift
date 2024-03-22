@@ -22,15 +22,11 @@ final class VersionDetailsViewModel: ObservableObject, ViewModelLifeCycle {
         print("Deinit \(self)")
     }
 
-    // MARK: - Async interface controlled by SwiftUI
-    @MainActor
-    func startAsync() async {
-
-    }
-
     // MARK: - Sync interface controlled by us
     func start() {
-
+        // load data here somehow (version.associatedTicketKeys & TicketsRepository.getTicket(key: String))
+        // create .loaded state
+        // update self.state
     }
 
     func stop() {

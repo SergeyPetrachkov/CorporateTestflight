@@ -43,6 +43,7 @@ final class VersionsListViewController: UIViewController, VersionsListViewContro
         view.backgroundColor = .systemBackground
         title = "Hello, workshop!"
         makeLayout()
+        interactor.viewDidLoad()
     }
 
     func showVersions(_ versions: [VersionsListModels.VersionViewModel]) {
