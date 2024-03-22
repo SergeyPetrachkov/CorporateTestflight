@@ -21,7 +21,9 @@ struct VersionDetailsView: View {
                 VStack {
                     Text("Something went wrong")
                     Text(error.message)
-                    Button("Retry", action: viewModel.start)
+                    Button("Retry") {
+                        viewModel.start()
+                    }
                 }
             }
         }
