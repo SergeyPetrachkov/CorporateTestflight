@@ -1,4 +1,4 @@
-@preconcurrency import XCTest
+import XCTest
 import CorporateTestflightDomain
 import Combine
 @testable import CorporateTestflightClient
@@ -14,14 +14,13 @@ final class VersionDetailsViewModelTests: XCTestCase {
         let sut = env.makeSUT()
 
         let expectation = expectation(description: "Show data expectation")
-        sut.start()
+        sut.send(.onAppear)
         var states: [VersionDetailsViewModel.State] = []
         sut.$state
+            .dropFirst() // skipping the one that is set on initialisation
             .sink { state in
                 states.append(state)
-                if states.count == 2 {
-                    expectation.fulfill()
-                }
+                expectation.fulfill()
             }
             .store(in: &env.cancellables)
         await fulfillment(of: [expectation], timeout: 5)
@@ -29,11 +28,6 @@ final class VersionDetailsViewModelTests: XCTestCase {
         XCTAssertEqual(
             states,
             [
-                .loading(
-                    .init(
-                        version: env.version
-                    )
-                ),
                 .loaded(
                     .init(
                         version: env.version,
@@ -54,8 +48,8 @@ final class VersionDetailsViewModelTests: XCTestCase {
 
         let expectation = expectation(description: "Show data expectation")
         expectation.isInverted = true
-        sut.start()
-        sut.stop()
+        sut.send(.onAppear)
+        sut.send(.onDisappear)
         var states: [VersionDetailsViewModel.State] = []
         sut.$state
             .sink { state in
