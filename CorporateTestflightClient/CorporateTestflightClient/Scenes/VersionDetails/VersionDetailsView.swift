@@ -18,19 +18,22 @@ struct VersionDetailsView: View {
             case .loaded(let state):
                 loadedView(detailsModel: state)
             case .failed(let error):
-                ContentUnavailableView(label: {
-                    VStack {
-                        Image(systemName: "cable.connector.horizontal")
-                        Text("Something went wrong")
-                            .font(.headline)
-                        Text(error.message)
-                            .font(.subheadline)
+                ContentUnavailableView(
+                    label: {
+                        VStack {
+                            Image(systemName: "cable.connector.horizontal")
+                            Text("Something went wrong")
+                                .font(.headline)
+                            Text(error.message)
+                                .font(.subheadline)
+                        }
+                    },
+                    actions: {
+                        Button("Retry") {
+                            viewModel.start()
+                        }
                     }
-                }, actions: {
-                    Button("Retry") {
-                        viewModel.start()
-                    }
-                })
+                )
             }
         }
         .refreshable {

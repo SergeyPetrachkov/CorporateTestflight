@@ -17,7 +17,7 @@ struct VersionDetailsLoadedView: View {
                 }
             }
             .padding(4)
-            .background(Color(red: 245/255.0, green: 245/255.0, blue: 247/255.0))
+            .background(Color(red: 245 / 255.0, green: 245 / 255.0, blue: 247 / 255.0))
             .clipShape(RoundedRectangle(cornerSize: .init(width: 8, height: 8), style: .continuous))
         }
     }

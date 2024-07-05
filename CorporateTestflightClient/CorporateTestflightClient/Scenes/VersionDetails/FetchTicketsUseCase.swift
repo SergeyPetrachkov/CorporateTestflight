@@ -19,11 +19,9 @@ struct FetchTicketsUseCase: FetchTicketsUseCaseProtocol {
                 group.addTask {
                     do {
                         return try await ticketsRepository.getTicket(key: ticketKey)
-                    }
-                    catch let urlError as URLError {
+                    } catch let urlError as URLError {
                         throw CancellationError()
-                    }
-                    catch {
+                    } catch {
                         print(error)
                         return nil
                     }
