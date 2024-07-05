@@ -26,15 +26,16 @@ final class VersionDetailsViewModel: ObservableObject {
     // MARK: - Sync interface controlled by us
 
     @MainActor
-    func start() {
-        currentTask?.cancel()
-        currentTask = Task {
-            await fetchData()
+    func send(_ action: Action) {
+        switch action {
+        case .onAppear, .onReload:
+            currentTask?.cancel()
+            currentTask = Task {
+                await fetchData()
+            }
+        case .onDisappear:
+            currentTask?.cancel()
         }
-    }
-
-    func stop() {
-        currentTask?.cancel()
     }
 
     // MARK: - Private logic

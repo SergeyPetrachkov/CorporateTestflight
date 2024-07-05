@@ -30,14 +30,14 @@ struct VersionDetailsView: View {
                     },
                     actions: {
                         Button("Retry") {
-                            viewModel.start()
+                            viewModel.send(.onReload)
                         }
                     }
                 )
             }
         }
         .refreshable {
-            viewModel.start()
+            viewModel.send(.onReload)
         }
     }
 
@@ -45,10 +45,10 @@ struct VersionDetailsView: View {
     private func loadingView(versionPreview: VersionDetailsLoadingView.State) -> some View {
         VersionDetailsLoadingView(state: versionPreview)
             .onAppear {
-                viewModel.start()
+                viewModel.send(.onAppear)
             }
             .onDisappear {
-                viewModel.stop()
+                viewModel.send(.onDisappear)
             }
     }
 
