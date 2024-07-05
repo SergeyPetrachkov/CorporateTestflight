@@ -2,7 +2,7 @@ import CoreNetworking
 import CorporateTestflightDomain
 
 public enum Environment {
-    public static var baseUrl = "http://127.0.0.1:8080"
+    public static let baseUrl = "http://127.0.0.1:8080"
 }
 
 public extension APIEndpoint {

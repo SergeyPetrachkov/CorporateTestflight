@@ -7,11 +7,7 @@ The purpose of this repo is not to create a system, but to serve a sample projec
 * macOS
 * admin access
 * Homebrew
-* Xcode 15.1 
-
-## Before opening Xcode
-
-* install Vapor toolbox by `brew install vapor`
+* Xcode 15.3
 
 ## How to use the repo
 
