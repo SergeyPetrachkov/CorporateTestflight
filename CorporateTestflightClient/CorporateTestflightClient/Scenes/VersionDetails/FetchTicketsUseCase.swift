@@ -1,7 +1,8 @@
 import CorporateTestflightDomain
+import Foundation
 
 protocol FetchTicketsUseCaseProtocol: Sendable {
-    func execute(for version: Version) async -> [Ticket]
+    func execute(for version: Version) async throws -> [Ticket]
 }
 
 struct FetchTicketsUseCase: FetchTicketsUseCaseProtocol {
@@ -12,20 +13,24 @@ struct FetchTicketsUseCase: FetchTicketsUseCaseProtocol {
         self.ticketsRepository = ticketsRepository
     }
 
-    func execute(for version: Version) async -> [Ticket] {
-        await withTaskGroup(of: Ticket?.self) { group in
+    func execute(for version: Version) async throws -> [Ticket] {
+        try await withThrowingTaskGroup(of: Ticket?.self) { group in
             version.associatedTicketKeys.forEach { ticketKey in
                 group.addTask {
                     do {
                         return try await ticketsRepository.getTicket(key: ticketKey)
-                    } catch {
+                    }
+                    catch let urlError as URLError {
+                        throw CancellationError()
+                    }
+                    catch {
                         print(error)
                         return nil
                     }
                 }
             }
             var tickets: [Ticket] = []
-            for await ticket in group {
+            for try await ticket in group {
                 if let ticket {
                     tickets.append(ticket)
                 }

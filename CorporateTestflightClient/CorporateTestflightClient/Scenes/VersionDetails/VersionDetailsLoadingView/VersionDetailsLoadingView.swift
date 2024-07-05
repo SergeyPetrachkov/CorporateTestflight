@@ -2,12 +2,12 @@ import SwiftUI
 
 struct VersionDetailsLoadingView: View {
 
-    let viewModel: VersionDetailsViewModel.State.VersionPreviewViewModel
+    let state: State
 
     var body: some View {
         VStack(alignment: .leading) {
-            VersionDetailsHeaderView(viewModel: viewModel.headerViewModel)
-            if viewModel.ticketPlaceholdersCount > 0 {
+            VersionDetailsHeaderView(state: state.headerState)
+            if state.ticketPlaceholdersCount > 0 {
                 HStack {
                     Spacer()
                     ProgressView()

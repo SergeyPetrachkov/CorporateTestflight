@@ -16,7 +16,7 @@ final class VersionDetailsViewModel: ObservableObject {
     init(version: Version, fetchTicketsUsecase: FetchTicketsUseCaseProtocol) {
         self.version = version
         self.fetchTicketsUsecase = fetchTicketsUsecase
-        self.state = .loading(State.VersionPreviewViewModel(version: version))
+        self.state = .loading(VersionDetailsLoadingView.State(version: version))
     }
 
     deinit {
@@ -41,11 +41,15 @@ final class VersionDetailsViewModel: ObservableObject {
 
     @MainActor
     private func fetchData() async {
-        let tickets = await fetchTicketsUsecase.execute(for: version)
-        if !Task.isCancelled {
-            state = .loaded(.init(version: version, tickets: tickets))
-        } else {
-            print("VM is stopped. State won't be published")
+        do {
+            let tickets = try await fetchTicketsUsecase.execute(for: version)
+            if !Task.isCancelled {
+                state = .loaded(.init(version: version, tickets: tickets))
+            } else {
+                print("VM is stopped. State won't be published")
+            }
+        } catch {
+            state = .failed(State.ErrorViewModel(message: error.localizedDescription))
         }
     }
 }

@@ -2,22 +2,20 @@ import SwiftUI
 
 struct TicketView: View {
 
-    let viewModel: VersionDetailsViewModel.State.LoadedVersionDetailsViewModel.TicketViewModel
+    let state: State
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            HStack {
-                Text(viewModel.key)
+            HStack(alignment: .top) {
+                Text(state.key)
                     .fontWeight(.bold)
-                Text(viewModel.title)
+                Text(state.title)
                     .fontWeight(.medium)
             }
-            .lineLimit(1)
-            Text(viewModel.body)
+            .lineLimit(2)
+            Text(state.body)
                 .font(.caption)
                 .lineLimit(3)
-
-            Divider()
         }
     }
 }
