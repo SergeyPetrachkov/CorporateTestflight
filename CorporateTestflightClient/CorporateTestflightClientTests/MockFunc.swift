@@ -165,6 +165,12 @@ final class MockThrowingFunc<Input, Output>: @unchecked Sendable {
         }
     }
 
+    var output: Output {
+        get throws {
+            try result(input)
+        }
+    }
+
     var input: Input {
         parameters[count - 1]
     }
@@ -184,6 +190,11 @@ final class MockThrowingFunc<Input, Output>: @unchecked Sendable {
     func call(with input: Input) {
         parameters.append(input)
         didCall(input)
+    }
+
+    func callAndReturn(_ input: Input) throws -> Output {
+        call(with: input)
+        return try output
     }
 }
 

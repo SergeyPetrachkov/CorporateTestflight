@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		39137D642B725C26003336C3 /* FetchTicketsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39137D632B725C26003336C3 /* FetchTicketsUseCase.swift */; };
+		397399162C394EC600A254B1 /* Testing in Frameworks */ = {isa = PBXBuildFile; productRef = 397399152C394EC600A254B1 /* Testing */; };
+		397399182C394F3500A254B1 /* VersionsListWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397399172C394F3500A254B1 /* VersionsListWorkerTests.swift */; };
+		3973991A2C39533B00A254B1 /* MockVersionsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397399192C39533B00A254B1 /* MockVersionsRepository.swift */; };
+		3973991C2C39540200A254B1 /* MockProjectsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3973991B2C39540200A254B1 /* MockProjectsRepository.swift */; };
 		3973F7022B99AACF00CC3D91 /* AsyncThrowingMockFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3973F7012B99AACF00CC3D91 /* AsyncThrowingMockFunc.swift */; };
 		397D9DDB2B20CFA400012C43 /* VersionDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397D9DDA2B20CFA400012C43 /* VersionDetailsView.swift */; };
 		397D9DDD2B20CFB900012C43 /* VersionDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397D9DDC2B20CFB900012C43 /* VersionDetailsViewModel.swift */; };
@@ -66,6 +70,9 @@
 
 /* Begin PBXFileReference section */
 		39137D632B725C26003336C3 /* FetchTicketsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchTicketsUseCase.swift; sourceTree = "<group>"; };
+		397399172C394F3500A254B1 /* VersionsListWorkerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionsListWorkerTests.swift; sourceTree = "<group>"; };
+		397399192C39533B00A254B1 /* MockVersionsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockVersionsRepository.swift; sourceTree = "<group>"; };
+		3973991B2C39540200A254B1 /* MockProjectsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockProjectsRepository.swift; sourceTree = "<group>"; };
 		3973F7012B99AACF00CC3D91 /* AsyncThrowingMockFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncThrowingMockFunc.swift; sourceTree = "<group>"; };
 		397D9DDA2B20CFA400012C43 /* VersionDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionDetailsView.swift; sourceTree = "<group>"; };
 		397D9DDC2B20CFB900012C43 /* VersionDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionDetailsViewModel.swift; sourceTree = "<group>"; };
@@ -127,6 +134,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				397399162C394EC600A254B1 /* Testing in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,6 +325,8 @@
 		39FAACA62B3C7371004E564A /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				3973991B2C39540200A254B1 /* MockProjectsRepository.swift */,
+				397399192C39533B00A254B1 /* MockVersionsRepository.swift */,
 				39FAACA72B3C7381004E564A /* MockVersionsListPresenter.swift */,
 				39FAACA92B3C739F004E564A /* MockFetchProjectOverviewUseCase.swift */,
 				39FAACAC2B3F0166004E564A /* MockVersionsListInteractorOutput.swift */,
@@ -331,6 +341,7 @@
 			children = (
 				39FAACA42B3C72F6004E564A /* VersionsListInteractorTests.swift */,
 				39FAACAE2B3F02C9004E564A /* VersionsListPresenterTests.swift */,
+				397399172C394F3500A254B1 /* VersionsListWorkerTests.swift */,
 			);
 			path = VersionsListTests;
 			sourceTree = "<group>";
@@ -383,6 +394,9 @@
 				39C3C0032B10B07C00F5D10D /* PBXTargetDependency */,
 			);
 			name = CorporateTestflightClientTests;
+			packageProductDependencies = (
+				397399152C394EC600A254B1 /* Testing */,
+			);
 			productName = CorporateTestflightClientTests;
 			productReference = 39C3C0012B10B07C00F5D10D /* CorporateTestflightClientTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -415,6 +429,9 @@
 				Base,
 			);
 			mainGroup = 39C3BFE22B10B07A00F5D10D;
+			packageReferences = (
+				397399142C394EC500A254B1 /* XCRemoteSwiftPackageReference "swift-testing" */,
+			);
 			productRefGroup = 39C3BFEC2B10B07A00F5D10D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -493,7 +510,10 @@
 				39FAACA32B3C6E35004E564A /* MockFunc.swift in Sources */,
 				39FAACB12B3F030E004E564A /* MockVersionsListViewController.swift in Sources */,
 				39FAACB62B3F06FF004E564A /* MockTicketsRepository.swift in Sources */,
+				397399182C394F3500A254B1 /* VersionsListWorkerTests.swift in Sources */,
+				3973991C2C39540200A254B1 /* MockProjectsRepository.swift in Sources */,
 				39FAACAD2B3F0166004E564A /* MockVersionsListInteractorOutput.swift in Sources */,
+				3973991A2C39533B00A254B1 /* MockVersionsRepository.swift in Sources */,
 				39FAACAA2B3C739F004E564A /* MockFetchProjectOverviewUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -759,7 +779,23 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		397399142C394EC500A254B1 /* XCRemoteSwiftPackageReference "swift-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-testing";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.10.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
+		397399152C394EC600A254B1 /* Testing */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 397399142C394EC500A254B1 /* XCRemoteSwiftPackageReference "swift-testing" */;
+			productName = Testing;
+		};
 		3998F24E2B14EEB200D7CB90 /* TestflightUIKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = TestflightUIKit;

@@ -1,6 +1,6 @@
-@preconcurrency import XCTest
-@testable import CorporateTestflightClient
+import XCTest
 import CorporateTestflightDomain
+@testable import CorporateTestflightClient
 
 final class VersionsListInteractorTests: XCTestCase {
 
