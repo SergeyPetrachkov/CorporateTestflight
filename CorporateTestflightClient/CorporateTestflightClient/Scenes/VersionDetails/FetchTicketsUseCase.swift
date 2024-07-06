@@ -15,7 +15,7 @@ struct FetchTicketsUseCase: FetchTicketsUseCaseProtocol {
 
     func execute(for version: Version) async throws -> [Ticket] {
         try await withThrowingTaskGroup(of: Ticket?.self) { group in
-            version.associatedTicketKeys.forEach { ticketKey in
+            for ticketKey in version.associatedTicketKeys {
                 group.addTask {
                     do {
                         return try await ticketsRepository.getTicket(key: ticketKey)
