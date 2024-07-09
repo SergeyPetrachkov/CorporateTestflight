@@ -10,7 +10,7 @@ final class VersionDetailsViewModelTests: XCTestCase {
         let env = Environment()
         let returnValue = Ticket(id: UUID(), key: "Key-1", title: "", description: "")
         env.repository.getTicketsMock.returns([returnValue])
-        env.repository.getTicketClosure = { _ in returnValue }
+        env.repository.getTicketMock.returns(returnValue)
         let sut = env.makeSUT()
 
         let expectation = expectation(description: "Show data expectation")
@@ -43,7 +43,7 @@ final class VersionDetailsViewModelTests: XCTestCase {
         let env = Environment()
         let returnValue = Ticket(id: UUID(), key: "Key-1", title: "", description: "")
         env.repository.getTicketsMock.returns([returnValue])
-        env.repository.getTicketClosure = { _ in returnValue }
+        env.repository.getTicketMock.returns(returnValue)
         let sut = env.makeSUT()
 
         let expectation = expectation(description: "Show data expectation")

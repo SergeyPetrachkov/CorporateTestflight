@@ -12,6 +12,7 @@
 		397399182C394F3500A254B1 /* VersionsListWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397399172C394F3500A254B1 /* VersionsListWorkerTests.swift */; };
 		3973991A2C39533B00A254B1 /* MockVersionsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397399192C39533B00A254B1 /* MockVersionsRepository.swift */; };
 		3973991C2C39540200A254B1 /* MockProjectsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3973991B2C39540200A254B1 /* MockProjectsRepository.swift */; };
+		3973991E2C3D6E0100A254B1 /* FetchTicketsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3973991D2C3D6DFD00A254B1 /* FetchTicketsUseCaseTests.swift */; };
 		3973F7022B99AACF00CC3D91 /* AsyncThrowingMockFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3973F7012B99AACF00CC3D91 /* AsyncThrowingMockFunc.swift */; };
 		397D9DDB2B20CFA400012C43 /* VersionDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397D9DDA2B20CFA400012C43 /* VersionDetailsView.swift */; };
 		397D9DDD2B20CFB900012C43 /* VersionDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397D9DDC2B20CFB900012C43 /* VersionDetailsViewModel.swift */; };
@@ -73,6 +74,7 @@
 		397399172C394F3500A254B1 /* VersionsListWorkerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionsListWorkerTests.swift; sourceTree = "<group>"; };
 		397399192C39533B00A254B1 /* MockVersionsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockVersionsRepository.swift; sourceTree = "<group>"; };
 		3973991B2C39540200A254B1 /* MockProjectsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockProjectsRepository.swift; sourceTree = "<group>"; };
+		3973991D2C3D6DFD00A254B1 /* FetchTicketsUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchTicketsUseCaseTests.swift; sourceTree = "<group>"; };
 		3973F7012B99AACF00CC3D91 /* AsyncThrowingMockFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncThrowingMockFunc.swift; sourceTree = "<group>"; };
 		397D9DDA2B20CFA400012C43 /* VersionDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionDetailsView.swift; sourceTree = "<group>"; };
 		397D9DDC2B20CFB900012C43 /* VersionDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionDetailsViewModel.swift; sourceTree = "<group>"; };
@@ -349,6 +351,7 @@
 		39FAACB22B3F063B004E564A /* VersionDetailsTests */ = {
 			isa = PBXGroup;
 			children = (
+				3973991D2C3D6DFD00A254B1 /* FetchTicketsUseCaseTests.swift */,
 				39FAACB32B3F064B004E564A /* VersionDetailsViewModelTests.swift */,
 			);
 			path = VersionDetailsTests;
@@ -508,6 +511,7 @@
 				39FAACA52B3C72F6004E564A /* VersionsListInteractorTests.swift in Sources */,
 				39FAACAF2B3F02C9004E564A /* VersionsListPresenterTests.swift in Sources */,
 				39FAACA32B3C6E35004E564A /* MockFunc.swift in Sources */,
+				3973991E2C3D6E0100A254B1 /* FetchTicketsUseCaseTests.swift in Sources */,
 				39FAACB12B3F030E004E564A /* MockVersionsListViewController.swift in Sources */,
 				39FAACB62B3F06FF004E564A /* MockTicketsRepository.swift in Sources */,
 				397399182C394F3500A254B1 /* VersionsListWorkerTests.swift in Sources */,

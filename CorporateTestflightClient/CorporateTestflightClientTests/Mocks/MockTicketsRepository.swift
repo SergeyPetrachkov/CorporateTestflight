@@ -8,18 +8,8 @@ final class MockTicketsRepository: TicketsRepository, @unchecked Sendable {
         return try await getTicketsMock.asyncOutput
     }
 
-    var getTicketCallsCount = 0
-    var getTicketCalled: Bool {
-        getTicketCallsCount > 0
-    }
-    var getTicketReceivedTicketKey: String?
-    var getTicketReceivedInvocations: [String] = []
-    var getTicketClosure: ((String) async throws -> CorporateTestflightDomain.Ticket)?
-
+    let getTicketMock = MockThrowingFunc<String, CorporateTestflightDomain.Ticket>()
     func getTicket(key: String) async throws -> CorporateTestflightDomain.Ticket {
-        getTicketCallsCount += 1
-        getTicketReceivedTicketKey = key
-        getTicketReceivedInvocations.append(key)
-        return try await getTicketClosure!(key)
+        try getTicketMock.callAndReturn(key)
     }
 }
