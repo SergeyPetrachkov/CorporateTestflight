@@ -1,7 +1,6 @@
 import UIKit
 import TestflightUIKit
 
-@MainActor
 protocol VersionsListViewControlling: AnyObject {
     func showVersions(_ versions: [VersionsListModels.VersionViewModel])
     func showProjectName(_ projectName: String)
@@ -70,7 +69,7 @@ extension VersionsListViewController: UICollectionViewDelegate {
         guard let row = dataSource.itemIdentifier(for: indexPath) else {
             return
         }
-        interactor.didSelect(row: row)
+//        interactor.didSelect(row: row)
     }
 }
 

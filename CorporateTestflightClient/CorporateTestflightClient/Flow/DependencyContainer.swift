@@ -29,6 +29,4 @@ final class AppDependencies: DependencyContaining {
     var ticketsRepository: TicketsRepository {
         TicketsRepositoryImpl(api: api)
     }
-
-    //    private(set) lazy var ticketsRepository: TicketsRepository = TicketsCacheActor(repository: TicketsRepositoryImpl(api: api))
 }

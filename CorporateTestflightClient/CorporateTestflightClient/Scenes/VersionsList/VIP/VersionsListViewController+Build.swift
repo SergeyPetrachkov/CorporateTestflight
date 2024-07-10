@@ -14,10 +14,8 @@ extension VersionsListViewController {
         let interactor = VersionsListInteractor(
             projectId: projectId,
             presenter: presenter,
-            worker: VersionsListWorker(
-                versionsRepository: versionsRepository,
-                projectsRepository: projectsRepository
-            )
+            versionsRepository: versionsRepository,
+            projectsRepository: projectsRepository
         )
         interactor.output = output
 

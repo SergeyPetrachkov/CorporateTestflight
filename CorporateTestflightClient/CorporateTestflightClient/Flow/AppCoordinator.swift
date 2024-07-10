@@ -1,13 +1,5 @@
-//
-//  AppCoordinator.swift
-//  CorporateTestflightClient
-//
-//  Created by Sergey Petrachkov on 24.11.2023.
-//
-
 import UIKit
 
-@MainActor
 final class AppCoordinator {
 
     private let rootNavigationController: UINavigationController

@@ -8,7 +8,6 @@ struct VersionsListFlowParameters {
     let dependenciesContainer: DependencyContaining
 }
 
-@MainActor
 final class VersionsListCoordinator {
 
     private let rootViewController: UINavigationController
@@ -43,8 +42,7 @@ extension VersionsListCoordinator: VersionsListInteractorOutput {
 
     private func showVersionDetails(_ version: Version) {
         let viewModel = VersionDetailsViewModel(
-            version: version,
-            fetchTicketsUsecase: FetchTicketsUseCase(ticketsRepository: dependenciesContainer.ticketsRepository)
+            version: version
         )
         let view = VersionDetailsView(viewModel: viewModel)
         let hostingVC = UIHostingController(rootView: view)
