@@ -26,7 +26,7 @@ struct FetchTicketsUseCaseTests {
         ticketsRepository.getTicketMock.returns(Ticket(id: Ticket.ID(), key: "Fake", title: "", description: ""))
         let sut = makeSUT()
 
-        let result = try await sut.execute(for: version)
+        let _ = try await sut.execute(for: version)
 
         #expect(ticketsRepository.getTicketMock.count == tickets.count)
         #expect(ticketsRepository.getTicketMock.parameters == tickets)
