@@ -2,6 +2,7 @@ import Foundation
 import CorporateTestflightDomain
 import ArchHelpers
 
+@MainActor
 final class VersionDetailsViewModel: ObservableObject {
 
     // MARK: - Injectables
@@ -25,7 +26,6 @@ final class VersionDetailsViewModel: ObservableObject {
 
     // MARK: - Sync interface controlled by us
 
-    @MainActor
     func send(_ action: Action) {
         switch action {
         case .onAppear, .onReload:
@@ -40,7 +40,6 @@ final class VersionDetailsViewModel: ObservableObject {
 
     // MARK: - Private logic
 
-    @MainActor
     private func fetchData() async {
         do {
             let tickets = try await fetchTicketsUsecase.execute(for: version)

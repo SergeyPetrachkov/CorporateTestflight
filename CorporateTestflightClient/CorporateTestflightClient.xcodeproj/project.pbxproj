@@ -19,6 +19,9 @@
 		397D9DE02B2330DA00012C43 /* TicketsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397D9DDF2B2330DA00012C43 /* TicketsRepository.swift */; };
 		397D9DE22B23499500012C43 /* VersionDetailsViewModel+State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397D9DE12B23499500012C43 /* VersionDetailsViewModel+State.swift */; };
 		397D9DE62B235AE100012C43 /* TicketsCacheActor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397D9DE52B235AE100012C43 /* TicketsCacheActor.swift */; };
+		39827A142D5658EE00883397 /* VersionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39827A122D5658EE00883397 /* VersionsListView.swift */; };
+		39827A172D565F2B00883397 /* VersionListFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39827A162D565F2B00883397 /* VersionListFeature.swift */; };
+		39827A192D565F6400883397 /* VersionsListStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39827A182D565F6400883397 /* VersionsListStore.swift */; };
 		3998F2432B14ED0900D7CB90 /* VersionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3998F2422B14ED0900D7CB90 /* VersionsListViewController.swift */; };
 		3998F2452B14ED1100D7CB90 /* VersionsListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3998F2442B14ED1100D7CB90 /* VersionsListInteractor.swift */; };
 		3998F2472B14ED1A00D7CB90 /* VersionsListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3998F2462B14ED1A00D7CB90 /* VersionsListPresenter.swift */; };
@@ -81,6 +84,9 @@
 		397D9DDF2B2330DA00012C43 /* TicketsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketsRepository.swift; sourceTree = "<group>"; };
 		397D9DE12B23499500012C43 /* VersionDetailsViewModel+State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VersionDetailsViewModel+State.swift"; sourceTree = "<group>"; };
 		397D9DE52B235AE100012C43 /* TicketsCacheActor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketsCacheActor.swift; sourceTree = "<group>"; };
+		39827A122D5658EE00883397 /* VersionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionsListView.swift; sourceTree = "<group>"; };
+		39827A162D565F2B00883397 /* VersionListFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionListFeature.swift; sourceTree = "<group>"; };
+		39827A182D565F6400883397 /* VersionsListStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionsListStore.swift; sourceTree = "<group>"; };
 		3998F2422B14ED0900D7CB90 /* VersionsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionsListViewController.swift; sourceTree = "<group>"; };
 		3998F2442B14ED1100D7CB90 /* VersionsListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionsListInteractor.swift; sourceTree = "<group>"; };
 		3998F2462B14ED1A00D7CB90 /* VersionsListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionsListPresenter.swift; sourceTree = "<group>"; };
@@ -152,6 +158,16 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		39827A132D5658EE00883397 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				39827A182D565F6400883397 /* VersionsListStore.swift */,
+				39827A162D565F2B00883397 /* VersionListFeature.swift */,
+				39827A122D5658EE00883397 /* VersionsListView.swift */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
 		3998F23F2B14ECC900D7CB90 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,6 +180,7 @@
 		3998F2402B14ECED00D7CB90 /* VersionsList */ = {
 			isa = PBXGroup;
 			children = (
+				39827A132D5658EE00883397 /* SwiftUI */,
 				3998F2532B18842400D7CB90 /* Flow */,
 				3998F2522B18841E00D7CB90 /* VIP */,
 			);
@@ -470,6 +487,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				39C3C0262B10B12200F5D10D /* AppCoordinator.swift in Sources */,
+				39827A142D5658EE00883397 /* VersionsListView.swift in Sources */,
 				397D9DE02B2330DA00012C43 /* TicketsRepository.swift in Sources */,
 				39C3C0282B10B14100F5D10D /* DependencyContainer.swift in Sources */,
 				3998F2582B188C2800D7CB90 /* VersionsRepository.swift in Sources */,
@@ -481,12 +499,14 @@
 				39C3BFEF2B10B07A00F5D10D /* AppDelegate.swift in Sources */,
 				39EA705D2C3825D100E41A93 /* VersionDetailsHeaderView+State.swift in Sources */,
 				397D9DE22B23499500012C43 /* VersionDetailsViewModel+State.swift in Sources */,
+				39827A172D565F2B00883397 /* VersionListFeature.swift in Sources */,
 				3998F24D2B14EDD600D7CB90 /* VersionListCell.swift in Sources */,
 				39E93F6E2B2C84FB005C9E1D /* VersionDetailsLoadedView.swift in Sources */,
 				39E93F6C2B2C8499005C9E1D /* VersionDetailsLoadingView.swift in Sources */,
 				39E93F6A2B2C840E005C9E1D /* TicketView.swift in Sources */,
 				397D9DDB2B20CFA400012C43 /* VersionDetailsView.swift in Sources */,
 				39E93F682B2C837F005C9E1D /* VersionDetailsHeaderView.swift in Sources */,
+				39827A192D565F6400883397 /* VersionsListStore.swift in Sources */,
 				397D9DE62B235AE100012C43 /* TicketsCacheActor.swift in Sources */,
 				3998F2492B14ED2700D7CB90 /* VersionsListWorker.swift in Sources */,
 				39EA70662C382C8500E41A93 /* TicketView+State.swift in Sources */,
@@ -685,7 +705,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_STRICT_CONCURRENCY = complete;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -710,7 +730,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_STRICT_CONCURRENCY = complete;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
