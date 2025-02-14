@@ -4,13 +4,12 @@ import Foundation
 enum VersionList {
 
 	indirect enum State {
-
 		struct Content {
-			let project: Project
-			let versions: [Version]
+			let projectTitle: String
+			let versions: [RowState]
 		}
 
-		case initial(projectID: Project.ID)
+		case initial
 		case loaded(Content)
 		case failed(Error)
 		case loading(previousState: State)
@@ -18,6 +17,7 @@ enum VersionList {
 
 	enum Action {
 		case start
+		case refresh(fromScratch: Bool)
 		case tapItem(RowState)
 	}
 
@@ -27,42 +27,17 @@ enum VersionList {
 		let subtitle: String
 	}
 
-
 	struct Environment {
 		let project: Project.ID
 		let usecase: FetchProjectAndVersionsUsecase
 		let mapper: RowMapper
+		let output: @MainActor (_ version: Version) -> Void
+
+		var versions: [Version] = []
 	}
-
-	/*
-	struct Reducer {
-
-		let env: Environment
-
-		func reduce(state: inout VersionList.State, action: VersionList.Action) async -> Effect {
-			switch action {
-			case .start:
-				guard case let .initial(projectId) = state else {
-					return .none // start can only be triggered once, huh?
-				}
-
-				do {
-					let (project, builds) = try await env.usecase.execute(projectId: projectId)
-					state = .loaded(.init(project: project, versions: builds))
-				} catch {
-					state = .failed(error)
-				}
-
-				return .none
-			case .tapItem:
-				return .none
-			}
-		}
-	}
-	*/
 
 	struct RowMapper {
-		private func map(versions: [Version]) -> [RowState] {
+		func map(versions: [Version]) -> [RowState] {
 			versions.map { version in
 				let subtitle = buildSubtitle(for: version)
 				return RowState(
@@ -95,3 +70,52 @@ enum Effect {
 	case run(@Sendable () async -> Void)
 	case none
 }
+
+
+//	struct Reducer {
+//
+//		let env: Environment
+//
+//		func reduce(state: inout VersionList.State, action: VersionList.Action) async -> Effect {
+//			switch action {
+//			case .start:
+//				guard case let .initial(projectId) = state else {
+//					return .none // start can only be triggered once, huh?
+//				}
+//
+//				do {
+//					let (project, builds) = try await env.usecase.execute(projectId: projectId)
+//					state = .loaded(.init(project: project, versions: builds))
+//				} catch {
+//					state = .failed(error)
+//				}
+//
+//				return .none
+//			case .tapItem:
+//				return .none
+//			}
+//		}
+//	}
+
+//struct Reducer {
+//
+//	let env: Environment
+//
+//	func reduce(state: VersionList.State, action: VersionList.Action) async -> Reduced<VersionList.State> {
+//		switch action {
+//		case .start:
+//			guard case let .initial(projectId) = state else {
+//				return .effect(.none) // start can only be triggered once, huh?
+//			}
+//
+//			do {
+//				let (project, builds) = try await env.usecase.execute(projectId: projectId)
+//				return .newState(.loaded(.init(project: project, versions: builds)))
+//			} catch {
+//				return .newState(.failed(error))
+//			}
+//		case .tapItem:
+//			return .effect(.none)
+//		}
+//	}
+//}

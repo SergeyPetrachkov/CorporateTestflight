@@ -3,17 +3,69 @@ import CorporateTestflightDomain
 
 struct VersionsListContainer: View {
 
-	let store: VersionsListStore
+	@StateObject private var store: VersionsListStore
+
+	init(store: VersionsListStore) {
+		self._store = StateObject(wrappedValue: store)
+	}
 
 	var body: some View {
-		VersionsList(state: []) { tappedItem in
-			Task {
-				await store.send(.tapItem(tappedItem))
+		contentView
+			.task {
+				await store.send(.start)
 			}
+	}
+
+	@ViewBuilder
+	private var contentView: some View {
+		switch store.state {
+		case .loading:
+			ProgressView()
+		case .loaded(let content):
+			VersionsList(state: content.versions) { tappedItem in
+				Task {
+					await store.send(.tapItem(tappedItem))
+				}
+			}
+			.refreshable {
+				await store.send(.refresh(fromScratch: false))
+			}
+			.navigationTitle(content.projectTitle)
+		case .failed(let error):
+			ContentUnavailableView {
+				Label("An error has occured", systemImage: "exclamationmark.triangle")
+			} description: {
+				Text("Error details: \(error).\nTry again.")
+			} actions: {
+				Button("Reload") {
+					Task {
+						await store.send(.refresh(fromScratch: true))
+					}
+				}
+				.buttonBorderShape(.roundedRectangle)
+				.buttonStyle(.bordered)
+			}
+		case .initial:
+			skeleton
 		}
-		.task {
-			await store.send(.start)
-		}
+	}
+
+	private var skeleton: some View {
+		VersionsList(state: [
+			.init(
+				id: UUID(),
+				title: "Here's the title",
+				subtitle: "And here's the long subtitle"
+			),
+			.init(
+				id: UUID(),
+				title: "Here's the title",
+				subtitle: "And here's the long subtitle"
+			)
+		]
+		) { _ in }
+			.redacted(reason: .placeholder)
+			.disabled(true)
 	}
 }
 
@@ -44,9 +96,9 @@ struct VersionListRow: View {
 	var body: some View {
 		VStack(alignment: .leading) {
 			Text(state.title)
-				.font(.title2)
+				.font(.title3)
 			Text(state.subtitle)
-				.font(.caption)
+				.font(.body)
 		}
 	}
 }

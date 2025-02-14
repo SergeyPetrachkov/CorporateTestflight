@@ -1,32 +1,67 @@
 import Combine
+import CorporateTestflightDomain
 
 @MainActor
-final class VersionsListStore: ObservableObject {
+protocol Store: AnyObject {
+	associatedtype State
+	associatedtype Environment
+	associatedtype Action
 
-	@Published var state: VersionList.State
-	let env: VersionList.Environment
+	var environment: Environment { get }
 
-	init(state: VersionList.State = .initial(projectID: 1), environment: VersionList.Environment) {
-		self.state = state
-		self.env = environment
+	init(initialState: State, environment: Environment)
+
+	func send(_ action: Action) async
+}
+
+final class VersionsListStore: ObservableObject, Store {
+
+	typealias State = VersionList.State
+	typealias Environment = VersionList.Environment
+	typealias Action = VersionList.Action
+
+	private(set) var environment: VersionList.Environment
+
+	@Published private(set) var state: State
+
+	init(initialState: State = .initial, environment: Environment) {
+		self.state = initialState
+		self.environment = environment
 	}
 
 	func send(_ action: VersionList.Action) async {
 		switch action {
 		case .start:
-			guard case let .initial(projectId) = state else {
-				return // start can only be triggered once, huh?
+			guard case .initial = state else {
+				return // we don't start multiple times
 			}
-
-			do {
-				state = .loading(previousState: state)
-				let (project, builds) = try await env.usecase.execute(projectId: projectId)
-				state = .loaded(.init(project: project, versions: builds))
-			} catch {
-				state = .failed(error)
+			await loadData(enterLoadingState: true)
+		case .refresh(let fromScratch):
+			await loadData(enterLoadingState: fromScratch)
+		case .tapItem(let rowState):
+			guard let version = environment.versions.first(where: { $0.id == rowState.id }) else {
+				return
 			}
-		case .tapItem:
-			break
+			environment.output(version)
 		}
+	}
+
+	private func loadData(enterLoadingState: Bool) async {
+		do {
+			if enterLoadingState {
+				state = .loading(previousState: state)
+			}
+			let (project, builds) = try await environment.usecase.execute(projectId: environment.project)
+			let mappedContent = await map(project: project, versions: builds)
+			environment.versions = builds
+			state = .loaded(mappedContent)
+		} catch {
+			state = .failed(error)
+		}
+	}
+
+	nonisolated private func map(project: Project, versions: [Version]) async -> VersionList.State.Content {
+		let rows = await environment.mapper.map(versions: versions)
+		return .init(projectTitle: project.name, versions: rows)
 	}
 }
