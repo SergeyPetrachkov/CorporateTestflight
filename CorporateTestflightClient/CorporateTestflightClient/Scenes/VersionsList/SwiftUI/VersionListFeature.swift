@@ -12,7 +12,7 @@ enum VersionList {
 		case initial
 		case loaded(Content)
 		case failed(Error)
-		case loading(previousState: State)
+		case loading
 	}
 
 	enum Action {
@@ -61,16 +61,15 @@ enum VersionList {
 	}
 }
 
-enum Reduced<State: Sendable> {
-	case newState(State)
-	case effect(Effect)
-}
-
-enum Effect {
-	case run(@Sendable () async -> Void)
-	case none
-}
-
+//enum Reduced<State: Sendable> {
+//	case newState(State)
+//	case effect(Effect)
+//}
+//
+//enum Effect {
+//	case run(@Sendable () async -> Void)
+//	case none
+//}
 
 //	struct Reducer {
 //

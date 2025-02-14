@@ -49,7 +49,7 @@ final class VersionsListStore: ObservableObject, Store {
 	private func loadData(enterLoadingState: Bool) async {
 		do {
 			if enterLoadingState {
-				state = .loading(previousState: state)
+				state = .loading
 			}
 			let (project, builds) = try await environment.usecase.execute(projectId: environment.project)
 			let mappedContent = await map(project: project, versions: builds)
