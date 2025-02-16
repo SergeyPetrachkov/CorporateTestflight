@@ -20,7 +20,16 @@ struct VersionsListContainer: View {
 	private var contentView: some View {
 		switch store.state {
 		case .loading:
-			ProgressView()
+			skeleton
+				.navigationBarTitleDisplayMode(.inline)
+				.toolbar {
+					ToolbarItem(placement: .principal) {
+						HStack {
+							ProgressView()
+							Text("Loading").font(.headline)
+						}
+					}
+				}
 		case .loaded(let content):
 			VersionsList(state: content.versions) { tappedItem in
 				Task {
@@ -45,6 +54,7 @@ struct VersionsListContainer: View {
 				.buttonBorderShape(.roundedRectangle)
 				.buttonStyle(.bordered)
 			}
+			.navigationTitle("Oops...")
 		case .initial:
 			skeleton
 		}
@@ -61,45 +71,16 @@ struct VersionsListContainer: View {
 				id: UUID(),
 				title: "Here's the title",
 				subtitle: "And here's the long subtitle"
+			),
+			.init(
+				id: UUID(),
+				title: "Here's the title",
+				subtitle: "And here's the long long long long long long longest subtitle in the world"
 			)
 		]
 		) { _ in }
 			.redacted(reason: .placeholder)
 			.disabled(true)
-	}
-}
-
-struct VersionsList: View {
-
-	let state: [VersionList.RowState]
-	let onItemTap: (VersionList.RowState) -> Void
-
-	var body: some View {
-		if state.isEmpty {
-			ContentUnavailableView("No versions found", systemImage: "exclamationmark.triangle")
-		} else {
-			List(state) { item in
-				VersionListRow(state: item)
-					.id(item.id)
-					.onTapGesture {
-						onItemTap(item)
-					}
-			}
-		}
-	}
-}
-
-struct VersionListRow: View {
-
-	let state: VersionList.RowState
-
-	var body: some View {
-		VStack(alignment: .leading) {
-			Text(state.title)
-				.font(.title3)
-			Text(state.subtitle)
-				.font(.body)
-		}
 	}
 }
 
