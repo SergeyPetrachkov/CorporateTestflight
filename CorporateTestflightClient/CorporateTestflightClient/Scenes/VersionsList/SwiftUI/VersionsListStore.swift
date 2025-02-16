@@ -24,6 +24,8 @@ final class VersionsListStore: ObservableObject, Store {
 
 	@Published private(set) var state: State
 
+	private var versions: [Version] = []
+
 	init(initialState: State = .initial, environment: Environment) {
 		self.state = initialState
 		self.environment = environment
@@ -39,10 +41,10 @@ final class VersionsListStore: ObservableObject, Store {
 		case .refresh(let fromScratch):
 			await loadData(enterLoadingState: fromScratch)
 		case .tapItem(let rowState):
-			guard let version = environment.versions.first(where: { $0.id == rowState.id }) else {
+			guard let version = versions.first(where: { $0.id == rowState.id }) else {
 				return
 			}
-			environment.output(version)
+			environment.output(.selectedVersion(version))
 		}
 	}
 
@@ -53,7 +55,7 @@ final class VersionsListStore: ObservableObject, Store {
 			}
 			let (project, builds) = try await environment.usecase.execute(projectId: environment.project)
 			let mappedContent = await map(project: project, versions: builds)
-			environment.versions = builds
+			versions = builds
 			state = .loaded(mappedContent)
 		} catch {
 			state = .failed(error)

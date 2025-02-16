@@ -26,8 +26,11 @@ final class VersionsListCoordinator {
 			project: projectId,
 			usecase: FetchProjectAndVersionsUsecaseImpl(versionsRepository: dependenciesContainer.versionsRepository, projectsRepository: dependenciesContainer.projectsRepository),
 			mapper: VersionList.RowMapper(),
-			output: { [weak self] version in
-				self?.showVersionDetails(version)
+			output: { [weak self] action in
+				switch action {
+				case .selectedVersion(let version):
+					self?.showVersionDetails(version)
+				}
 			}
 		)
 		let store = VersionsListStore(environment: environment)

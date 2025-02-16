@@ -28,12 +28,15 @@ enum VersionList {
 	}
 
 	struct Environment {
+		enum Output {
+			case selectedVersion(Version)
+		}
+
 		let project: Project.ID
 		let usecase: FetchProjectAndVersionsUsecase
 		let mapper: RowMapper
-		let output: @MainActor (_ version: Version) -> Void
 
-		var versions: [Version] = []
+		let output: @MainActor (Output) -> Void
 	}
 
 	struct RowMapper {
