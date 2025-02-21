@@ -1,0 +1,72 @@
+[
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440000",
+		"buildNumber": 1,
+		"releaseNotes": "The very first build 🥇",
+		"associatedTicketKeys": [],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440001",
+		"buildNumber": 2,
+		"releaseNotes": "Added analytics dependencies and set up the welcome screen 🤗",
+		"associatedTicketKeys": ["JIRA-1"],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440002",
+		"buildNumber": 3,
+		"releaseNotes": "Created the onboarding flow ⛴️",
+		"associatedTicketKeys": ["JIRA-2", "JIRA-3", "JIRA-4"],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440003",
+		"buildNumber": 4,
+		"releaseNotes": "Created the dashboard for the authorized user 🎛️",
+		"associatedTicketKeys": ["JIRA-4", "JIRA-5", "JIRA-6", "JIRA-7", "JIRA-8", "JIRA-9"],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440004",
+		"buildNumber": 5,
+		"releaseNotes": "💰Created the in-app-purchase flow 💸",
+		"associatedTicketKeys": ["JIRA-9", "JIRA-10"],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440005",
+		"buildNumber": 1,
+		"releaseNotes": "Do something irrelevant",
+		"associatedTicketKeys": [],
+		"projectId": 2
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440006",
+		"buildNumber": 7,
+		"releaseNotes": "Implemented push notifications 📲",
+		"associatedTicketKeys": ["JIRA-11", "JIRA-12"],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440007",
+		"buildNumber": 8,
+		"releaseNotes": "Refactored backend API calls 🚀",
+		"associatedTicketKeys": ["JIRA-13"],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440008",
+		"buildNumber": 9,
+		"releaseNotes": "Fixed login bug and improved security 🔐",
+		"associatedTicketKeys": ["JIRA-14", "JIRA-15"],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440009",
+		"buildNumber": 10,
+		"releaseNotes": "Revamped user profile section 🎨",
+		"associatedTicketKeys": ["JIRA-16", "JIRA-17", "JIRA-18"],
+		"projectId": 1
+	}
+]
