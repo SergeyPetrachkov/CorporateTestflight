@@ -1,0 +1,290 @@
+[
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440001",
+		"key": "JIRA-1",
+		"title": "Set up a welcome screen",
+		"description": "As a user\nWhen I open an app for the first time\nI want to see a welcome screen"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440002",
+		"key": "JIRA-2",
+		"title": "Create an onboarding flow pt I",
+		"description": "As a user\nWhen I open an app for the first time\nI want to be onboarded to the app's features"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440003",
+		"key": "JIRA-3",
+		"title": "Create an onboarding flow pt II",
+		"description": "As a user\nWhen I open an app for the first time\nI want to be onboarded to the app's features"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440004",
+		"key": "JIRA-4",
+		"title": "Integrate the onboarding flow into the main app",
+		"description": "No description"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440005",
+		"key": "JIRA-5",
+		"title": "Create a dashboard screen for the user",
+		"description": "No description"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440006",
+		"key": "JIRA-6",
+		"title": "Make the dashboard customizable",
+		"description": "As a user\nI want to be able to customize my dashboard\nSo I only see the relevant features"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440007",
+		"key": "JIRA-7",
+		"title": "Dummy ticket",
+		"description": "Nothing to see here"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440008",
+		"key": "JIRA-8",
+		"title": "Integrate the dashboard into the main app",
+		"description": "Nothing to see here"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440009",
+		"key": "JIRA-9",
+		"title": "No title",
+		"description": "No description."
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440010",
+		"key": "JIRA-10",
+		"title": "Implement user authentication",
+		"description": "As a user\nI want to securely log into the app\nSo I can access my personal data"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440011",
+		"key": "JIRA-11",
+		"title": "Enable password reset functionality",
+		"description": "As a user\nI want to reset my password\nSo I can regain access to my account if I forget my credentials"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440012",
+		"key": "JIRA-12",
+		"title": "Add push notifications",
+		"description": "As a user\nI want to receive push notifications\nSo I can stay informed about important updates"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440013",
+		"key": "JIRA-13",
+		"title": "Optimize API calls",
+		"description": "As a developer\nI want to reduce API response time\nSo the app performs better"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440014",
+		"key": "JIRA-14",
+		"title": "Fix login bug",
+		"description": "Fix the login issue that prevents some users from signing in"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440015",
+		"key": "JIRA-15",
+		"title": "Improve security measures",
+		"description": "Enhance authentication security with two-factor authentication"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440016",
+		"key": "JIRA-16",
+		"title": "Revamp user profile UI",
+		"description": "Redesign the profile section to improve usability"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440017",
+		"key": "JIRA-17",
+		"title": "Allow users to change profile pictures",
+		"description": "As a user\nI want to upload a new profile picture\nSo I can personalize my account"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440018",
+		"key": "JIRA-18",
+		"title": "Add multi-language support",
+		"description": "As a user\nI want to use the app in my preferred language\nSo I can understand the interface better"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440019",
+		"key": "JIRA-19",
+		"title": "Implement dark mode",
+		"description": "As a user\nI want to enable dark mode\nSo I can reduce eye strain in low-light conditions"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440020",
+		"key": "JIRA-20",
+		"title": "Improve database indexing",
+		"description": "As a developer\nI want to optimize database queries\nSo the app loads data faster"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440021",
+		"key": "JIRA-21",
+		"title": "Fix UI glitches on Android",
+		"description": "Resolve minor visual inconsistencies on Android devices"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440022",
+		"key": "JIRA-22",
+		"title": "Fix UI glitches on iOS",
+		"description": "Resolve minor visual inconsistencies on iOS devices"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440023",
+		"key": "JIRA-23",
+		"title": "Integrate payment gateway",
+		"description": "As a user\nI want to make secure payments in the app\nSo I can purchase premium features"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440024",
+		"key": "JIRA-24",
+		"title": "Enable biometric authentication",
+		"description": "As a user\nI want to log in using Face ID or fingerprint\nSo I can access my account faster"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440025",
+		"key": "JIRA-25",
+		"title": "Enhance search functionality",
+		"description": "As a user\nI want a powerful search feature\nSo I can quickly find relevant content"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440026",
+		"key": "JIRA-26",
+		"title": "Reduce app loading time",
+		"description": "Optimize app startup speed for better user experience"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440027",
+		"key": "JIRA-27",
+		"title": "Fix app crashes on startup",
+		"description": "Resolve stability issues causing crashes on launch"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440028",
+		"key": "JIRA-28",
+		"title": "Improve caching mechanism",
+		"description": "Implement better caching to reduce network requests"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440029",
+		"key": "JIRA-29",
+		"title": "Add real-time chat feature",
+		"description": "As a user\nI want to chat with others in real time\nSo I can communicate efficiently"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440030",
+		"key": "JIRA-30",
+		"title": "Add emoji reactions to messages",
+		"description": "As a user\nI want to react to messages with emojis\nSo I can express my feelings easily"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440031",
+		"key": "JIRA-31",
+		"title": "Fix broken links in the help center",
+		"description": "Review and update broken links in the support section"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440032",
+		"key": "JIRA-32",
+		"title": "Allow users to delete their accounts",
+		"description": "As a user\nI want to permanently delete my account\nSo I can remove my data from the system"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440033",
+		"key": "JIRA-33",
+		"title": "Redesign the settings page",
+		"description": "As a user\nI want a cleaner settings layout\nSo I can find options more easily"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440034",
+		"key": "JIRA-34",
+		"title": "Improve error handling",
+		"description": "As a developer\nI want better error messages\nSo users can understand what went wrong"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440035",
+		"key": "JIRA-35",
+		"title": "Fix image upload issues",
+		"description": "Resolve bugs causing image uploads to fail"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440036",
+		"key": "JIRA-36",
+		"title": "Optimize battery usage",
+		"description": "Reduce background processes to save battery"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440037",
+		"key": "JIRA-37",
+		"title": "Add voice command support",
+		"description": "As a user\nI want to use voice commands\nSo I can navigate the app hands-free"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440038",
+		"key": "JIRA-38",
+		"title": "Implement social login",
+		"description": "Allow users to log in with Google, Apple, or Facebook"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440039",
+		"key": "JIRA-39",
+		"title": "Enable offline mode",
+		"description": "As a user\nI want to use the app offline\nSo I can continue working without an internet connection"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440040",
+		"key": "JIRA-40",
+		"title": "Add a dark mode toggle in settings",
+		"description": "Allow users to manually enable or disable dark mode"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440041",
+		"key": "JIRA-41",
+		"title": "Allow users to export data",
+		"description": "As a user\nI want to export my data\nSo I can keep a backup"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440042",
+		"key": "JIRA-42",
+		"title": "Fix notification delivery delays",
+		"description": "Ensure push notifications are delivered on time"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440043",
+		"key": "JIRA-43",
+		"title": "Improve accessibility features",
+		"description": "Enhance screen reader support and high-contrast mode"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440044",
+		"key": "JIRA-44",
+		"title": "Enable two-step verification",
+		"description": "Allow users to set up two-step verification for added security"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440045",
+		"key": "JIRA-45",
+		"title": "Implement app version control",
+		"description": "Ensure users are notified about new updates and changelogs"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440046",
+		"key": "JIRA-46",
+		"title": "Add a FAQ section",
+		"description": "Provide answers to common user questions"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440047",
+		"key": "JIRA-47",
+		"title": "Improve animation smoothness",
+		"description": "Make app transitions and animations more fluid"
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440048",
+		"key": "JIRA-48",
+		"title": "Allow users to follow other users",
+		"description": "As a user\nI want to follow others\nSo I can keep track of their updates"
+	}
+]

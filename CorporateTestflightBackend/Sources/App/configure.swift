@@ -12,7 +12,7 @@ public func configure(_ app: Application) async throws {
 	app.databases.use(DatabaseConfigurationFactory.sqlite(.file("db.sqlite")), as: .sqlite)
 
 	app.migrations.add(CreateProjects())
-	app.migrations.add(CreateTickets())
+	app.migrations.add(CreateTickets(dataUrl: app.directory.publicDirectory.appending("tickets.json")))
 	app.migrations.add(CreateVersions(dataUrl: app.directory.publicDirectory.appending("versions.json")))
 
 	try await app.autoMigrate()
