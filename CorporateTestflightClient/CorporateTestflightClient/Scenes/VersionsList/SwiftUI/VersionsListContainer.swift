@@ -1,5 +1,6 @@
 import SwiftUI
 import CorporateTestflightDomain
+import TestflightUIKit
 
 struct VersionsListContainer: View {
 
@@ -61,26 +62,7 @@ struct VersionsListContainer: View {
 	}
 
 	private var skeleton: some View {
-		VersionsList(state: [
-			.init(
-				id: UUID(),
-				title: "Here's the title",
-				subtitle: "And here's the long subtitle"
-			),
-			.init(
-				id: UUID(),
-				title: "Here's the title",
-				subtitle: "And here's the long subtitle"
-			),
-			.init(
-				id: UUID(),
-				title: "Here's the title",
-				subtitle: "And here's the long long long long long long longest subtitle in the world"
-			)
-		]
-		) { _ in }
-			.redacted(reason: .placeholder)
-			.disabled(true)
+		SkeletonView()
 	}
 }
 
