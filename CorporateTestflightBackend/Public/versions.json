@@ -35,13 +35,6 @@
 		"projectId": 1
 	},
 	{
-		"id": "550e8400-e29b-41d4-a716-446655440005",
-		"buildNumber": 1,
-		"releaseNotes": "Do something irrelevant",
-		"associatedTicketKeys": [],
-		"projectId": 2
-	},
-	{
 		"id": "550e8400-e29b-41d4-a716-446655440006",
 		"buildNumber": 7,
 		"releaseNotes": "Implemented push notifications 📲",
@@ -67,6 +60,216 @@
 		"buildNumber": 10,
 		"releaseNotes": "Revamped user profile section 🎨",
 		"associatedTicketKeys": ["JIRA-16", "JIRA-17", "JIRA-18"],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-44665544000A",
+		"buildNumber": 11,
+		"releaseNotes": "Optimized database queries for faster load times ⚡",
+		"associatedTicketKeys": ["JIRA-19", "JIRA-20"],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-44665544000B",
+		"buildNumber": 12,
+		"releaseNotes": "Improved accessibility features ♿",
+		"associatedTicketKeys": ["JIRA-21"],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-44665544000C",
+		"buildNumber": 13,
+		"releaseNotes": "Added dark mode support 🌙",
+		"associatedTicketKeys": ["JIRA-22", "JIRA-23"],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-44665544000D",
+		"buildNumber": 14,
+		"releaseNotes": "Fixed logout issues and session handling 🔄",
+		"associatedTicketKeys": ["JIRA-24"],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-44665544000E",
+		"buildNumber": 15,
+		"releaseNotes": "Integrated third-party payment gateway 💳",
+		"associatedTicketKeys": ["JIRA-25", "JIRA-26", "JIRA-27"],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-44665544000F",
+		"buildNumber": 16,
+		"releaseNotes": "Improved caching mechanisms for better performance 🚀",
+		"associatedTicketKeys": ["JIRA-28"],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440010",
+		"buildNumber": 17,
+		"releaseNotes": "Enhanced search functionality 🔍",
+		"associatedTicketKeys": ["JIRA-29", "JIRA-30"],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440011",
+		"buildNumber": 18,
+		"releaseNotes": "Added multi-language support 🌍",
+		"associatedTicketKeys": ["JIRA-31", "JIRA-32"],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440012",
+		"buildNumber": 19,
+		"releaseNotes": "Fixed UI glitches on the settings page 🛠️",
+		"associatedTicketKeys": ["JIRA-33"],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440013",
+		"buildNumber": 20,
+		"releaseNotes": "Security patch for authentication module 🔐",
+		"associatedTicketKeys": ["JIRA-34", "JIRA-35"],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440014",
+		"buildNumber": 21,
+		"releaseNotes": "Refactored authentication flow for better security 🔑",
+		"associatedTicketKeys": ["JIRA-36", "JIRA-37"],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440015",
+		"buildNumber": 22,
+		"releaseNotes": "Enhanced performance of real-time data updates 📊",
+		"associatedTicketKeys": ["JIRA-38"],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440016",
+		"buildNumber": 23,
+		"releaseNotes": "Fixed crashes related to large file uploads 📁",
+		"associatedTicketKeys": ["JIRA-39", "JIRA-40"],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440017",
+		"buildNumber": 24,
+		"releaseNotes": "Implemented email verification for new users 📧",
+		"associatedTicketKeys": ["JIRA-41"],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440018",
+		"buildNumber": 25,
+		"releaseNotes": "Revamped the settings UI for better usability 🎨",
+		"associatedTicketKeys": ["JIRA-42", "JIRA-43"],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440019",
+		"buildNumber": 26,
+		"releaseNotes": "Added support for biometric authentication 👆",
+		"associatedTicketKeys": ["JIRA-44", "JIRA-45"],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-44665544001A",
+		"buildNumber": 27,
+		"releaseNotes": "Optimized image loading for a smoother experience 🖼️",
+		"associatedTicketKeys": ["JIRA-46"],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-44665544001B",
+		"buildNumber": 28,
+		"releaseNotes": "Upgraded third-party dependencies for better stability 🛠️",
+		"associatedTicketKeys": ["JIRA-47", "JIRA-48"],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-44665544001C",
+		"buildNumber": 29,
+		"releaseNotes": "Fixed minor UI inconsistencies across screens 🎭",
+		"associatedTicketKeys": ["JIRA-49"],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-44665544001D",
+		"buildNumber": 30,
+		"releaseNotes": "Implemented two-factor authentication for enhanced security 🔐",
+		"associatedTicketKeys": ["JIRA-50", "JIRA-51"],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-44665544001E",
+		"buildNumber": 31,
+		"releaseNotes": "Fixed memory leak issues for better app stability 🛠️",
+		"associatedTicketKeys": ["JIRA-52", "JIRA-53"],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-44665544001F",
+		"buildNumber": 32,
+		"releaseNotes": "Added support for offline mode 📶",
+		"associatedTicketKeys": ["JIRA-54"],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440020",
+		"buildNumber": 33,
+		"releaseNotes": "Enhanced error logging for debugging 📝",
+		"associatedTicketKeys": ["JIRA-55", "JIRA-56"],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440021",
+		"buildNumber": 34,
+		"releaseNotes": "Fixed layout issues on mobile devices 📱",
+		"associatedTicketKeys": ["JIRA-57"],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440022",
+		"buildNumber": 35,
+		"releaseNotes": "Improved loading speed for the dashboard 🚀",
+		"associatedTicketKeys": ["JIRA-58", "JIRA-59"],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440023",
+		"buildNumber": 36,
+		"releaseNotes": "Added a new notification center 🔔",
+		"associatedTicketKeys": ["JIRA-60"],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440024",
+		"buildNumber": 37,
+		"releaseNotes": "Updated user roles and permissions system 🔑",
+		"associatedTicketKeys": ["JIRA-61", "JIRA-62"],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440025",
+		"buildNumber": 38,
+		"releaseNotes": "Integrated new analytics dashboard 📊",
+		"associatedTicketKeys": ["JIRA-63"],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440026",
+		"buildNumber": 39,
+		"releaseNotes": "Bug fixes and performance improvements 🛠️",
+		"associatedTicketKeys": ["JIRA-64"],
+		"projectId": 1
+	},
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440027",
+		"buildNumber": 40,
+		"releaseNotes": "Implemented social login with Google and Facebook 🔗",
+		"associatedTicketKeys": ["JIRA-65", "JIRA-66"],
 		"projectId": 1
 	}
 ]
