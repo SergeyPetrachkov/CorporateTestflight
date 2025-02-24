@@ -1,18 +1,6 @@
 import Combine
 import CorporateTestflightDomain
-
-@MainActor
-protocol Store: AnyObject {
-	associatedtype State
-	associatedtype Environment
-	associatedtype Action
-
-	var environment: Environment { get }
-
-	init(initialState: State, environment: Environment)
-
-	func send(_ action: Action) async
-}
+import UniFlow
 
 final class VersionsListStore: ObservableObject, Store {
 
@@ -22,7 +10,11 @@ final class VersionsListStore: ObservableObject, Store {
 
 	private(set) var environment: VersionList.Environment
 
-	@Published private(set) var state: State
+	@Published private(set) var state: State {
+		didSet {
+			print("state >> '\(state)'")
+		}
+	}
 
 	private var versions: [Version] = []
 
@@ -32,6 +24,7 @@ final class VersionsListStore: ObservableObject, Store {
 	}
 
 	func send(_ action: VersionList.Action) async {
+		print("'action: \(action)' >> 'state: \(state)'")
 		switch action {
 		case .start:
 			guard case .initial = state else {

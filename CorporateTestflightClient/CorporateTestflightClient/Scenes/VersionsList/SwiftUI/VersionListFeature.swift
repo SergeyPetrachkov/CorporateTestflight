@@ -3,7 +3,7 @@ import Foundation
 
 enum VersionList {
 
-	indirect enum State {
+	enum State: CustomDebugStringConvertible {
 		struct Content {
 			let projectTitle: String
 			let versions: [RowState]
@@ -13,12 +13,36 @@ enum VersionList {
 		case loaded(Content)
 		case failed(Error)
 		case loading
+
+		var debugDescription: String {
+			switch self {
+			case .initial:
+				"initial"
+			case .loaded(let content):
+				"loaded: builds_count=\(content.versions.count)"
+			case .failed(let error):
+				"failed: \(error.localizedDescription)"
+			case .loading:
+				"loading"
+			}
+		}
 	}
 
-	enum Action {
+	enum Action: CustomDebugStringConvertible {
 		case start
 		case refresh(fromScratch: Bool)
 		case tapItem(RowState)
+
+		var debugDescription: String {
+			switch self {
+			case .start:
+				"start"
+			case .refresh(let fromScratch):
+				"refresh: from_scratch=\(fromScratch)"
+			case .tapItem(let rowState):
+				"tap: row_id=\(rowState.id)"
+			}
+		}
 	}
 
 	struct RowState: Equatable, Hashable, Identifiable {

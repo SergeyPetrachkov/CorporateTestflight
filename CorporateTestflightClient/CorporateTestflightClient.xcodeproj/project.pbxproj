@@ -7,9 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		397399162C394EC600A254B1 /* Testing in Frameworks */ = {isa = PBXBuildFile; productRef = 397399152C394EC600A254B1 /* Testing */; };
 		3998F24F2B14EEB200D7CB90 /* TestflightUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3998F24E2B14EEB200D7CB90 /* TestflightUIKit */; };
-		39B116DA2B1E269B00909C09 /* ArchHelpers in Frameworks */ = {isa = PBXBuildFile; productRef = 39B116D92B1E269B00909C09 /* ArchHelpers */; };
+		39A8B0092D6CB194000387A0 /* UniFlow in Frameworks */ = {isa = PBXBuildFile; productRef = 39A8B0082D6CB194000387A0 /* UniFlow */; };
 		39C3C0202B10B0F000F5D10D /* TestflightNetworking in Frameworks */ = {isa = PBXBuildFile; productRef = 39C3C01F2B10B0F000F5D10D /* TestflightNetworking */; };
 		39C3C0222B10B0F000F5D10D /* CorporateTestflightDomain in Frameworks */ = {isa = PBXBuildFile; productRef = 39C3C0212B10B0F000F5D10D /* CorporateTestflightDomain */; };
 /* End PBXBuildFile section */
@@ -50,10 +49,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				39B116DA2B1E269B00909C09 /* ArchHelpers in Frameworks */,
 				3998F24F2B14EEB200D7CB90 /* TestflightUIKit in Frameworks */,
 				39C3C0222B10B0F000F5D10D /* CorporateTestflightDomain in Frameworks */,
 				39C3C0202B10B0F000F5D10D /* TestflightNetworking in Frameworks */,
+				39A8B0092D6CB194000387A0 /* UniFlow in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,7 +60,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				397399162C394EC600A254B1 /* Testing in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,7 +116,7 @@
 				39C3C01F2B10B0F000F5D10D /* TestflightNetworking */,
 				39C3C0212B10B0F000F5D10D /* CorporateTestflightDomain */,
 				3998F24E2B14EEB200D7CB90 /* TestflightUIKit */,
-				39B116D92B1E269B00909C09 /* ArchHelpers */,
+				39A8B0082D6CB194000387A0 /* UniFlow */,
 			);
 			productName = CorporateTestflightClient;
 			productReference = 39C3BFEB2B10B07A00F5D10D /* CorporateTestflightClient.app */;
@@ -142,7 +140,6 @@
 			);
 			name = CorporateTestflightClientTests;
 			packageProductDependencies = (
-				397399152C394EC600A254B1 /* Testing */,
 			);
 			productName = CorporateTestflightClientTests;
 			productReference = 39C3C0012B10B07C00F5D10D /* CorporateTestflightClientTests.xctest */;
@@ -177,7 +174,6 @@
 			);
 			mainGroup = 39C3BFE22B10B07A00F5D10D;
 			packageReferences = (
-				397399142C394EC500A254B1 /* XCRemoteSwiftPackageReference "swift-testing" */,
 			);
 			productRefGroup = 39C3BFEC2B10B07A00F5D10D /* Products */;
 			projectDirPath = "";
@@ -471,30 +467,14 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		397399142C394EC500A254B1 /* XCRemoteSwiftPackageReference "swift-testing" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/apple/swift-testing";
-			requirement = {
-				kind = exactVersion;
-				version = 0.10.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
-		397399152C394EC600A254B1 /* Testing */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 397399142C394EC500A254B1 /* XCRemoteSwiftPackageReference "swift-testing" */;
-			productName = Testing;
-		};
 		3998F24E2B14EEB200D7CB90 /* TestflightUIKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = TestflightUIKit;
 		};
-		39B116D92B1E269B00909C09 /* ArchHelpers */ = {
+		39A8B0082D6CB194000387A0 /* UniFlow */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = ArchHelpers;
+			productName = UniFlow;
 		};
 		39C3C01F2B10B0F000F5D10D /* TestflightNetworking */ = {
 			isa = XCSwiftPackageProductDependency;

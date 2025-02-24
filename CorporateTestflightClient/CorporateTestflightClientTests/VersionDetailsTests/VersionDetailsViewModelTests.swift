@@ -15,7 +15,7 @@ final class VersionDetailsViewModelTests: XCTestCase {
 
         let expectation = expectation(description: "Show data expectation")
         sut.send(.onAppear)
-        var states: [VersionDetailsViewModel.State] = []
+        var states: [VersionDetailsStore.State] = []
         sut.$state
             .dropFirst() // skipping the one that is set on initialisation
             .sink { state in
@@ -50,7 +50,7 @@ final class VersionDetailsViewModelTests: XCTestCase {
         expectation.isInverted = true
         sut.send(.onAppear)
         sut.send(.onDisappear)
-        var states: [VersionDetailsViewModel.State] = []
+        var states: [VersionDetailsStore.State] = []
         sut.$state
             .sink { state in
                 states.append(state)
@@ -77,7 +77,7 @@ private final class Environment {
     var repository = MockTicketsRepository()
     var cancellables: Set<AnyCancellable> = []
 
-    func makeSUT() -> VersionDetailsViewModel {
-        VersionDetailsViewModel(version: version, fetchTicketsUsecase: FetchTicketsUseCase(ticketsRepository: repository))
+    func makeSUT() -> VersionDetailsStore {
+        VersionDetailsStore(version: version, fetchTicketsUsecase: FetchTicketsUseCase(ticketsRepository: repository))
     }
 }

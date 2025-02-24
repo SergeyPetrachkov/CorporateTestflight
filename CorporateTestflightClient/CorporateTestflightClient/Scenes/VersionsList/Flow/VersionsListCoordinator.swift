@@ -57,11 +57,14 @@ extension VersionsListCoordinator: VersionsListInteractorOutput {
 	}
 
 	private func showVersionDetails(_ version: Version) {
-		let viewModel = VersionDetailsViewModel(
+		let environment = VersionDetails.Environment(
 			version: version,
 			fetchTicketsUsecase: FetchTicketsUseCase(ticketsRepository: dependenciesContainer.ticketsRepository)
 		)
-		let view = VersionDetailsView(viewModel: viewModel)
+		let store = VersionDetailsStore(
+			initialState: .initial, environment: environment
+		)
+		let view = VersionDetailsContainer(store: store)
 		let hostingVC = UIHostingController(rootView: view)
 		rootViewController.pushViewController(hostingVC, animated: true)
 	}

@@ -1,4 +1,3 @@
-import ArchHelpers
 import CorporateTestflightDomain
 
 protocol VersionsListInteractorProtocol {
