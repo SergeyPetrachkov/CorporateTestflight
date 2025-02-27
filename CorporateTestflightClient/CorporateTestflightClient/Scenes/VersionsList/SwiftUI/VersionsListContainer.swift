@@ -41,6 +41,15 @@ struct VersionsListContainer: View {
 				await store.send(.refresh(fromScratch: false))
 			}
 			.navigationTitle(content.projectTitle)
+			.toolbar {
+				ToolbarItem(placement: .primaryAction) {
+					Button("QR") {
+						Task {
+							await store.send(.tapQR)
+						}
+					}
+				}
+			}
 		case .failed(let error):
 			ContentUnavailableView {
 				Label("An error has occured", systemImage: "exclamationmark.triangle")
@@ -56,6 +65,15 @@ struct VersionsListContainer: View {
 				.buttonStyle(.bordered)
 			}
 			.navigationTitle("Oops...")
+			.toolbar {
+				ToolbarItem(placement: .primaryAction) {
+					Button("QR") {
+						Task {
+							await store.send(.tapQR)
+						}
+					}
+				}
+			}
 		case .initial:
 			skeleton
 		}

@@ -1,3 +1,4 @@
+@available(iOS 13.0.0, *)
 @MainActor
 public protocol Store: AnyObject {
 	associatedtype State

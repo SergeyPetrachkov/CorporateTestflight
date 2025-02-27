@@ -15,6 +15,8 @@ final class VersionsListCoordinator {
 	private let dependenciesContainer: DependencyContaining
 	private let projectId: Int
 
+	var onQRRequested: () -> Void = {}
+
 	init(flowParameters: VersionsListFlowParameters) {
 		self.rootViewController = flowParameters.rootViewController
 		self.dependenciesContainer = flowParameters.dependenciesContainer
@@ -30,6 +32,8 @@ final class VersionsListCoordinator {
 				switch action {
 				case .selectedVersion(let version):
 					self?.showVersionDetails(version)
+				case .qrRequested:
+					self?.onQRRequested()
 				}
 			}
 		)

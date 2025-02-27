@@ -38,6 +38,8 @@ final class VersionsListStore: ObservableObject, Store {
 				return
 			}
 			environment.output(.selectedVersion(version))
+		case .tapQR:
+			environment.output(.qrRequested)
 		}
 	}
 

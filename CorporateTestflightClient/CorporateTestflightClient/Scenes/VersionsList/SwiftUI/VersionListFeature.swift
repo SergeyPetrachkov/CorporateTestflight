@@ -32,6 +32,7 @@ enum VersionList {
 		case start
 		case refresh(fromScratch: Bool)
 		case tapItem(RowState)
+		case tapQR
 
 		var debugDescription: String {
 			switch self {
@@ -41,6 +42,8 @@ enum VersionList {
 				"refresh: from_scratch=\(fromScratch)"
 			case .tapItem(let rowState):
 				"tap: row_id=\(rowState.id)"
+			case .tapQR:
+				"tap: qr_code"
 			}
 		}
 	}
@@ -54,6 +57,7 @@ enum VersionList {
 	struct Environment {
 		enum Output {
 			case selectedVersion(Version)
+			case qrRequested
 		}
 
 		let project: Project.ID

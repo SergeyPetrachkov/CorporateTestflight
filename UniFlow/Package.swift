@@ -4,6 +4,7 @@ import PackageDescription
 
 let package = Package(
 	name: "UniFlow",
+	platforms: [.iOS(.v16)],
 	products: [
 		.library(
 			name: "UniFlow",
