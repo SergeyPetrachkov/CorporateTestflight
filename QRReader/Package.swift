@@ -8,6 +8,7 @@ let interfaceModuleName = "\(moduleName)Interface"
 let swiftSettings = [SwiftSetting.swiftLanguageMode(.v6)]
 
 let uniFlowDependency = Target.Dependency.product(name: "UniFlow", package: "UniFlow")
+let simpleDIDependency = Target.Dependency.product(name: "SimpleDI", package: "SimpleDI")
 
 let package = Package(
 	name: moduleName,
@@ -15,7 +16,6 @@ let package = Package(
 	products: [
 		.library(
 			name: interfaceModuleName,
-			type: .dynamic,
 			targets: ["QRReaderInterface"]
 		),
 		.library(
@@ -25,6 +25,7 @@ let package = Package(
 	],
 	dependencies: [
 		.package(name: "UniFlow", path: "../UniFlow"),
+		.package(name: "SimpleDI", path: "../SimpleDI"),
 		.package(url: "https://github.com/apple/swift-async-algorithms", branch: "main")
 	],
 	targets: [
@@ -40,6 +41,7 @@ let package = Package(
 			dependencies: [
 				.target(name: interfaceModuleName),
 				uniFlowDependency,
+				simpleDIDependency,
 				.product(name: "AsyncAlgorithms", package: "swift-async-algorithms")
 			],
 			swiftSettings: swiftSettings

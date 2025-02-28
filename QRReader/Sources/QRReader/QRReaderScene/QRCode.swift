@@ -1,18 +1,12 @@
-//
-//  QRCode.swift
-//  QRReader
-//
-//  Created by Sergey Petrachkov on 28.02.2025.
-//
+import AVFoundation
 
-
-public enum QRCode {
-	public enum Action {
+enum QRCode {
+	enum Action {
 		case start
 		case stop
 	}
 
-	public struct Environment {
+	struct Environment {
 		let qrListener: QRCodeCaptureListener
 
 		public init(qrListener: QRCodeCaptureListener) {
@@ -20,11 +14,11 @@ public enum QRCode {
 		}
 	}
 
-	public struct State {
+	struct State {
 		var scannedCode: String?
 		var session: AVCaptureSession
 
-		public init(scannedCode: String? = nil, session: AVCaptureSession) {
+		init(scannedCode: String? = nil, session: AVCaptureSession) {
 			self.scannedCode = scannedCode
 			self.session = session
 		}

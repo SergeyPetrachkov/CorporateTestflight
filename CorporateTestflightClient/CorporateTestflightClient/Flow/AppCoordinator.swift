@@ -1,6 +1,7 @@
 import AVFoundation
 import UIKit
-import QRReader
+import QRReaderInterface
+import SimpleDI
 import SwiftUI
 
 @MainActor
@@ -8,12 +9,14 @@ final class AppCoordinator {
 
 	private let rootNavigationController: UINavigationController
 	private let dependenciesContainer: DependencyContaining
+	private let resolver: Resolver
 
 	private var childCoordinator: VersionsListCoordinator?
 
-	init(rootNavigationController: UINavigationController, dependenciesContainer: DependencyContaining) {
+	init(rootNavigationController: UINavigationController, dependenciesContainer: DependencyContaining, resolver: Resolver) {
 		self.rootNavigationController = rootNavigationController
 		self.dependenciesContainer = dependenciesContainer
+		self.resolver = resolver
 	}
 
 	func start() {
@@ -26,13 +29,11 @@ final class AppCoordinator {
 		)
 		childCoordinator?.start()
 		childCoordinator?.onQRRequested = { [weak self] in
-			let session = AVCaptureSession()
-			let env = QRCode.Environment(qrListener: QRCodeCaptureListener.init(session: session, sessionConfigurator: CaptureSessionConfigurator()))
-			let state = QRCode.State(session: session)
-			let store = QRReaderStore(initialState: state, environment: env)
-			let view = QRReaderView(store: store)
-			let hostingVC = UIHostingController(rootView: view)
-			self?.rootNavigationController.pushViewController(hostingVC, animated: true)
+			guard let self else { return }
+			guard let coordinator: any QRReaderFlowCoordinating = resolver.resolve((any QRReaderFlowCoordinating).self, argument: QRReaderFlowInput.init(session: AVCaptureSession(), parentViewController: rootNavigationController)) else {
+				return
+			}
+			coordinator.start()
 		}
 	}
 }

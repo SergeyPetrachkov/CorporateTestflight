@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		395218FD2D70B97900F4E26E /* QRReader in Frameworks */ = {isa = PBXBuildFile; productRef = 395218FC2D70B97900F4E26E /* QRReader */; };
 		3998F24F2B14EEB200D7CB90 /* TestflightUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3998F24E2B14EEB200D7CB90 /* TestflightUIKit */; };
 		39A8B0092D6CB194000387A0 /* UniFlow in Frameworks */ = {isa = PBXBuildFile; productRef = 39A8B0082D6CB194000387A0 /* UniFlow */; };
 		39C3C0202B10B0F000F5D10D /* TestflightNetworking in Frameworks */ = {isa = PBXBuildFile; productRef = 39C3C01F2B10B0F000F5D10D /* TestflightNetworking */; };
 		39C3C0222B10B0F000F5D10D /* CorporateTestflightDomain in Frameworks */ = {isa = PBXBuildFile; productRef = 39C3C0212B10B0F000F5D10D /* CorporateTestflightDomain */; };
-		39F77FFF2D71DCC1008FE9D3 /* SimpleDI in Frameworks */ = {isa = PBXBuildFile; productRef = 39F77FFE2D71DCC1008FE9D3 /* SimpleDI */; };
+		39F780072D71E727008FE9D3 /* SimpleDI in Frameworks */ = {isa = PBXBuildFile; productRef = 39F780062D71E727008FE9D3 /* SimpleDI */; };
+		39F780092D71E72C008FE9D3 /* QRReader in Frameworks */ = {isa = PBXBuildFile; productRef = 39F780082D71E72C008FE9D3 /* QRReader */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -24,6 +24,19 @@
 			remoteInfo = CorporateTestflightClient;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		39F780032D71E5AA008FE9D3 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		393FB16F2D5774CF0078E548 /* CorporateTestflightClientTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = CorporateTestflightClientTests.xctestplan; sourceTree = "<group>"; };
@@ -52,10 +65,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				3998F24F2B14EEB200D7CB90 /* TestflightUIKit in Frameworks */,
-				39F77FFF2D71DCC1008FE9D3 /* SimpleDI in Frameworks */,
 				39C3C0222B10B0F000F5D10D /* CorporateTestflightDomain in Frameworks */,
 				39C3C0202B10B0F000F5D10D /* TestflightNetworking in Frameworks */,
-				395218FD2D70B97900F4E26E /* QRReader in Frameworks */,
+				39F780072D71E727008FE9D3 /* SimpleDI in Frameworks */,
+				39F780092D71E72C008FE9D3 /* QRReader in Frameworks */,
 				39A8B0092D6CB194000387A0 /* UniFlow in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -107,6 +120,7 @@
 				39C3BFE72B10B07A00F5D10D /* Sources */,
 				39C3BFE82B10B07A00F5D10D /* Frameworks */,
 				39C3BFE92B10B07A00F5D10D /* Resources */,
+				39F780032D71E5AA008FE9D3 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -121,8 +135,8 @@
 				39C3C0212B10B0F000F5D10D /* CorporateTestflightDomain */,
 				3998F24E2B14EEB200D7CB90 /* TestflightUIKit */,
 				39A8B0082D6CB194000387A0 /* UniFlow */,
-				395218FC2D70B97900F4E26E /* QRReader */,
-				39F77FFE2D71DCC1008FE9D3 /* SimpleDI */,
+				39F780062D71E727008FE9D3 /* SimpleDI */,
+				39F780082D71E72C008FE9D3 /* QRReader */,
 			);
 			productName = CorporateTestflightClient;
 			productReference = 39C3BFEB2B10B07A00F5D10D /* CorporateTestflightClient.app */;
@@ -476,10 +490,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		395218FC2D70B97900F4E26E /* QRReader */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = QRReader;
-		};
 		3998F24E2B14EEB200D7CB90 /* TestflightUIKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = TestflightUIKit;
@@ -496,9 +506,13 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = CorporateTestflightDomain;
 		};
-		39F77FFE2D71DCC1008FE9D3 /* SimpleDI */ = {
+		39F780062D71E727008FE9D3 /* SimpleDI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SimpleDI;
+		};
+		39F780082D71E72C008FE9D3 /* QRReader */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = QRReader;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

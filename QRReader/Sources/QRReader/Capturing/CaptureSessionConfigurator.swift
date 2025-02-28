@@ -1,14 +1,15 @@
 import AVFoundation
 import Foundation
 
-public struct CaptureSessionConfigurator {
-
-	public init() {}
+struct CaptureSessionConfigurator {
 
 	func setupSession(session: AVCaptureSession, captureOutputDelegate: AVCaptureMetadataOutputObjectsDelegate) {
 
-		let videoCaptureDevice = AVCaptureDevice.default(for: .video)
-		guard let videoInput = try? AVCaptureDeviceInput(device: videoCaptureDevice!), session.canAddInput(videoInput) else {
+		guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else {
+			print("You're trying to launch QR Reader on a simulator. No can do!")
+			return
+		}
+		guard let videoInput = try? AVCaptureDeviceInput(device: videoCaptureDevice), session.canAddInput(videoInput) else {
 			return
 		}
 		session.addInput(videoInput)

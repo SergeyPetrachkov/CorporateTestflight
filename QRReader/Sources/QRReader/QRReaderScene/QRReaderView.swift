@@ -6,7 +6,7 @@ import UIKit
 public struct QRReaderView: View {
 	@StateObject private var store: QRReaderStore
 
-	public init(store: QRReaderStore) {
+	init(store: QRReaderStore) {
 		self._store = .init(wrappedValue: store)
 	}
 
