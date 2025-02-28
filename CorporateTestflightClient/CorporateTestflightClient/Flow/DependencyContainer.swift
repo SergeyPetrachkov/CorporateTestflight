@@ -14,6 +14,16 @@ protocol DependencyContaining {
 
 }
 
+struct DependencyContainer: DependencyContaining {
+	let api: any TestflightNetworking.TestflightAPIProviding
+	
+	let versionsRepository: any CorporateTestflightDomain.VersionsRepository
+
+	let projectsRepository: any CorporateTestflightDomain.ProjectsRepository
+
+	let ticketsRepository: any CorporateTestflightDomain.TicketsRepository
+}
+
 final class AppDependencies: DependencyContaining {
 
 	private(set) lazy var api: TestflightAPIProviding = TestflightAPIProvider(session: .shared, decoder: JSONDecoder())

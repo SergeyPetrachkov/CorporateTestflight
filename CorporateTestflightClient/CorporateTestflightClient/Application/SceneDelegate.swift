@@ -28,7 +28,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 		let coordinator = AppCoordinator(
 			rootNavigationController: navigationController,
-			dependenciesContainer: AppDependencies(),
 			resolver: container
 		)
 		coordinator.start()

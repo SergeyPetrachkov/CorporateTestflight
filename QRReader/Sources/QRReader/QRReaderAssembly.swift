@@ -10,7 +10,7 @@ public final class QRReaderAssembly: @preconcurrency Assembly {
 	}
 
 	public func assemble(container: Container) {
-		container.register((any QRReaderFlowCoordinating).self) { inputParameters in
+		container.register((any QRReaderFlowCoordinating).self) { inputParameters, _ in
 			QRReaderFlowCoordinator(input: inputParameters)
 		}		
 	}
