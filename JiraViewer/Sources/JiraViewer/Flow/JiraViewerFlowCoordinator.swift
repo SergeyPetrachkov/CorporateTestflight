@@ -15,7 +15,7 @@ final class JiraViewerFlowCoordinator: JiraViewerFlowCoordinating {
 
 	func start() {
 		let env = JiraViewer.Environment(
-			attachmentLoader: input.imageLoader,
+			attachmentLoader: input.resolver.resolve(ImageLoader.self)!,
 			ticket: input.ticket
 		)
 		let state = JiraViewer.State(ticket: input.ticket)
@@ -25,4 +25,3 @@ final class JiraViewerFlowCoordinator: JiraViewerFlowCoordinating {
 		input.parentViewController.present(hostingVC, animated: true)
 	}
 }
-

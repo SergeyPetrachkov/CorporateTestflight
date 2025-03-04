@@ -36,7 +36,8 @@ let package = Package(
 			name: interfaceModuleName,
 			dependencies: [
 				uniFlowDependency,
-				domainDependency
+				domainDependency,
+				simpleDIDependency
 			],
 			swiftSettings: swiftSettings
 		),

@@ -1,5 +1,5 @@
 import CorporateTestflightDomain
-import ImageLoader
+import SimpleDI
 import UniFlow
 import UIKit
 
@@ -10,11 +10,11 @@ public protocol JiraViewerFlowCoordinating: SyncFlowEngine {
 public struct JiraViewerFlowInput {
 	public let ticket: Ticket
 	public let parentViewController: UIViewController
-	public let imageLoader: ImageLoader
+	public let resolver: Resolver
 
-	public init(ticket: Ticket, parentViewController: UIViewController, imageLoader: ImageLoader) {
+	public init(ticket: Ticket, parentViewController: UIViewController, resolver: Resolver) {
 		self.ticket = ticket
 		self.parentViewController = parentViewController
-		self.imageLoader = imageLoader
+		self.resolver = resolver
 	}
 }
