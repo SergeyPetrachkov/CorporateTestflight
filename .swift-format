@@ -1,17 +1,17 @@
 {
-    "version": 1,
-    "lineLength": 160,
-    "indentation": {
-        "spaces": 4
-    },
-    "maximumBlankLines": 1,
-    "respectsExistingLineBreaks": true,
-    "lineBreakBeforeControlFlowKeywords": false,
-    "lineBreakBeforeEachArgument": true,
-    "lineBreakBeforeEachGenericRequirement": false,
-    "prioritizeKeepingFunctionOutputTogether": true,
-    "multiElementCollectionTrailingCommas": false,
-    "rules": {
-        "NoAccessLevelOnExtensionDeclaration": false
-    }
+	"version": 1,
+	"lineLength": 160,
+	"indentation": {
+		"tabs": 1
+	},
+	"maximumBlankLines": 1,
+	"respectsExistingLineBreaks": true,
+	"lineBreakBeforeControlFlowKeywords": false,
+	"lineBreakBeforeEachArgument": true,
+	"lineBreakBeforeEachGenericRequirement": false,
+	"prioritizeKeepingFunctionOutputTogether": true,
+	"multiElementCollectionTrailingCommas": false,
+	"rules": {
+		"NoAccessLevelOnExtensionDeclaration": false
+	}
 }

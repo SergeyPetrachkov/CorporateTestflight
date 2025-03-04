@@ -5,6 +5,8 @@ import PackageDescription
 
 let sharedPackage = Package.Dependency.package(path: "../CorporateTestflightShared")
 let domainTargetDependency = Target.Dependency.product(name: "CorporateTestflightDomain", package: "CorporateTestflightShared")
+let mockFuncPackage = Package.Dependency.package(name: "MockFunc", path: "../MockFunc")
+let mockFuncDependency = Target.Dependency.product(name: "MockFunc", package: "MockFunc")
 
 let swiftSettings = [SwiftSetting.swiftLanguageMode(.v6)]
 
@@ -27,7 +29,17 @@ let testflightNetworkingTarget = Target.target(
 	path: path(for: testflightNetworking),
 	swiftSettings: swiftSettings
 )
+let testflightNetworkingDependency = Target.Dependency.target(name: testflightNetworking)
 let testflightNetworkingProduct = Product.library(name: testflightNetworking, targets: [testflightNetworking])
+
+let testflightNetworkingMock = "TestflightNetworkingMock"
+let testflightNetworkingMockTarget = Target.target(
+	name: testflightNetworkingMock,
+	dependencies: [domainTargetDependency, coreNetworkingDependency, testflightNetworkingDependency, mockFuncDependency],
+	path: path(for: testflightNetworkingMock),
+	swiftSettings: swiftSettings
+)
+let testflightNetworkingMockProduct = Product.library(name: testflightNetworkingMock, targets: [testflightNetworkingMock])
 
 let testflightUIKit = "TestflightUIKit"
 let testflightUIKitTarget = Target.target(
@@ -45,15 +57,19 @@ let package = Package(
 	products: [
 		coreNetworkingProduct,
 		testflightNetworkingProduct,
-		testflightUIKitProduct
+		testflightUIKitProduct,
+		// Mocks
+		testflightNetworkingMockProduct
 	],
 	dependencies: [
-		sharedPackage
+		sharedPackage,
+		mockFuncPackage
 	],
 	targets: [
 		coreNetworkingTarget,
 		testflightNetworkingTarget,
-		testflightUIKitTarget
+		testflightUIKitTarget,
+		testflightNetworkingMockTarget
 	]
 )
 

@@ -3,38 +3,44 @@ import CorporateTestflightDomain
 import CoreNetworking
 
 public protocol TestflightAPIProviding: Sendable {
-    func getProject(id: Project.ID) async throws -> Project
-    func getVersions(for projectId: Project.ID) async throws -> [Version]
-    func getTicket(key: String) async throws -> Ticket
+	func getProject(id: Project.ID) async throws -> Project
+	func getVersions(for projectId: Project.ID) async throws -> [Version]
+	func getTicket(key: String) async throws -> Ticket
+	func getResource(url: URL) async throws -> Data
 }
 
 public final class TestflightAPIProvider: TestflightAPIProviding {
 
-    private let session: URLSession
-    private let decoder: JSONDecoder
+	private let session: URLSession
+	private let decoder: JSONDecoder
 
-    public init(session: URLSession = URLSession.shared, decoder: JSONDecoder = JSONDecoder()) {
-        self.session = session
-        self.decoder = decoder
-    }
+	public init(session: URLSession = URLSession.shared, decoder: JSONDecoder = JSONDecoder()) {
+		self.session = session
+		self.decoder = decoder
+	}
 
-    public func getProject(id: Project.ID) async throws -> Project {
-        let apiEndpoint = APIEndpoint<Project>.project(id: id)
-        return try await get(apiEndpoint: apiEndpoint)
-    }
+	public func getProject(id: Project.ID) async throws -> Project {
+		let apiEndpoint = APIEndpoint<Project>.project(id: id)
+		return try await get(apiEndpoint: apiEndpoint)
+	}
 
-    public func getVersions(for projectId: Project.ID) async throws -> [Version] {
-        let apiEndpoint = APIEndpoint<[Version]>.versions(projectId: projectId)
-        return try await get(apiEndpoint: apiEndpoint)
-    }
+	public func getVersions(for projectId: Project.ID) async throws -> [Version] {
+		let apiEndpoint = APIEndpoint<[Version]>.versions(projectId: projectId)
+		return try await get(apiEndpoint: apiEndpoint)
+	}
 
-    public func getTicket(key: String) async throws -> Ticket {
-        let apiEndpoint = APIEndpoint<Ticket>.ticket(ticketKey: key)
-        return try await get(apiEndpoint: apiEndpoint)
-    }
+	public func getTicket(key: String) async throws -> Ticket {
+		let apiEndpoint = APIEndpoint<Ticket>.ticket(ticketKey: key)
+		return try await get(apiEndpoint: apiEndpoint)
+	}
 
-    private func get<Type: Decodable>(apiEndpoint: APIEndpoint<Type>) async throws -> Type {
-        let urlRequest = apiEndpoint.asURLRequest()
-        return try await SimpleRequestExecutor(urlSession: session, decoder: decoder).execute(urlRequest)
-    }
+	public func getResource(url: URL) async throws -> Data {
+		try await SimpleRequestExecutor(urlSession: session, decoder: decoder).execute(URLRequest(url: url))
+	}
+
+	private func get<Type: Decodable>(apiEndpoint: APIEndpoint<Type>) async throws -> Type {
+		let urlRequest = apiEndpoint.asURLRequest()
+		return try await SimpleRequestExecutor(urlSession: session, decoder: decoder).execute(urlRequest)
+	}
 }
+

@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:MockFunc">
+   </FileRef>
+   <FileRef
+      location = "group:ImageLoader">
+   </FileRef>
+   <FileRef
       location = "group:SimpleDI">
    </FileRef>
    <FileRef
