@@ -15,12 +15,11 @@ final class JiraViewerFlowCoordinator: JiraViewerFlowCoordinating {
 
 	func start() {
 		let env = JiraViewer.Environment(
-			attachmentLoader: input.resolver.resolve(ImageLoader.self)!,
+			attachmentLoader: LoadAttachmentsUsecaseImpl(imageLoader: input.resolver.resolve(ImageLoader.self)!),
 			ticket: input.ticket
 		)
-		let state = JiraViewer.State(ticket: input.ticket)
-		let store = JiraViewerStore(initialState: state, environment: env)
-		let view = JiraViewerView(store: store)
+		let store = JiraViewerStore(initialState: .init(ticket: input.ticket), environment: env)
+		let view = JiraViewerContainer(store: store)
 		let hostingVC = UIHostingController(rootView: view)
 		input.parentViewController.present(hostingVC, animated: true)
 	}

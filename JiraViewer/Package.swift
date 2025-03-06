@@ -14,7 +14,7 @@ let imageLoaderDependency = Target.Dependency.product(name: "ImageLoader", packa
 
 let package = Package(
 	name: moduleName,
-	platforms: [.iOS(.v16), .macOS(.v13)],
+	platforms: [.iOS(.v17), .macOS(.v15)],
 	products: [
 		.library(
 			name: interfaceModuleName,
