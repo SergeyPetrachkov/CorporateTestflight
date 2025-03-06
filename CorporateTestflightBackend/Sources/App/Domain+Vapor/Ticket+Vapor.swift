@@ -1,4 +1,4 @@
 import CorporateTestflightDomain
 import Vapor
 
-extension CorporateTestflightDomain.Ticket: Content {}
+extension CorporateTestflightDomain.Ticket: @retroactive Content {}

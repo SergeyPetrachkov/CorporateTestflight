@@ -3,25 +3,47 @@
 		"id": "550e8400-e29b-41d4-a716-446655440001",
 		"key": "JIRA-1",
 		"title": "Set up a welcome screen",
-		"description": "As a user\nWhen I open an app for the first time\nI want to see a welcome screen"
+		"description": "As a user\nWhen I open an app for the first time\nI want to see a welcome screen",
+		"attachments": [
+			"harold-meme.jpg",
+			"pepe.jpg",
+			"boromir-meme.jpg",
+			"trollface-meme.jpg"
+		]
 	},
 	{
 		"id": "550e8400-e29b-41d4-a716-446655440002",
 		"key": "JIRA-2",
 		"title": "Create an onboarding flow pt I",
-		"description": "As a user\nWhen I open an app for the first time\nI want to be onboarded to the app's features"
+		"description": "As a user\nWhen I open an app for the first time\nI want to be onboarded to the app's features",
+		"attachments": [
+			"fish-meme.jpg",
+			"trollface-meme.jpg"
+		]
 	},
 	{
 		"id": "550e8400-e29b-41d4-a716-446655440003",
 		"key": "JIRA-3",
 		"title": "Create an onboarding flow pt II",
-		"description": "As a user\nWhen I open an app for the first time\nI want to be onboarded to the app's features"
+		"description": "As a user\nWhen I open an app for the first time\nI want to be onboarded to the app's features",
+		"attachments": [
+			"fish-meme.jpg",
+			"pepe.jpg",
+		]
 	},
 	{
 		"id": "550e8400-e29b-41d4-a716-446655440004",
 		"key": "JIRA-4",
 		"title": "Integrate the onboarding flow into the main app",
-		"description": "No description"
+		"description": "No description",
+		"attachments": [
+			"harold-meme.jpg",
+			"pepe.jpg",
+			"boromir-meme.jpg",
+			"trollface-meme.jpg",
+			"fish-meme.jpg",
+			"chillguy-meme.jpg"
+		]
 	},
 	{
 		"id": "550e8400-e29b-41d4-a716-446655440005",
