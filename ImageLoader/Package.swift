@@ -4,7 +4,7 @@ import PackageDescription
 
 let package = Package(
 	name: "ImageLoader",
-	platforms: [.iOS(.v16), .macOS(.v13)],
+	platforms: [.iOS(.v16), .macOS(.v15)],
 	products: [
 		.library(
 			name: "ImageLoader",

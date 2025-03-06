@@ -52,7 +52,7 @@ import TestflightNetworking
 import OSLog
 import Foundation
 
-public protocol ImageLoader {
+public protocol ImageLoader: Sendable {
 	func load(url: URL) async throws -> LoadableImage
 }
 
