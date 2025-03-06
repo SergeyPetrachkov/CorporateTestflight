@@ -11,6 +11,9 @@ public struct QRReaderView: View {
 	}
 
 	public var body: some View {
+#if targetEnvironment(simulator)
+		Text("QR Code scanning is not supported in the simulator.")
+#else
 		ScannerView(captureSession: store.state.session)
 			.overlay {
 				if let scannedCode = store.state.scannedCode {
@@ -27,6 +30,7 @@ public struct QRReaderView: View {
 			.task {
 				await store.send(.start)
 			}
+#endif
 	}
 }
 
