@@ -8,7 +8,6 @@ final class AppAssembly: Assembly {
 
 	func assemble(container: SimpleDI.Container) {
 
-
 		container.registerSingleton((any TestflightAPIProviding).self) { _,_ in
 			TestflightAPIProvider(session: .shared, decoder: JSONDecoder())
 		}

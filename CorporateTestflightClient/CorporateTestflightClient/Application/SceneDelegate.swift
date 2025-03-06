@@ -1,6 +1,7 @@
 import UIKit
 import SimpleDI
 import QRReader
+import JiraViewer
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -21,8 +22,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		window.makeKeyAndVisible()
 
 		let container = Container()
+		let assemblies: [Assembly] = [
+			AppAssembly(),
+			QRReaderAssembly(),
+			JiraViewerAssembly()
+		]
 
-		for assembly: Assembly in [QRReaderAssembly(), AppAssembly()] {
+		for assembly in assemblies {
 			assembly.assemble(container: container)
 		}
 

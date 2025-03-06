@@ -5,6 +5,7 @@ import SimpleDI
 import SwiftUI
 import CorporateTestflightDomain
 import TestflightNetworking
+import JiraViewerInterface
 
 @MainActor
 final class AppCoordinator {
@@ -34,12 +35,30 @@ final class AppCoordinator {
 			)
 		)
 		childCoordinator?.start()
-		childCoordinator?.onQRRequested = { [weak self] in
+		childCoordinator?.output = { [weak self] argument in
 			guard let self else { return }
-			guard let coordinator: any QRReaderFlowCoordinating = resolver.resolve((any QRReaderFlowCoordinating).self, argument: QRReaderFlowInput(session: AVCaptureSession(), parentViewController: rootNavigationController)) else {
-				return
+			switch argument {
+			case .qrRequested:
+				guard let coordinator: any QRReaderFlowCoordinating = resolver.resolve(
+					(any QRReaderFlowCoordinating).self,
+					argument: QRReaderFlowInput(session: AVCaptureSession(), parentViewController: rootNavigationController)
+				) else {
+					return
+				}
+				coordinator.start()
+			case .ticketDetailsRequested(let ticket):
+				guard let coordinator: any JiraViewerFlowCoordinating = resolver.resolve(
+					(any JiraViewerFlowCoordinating).self,
+					argument: JiraViewerFlowInput(
+						ticket: ticket,
+						parentViewController: rootNavigationController,
+						resolver: resolver
+					)
+				) else {
+					return
+				}
+				coordinator.start()
 			}
-			coordinator.start()
 		}
 	}
 }

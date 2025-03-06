@@ -5,6 +5,9 @@
       location = "group:JiraViewer">
    </FileRef>
    <FileRef
+      location = "group:QRReader">
+   </FileRef>
+   <FileRef
       location = "group:MockFunc">
    </FileRef>
    <FileRef
@@ -12,9 +15,6 @@
    </FileRef>
    <FileRef
       location = "group:SimpleDI">
-   </FileRef>
-   <FileRef
-      location = "group:QRReader">
    </FileRef>
    <FileRef
       location = "group:UniFlow">

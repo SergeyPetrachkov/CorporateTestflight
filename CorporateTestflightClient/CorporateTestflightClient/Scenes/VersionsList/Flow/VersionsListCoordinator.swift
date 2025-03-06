@@ -1,11 +1,17 @@
 import UIKit
 import SwiftUI
 import CorporateTestflightDomain
+import JiraViewerInterface
 
 struct VersionsListFlowParameters {
 	let projectId: Int
 	let rootViewController: UINavigationController
 	let dependenciesContainer: DependencyContaining
+}
+
+enum VersionsListOutput {
+	case qrRequested
+	case ticketDetailsRequested(Ticket)
 }
 
 @MainActor
@@ -15,7 +21,7 @@ final class VersionsListCoordinator {
 	private let dependenciesContainer: DependencyContaining
 	private let projectId: Int
 
-	var onQRRequested: () -> Void = {}
+	var output: ((VersionsListOutput) -> Void)?
 
 	init(flowParameters: VersionsListFlowParameters) {
 		self.rootViewController = flowParameters.rootViewController
@@ -26,14 +32,17 @@ final class VersionsListCoordinator {
 	func start() {
 		let environment = VersionsListStore.Environment(
 			project: projectId,
-			usecase: FetchProjectAndVersionsUsecaseImpl(versionsRepository: dependenciesContainer.versionsRepository, projectsRepository: dependenciesContainer.projectsRepository),
+			usecase: FetchProjectAndVersionsUsecaseImpl(
+				versionsRepository: dependenciesContainer.versionsRepository,
+				projectsRepository: dependenciesContainer.projectsRepository
+			),
 			mapper: VersionList.RowMapper(),
 			output: { [weak self] action in
 				switch action {
 				case .selectedVersion(let version):
 					self?.showVersionDetails(version)
 				case .qrRequested:
-					self?.onQRRequested()
+					self?.output?(.qrRequested)
 				}
 			}
 		)
@@ -63,7 +72,12 @@ extension VersionsListCoordinator: VersionsListInteractorOutput {
 	private func showVersionDetails(_ version: Version) {
 		let environment = VersionDetails.Environment(
 			version: version,
-			fetchTicketsUsecase: FetchTicketsUseCase(ticketsRepository: dependenciesContainer.ticketsRepository)
+			fetchTicketsUsecase: FetchTicketsUseCase(
+				ticketsRepository: dependenciesContainer.ticketsRepository
+			),
+			onTickedTapped: { [weak self] ticket in
+				self?.output?(.ticketDetailsRequested(ticket))
+			}
 		)
 		let store = VersionDetailsStore(
 			initialState: .initial, environment: environment

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		19C808FE2D7987C800EF62F9 /* JiraViewer in Frameworks */ = {isa = PBXBuildFile; productRef = 19C808FD2D7987C800EF62F9 /* JiraViewer */; };
 		3931EBE42D774E44003190A7 /* ImageLoader in Frameworks */ = {isa = PBXBuildFile; productRef = 3931EBE32D774E44003190A7 /* ImageLoader */; };
 		3998F24F2B14EEB200D7CB90 /* TestflightUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3998F24E2B14EEB200D7CB90 /* TestflightUIKit */; };
 		39A8B0092D6CB194000387A0 /* UniFlow in Frameworks */ = {isa = PBXBuildFile; productRef = 39A8B0082D6CB194000387A0 /* UniFlow */; };
@@ -67,6 +68,7 @@
 			files = (
 				3931EBE42D774E44003190A7 /* ImageLoader in Frameworks */,
 				3998F24F2B14EEB200D7CB90 /* TestflightUIKit in Frameworks */,
+				19C808FE2D7987C800EF62F9 /* JiraViewer in Frameworks */,
 				39C3C0222B10B0F000F5D10D /* CorporateTestflightDomain in Frameworks */,
 				39C3C0202B10B0F000F5D10D /* TestflightNetworking in Frameworks */,
 				39F780072D71E727008FE9D3 /* SimpleDI in Frameworks */,
@@ -140,6 +142,7 @@
 				39F780062D71E727008FE9D3 /* SimpleDI */,
 				39F780082D71E72C008FE9D3 /* QRReader */,
 				3931EBE32D774E44003190A7 /* ImageLoader */,
+				19C808FD2D7987C800EF62F9 /* JiraViewer */,
 			);
 			productName = CorporateTestflightClient;
 			productReference = 39C3BFEB2B10B07A00F5D10D /* CorporateTestflightClient.app */;
@@ -493,6 +496,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		19C808FD2D7987C800EF62F9 /* JiraViewer */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = JiraViewer;
+		};
 		3931EBE32D774E44003190A7 /* ImageLoader */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ImageLoader;

@@ -57,7 +57,11 @@ struct VersionDetailsContainer: View {
 
 	@ViewBuilder
 	private func loadedView(detailsModel: VersionDetailsLoadedView.State) -> some View {
-		VersionDetailsLoadedView(state: detailsModel)
+		VersionDetailsLoadedView(state: detailsModel) { ticket in
+			Task {
+				await store.send(.tap(ticket))
+			}
+		}
 	}
 
 	@ViewBuilder

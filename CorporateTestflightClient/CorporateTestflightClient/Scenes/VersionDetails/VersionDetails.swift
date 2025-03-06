@@ -5,11 +5,25 @@ enum VersionDetails {
 	struct Environment {
 		let version: Version
 		let fetchTicketsUsecase: FetchTicketsUseCaseProtocol
+
+		let onTickedTapped: (Ticket) -> Void
 	}
 
-	enum Action {
+	enum Action: CustomDebugStringConvertible {
 		case start
 		case refresh
+		case tap(TicketView.State)
+
+		var debugDescription: String {
+			switch self {
+			case .start:
+				"start"
+			case .refresh:
+				"refresh"
+			case .tap(let item):
+				"tap: \(item.key)"
+			}
+		}
 	}
 
 	enum State: Equatable, CustomDebugStringConvertible {

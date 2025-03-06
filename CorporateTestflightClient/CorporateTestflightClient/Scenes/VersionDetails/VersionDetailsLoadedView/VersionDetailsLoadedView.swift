@@ -3,6 +3,12 @@ import SwiftUI
 struct VersionDetailsLoadedView: View {
 
 	let state: State
+	let onTicketTapped: (TicketView.State) -> Void
+
+	init(state: State, onTicketTapped: @escaping (TicketView.State) -> Void = { _ in }) {
+		self.state = state
+		self.onTicketTapped = onTicketTapped
+	}
 
 	var body: some View {
 		VStack(alignment: .leading, spacing: 8) {
@@ -14,6 +20,9 @@ struct VersionDetailsLoadedView: View {
 				Divider()
 				ForEach(state.ticketsModels) { ticket in
 					TicketView(state: ticket)
+						.onTapGesture {
+							onTicketTapped(ticket)
+						}
 				}
 			}
 			.padding(4)

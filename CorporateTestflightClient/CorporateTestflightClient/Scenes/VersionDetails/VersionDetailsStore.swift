@@ -2,7 +2,6 @@ import CorporateTestflightDomain
 import Foundation
 import UniFlow
 
-
 final class VersionDetailsStore: ObservableObject, Store {
 
 	typealias Environment = VersionDetails.Environment
@@ -18,6 +17,8 @@ final class VersionDetailsStore: ObservableObject, Store {
 		}
 	}
 
+	private var loadedTickets: [Ticket] = []
+
 	// MARK: - Init
 
 	init(initialState: State, environment: Environment) {
@@ -26,7 +27,7 @@ final class VersionDetailsStore: ObservableObject, Store {
 	}
 
 	deinit {
-		print("deinit \(self)")
+		print("❌ deinit \(self)")
 	}
 
 	// MARK: - Sync interface controlled by us
@@ -36,6 +37,11 @@ final class VersionDetailsStore: ObservableObject, Store {
 		switch action {
 		case .start, .refresh:
 			await fetchData()
+		case .tap(let ticket):
+			guard let matchedTicket = loadedTickets.first(where: { $0.key == ticket.key }) else {
+				return
+			}
+			environment.onTickedTapped(matchedTicket)
 		}
 	}
 
@@ -45,6 +51,7 @@ final class VersionDetailsStore: ObservableObject, Store {
 		do {
 			let version = environment.version
 			let tickets = try await environment.fetchTicketsUsecase.execute(for: version)
+			loadedTickets = tickets
 			if !Task.isCancelled {
 				state = .loaded(.init(version: version, tickets: tickets))
 			} else {
