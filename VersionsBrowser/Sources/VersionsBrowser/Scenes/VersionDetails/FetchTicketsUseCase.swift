@@ -14,11 +14,12 @@ struct FetchTicketsUseCase: FetchTicketsUseCaseProtocol {
 	}
 
 	func execute(for version: Version) async throws -> [Ticket] {
-		try await withThrowingTaskGroup(of: Ticket?.self) { group in
-			for ticketKey in version.associatedTicketKeys {
+		try await withThrowingTaskGroup(of: (Int, Ticket)?.self) { group in
+			for (offset, ticketKey) in version.associatedTicketKeys.enumerated() {
 				group.addTask {
 					do {
-						return try await ticketsRepository.getTicket(key: ticketKey)
+						let ticket = try await ticketsRepository.getTicket(key: ticketKey)
+						return (offset, ticket)
 					} catch is URLError {
 						throw CancellationError()
 					} catch {
@@ -27,13 +28,13 @@ struct FetchTicketsUseCase: FetchTicketsUseCaseProtocol {
 					}
 				}
 			}
-			var tickets: [Ticket] = []
+			var tickets: [(Int, Ticket)] = []
 			for try await ticket in group {
 				if let ticket {
 					tickets.append(ticket)
 				}
 			}
-			return tickets
+			return tickets.sorted(by: { $0.0 < $1.0 }).compactMap(\.1)
 		}
 	}
 }

@@ -16,31 +16,6 @@ extension NSImage {
 	}
 }
 
-//
-//@dynamicMemberLookup
-//public final class SendableNSImage: @unchecked Sendable {
-//	public let wrappedValue: NSImage
-//
-//	public init(wrappedValue: NSImage) {
-//		self.wrappedValue = wrappedValue
-//	}
-//
-//	public convenience init?(data: Data) {
-//		guard let image = NSImage(data: data) else {
-//			return nil
-//		}
-//		self.init(wrappedValue: image)
-//	}
-//
-//	public subscript<T>(dynamicMember keyPath: KeyPath<NSImage, T>) -> T {
-//		wrappedValue[keyPath: keyPath]
-//	}
-//}
-//
-//extension SendableNSImage {
-//	public var asNSImage: NSImage { wrappedValue }
-//}
-
 public typealias LoadableImage = NSImage
 #elseif os(iOS) || os(tvOS) || os(watchOS)
 import UIKit
@@ -98,7 +73,7 @@ public actor ImageCache: ImageLoader {
 				let cachedImage = try await currentActiveTask.value
 				return cachedImage
 			} catch {
-				os_log(.info, "Previously cached task for the image \(url) returned error \(error)")
+				print("Previously cached task for the image \(url) returned error \(error)")
 			}
 		}
 

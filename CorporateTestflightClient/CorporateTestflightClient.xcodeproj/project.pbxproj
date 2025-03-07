@@ -7,15 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		19C808FE2D7987C800EF62F9 /* JiraViewer in Frameworks */ = {isa = PBXBuildFile; productRef = 19C808FD2D7987C800EF62F9 /* JiraViewer */; };
-		3931EBE42D774E44003190A7 /* ImageLoader in Frameworks */ = {isa = PBXBuildFile; productRef = 3931EBE32D774E44003190A7 /* ImageLoader */; };
-		3931EC602D7B1154003190A7 /* VersionsBrowser in Frameworks */ = {isa = PBXBuildFile; productRef = 3931EC5F2D7B1154003190A7 /* VersionsBrowser */; };
-		3998F24F2B14EEB200D7CB90 /* TestflightUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3998F24E2B14EEB200D7CB90 /* TestflightUIKit */; };
-		39A8B0092D6CB194000387A0 /* UniFlow in Frameworks */ = {isa = PBXBuildFile; productRef = 39A8B0082D6CB194000387A0 /* UniFlow */; };
-		39C3C0202B10B0F000F5D10D /* TestflightNetworking in Frameworks */ = {isa = PBXBuildFile; productRef = 39C3C01F2B10B0F000F5D10D /* TestflightNetworking */; };
-		39C3C0222B10B0F000F5D10D /* CorporateTestflightDomain in Frameworks */ = {isa = PBXBuildFile; productRef = 39C3C0212B10B0F000F5D10D /* CorporateTestflightDomain */; };
-		39F780072D71E727008FE9D3 /* SimpleDI in Frameworks */ = {isa = PBXBuildFile; productRef = 39F780062D71E727008FE9D3 /* SimpleDI */; };
-		39F780092D71E72C008FE9D3 /* QRReader in Frameworks */ = {isa = PBXBuildFile; productRef = 39F780082D71E72C008FE9D3 /* QRReader */; };
+		3931EC632D7B2138003190A7 /* CorporateTestflightDomain in Frameworks */ = {isa = PBXBuildFile; productRef = 3931EC622D7B2138003190A7 /* CorporateTestflightDomain */; };
+		3931EC662D7B216D003190A7 /* VersionsBrowser in Frameworks */ = {isa = PBXBuildFile; productRef = 3931EC652D7B216D003190A7 /* VersionsBrowser */; };
+		3931EC682D7B216D003190A7 /* VersionsBrowserInterface in Frameworks */ = {isa = PBXBuildFile; productRef = 3931EC672D7B216D003190A7 /* VersionsBrowserInterface */; };
+		3931EC6A2D7B2181003190A7 /* TestflightNetworking in Frameworks */ = {isa = PBXBuildFile; productRef = 3931EC692D7B2181003190A7 /* TestflightNetworking */; };
+		3931EC6C2D7B2181003190A7 /* TestflightUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3931EC6B2D7B2181003190A7 /* TestflightUIKit */; };
+		3931EC6E2D7B2194003190A7 /* ImageLoader in Frameworks */ = {isa = PBXBuildFile; productRef = 3931EC6D2D7B2194003190A7 /* ImageLoader */; };
+		3931EC702D7B2194003190A7 /* JiraViewer in Frameworks */ = {isa = PBXBuildFile; productRef = 3931EC6F2D7B2194003190A7 /* JiraViewer */; };
+		3931EC722D7B2194003190A7 /* JiraViewerInterface in Frameworks */ = {isa = PBXBuildFile; productRef = 3931EC712D7B2194003190A7 /* JiraViewerInterface */; };
+		3931EC742D7B2194003190A7 /* QRReader in Frameworks */ = {isa = PBXBuildFile; productRef = 3931EC732D7B2194003190A7 /* QRReader */; };
+		3931EC762D7B2194003190A7 /* QRReaderInterface in Frameworks */ = {isa = PBXBuildFile; productRef = 3931EC752D7B2194003190A7 /* QRReaderInterface */; };
+		3931EC782D7B2194003190A7 /* SimpleDI in Frameworks */ = {isa = PBXBuildFile; productRef = 3931EC772D7B2194003190A7 /* SimpleDI */; };
+		3931EC7A2D7B2194003190A7 /* UniFlow in Frameworks */ = {isa = PBXBuildFile; productRef = 3931EC792D7B2194003190A7 /* UniFlow */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,15 +70,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3931EBE42D774E44003190A7 /* ImageLoader in Frameworks */,
-				3998F24F2B14EEB200D7CB90 /* TestflightUIKit in Frameworks */,
-				19C808FE2D7987C800EF62F9 /* JiraViewer in Frameworks */,
-				39C3C0222B10B0F000F5D10D /* CorporateTestflightDomain in Frameworks */,
-				39C3C0202B10B0F000F5D10D /* TestflightNetworking in Frameworks */,
-				39F780072D71E727008FE9D3 /* SimpleDI in Frameworks */,
-				39F780092D71E72C008FE9D3 /* QRReader in Frameworks */,
-				3931EC602D7B1154003190A7 /* VersionsBrowser in Frameworks */,
-				39A8B0092D6CB194000387A0 /* UniFlow in Frameworks */,
+				3931EC662D7B216D003190A7 /* VersionsBrowser in Frameworks */,
+				3931EC742D7B2194003190A7 /* QRReader in Frameworks */,
+				3931EC782D7B2194003190A7 /* SimpleDI in Frameworks */,
+				3931EC7A2D7B2194003190A7 /* UniFlow in Frameworks */,
+				3931EC6E2D7B2194003190A7 /* ImageLoader in Frameworks */,
+				3931EC6C2D7B2181003190A7 /* TestflightUIKit in Frameworks */,
+				3931EC702D7B2194003190A7 /* JiraViewer in Frameworks */,
+				3931EC722D7B2194003190A7 /* JiraViewerInterface in Frameworks */,
+				3931EC762D7B2194003190A7 /* QRReaderInterface in Frameworks */,
+				3931EC682D7B216D003190A7 /* VersionsBrowserInterface in Frameworks */,
+				3931EC6A2D7B2181003190A7 /* TestflightNetworking in Frameworks */,
+				3931EC632D7B2138003190A7 /* CorporateTestflightDomain in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,15 +143,18 @@
 			);
 			name = CorporateTestflightClient;
 			packageProductDependencies = (
-				39C3C01F2B10B0F000F5D10D /* TestflightNetworking */,
-				39C3C0212B10B0F000F5D10D /* CorporateTestflightDomain */,
-				3998F24E2B14EEB200D7CB90 /* TestflightUIKit */,
-				39A8B0082D6CB194000387A0 /* UniFlow */,
-				39F780062D71E727008FE9D3 /* SimpleDI */,
-				39F780082D71E72C008FE9D3 /* QRReader */,
-				3931EBE32D774E44003190A7 /* ImageLoader */,
-				19C808FD2D7987C800EF62F9 /* JiraViewer */,
-				3931EC5F2D7B1154003190A7 /* VersionsBrowser */,
+				3931EC622D7B2138003190A7 /* CorporateTestflightDomain */,
+				3931EC652D7B216D003190A7 /* VersionsBrowser */,
+				3931EC672D7B216D003190A7 /* VersionsBrowserInterface */,
+				3931EC692D7B2181003190A7 /* TestflightNetworking */,
+				3931EC6B2D7B2181003190A7 /* TestflightUIKit */,
+				3931EC6D2D7B2194003190A7 /* ImageLoader */,
+				3931EC6F2D7B2194003190A7 /* JiraViewer */,
+				3931EC712D7B2194003190A7 /* JiraViewerInterface */,
+				3931EC732D7B2194003190A7 /* QRReader */,
+				3931EC752D7B2194003190A7 /* QRReaderInterface */,
+				3931EC772D7B2194003190A7 /* SimpleDI */,
+				3931EC792D7B2194003190A7 /* UniFlow */,
 			);
 			productName = CorporateTestflightClient;
 			productReference = 39C3BFEB2B10B07A00F5D10D /* CorporateTestflightClient.app */;
@@ -203,6 +212,7 @@
 			);
 			mainGroup = 39C3BFE22B10B07A00F5D10D;
 			packageReferences = (
+				3931EC642D7B216D003190A7 /* XCLocalSwiftPackageReference "../VersionsBrowser" */,
 			);
 			productRefGroup = 39C3BFEC2B10B07A00F5D10D /* Products */;
 			projectDirPath = "";
@@ -498,42 +508,61 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		3931EC642D7B216D003190A7 /* XCLocalSwiftPackageReference "../VersionsBrowser" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../VersionsBrowser;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
-		19C808FD2D7987C800EF62F9 /* JiraViewer */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = JiraViewer;
-		};
-		3931EBE32D774E44003190A7 /* ImageLoader */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = ImageLoader;
-		};
-		3931EC5F2D7B1154003190A7 /* VersionsBrowser */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = VersionsBrowser;
-		};
-		3998F24E2B14EEB200D7CB90 /* TestflightUIKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = TestflightUIKit;
-		};
-		39A8B0082D6CB194000387A0 /* UniFlow */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = UniFlow;
-		};
-		39C3C01F2B10B0F000F5D10D /* TestflightNetworking */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = TestflightNetworking;
-		};
-		39C3C0212B10B0F000F5D10D /* CorporateTestflightDomain */ = {
+		3931EC622D7B2138003190A7 /* CorporateTestflightDomain */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CorporateTestflightDomain;
 		};
-		39F780062D71E727008FE9D3 /* SimpleDI */ = {
+		3931EC652D7B216D003190A7 /* VersionsBrowser */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = VersionsBrowser;
+		};
+		3931EC672D7B216D003190A7 /* VersionsBrowserInterface */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = VersionsBrowserInterface;
+		};
+		3931EC692D7B2181003190A7 /* TestflightNetworking */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TestflightNetworking;
+		};
+		3931EC6B2D7B2181003190A7 /* TestflightUIKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TestflightUIKit;
+		};
+		3931EC6D2D7B2194003190A7 /* ImageLoader */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ImageLoader;
+		};
+		3931EC6F2D7B2194003190A7 /* JiraViewer */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = JiraViewer;
+		};
+		3931EC712D7B2194003190A7 /* JiraViewerInterface */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = JiraViewerInterface;
+		};
+		3931EC732D7B2194003190A7 /* QRReader */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = QRReader;
+		};
+		3931EC752D7B2194003190A7 /* QRReaderInterface */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = QRReaderInterface;
+		};
+		3931EC772D7B2194003190A7 /* SimpleDI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SimpleDI;
 		};
-		39F780082D71E72C008FE9D3 /* QRReader */ = {
+		3931EC792D7B2194003190A7 /* UniFlow */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = QRReader;
+			productName = UniFlow;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

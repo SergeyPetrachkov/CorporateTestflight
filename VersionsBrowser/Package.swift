@@ -31,7 +31,8 @@ let package = Package(
 		.package(name: "SimpleDI", path: "../SimpleDI"),
 		.package(name: "CorporateTestflightShared", path: "../CorporateTestflightShared"),
 		.package(name: "CorporateTestflightClientCore", path: "../CorporateTestflightClientCore"),
-		.package(name: "JiraViewer", path: "../JiraViewer")
+		.package(name: "JiraViewer", path: "../JiraViewer"),
+		.package(name: "MockFunc", path: "../MockFunc")
 	],
 	targets: [
 		.target(
@@ -57,7 +58,12 @@ let package = Package(
 		),
 		.testTarget(
 			name: "\(moduleName)Tests",
-			dependencies: []
+			dependencies: [
+				"VersionsBrowser",
+				"VersionsBrowserInterface",
+				"MockFunc",
+				domainDependency
+			]
 		),
 	]
 )

@@ -159,4 +159,30 @@ struct ConservativeImageCacheTests {
 			// helaas pindakaas. Testing + availble + macros don't work together
 		}
 	}
+
+	@Test
+	func threadSafety() async throws {
+		if #available(iOS 18.0, *) {
+			// Given
+			let env = Environment()
+			await env.apiService.getResourceMock.returns(env.expectedImage.pngData()!)
+			let sut = env.makeSUT()
+
+
+			await withTaskGroup(of: Void.self) { group in
+				for i in 0..<100 {
+					group.addTask {
+						let url = URL(string: "https://example.com/image.jpg")!
+						_ = try? await sut.load(url: url)
+					}
+				}
+
+				for await _ in group {}
+			}
+			let callsCount = await env.apiService.getResourceMock.count
+			#expect(callsCount == 1)
+		} else {
+			// helaas pindakaas. Testing + availble + macros don't work together
+		}
+	}
 }

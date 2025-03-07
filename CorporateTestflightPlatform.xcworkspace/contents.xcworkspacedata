@@ -2,26 +2,40 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:VersionsBrowser">
+      location = "group:Readme.md">
    </FileRef>
-   <FileRef
-      location = "group:JiraViewer">
-   </FileRef>
-   <FileRef
-      location = "group:QRReader">
-   </FileRef>
-   <FileRef
-      location = "group:MockFunc">
-   </FileRef>
-   <FileRef
-      location = "group:ImageLoader">
-   </FileRef>
-   <FileRef
-      location = "group:SimpleDI">
-   </FileRef>
-   <FileRef
-      location = "group:UniFlow">
-   </FileRef>
+   <Group
+      location = "container:"
+      name = "Horizontals">
+      <FileRef
+         location = "group:CorporateTestflightClientCore">
+      </FileRef>
+      <FileRef
+         location = "group:MockFunc">
+      </FileRef>
+      <FileRef
+         location = "group:ImageLoader">
+      </FileRef>
+      <FileRef
+         location = "group:SimpleDI">
+      </FileRef>
+      <FileRef
+         location = "group:UniFlow">
+      </FileRef>
+   </Group>
+   <Group
+      location = "container:"
+      name = "Verticals">
+      <FileRef
+         location = "group:VersionsBrowser">
+      </FileRef>
+      <FileRef
+         location = "group:JiraViewer">
+      </FileRef>
+      <FileRef
+         location = "group:QRReader">
+      </FileRef>
+   </Group>
    <FileRef
       location = "group:CorporateTestflightShared">
    </FileRef>
@@ -29,12 +43,6 @@
       location = "group:CorporateTestflightPlatform/../CorporateTestflightBackend">
    </FileRef>
    <FileRef
-      location = "group:CorporateTestflightClientCore">
-   </FileRef>
-   <FileRef
       location = "group:CorporateTestflightClient/CorporateTestflightClient.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:Readme.md">
    </FileRef>
 </Workspace>

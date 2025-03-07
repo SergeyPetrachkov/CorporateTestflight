@@ -6,8 +6,7 @@ The purpose of this repo is not to create a system, but to serve a sample projec
 
 * macOS
 * admin access
-* Homebrew
-* Xcode 15.3
+* Xcode 16.2
 
 ## How to use the repo
 

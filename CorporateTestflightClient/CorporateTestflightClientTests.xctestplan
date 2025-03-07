@@ -9,22 +9,28 @@
     }
   ],
   "defaultOptions" : {
-    "codeCoverage" : {
-      "targets" : [
-        {
-          "containerPath" : "container:CorporateTestflightClient.xcodeproj",
-          "identifier" : "39C3BFEA2B10B07A00F5D10D",
-          "name" : "CorporateTestflightClient"
-        }
-      ]
-    }
+
   },
   "testTargets" : [
     {
       "target" : {
-        "containerPath" : "container:CorporateTestflightClient.xcodeproj",
-        "identifier" : "39C3C0002B10B07C00F5D10D",
-        "name" : "CorporateTestflightClientTests"
+        "containerPath" : "container:..\/MockFunc",
+        "identifier" : "MockFuncTests",
+        "name" : "MockFuncTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:..\/SimpleDI",
+        "identifier" : "SimpleDITests",
+        "name" : "SimpleDITests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:..\/ImageLoader",
+        "identifier" : "ImageLoaderTests",
+        "name" : "ImageLoaderTests"
       }
     }
   ],

@@ -114,5 +114,27 @@ struct ImageLoaderTests {
 		_ = try await sut.load(url: firstURL)
 		#expect(await env.apiService.getResourceMock.count == 5)
 	}
+
+	@Test
+	func threadSafety() async throws {
+		// Given
+		let env = Environment()
+		await env.apiService.getResourceMock.returns(env.expectedImage.pngData()!)
+		let sut = env.makeSUT()
+
+
+		await withTaskGroup(of: Void.self) { group in
+			for i in 0..<100 {
+				group.addTask {
+					let url = URL(string: "https://example.com/image\(i/2).jpg")!
+					_ = try? await sut.load(url: url)
+				}
+			}
+
+			for await _ in group {}
+		}
+		let callsCount = await env.apiService.getResourceMock.count
+		#expect(callsCount == 50)
+	}
 }
 
