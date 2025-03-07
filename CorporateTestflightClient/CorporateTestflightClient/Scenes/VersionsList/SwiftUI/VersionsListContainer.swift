@@ -4,22 +4,19 @@ import TestflightUIKit
 
 struct VersionsListContainer: View {
 
-	@StateObject private var store: VersionsListStore
+	@ObservedObject private var store: VersionsListStore
 
 	init(store: VersionsListStore) {
-		self._store = StateObject(wrappedValue: store)
+		self.store = store
 	}
 
 	var body: some View {
 		contentView
-			.task {
-				await store.send(.start)
-			}
 	}
 
 	@ViewBuilder
 	private var contentView: some View {
-		switch store.state {
+		switch store.state.contentState {
 		case .loading:
 			skeleton
 				.navigationBarTitleDisplayMode(.inline)
@@ -31,10 +28,25 @@ struct VersionsListContainer: View {
 						}
 					}
 				}
+				.task {
+					await store.send(.start)
+				}
 		case .loaded(let content):
 			VersionsList(state: content.versions) { tappedItem in
 				Task {
 					await store.send(.tapItem(tappedItem))
+				}
+			}
+			.searchable(text: $store.state.seachTerm, prompt: "Jira keys or release notes")
+			.onSubmit(of: .search) {
+				Task {
+					await store.send(.search)
+				}
+			}
+			.onChange(of: store.state.seachTerm) {
+				Task {
+					try await Task.sleep(for: .milliseconds(300))
+					await store.send(.debouncedSearch)
 				}
 			}
 			.refreshable {
@@ -74,8 +86,6 @@ struct VersionsListContainer: View {
 					}
 				}
 			}
-		case .initial:
-			skeleton
 		}
 	}
 

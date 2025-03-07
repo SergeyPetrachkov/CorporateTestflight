@@ -2,39 +2,36 @@ import UIKit
 import SwiftUI
 import CorporateTestflightDomain
 import JiraViewerInterface
+import SimpleDI
+import UniFlow
 
 struct VersionsListFlowParameters {
 	let projectId: Int
 	let rootViewController: UINavigationController
-	let dependenciesContainer: DependencyContaining
+	let resolver: Resolver
 }
 
 enum VersionsListOutput {
 	case qrRequested
-	case ticketDetailsRequested(Ticket)
 }
 
 @MainActor
-final class VersionsListCoordinator {
+final class VersionsListCoordinator: SyncFlowEngine {
 
-	private let rootViewController: UINavigationController
-	private let dependenciesContainer: DependencyContaining
-	private let projectId: Int
+	private let input: VersionsListFlowParameters
 
 	var output: ((VersionsListOutput) -> Void)?
 
-	init(flowParameters: VersionsListFlowParameters) {
-		self.rootViewController = flowParameters.rootViewController
-		self.dependenciesContainer = flowParameters.dependenciesContainer
-		self.projectId = flowParameters.projectId
+	init(input: VersionsListFlowParameters) {
+		self.input = input
 	}
 
 	func start() {
 		let environment = VersionsListStore.Environment(
-			project: projectId,
+			project: input.projectId,
 			usecase: FetchProjectAndVersionsUsecaseImpl(
-				versionsRepository: dependenciesContainer.versionsRepository,
-				projectsRepository: dependenciesContainer.projectsRepository
+				versionsRepository: input.resolver.resolve(VersionsRepository.self)!,
+				projectsRepository: input.resolver.resolve(ProjectsRepository.self)!
 			),
 			mapper: VersionList.RowMapper(),
 			output: { [weak self] action in
@@ -46,37 +43,19 @@ final class VersionsListCoordinator {
 				}
 			}
 		)
-		let store = VersionsListStore(environment: environment)
+		let store = VersionsListStore(initialState: VersionsListStore.State(), environment: environment)
 		let hostingVC = UIHostingController(rootView: VersionsListContainer(store: store))
-		rootViewController.setViewControllers([hostingVC], animated: true)
-
-//		let versionsVC = VersionsListViewController.build(
-//			projectId: projectId,
-//			versionsRepository: dependenciesContainer.versionsRepository,
-//			projectsRepository: dependenciesContainer.projectsRepository,
-//			output: self
-//		)
-//		rootViewController.setViewControllers([versionsVC], animated: true)
-	}
-}
-
-extension VersionsListCoordinator: VersionsListInteractorOutput {
-
-	func didEmitEvent(_ event: VersionsListEvent) {
-		switch event {
-		case .requestVersionDetails(let version):
-			showVersionDetails(version)
-		}
+		input.rootViewController.setViewControllers([hostingVC], animated: true)
 	}
 
 	private func showVersionDetails(_ version: Version) {
 		let environment = VersionDetails.Environment(
 			version: version,
 			fetchTicketsUsecase: FetchTicketsUseCase(
-				ticketsRepository: dependenciesContainer.ticketsRepository
+				ticketsRepository: input.resolver.resolve(TicketsRepository.self)!
 			),
 			onTickedTapped: { [weak self] ticket in
-				self?.output?(.ticketDetailsRequested(ticket))
+				self?.showJiraTicket(ticket)
 			}
 		)
 		let store = VersionDetailsStore(
@@ -84,6 +63,20 @@ extension VersionsListCoordinator: VersionsListInteractorOutput {
 		)
 		let view = VersionDetailsContainer(store: store)
 		let hostingVC = UIHostingController(rootView: view)
-		rootViewController.pushViewController(hostingVC, animated: true)
+		input.rootViewController.pushViewController(hostingVC, animated: true)
+	}
+
+	private func showJiraTicket(_ ticket: Ticket) {
+		guard let coordinator: any JiraViewerFlowCoordinating = input.resolver.resolve(
+			(any JiraViewerFlowCoordinating).self,
+			argument: JiraViewerFlowInput(
+				ticket: ticket,
+				parentViewController: input.rootViewController,
+				resolver: input.resolver
+			)
+		) else {
+			return
+		}
+		coordinator.start()
 	}
 }

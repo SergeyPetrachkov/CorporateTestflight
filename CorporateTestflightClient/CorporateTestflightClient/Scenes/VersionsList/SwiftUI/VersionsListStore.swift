@@ -10,15 +10,12 @@ final class VersionsListStore: ObservableObject, Store {
 
 	private(set) var environment: VersionList.Environment
 
-	@Published private(set) var state: State {
-		didSet {
-			print("state >> '\(state)'")
-		}
-	}
+	@Published var state: State
 
 	private var versions: [Version] = []
+	private var project: Project?
 
-	init(initialState: State = .initial, environment: Environment) {
+	init(initialState: State, environment: Environment) {
 		self.state = initialState
 		self.environment = environment
 	}
@@ -27,9 +24,6 @@ final class VersionsListStore: ObservableObject, Store {
 		print("'action: \(action)' >> 'state: \(state)'")
 		switch action {
 		case .start:
-			guard case .initial = state else {
-				return // we don't start multiple times
-			}
 			await loadData(enterLoadingState: true)
 		case .refresh(let fromScratch):
 			await loadData(enterLoadingState: fromScratch)
@@ -40,25 +34,45 @@ final class VersionsListStore: ObservableObject, Store {
 			environment.output(.selectedVersion(version))
 		case .tapQR:
 			environment.output(.qrRequested)
+		case .search, .debouncedSearch:
+			guard let project else {
+				return assertionFailure("❌ the contents are not loaded")
+			}
+			let filteredVersions = await filterVersions(searchTerm: state.seachTerm, versions: versions)
+			let mappedContent = await map(project: project, versions: filteredVersions)
+			state.contentState = .loaded(mappedContent)
 		}
+		print("state >> '\(state)'")
 	}
 
 	private func loadData(enterLoadingState: Bool) async {
 		do {
 			if enterLoadingState {
-				state = .loading
+				state.contentState = .loading
 			}
 			let (project, builds) = try await environment.usecase.execute(projectId: environment.project)
 			let mappedContent = await map(project: project, versions: builds)
 			versions = builds
-			state = .loaded(mappedContent)
+			self.project = project
+			state.contentState = .loaded(mappedContent)
 		} catch {
-			state = .failed(error)
+			state.contentState = .failed(.init(localizedDescription: error.localizedDescription))
 		}
 	}
 
 	nonisolated private func map(project: Project, versions: [Version]) async -> VersionList.State.Content {
 		let rows = await environment.mapper.map(versions: versions)
 		return .init(projectTitle: project.name, versions: rows)
+	}
+
+	nonisolated private func filterVersions(searchTerm: String, versions: [Version]) async -> [Version] {
+		guard !searchTerm.isEmpty else {
+			return versions
+		}
+		let lowercasedSearchTerm = searchTerm.lowercased()
+		return versions.filter {
+			$0.associatedTicketKeys.contains { $0.lowercased() == lowercasedSearchTerm }
+			|| ($0.releaseNotes ?? "").contains(lowercasedSearchTerm)
+		}
 	}
 }

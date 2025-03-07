@@ -3,28 +3,44 @@ import Foundation
 
 enum VersionList {
 
-	enum State: CustomDebugStringConvertible {
-		struct Content {
+	struct State: CustomDebugStringConvertible, Equatable {
+
+		struct Content: Equatable {
 			let projectTitle: String
 			let versions: [RowState]
 		}
 
-		case initial
-		case loaded(Content)
-		case failed(Error)
-		case loading
+		struct ErrorState: Equatable {
+			let localizedDescription: String
+		}
+
+		enum ContentState: Equatable {
+			case loading
+			case loaded(Content)
+			case failed(ErrorState)
+		}
+
+		var seachTerm: String = ""
+		var contentState: ContentState
 
 		var debugDescription: String {
-			switch self {
-			case .initial:
-				"initial"
+			switch self.contentState {
 			case .loaded(let content):
-				"loaded: builds_count=\(content.versions.count)"
+				"loaded: builds_count=\(content.versions.count); search_term='\(seachTerm)'"
 			case .failed(let error):
-				"failed: \(error.localizedDescription)"
+				"failed: \(error.localizedDescription); search_term='\(seachTerm)'"
 			case .loading:
-				"loading"
+				"loading; search_term='\(seachTerm)'"
 			}
+		}
+
+		init(seachTerm: String, contentState: ContentState) {
+			self.seachTerm = seachTerm
+			self.contentState = contentState
+		}
+
+		init() {
+			self.init(seachTerm: "", contentState: .loading)
 		}
 	}
 
@@ -33,6 +49,8 @@ enum VersionList {
 		case refresh(fromScratch: Bool)
 		case tapItem(RowState)
 		case tapQR
+		case search
+		case debouncedSearch
 
 		var debugDescription: String {
 			switch self {
@@ -44,6 +62,10 @@ enum VersionList {
 				"tap: row_id=\(rowState.id)"
 			case .tapQR:
 				"tap: qr_code"
+			case .search:
+				"search"
+			case .debouncedSearch:
+				"debounced_search"
 			}
 		}
 	}
@@ -91,61 +113,3 @@ enum VersionList {
 		}
 	}
 }
-
-//enum Reduced<State: Sendable> {
-//	case newState(State)
-//	case effect(Effect)
-//}
-//
-//enum Effect {
-//	case run(@Sendable () async -> Void)
-//	case none
-//}
-
-//	struct Reducer {
-//
-//		let env: Environment
-//
-//		func reduce(state: inout VersionList.State, action: VersionList.Action) async -> Effect {
-//			switch action {
-//			case .start:
-//				guard case let .initial(projectId) = state else {
-//					return .none // start can only be triggered once, huh?
-//				}
-//
-//				do {
-//					let (project, builds) = try await env.usecase.execute(projectId: projectId)
-//					state = .loaded(.init(project: project, versions: builds))
-//				} catch {
-//					state = .failed(error)
-//				}
-//
-//				return .none
-//			case .tapItem:
-//				return .none
-//			}
-//		}
-//	}
-
-//struct Reducer {
-//
-//	let env: Environment
-//
-//	func reduce(state: VersionList.State, action: VersionList.Action) async -> Reduced<VersionList.State> {
-//		switch action {
-//		case .start:
-//			guard case let .initial(projectId) = state else {
-//				return .effect(.none) // start can only be triggered once, huh?
-//			}
-//
-//			do {
-//				let (project, builds) = try await env.usecase.execute(projectId: projectId)
-//				return .newState(.loaded(.init(project: project, versions: builds)))
-//			} catch {
-//				return .newState(.failed(error))
-//			}
-//		case .tapItem:
-//			return .effect(.none)
-//		}
-//	}
-//}
