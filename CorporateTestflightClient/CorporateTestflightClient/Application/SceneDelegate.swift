@@ -2,6 +2,7 @@ import UIKit
 import SimpleDI
 import QRReader
 import JiraViewer
+import VersionsBrowser
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -24,6 +25,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		let container = Container()
 		let assemblies: [Assembly] = [
 			AppAssembly(),
+			VersionsBrowserAssembly(),
 			QRReaderAssembly(),
 			JiraViewerAssembly()
 		]

@@ -3,9 +3,7 @@ import SimpleDI
 import UniFlow
 import UIKit
 
-public protocol JiraViewerFlowCoordinating: SyncFlowEngine {
-	func start()
-}
+public protocol JiraViewerFlowCoordinating: SyncFlowEngine { }
 
 public struct JiraViewerFlowInput {
 	public let ticket: Ticket

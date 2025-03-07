@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:VersionsBrowser">
+   </FileRef>
+   <FileRef
       location = "group:JiraViewer">
    </FileRef>
    <FileRef

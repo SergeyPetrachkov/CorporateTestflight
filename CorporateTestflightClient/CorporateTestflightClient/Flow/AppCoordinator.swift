@@ -6,6 +6,7 @@ import SwiftUI
 import CorporateTestflightDomain
 import TestflightNetworking
 import JiraViewerInterface
+import VersionsBrowserInterface
 
 @MainActor
 final class AppCoordinator {
@@ -13,7 +14,7 @@ final class AppCoordinator {
 	private let rootNavigationController: UINavigationController
 	private let resolver: Resolver
 
-	private var childCoordinator: VersionsListCoordinator?
+	private var childCoordinator: (any VersionsBrowserCoordinator)?
 
 	init(rootNavigationController: UINavigationController, resolver: Resolver) {
 		self.rootNavigationController = rootNavigationController
@@ -21,13 +22,10 @@ final class AppCoordinator {
 	}
 
 	func start() {
-		let versionsListCoordinator = VersionsListCoordinator(
-			input: .init(
-				projectId: 1,
-				rootViewController: rootNavigationController,
-				resolver: resolver
-			)
-		)
+		let input = VersionsBrowserFlowInput(projectId: 1, parentViewController: rootNavigationController, resolver: resolver)
+		guard var versionsListCoordinator = resolver.resolve((any VersionsBrowserCoordinator).self, argument: input) else {
+			return
+		}
 		versionsListCoordinator.output = { [weak self] argument in
 			guard let self else { return }
 			switch argument {

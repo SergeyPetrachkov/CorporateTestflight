@@ -4,25 +4,15 @@ import CorporateTestflightDomain
 import JiraViewerInterface
 import SimpleDI
 import UniFlow
+import VersionsBrowserInterface
 
-struct VersionsListFlowParameters {
-	let projectId: Int
-	let rootViewController: UINavigationController
-	let resolver: Resolver
-}
+final class VersionsListCoordinator: VersionsBrowserCoordinator {
 
-enum VersionsListOutput {
-	case qrRequested
-}
+	private let input: VersionsBrowserFlowInput
 
-@MainActor
-final class VersionsListCoordinator: SyncFlowEngine {
+	var output: ((VersionsBrowserOutput) -> Void)?
 
-	private let input: VersionsListFlowParameters
-
-	var output: ((VersionsListOutput) -> Void)?
-
-	init(input: VersionsListFlowParameters) {
+	init(input: VersionsBrowserFlowInput) {
 		self.input = input
 	}
 
@@ -45,7 +35,7 @@ final class VersionsListCoordinator: SyncFlowEngine {
 		)
 		let store = VersionsListStore(initialState: VersionsListStore.State(), environment: environment)
 		let hostingVC = UIHostingController(rootView: VersionsListContainer(store: store))
-		input.rootViewController.setViewControllers([hostingVC], animated: true)
+		input.parentViewController.setViewControllers([hostingVC], animated: true)
 	}
 
 	private func showVersionDetails(_ version: Version) {
@@ -63,7 +53,7 @@ final class VersionsListCoordinator: SyncFlowEngine {
 		)
 		let view = VersionDetailsContainer(store: store)
 		let hostingVC = UIHostingController(rootView: view)
-		input.rootViewController.pushViewController(hostingVC, animated: true)
+		input.parentViewController.pushViewController(hostingVC, animated: true)
 	}
 
 	private func showJiraTicket(_ ticket: Ticket) {
@@ -71,7 +61,7 @@ final class VersionsListCoordinator: SyncFlowEngine {
 			(any JiraViewerFlowCoordinating).self,
 			argument: JiraViewerFlowInput(
 				ticket: ticket,
-				parentViewController: input.rootViewController,
+				parentViewController: input.parentViewController,
 				resolver: input.resolver
 			)
 		) else {
