@@ -2,9 +2,7 @@ import AVFoundation
 import UniFlow
 import UIKit
 
-public protocol QRReaderFlowCoordinating: SyncFlowEngine {
-
-}
+public protocol QRReaderFlowCoordinating: FlowEngine { }
 
 public struct QRReaderFlowInput {
 
@@ -15,4 +13,9 @@ public struct QRReaderFlowInput {
 		self.session = session
 		self.parentViewController = parentViewController
 	}
+}
+
+public enum QRReaderFlowResult: Sendable {
+	case cancelled
+	case codeRetrieved(String)
 }

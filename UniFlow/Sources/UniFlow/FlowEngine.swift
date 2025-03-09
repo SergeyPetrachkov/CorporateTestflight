@@ -1,6 +1,6 @@
 @available(iOS 13.0.0, *)
 @MainActor
-public protocol FlowEngine {
+public protocol FlowEngine: AnyObject {
 	associatedtype Input
 	associatedtype Output
 

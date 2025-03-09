@@ -38,12 +38,20 @@ final class AppCoordinator {
 	}
 
 	private func showQRReader() {
+		let input = QRReaderFlowInput(
+			session: AVCaptureSession(),
+			parentViewController: rootNavigationController
+		)
+
 		guard let coordinator: any QRReaderFlowCoordinating = resolver.resolve(
 			(any QRReaderFlowCoordinating).self,
-			argument: QRReaderFlowInput(session: AVCaptureSession(), parentViewController: rootNavigationController)
+			argument: input
 		) else {
 			return
 		}
-		coordinator.start()
+		Task {
+			let result = await coordinator.start()
+			print(result)
+		}
 	}
 }

@@ -1,53 +1,70 @@
-import AVFoundation
 import SwiftUI
-import UIKit
 
 @available(iOS 16.0, *)
-public struct QRReaderView: View {
+struct QRReaderView: View {
 	@StateObject private var store: QRReaderStore
 
 	init(store: QRReaderStore) {
 		self._store = .init(wrappedValue: store)
 	}
 
-	public var body: some View {
+	var body: some View {
+		NavigationView {
+			contentView
+				.task {
+					await store.send(.start)
+				}
+				.navigationTitle("QR Scanner")
+				.navigationBarTitleDisplayMode(.inline)
+				.toolbar {
+					ToolbarItemGroup(placement: .primaryAction) {
+						Button("Close") {
+							Task {
+								await store.send(.stop)
+							}
+						}
+					}
+				}
+		}
+	}
+
+	private var contentView: some View {
 #if targetEnvironment(simulator)
-		Text("QR Code scanning is not supported in the simulator.")
+		ZStack {
+			Image(uiImage: generateImage())
+				.interpolation(.none)
+				.resizable()
+				.scaledToFit()
+				.frame(width: 200, height: 200)
+			overlayView
+		}
 #else
 		ScannerView(captureSession: store.state.session)
+			.overlay(overlayView)
+#endif
+	}
+
+	private var overlayView: some View {
+		ScannerOverlayView()
 			.overlay {
 				if let scannedCode = store.state.scannedCode {
 					VStack {
 						Spacer()
-						Text("Scanned QR Code: \(scannedCode)")
+						Text("Open '\(scannedCode)'")
 							.padding()
 							.background(Color.white)
 							.cornerRadius(10)
 							.padding()
+					}
+					.onTapGesture {
+						Task {
+							await store.send(.tapScannedContent(scannedCode))
+						}
 					}
 				}
 			}
 			.task {
 				await store.send(.start)
 			}
-#endif
 	}
-}
-
-struct ScannerView: UIViewControllerRepresentable {
-
-	let captureSession: AVCaptureSession
-
-	func makeUIViewController(context: Context) -> UIViewController {
-		let viewController = UIViewController()
-
-		let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-		previewLayer.frame = viewController.view.bounds
-		previewLayer.videoGravity = .resizeAspectFill
-		viewController.view.layer.addSublayer(previewLayer)
-
-		return viewController
-	}
-
-	func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
 }

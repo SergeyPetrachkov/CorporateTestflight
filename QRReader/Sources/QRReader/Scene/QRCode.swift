@@ -1,17 +1,16 @@
 import AVFoundation
+import QRReaderInterface
 
 enum QRCode {
 	enum Action {
 		case start
 		case stop
+		case tapScannedContent(String)
 	}
 
 	struct Environment {
 		let qrListener: QRCodeCaptureListener
-
-		public init(qrListener: QRCodeCaptureListener) {
-			self.qrListener = qrListener
-		}
+		let output: (QRReaderFlowResult) -> Void
 	}
 
 	struct State {
