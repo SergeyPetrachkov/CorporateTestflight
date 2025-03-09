@@ -51,7 +51,24 @@ final class AppCoordinator {
 		}
 		Task {
 			let result = await coordinator.start()
-			print(result)
+			switch result {
+			case .codeRetrieved(let code):
+				do {
+					let parseResult = try QRCodeParser.parse(code)
+					switch parseResult {
+					case .ticket(let ticketKey):
+						print("Scanned ticket: \(ticketKey)")
+					case .version(let versionId):
+						print("Scanned version: \(versionId)")
+					case .invalid:
+						print("Invalid QR code format")
+					}
+				} catch {
+					print("Failed to parse QR code: \(error.localizedDescription)")
+				}
+			case .cancelled:
+				break
+			}
 		}
 	}
 }

@@ -2,7 +2,7 @@ import AVFoundation
 import UniFlow
 import UIKit
 
-public protocol QRReaderFlowCoordinating: FlowEngine { }
+public protocol QRReaderFlowCoordinating: FlowEngine where Output == QRReaderFlowResult { }
 
 public struct QRReaderFlowInput {
 
