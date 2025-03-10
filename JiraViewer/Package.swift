@@ -10,6 +10,7 @@ let swiftSettings = [SwiftSetting.swiftLanguageMode(.v6)]
 let uniFlowDependency = Target.Dependency.product(name: "UniFlow", package: "UniFlow")
 let simpleDIDependency = Target.Dependency.product(name: "SimpleDI", package: "SimpleDI")
 let domainDependency = Target.Dependency.product(name: "CorporateTestflightDomain", package: "CorporateTestflightShared")
+let foundationDependency = Target.Dependency.product(name: "TestflightFoundation", package: "CorporateTestflightCore")
 let imageLoaderDependency = Target.Dependency.product(name: "ImageLoader", package: "ImageLoader")
 
 let package = Package(
@@ -48,7 +49,8 @@ let package = Package(
 				uniFlowDependency,
 				simpleDIDependency,
 				domainDependency,
-				imageLoaderDependency
+				imageLoaderDependency,
+				foundationDependency
 			],
 			swiftSettings: swiftSettings
 		),

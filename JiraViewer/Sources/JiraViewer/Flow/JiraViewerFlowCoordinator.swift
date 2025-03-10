@@ -16,6 +16,7 @@ final class JiraViewerFlowCoordinator: JiraViewerFlowCoordinating {
 	func start() {
 		let env = JiraViewer.Environment(
 			attachmentLoader: LoadAttachmentsUsecaseImpl(imageLoader: input.resolver.resolve(ImageLoader.self)!),
+			ticketsRepository: input.resolver.resolve(TicketsRepository.self)!,
 			ticket: input.ticket
 		)
 		let store = JiraViewerStore(initialState: .init(ticket: input.ticket), environment: env)

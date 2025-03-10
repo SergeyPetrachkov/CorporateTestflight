@@ -10,12 +10,8 @@ enum JiraViewer {
 
 	struct Environment {
 		let attachmentLoader: LoadAttachmentsUsecase
-		let ticket: Ticket
-
-		init(attachmentLoader: LoadAttachmentsUsecase, ticket: Ticket) {
-			self.attachmentLoader = attachmentLoader
-			self.ticket = ticket
-		}
+		let ticketsRepository: TicketsRepository
+		var ticket: Ticket
 	}
 
 	struct TicketHeaderState {

@@ -7,6 +7,8 @@ import CorporateTestflightDomain
 import TestflightNetworking
 import JiraViewerInterface
 import VersionsBrowserInterface
+import Foundation
+import TestflightFoundation
 
 @MainActor
 final class AppCoordinator {
@@ -57,18 +59,45 @@ final class AppCoordinator {
 					let parseResult = try QRCodeParser.parse(code)
 					switch parseResult {
 					case .ticket(let ticketKey):
-						print("Scanned ticket: \(ticketKey)")
+						showTicket(key: ticketKey)
 					case .version(let versionId):
-						print("Scanned version: \(versionId)")
+						showAlert(message: "Scanned version: \(versionId)")
 					case .invalid:
-						print("Invalid QR code format")
+						showAlert(message: "Invalid QR code format")
 					}
 				} catch {
-					print("Failed to parse QR code: \(error.localizedDescription)")
+					showAlert(message: "Failed to parse QR code: \(error.localizedDescription)")
 				}
 			case .cancelled:
 				break
 			}
 		}
+	}
+
+	private func showTicket(key: String) {
+		guard let coordinator: any JiraViewerFlowCoordinating = resolver.resolve(
+			(any JiraViewerFlowCoordinating).self,
+			argument: JiraViewerFlowInput(
+				ticket: Ticket(key: key),
+				parentViewController: rootNavigationController,
+				resolver: resolver
+			)
+		) else {
+			return
+		}
+		coordinator.start()
+	}
+
+	private func showAlert(message: String) {
+		let alertVC = UIAlertController(title: "Oops!", message: message, preferredStyle: .alert)
+		let okAction = UIAlertAction(title: "OK", style: .default)
+		alertVC.addAction(okAction)
+		rootNavigationController.present(alertVC, animated: true)
+	}
+}
+
+private extension Ticket {
+	init(key: String) {
+		self.init(id: UUID.zero, key: key, title: "", description: "")
 	}
 }
