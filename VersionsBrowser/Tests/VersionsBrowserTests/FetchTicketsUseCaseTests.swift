@@ -22,7 +22,6 @@ struct FetchTicketsUseCaseTests {
 		arguments: [[], ["Key1"], ["Key2", "Key3"]]
 	)
 	func fetchTicketsHappyPath(tickets: [String]) async throws {
-		print("Testing \(tickets)")
 		let version = Version(id: Version.ID(), buildNumber: 1, associatedTicketKeys: tickets)
 		await ticketsRepository.getTicketMock.returns(Ticket(id: Ticket.ID(), key: "Fake", title: "", description: ""))
 		let sut = makeSUT()

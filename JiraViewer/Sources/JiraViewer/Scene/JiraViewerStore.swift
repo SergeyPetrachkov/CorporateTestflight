@@ -18,12 +18,12 @@ final class JiraViewerStore: Store, ObservableObject {
 		self.state = initialState
 	}
 
-	deinit {
-		print("❌ deinit \(self)")
-	}
+//	deinit {
+//		print("❌ deinit \(self)")
+//	}
 
 	func send(_ action: Action) async {
-		print("'action: \(action)' >> 'state: \(state)'")
+//		print("'action: \(action)' >> 'state: \(state)'")
 		switch action {
 		case .start, .refresh:
 			state.footer = .loading
@@ -56,7 +56,7 @@ final class JiraViewerStore: Store, ObservableObject {
 				state.footer = .failed(.init(description: error.localizedDescription))
 			}
 		}
-		print("state >> '\(state)'")
+//		print("state >> '\(state)'")
 	}
 
 	private func isTicketValid(ticket: Ticket) -> Bool {

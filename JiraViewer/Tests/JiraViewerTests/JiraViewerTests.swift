@@ -44,9 +44,10 @@ struct JiraViewerStoreTests {
 		let sut = env.makeSUT(ticket: ticket)
 
 		await sut.send(.start)
+		let resultedState = sut.state
 
 		#expect(
-			sut.state == JiraViewer.State(
+			resultedState == JiraViewer.State(
 				header: JiraViewer.TicketHeaderState(
 					title: ticket.title,
 					key: ticket.key,
@@ -83,9 +84,10 @@ struct JiraViewerStoreTests {
 		let sut = env.makeSUT(ticket: ticket)
 
 		await sut.send(.start)
+		let resultedState = sut.state
 
 		#expect(
-			sut.state == JiraViewer.State(
+			resultedState == JiraViewer.State(
 				header: JiraViewer.TicketHeaderState(
 					title: ticket.title,
 					key: ticket.key,
@@ -128,9 +130,10 @@ struct JiraViewerStoreTests {
 		let sut = env.makeSUT(ticket: initialTicket)
 
 		await sut.send(action)
+		let resultedState = sut.state
 
 		#expect(
-			sut.state == JiraViewer.State(
+			resultedState == JiraViewer.State(
 				header: JiraViewer.TicketHeaderState(
 					title: expectedTicket.title,
 					key: expectedTicket.key,
@@ -166,9 +169,10 @@ struct JiraViewerStoreTests {
 		let sut = env.makeSUT(ticket: expectedTicket)
 
 		await sut.send(.start)
+		let resultedState = sut.state
 
 		#expect(
-			sut.state == JiraViewer.State(
+			resultedState == JiraViewer.State(
 				header: JiraViewer.TicketHeaderState(
 					title: expectedTicket.title,
 					key: expectedTicket.key,
