@@ -10,6 +10,10 @@ let package = Package(
 			name: "ImageLoader",
 			targets: ["ImageLoader"]
 		),
+		.library(
+			name: "ImageLoaderMock",
+			targets: ["ImageLoaderMock"]
+		)
 	],
 	dependencies: [
 		.package(name: "CorporateTestflightClientCore", path: "../CorporateTestflightClientCore"),
@@ -20,6 +24,14 @@ let package = Package(
 			name: "ImageLoader",
 			dependencies: [
 				.product(name: "TestflightNetworking", package: "CorporateTestflightClientCore")
+			],
+			swiftSettings: [.swiftLanguageMode(.v6)]
+		),
+		.target(
+			name: "ImageLoaderMock",
+			dependencies: [
+				"ImageLoader",
+				"MockFunc"
 			],
 			swiftSettings: [.swiftLanguageMode(.v6)]
 		),

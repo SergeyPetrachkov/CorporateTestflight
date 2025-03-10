@@ -31,7 +31,11 @@ final class JiraViewerStore: Store, ObservableObject {
 				if !isTicketValid(ticket: environment.ticket) {
 					let fullTicket = try await environment.ticketsRepository.getTicket(key: environment.ticket.key)
 					environment.ticket = fullTicket
-					state.header = .init(title: fullTicket.title, key: fullTicket.key, description: fullTicket.description)
+					state.header = JiraViewer.TicketHeaderState(
+						title: fullTicket.title,
+						key: fullTicket.key,
+						description: fullTicket.description
+					)
 				}
 				if let attachmentsToLoad = environment.ticket.attachments {
 					let attachments = try await environment.attachmentLoader.execute(attachments: attachmentsToLoad)

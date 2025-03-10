@@ -14,26 +14,30 @@ enum JiraViewer {
 		var ticket: Ticket
 	}
 
-	struct TicketHeaderState {
+	struct TicketHeaderState: Equatable {
 		let title: String
 		let key: String
 		let description: String?
 	}
 
-	struct LoadedImage: Identifiable {
+	struct LoadedImage: Identifiable, Equatable, CustomDebugStringConvertible {
 		let resourceURL: URL
 		let image: LoadableImage
 
 		var id: URL {
 			resourceURL
 		}
+
+		var debugDescription: String {
+			id.absoluteString
+		}
 	}
 
-	struct TicketAttachmentsState {
+	struct TicketAttachmentsState: Equatable {
 		let images: [LoadedImage]
 	}
 
-	struct ErrorState {
+	struct ErrorState: Equatable {
 		let description: String
 	}
 
@@ -42,9 +46,9 @@ enum JiraViewer {
 		let footer: TicketAttachmentsState
 	}
 
-	struct State: CustomDebugStringConvertible {
+	struct State: CustomDebugStringConvertible, Equatable {
 
-		enum LoadableFooterState {
+		enum LoadableFooterState: Equatable {
 			case loading
 			case loaded(TicketAttachmentsState)
 			case failed(ErrorState)
@@ -56,8 +60,8 @@ enum JiraViewer {
 			switch footer {
 			case .loading:
 				"\(header.key):loading"
-			case .loaded:
-				"\(header.key):loaded"
+			case .loaded(let state):
+				"\(header.key):loaded,attachments:\(state.images)"
 			case .failed:
 				"\(header.key):failed"
 			}
