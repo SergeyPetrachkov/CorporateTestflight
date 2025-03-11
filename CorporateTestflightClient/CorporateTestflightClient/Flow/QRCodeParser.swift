@@ -10,14 +10,11 @@ enum QRCodeParseResult: Equatable {
 enum QRCodeParser {
 	enum ParsingError: LocalizedError {
 		case invalidFormat
-		case missingValue
 
 		public var errorDescription: String? {
 			switch self {
 			case .invalidFormat:
 				return "QR code format is invalid"
-			case .missingValue:
-				return "QR code is missing a value"
 			}
 		}
 	}
@@ -30,10 +27,6 @@ enum QRCodeParser {
 
 		let type = components[0]
 		let value = String(components[1])
-
-		guard !value.isEmpty else {
-			throw ParsingError.missingValue
-		}
 
 		switch type {
 		case "ticket":

@@ -6,7 +6,7 @@ import CoreImage.CIFilterBuiltins
 func generateImage() -> UIImage {
 	let context = CIContext()
 	let filter = CIFilter.qrCodeGenerator()
-	filter.message = "ticket:JIRA-4".data(using: .utf8)!
+	filter.message = "ticket:JIRA-1".data(using: .utf8)!
 
 	if let outputImage = filter.outputImage {
 		if let cgImage = context.createCGImage(outputImage, from: outputImage.extent) {

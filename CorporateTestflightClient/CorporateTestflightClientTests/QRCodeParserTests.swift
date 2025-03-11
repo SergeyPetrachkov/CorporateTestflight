@@ -38,12 +38,4 @@ final class QRCodeParserTests: XCTestCase {
 			XCTAssertEqual(error as? QRCodeParser.ParsingError, .invalidFormat)
 		}
 	}
-
-	func testMissingValue() {
-		let code = "ticket:"
-		XCTAssertThrowsError(try QRCodeParser.parse(code)) { error in
-			XCTAssertEqual(error as? QRCodeParser.ParsingError, .missingValue)
-		}
-	}
 }
-

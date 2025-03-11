@@ -4,8 +4,6 @@ public protocol FlowEngine: AnyObject {
 	associatedtype Input
 	associatedtype Output
 
-	init(input: Input)
-
 	func start() async -> Output
 }
 
@@ -15,7 +13,7 @@ public protocol FlowEngine: AnyObject {
 public protocol SyncFlowEngine {
 	associatedtype Input
 
-	init(input: Input)
+//	init(input: Input)
 
 	func start()
 }

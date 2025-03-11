@@ -24,15 +24,10 @@ final class QRReaderStore: Store, ObservableObject {
 		print("'action: \(action)' >> 'state: \(state)'")
 		switch action {
 		case .start:
-#if targetEnvironment(simulator)
-			state.scannedCode = "ticket:JIRA-4"
-#else
 			for await code in environment.qrListener.startStream().removeDuplicates() {
-				print("code: \(code)")
 				AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
 				state.scannedCode = code
 			}
-#endif
 		case .stop:
 			environment.qrListener.stop()
 			environment.output(.cancelled)
@@ -41,3 +36,4 @@ final class QRReaderStore: Store, ObservableObject {
 		}
 	}
 }
+

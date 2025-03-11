@@ -1,4 +1,3 @@
-import AVFoundation
 import UIKit
 import QRReaderInterface
 import SimpleDI
@@ -41,7 +40,6 @@ final class AppCoordinator {
 
 	private func showQRReader() {
 		let input = QRReaderFlowInput(
-			session: AVCaptureSession(),
 			parentViewController: rootNavigationController
 		)
 

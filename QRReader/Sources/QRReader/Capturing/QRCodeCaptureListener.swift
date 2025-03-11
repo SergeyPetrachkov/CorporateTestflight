@@ -1,7 +1,30 @@
 import AVFoundation
 import Foundation
 
-final class QRCodeCaptureListener: NSObject, AVCaptureMetadataOutputObjectsDelegate, @unchecked Sendable {
+protocol QRCodeCaptureListening: AnyObject {
+	func start()
+
+	func stop()
+
+	func startStream() -> AsyncStream<String>
+}
+
+#if targetEnvironment(simulator)
+final class QRCodeCaptureSimulatorListener: QRCodeCaptureListening {
+	func start() {}
+
+	func stop() {}
+
+	func startStream() -> AsyncStream<String> {
+		AsyncStream { continuation in
+			continuation.yield("ticket:JIRA-1")
+			continuation.finish()
+		}
+	}
+}
+#endif
+
+final class QRCodeCaptureListener: NSObject, QRCodeCaptureListening, AVCaptureMetadataOutputObjectsDelegate, @unchecked Sendable {
 
 	let session: AVCaptureSession
 	let sessionConfigurator: CaptureSessionConfigurator

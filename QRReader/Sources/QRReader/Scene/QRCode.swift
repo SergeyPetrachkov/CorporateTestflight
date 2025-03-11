@@ -9,7 +9,7 @@ enum QRCode {
 	}
 
 	struct Environment {
-		let qrListener: QRCodeCaptureListener
+		let qrListener: QRCodeCaptureListening
 		let output: (QRReaderFlowResult) -> Void
 	}
 

@@ -164,7 +164,11 @@ struct JiraViewerStoreTests {
 			description: "Description1",
 			attachments: ["meme.jpg"]
 		)
-		let expectedError = NSError(domain: "image-loader-error-domain", code: -1, userInfo: [NSLocalizedDescriptionKey: "Fake error"])
+		let expectedError = NSError(
+			domain: "image-loader-error-domain",
+			code: -1,
+			userInfo: [NSLocalizedDescriptionKey: "Fake error"]
+		)
 		await env.imageLoaderMock.loadMock.throws(expectedError)
 		let sut = env.makeSUT(ticket: expectedTicket)
 

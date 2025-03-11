@@ -14,6 +14,13 @@
   "testTargets" : [
     {
       "target" : {
+        "containerPath" : "container:..\/JiraViewer",
+        "identifier" : "JiraViewerTests",
+        "name" : "JiraViewerTests"
+      }
+    },
+    {
+      "target" : {
         "containerPath" : "container:..\/MockFunc",
         "identifier" : "MockFuncTests",
         "name" : "MockFuncTests"
@@ -31,6 +38,13 @@
         "containerPath" : "container:..\/ImageLoader",
         "identifier" : "ImageLoaderTests",
         "name" : "ImageLoaderTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:CorporateTestflightClient.xcodeproj",
+        "identifier" : "39C3C0002B10B07C00F5D10D",
+        "name" : "CorporateTestflightClientTests"
       }
     }
   ],

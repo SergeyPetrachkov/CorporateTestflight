@@ -2,10 +2,11 @@ import SwiftUI
 
 @available(iOS 16.0, *)
 struct QRReaderView: View {
-	@StateObject private var store: QRReaderStore
+
+	@ObservedObject private var store: QRReaderStore
 
 	init(store: QRReaderStore) {
-		self._store = .init(wrappedValue: store)
+		self.store = store
 	}
 
 	var body: some View {
@@ -62,9 +63,6 @@ struct QRReaderView: View {
 						}
 					}
 				}
-			}
-			.task {
-				await store.send(.start)
 			}
 	}
 }

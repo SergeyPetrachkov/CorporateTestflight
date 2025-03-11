@@ -26,6 +26,7 @@ let package = Package(
 	dependencies: [
 		.package(name: "UniFlow", path: "../UniFlow"),
 		.package(name: "SimpleDI", path: "../SimpleDI"),
+		.package(name: "MockFunc", path: "../MockFunc"),
 		.package(url: "https://github.com/apple/swift-async-algorithms", branch: "main")
 	],
 	targets: [
@@ -48,7 +49,12 @@ let package = Package(
 		),
 		.testTarget(
 			name: "QRReaderTests",
-			dependencies: ["QRReader"]
+			dependencies: [
+				"QRReader",
+				"QRReaderInterface",
+				"MockFunc",
+				"SimpleDI"
+			]
 		),
 	]
 )

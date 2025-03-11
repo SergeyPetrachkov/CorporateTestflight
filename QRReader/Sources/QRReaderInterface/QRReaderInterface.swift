@@ -1,21 +1,22 @@
-import AVFoundation
 import UniFlow
 import UIKit
 
-public protocol QRReaderFlowCoordinating: FlowEngine where Output == QRReaderFlowResult { }
+public protocol QRReaderFlowCoordinating: SyncFlowEngine where Input == QRReaderFlowInput {
+
+	var output: ((QRReaderFlowResult) -> Void)? { get set }
+	func start()
+}
 
 public struct QRReaderFlowInput {
 
-	public let session: AVCaptureSession
 	public let parentViewController: UIViewController
 
-	public init(session: AVCaptureSession, parentViewController: UIViewController) {
-		self.session = session
+	public init(parentViewController: UIViewController) {
 		self.parentViewController = parentViewController
 	}
 }
 
-public enum QRReaderFlowResult: Sendable {
+public enum QRReaderFlowResult: Sendable, Equatable {
 	case cancelled
 	case codeRetrieved(String)
 }
