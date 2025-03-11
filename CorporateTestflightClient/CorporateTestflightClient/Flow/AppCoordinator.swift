@@ -25,7 +25,7 @@ final class AppCoordinator {
 
 	func start() {
 		let input = VersionsBrowserFlowInput(projectId: 1, parentViewController: rootNavigationController, resolver: resolver)
-		guard var versionsListCoordinator = resolver.resolve((any VersionsBrowserCoordinator).self, argument: input) else {
+		guard let versionsListCoordinator = resolver.resolve((any VersionsBrowserCoordinator).self, argument: input) else {
 			return
 		}
 		versionsListCoordinator.output = { [weak self] argument in
