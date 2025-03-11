@@ -10,7 +10,7 @@ public protocol FlowEngine: AnyObject {
 
 @available(iOS 13.0.0, *)
 @MainActor
-public protocol SyncFlowEngine {
+public protocol SyncFlowEngine: AnyObject {
 	associatedtype Input
 
 //	init(input: Input)

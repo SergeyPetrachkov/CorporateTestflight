@@ -5,6 +5,7 @@ public protocol QRReaderFlowCoordinating: SyncFlowEngine where Input == QRReader
 
 	var output: ((QRReaderFlowResult) -> Void)? { get set }
 	func start()
+	func startAsync() async -> QRReaderFlowResult
 }
 
 public struct QRReaderFlowInput {

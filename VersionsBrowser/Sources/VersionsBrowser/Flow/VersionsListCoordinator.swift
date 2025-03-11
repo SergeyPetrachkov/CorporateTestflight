@@ -8,11 +8,13 @@ import VersionsBrowserInterface
 
 final class VersionsListCoordinator: VersionsBrowserCoordinator {
 
-	private let input: VersionsBrowserFlowInput
+	typealias Input = VersionsBrowserFlowInput
+
+	private let input: Input
 
 	var output: ((VersionsBrowserOutput) -> Void)?
 
-	init(input: VersionsBrowserFlowInput) {
+	init(input: Input) {
 		self.input = input
 	}
 
