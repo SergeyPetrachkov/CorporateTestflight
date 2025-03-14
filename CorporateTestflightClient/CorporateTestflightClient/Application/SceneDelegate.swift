@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		window.makeKeyAndVisible()
 
 		let container = Container()
-		let assemblies: [Assembly] = [
+		let assemblies: [any Assembly] = [
 			AppAssembly(),
 			VersionsBrowserAssembly(),
 			QRReaderAssembly(),

@@ -9,7 +9,7 @@ struct VersionDetailsLoadingView: View {
 		VStack(alignment: .leading) {
 			VersionDetailsHeaderView(state: state.headerState)
 			if state.ticketPlaceholdersCount > 0 {
-				SkeletonView(itemsCount: 3)
+				SkeletonView()
 					.contentMargins(0)
 			}
 		}

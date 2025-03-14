@@ -13,28 +13,28 @@ final class AppAssembly: Assembly {
 		}
 
 		container.registerSingleton((any ImageLoader).self) { _,resolver in
-			guard let api = resolver.resolve(TestflightAPIProviding.self) else {
+			guard let api = resolver.resolve((any TestflightAPIProviding).self) else {
 				fatalError("My self-written DI sucks!")
 			}
 			return ImageCache(apiService: api)
 		}
 
 		container.register((any VersionsRepository).self) { _, resolver -> VersionsRepositoryImpl in
-			guard let api = resolver.resolve(TestflightAPIProviding.self) else {
+			guard let api = resolver.resolve((any TestflightAPIProviding).self) else {
 				fatalError("My self-written DI sucks!")
 			}
 			return VersionsRepositoryImpl(api: api)
 		}
 
 		container.register((any ProjectsRepository).self) { _, resolver in
-			guard let api = resolver.resolve(TestflightAPIProviding.self) else {
+			guard let api = resolver.resolve((any TestflightAPIProviding).self) else {
 				fatalError("My self-written DI sucks!")
 			}
 			return ProjectsRepositoryImpl(api: api)
 		}
 
 		container.register((any TicketsRepository).self) { _, resolver in
-			guard let api = resolver.resolve(TestflightAPIProviding.self) else {
+			guard let api = resolver.resolve((any TestflightAPIProviding).self) else {
 				fatalError("My self-written DI sucks!")
 			}
 			return TicketsRepositoryImpl(api: api)

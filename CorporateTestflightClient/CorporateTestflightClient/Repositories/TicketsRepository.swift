@@ -4,9 +4,9 @@ import TestflightNetworking
 
 struct TicketsRepositoryImpl: TicketsRepository {
 
-	private let api: TestflightAPIProviding
+	private let api: any TestflightAPIProviding
 
-	init(api: TestflightAPIProviding) {
+	init(api: any TestflightAPIProviding) {
 		self.api = api
 	}
 

@@ -13,12 +13,12 @@ import TestflightFoundation
 final class AppCoordinator {
 
 	private let rootNavigationController: UINavigationController
-	private let resolver: Resolver
+	private let resolver: any Resolver
 
 	private var childCoordinator: (any VersionsBrowserCoordinator)?
 	private var qrCoordinator: (any QRReaderFlowCoordinating)?
 
-	init(rootNavigationController: UINavigationController, resolver: Resolver) {
+	init(rootNavigationController: UINavigationController, resolver: any Resolver) {
 		self.rootNavigationController = rootNavigationController
 		self.resolver = resolver
 	}
