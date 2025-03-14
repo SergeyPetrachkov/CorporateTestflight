@@ -14,6 +14,20 @@
   "testTargets" : [
     {
       "target" : {
+        "containerPath" : "container:..\/QRReader",
+        "identifier" : "QRReaderTests",
+        "name" : "QRReaderTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:..\/ImageLoader",
+        "identifier" : "ImageLoaderTests",
+        "name" : "ImageLoaderTests"
+      }
+    },
+    {
+      "target" : {
         "containerPath" : "container:..\/JiraViewer",
         "identifier" : "JiraViewerTests",
         "name" : "JiraViewerTests"
@@ -21,9 +35,9 @@
     },
     {
       "target" : {
-        "containerPath" : "container:..\/MockFunc",
-        "identifier" : "MockFuncTests",
-        "name" : "MockFuncTests"
+        "containerPath" : "container:..\/VersionsBrowser",
+        "identifier" : "VersionsBrowserTests",
+        "name" : "VersionsBrowserTests"
       }
     },
     {
@@ -35,9 +49,9 @@
     },
     {
       "target" : {
-        "containerPath" : "container:..\/ImageLoader",
-        "identifier" : "ImageLoaderTests",
-        "name" : "ImageLoaderTests"
+        "containerPath" : "container:..\/MockFunc",
+        "identifier" : "MockFuncTests",
+        "name" : "MockFuncTests"
       }
     },
     {
