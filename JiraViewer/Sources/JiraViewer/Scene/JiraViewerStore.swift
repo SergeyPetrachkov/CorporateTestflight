@@ -23,7 +23,7 @@ final class JiraViewerStore: Store, ObservableObject {
 //	}
 
 	func send(_ action: Action) async {
-//		print("'action: \(action)' >> 'state: \(state)'")
+		print("'action: \(action)' >> 'state: \(state)'")
 		switch action {
 		case .start, .refresh:
 			state.footer = .loading
@@ -37,8 +37,16 @@ final class JiraViewerStore: Store, ObservableObject {
 						description: fullTicket.description
 					)
 				}
+				if Task.isCancelled {
+					print("Task is cancelled, no attachments will be loaded")
+					return
+				}
 				if let attachmentsToLoad = environment.ticket.attachments {
 					let attachments = try await environment.attachmentLoader.execute(attachments: attachmentsToLoad)
+					if Task.isCancelled {
+						print("Task is cancelled, no attachments will be displayed")
+						return
+					}
 					state.footer = .loaded(
 						JiraViewer.TicketAttachmentsState(
 							images: attachments.map { JiraViewer.LoadedImage(resourceURL: $0.0, image: $0.1) }
@@ -53,10 +61,14 @@ final class JiraViewerStore: Store, ObservableObject {
 				}
 			}
 			catch {
+				if Task.isCancelled {
+					print("Task is cancelled, no error will be displayed")
+					return
+				}
 				state.footer = .failed(.init(description: error.localizedDescription))
 			}
 		}
-//		print("state >> '\(state)'")
+		print("state >> '\(state)'")
 	}
 
 	private func isTicketValid(ticket: Ticket) -> Bool {

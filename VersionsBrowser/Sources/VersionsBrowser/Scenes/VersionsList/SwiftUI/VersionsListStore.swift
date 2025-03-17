@@ -51,7 +51,13 @@ final class VersionsListStore: ObservableObject, Store {
 				state.contentState = .loading
 			}
 			let (project, builds) = try await environment.usecase.execute(projectId: environment.project)
+			if Task.isCancelled {
+				return
+			}
 			let mappedContent = await map(project: project, versions: builds)
+			if Task.isCancelled {
+				return
+			}
 			versions = builds
 			self.project = project
 			state.contentState = .loaded(mappedContent)

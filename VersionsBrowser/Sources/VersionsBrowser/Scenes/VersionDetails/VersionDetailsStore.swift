@@ -55,7 +55,7 @@ final class VersionDetailsStore: ObservableObject, Store {
 			if !Task.isCancelled {
 				state = .loaded(.init(version: version, tickets: tickets))
 			} else {
-				print("VM is stopped. State won't be published")
+				print("Store is stopped. State won't be published")
 			}
 		} catch {
 			state = .failed(State.ErrorViewModel(message: error.localizedDescription))
