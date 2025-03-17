@@ -45,6 +45,7 @@ struct VersionsListContainer: View {
 				}
 			}
 			.onChange(of: store.state.seachTerm) {
+				// here: we hold a reference to a task, we cancel the existing one and we also debounce via Task sleep
 				currentSearchTask?.cancel()
 				currentSearchTask = Task {
 					try await Task.sleep(for: .milliseconds(300))
