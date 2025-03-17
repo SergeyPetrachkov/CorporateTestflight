@@ -5,6 +5,7 @@ import TestflightUIKit
 struct VersionsListContainer: View {
 
 	@ObservedObject private var store: VersionsListStore
+	@State private var currentSearchTask: Task<Void, any Error>?
 
 	init(store: VersionsListStore) {
 		self.store = store
@@ -44,8 +45,10 @@ struct VersionsListContainer: View {
 				}
 			}
 			.onChange(of: store.state.seachTerm) {
-				Task {
+				currentSearchTask?.cancel()
+				currentSearchTask = Task {
 					try await Task.sleep(for: .milliseconds(300))
+					try Task.checkCancellation()
 					await store.send(.debouncedSearch)
 				}
 			}
