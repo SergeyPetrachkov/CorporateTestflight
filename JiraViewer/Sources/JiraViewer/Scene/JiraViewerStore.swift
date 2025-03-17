@@ -18,9 +18,9 @@ final class JiraViewerStore: Store, ObservableObject {
 		self.state = initialState
 	}
 
-//	deinit {
-//		print("❌ deinit \(self)")
-//	}
+	deinit {
+		print("❌ deinit \(self)")
+	}
 
 	func send(_ action: Action) async {
 		print("'action: \(action)' >> 'state: \(state)'")
