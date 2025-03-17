@@ -33,11 +33,11 @@ final class AppAssembly: Assembly {
 			return ProjectsRepositoryImpl(api: api)
 		}
 
-		container.register((any TicketsRepository).self) { _, resolver in
+		container.registerSingleton((any TicketsRepository).self) { _, resolver in
 			guard let api = resolver.resolve((any TestflightAPIProviding).self) else {
 				fatalError("My self-written DI sucks!")
 			}
-			return TicketsRepositoryImpl(api: api)
+			return TicketsCacheActor(repository: TicketsRepositoryImpl(api: api))
 		}
 	}
 }

@@ -20,6 +20,7 @@
 		3931EC782D7B2194003190A7 /* SimpleDI in Frameworks */ = {isa = PBXBuildFile; productRef = 3931EC772D7B2194003190A7 /* SimpleDI */; };
 		3931EC7A2D7B2194003190A7 /* UniFlow in Frameworks */ = {isa = PBXBuildFile; productRef = 3931EC792D7B2194003190A7 /* UniFlow */; };
 		39AF5C4F2D7EF67100A53A76 /* TestflightFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 39AF5C4E2D7EF67100A53A76 /* TestflightFoundation */; };
+		39D28A1D2D886BDE003D3771 /* MockFunc in Frameworks */ = {isa = PBXBuildFile; productRef = 39D28A1C2D886BDE003D3771 /* MockFunc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39D28A1D2D886BDE003D3771 /* MockFunc in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,6 +183,7 @@
 			);
 			name = CorporateTestflightClientTests;
 			packageProductDependencies = (
+				39D28A1C2D886BDE003D3771 /* MockFunc */,
 			);
 			productName = CorporateTestflightClientTests;
 			productReference = 39C3C0012B10B07C00F5D10D /* CorporateTestflightClientTests.xctest */;
@@ -576,6 +579,10 @@
 		39AF5C4E2D7EF67100A53A76 /* TestflightFoundation */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = TestflightFoundation;
+		};
+		39D28A1C2D886BDE003D3771 /* MockFunc */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MockFunc;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

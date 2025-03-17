@@ -35,6 +35,7 @@ actor TicketsCacheActor: TicketsRepository {
 		print("Entering actor for \(key)")
 		switch tickets[key] {
 		case .cached(let ticket):
+			print("Returning cached value by \(key)")
 			return ticket
 		case .inProgress(let task):
 			print("Awaiting existing task for \(key)")
@@ -51,6 +52,7 @@ actor TicketsCacheActor: TicketsRepository {
 				let ticketValue = try await ticketTask.value
 				print("Caching value by \(key)")
 				tickets[key] = .cached(ticketValue)
+				print("Returning value by \(key)")
 				return ticketValue
 			} catch {
 				print("Failed to catch value by \(key). Will evict the operation from cache")
