@@ -11,31 +11,26 @@ final class VersionsListCoordinator: VersionsBrowserCoordinator {
 	typealias Input = VersionsBrowserFlowInput
 
 	private let input: Input
+	private let factory: VersionsBrowserFactory
 
 	var output: ((VersionsBrowserOutput) -> Void)?
 
-	init(input: Input) {
+	init(input: Input, factory: VersionsBrowserFactory) {
 		self.input = input
+		self.factory = factory
 	}
 
 	func start() {
-		let environment = VersionsListStore.Environment(
-			project: input.projectId,
-			usecase: FetchProjectAndVersionsUsecaseImpl(
-				versionsRepository: input.resolver.resolve(VersionsRepository.self)!,
-				projectsRepository: input.resolver.resolve(ProjectsRepository.self)!
-			),
-			mapper: VersionList.RowMapper(),
-			output: { [weak self] action in
-				switch action {
-				case .selectedVersion(let version):
-					self?.showVersionDetails(version)
-				case .qrRequested:
-					self?.output?(.qrRequested)
-				}
+		let output: @MainActor (VersionList.Environment.Output) -> Void = { [weak self] action in
+			switch action {
+			case .selectedVersion(let version):
+				self?.showVersionDetails(version)
+			case .qrRequested:
+				self?.output?(.qrRequested)
 			}
-		)
-		let store = VersionsListStore(initialState: VersionsListStore.State(), environment: environment)
+		}
+		let environment = factory.environment(inputParameters: (input, output))
+		let store = factory.store(inputParameters: (VersionList.State(), environment))
 		let hostingVC = UIHostingController(rootView: VersionsListContainer(store: store))
 		input.parentViewController.setViewControllers([hostingVC], animated: true)
 	}

@@ -159,30 +159,6 @@ final class ViewControllerSpy: UIViewController {
 	}
 }
 
-
-final class MockQRReaderFlowFactory: QRReaderFlowFactory {
-
-	let sessionMock = MockFunc<Void, AVCaptureSession>()
-	func session() -> AVCaptureSession {
-		sessionMock.callAndReturn()
-	}
-
-	let mockCapturingListener = MockFunc<AVCaptureSession, any QRReader.QRCodeCaptureListening>()
-	func capturingListener(inputParameters: AVCaptureSession) -> any QRReader.QRCodeCaptureListening {
-		mockCapturingListener.callAndReturn(inputParameters)
-	}
-
-	let mockEnvironment = MockFunc<(any QRCodeCaptureListening, (QRReaderFlowResult) -> Void), QRCode.Environment>()
-	func environment(inputParameters: (any QRCodeCaptureListening, (QRReaderFlowResult) -> Void)) -> QRCode.Environment {
-		mockEnvironment.callAndReturn(inputParameters)
-	}
-
-	let mockStore = MockFunc<(QRCode.State, QRCode.Environment), QRReader.QRReaderStore>()
-	func store(inputParameters: (QRReader.QRCode.State, QRReader.QRCode.Environment)) -> QRReader.QRReaderStore {
-		mockStore.callAndReturn(inputParameters)
-	}
-}
-
 final class StubQRCodeCaptureListening: QRCodeCaptureListening {
 	func start() {
 

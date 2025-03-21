@@ -77,7 +77,7 @@ enum VersionList {
 	}
 
 	struct Environment {
-		enum Output {
+		enum Output: Sendable {
 			case selectedVersion(Version)
 			case qrRequested
 		}
