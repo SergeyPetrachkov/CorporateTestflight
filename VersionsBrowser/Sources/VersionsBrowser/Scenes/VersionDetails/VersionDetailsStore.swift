@@ -62,4 +62,3 @@ final class VersionDetailsStore: ObservableObject, Store {
 		}
 	}
 }
-

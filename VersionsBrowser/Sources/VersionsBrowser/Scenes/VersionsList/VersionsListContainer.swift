@@ -2,6 +2,11 @@ import SwiftUI
 import CorporateTestflightDomain
 import TestflightUIKit
 
+// Plan:
+// Container for behavior/plain dumb views for the rest
+// .task {}
+// .onChange
+
 struct VersionsListContainer: View {
 
 	@ObservedObject private var store: VersionsListStore
@@ -96,40 +101,4 @@ struct VersionsListContainer: View {
 	private var skeleton: some View {
 		SkeletonView()
 	}
-}
-
-#Preview("Behavior-less filled List") {
-	VersionsList(
-		state: [
-			.init(
-				id: UUID(),
-				title: "Title",
-				subtitle: "Subtitle"
-			),
-			.init(
-				id: UUID(),
-				title: "Here's the title",
-				subtitle: "And here's the long subtitle"
-			),
-			.init(
-				id: UUID(),
-				title: "Here's the title",
-				subtitle: "And here's the long long long long long long longest subtitle in the world"
-			),
-		],
-		onItemTap: { _ in }
-	)
-}
-
-#Preview("Behavior-less empty List") {
-	VersionsList(
-		state: [],
-		onItemTap: { _ in }
-	)
-}
-
-// Do we even need this one if we have a list preview? Maybe yes, maybe no.
-#Preview("Behavior-less Row") {
-	VersionListRow(state: .init(id: UUID(), title: "Title", subtitle: "Subtitle"))
-	VersionListRow(state: .init(id: UUID(), title: "Here's the title", subtitle: "And here's the long subtitle"))
 }

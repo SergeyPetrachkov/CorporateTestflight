@@ -2,6 +2,11 @@ import Combine
 import CorporateTestflightDomain
 import UniFlow
 
+// Plan:
+// Implement Store
+// Nonisolated async
+// Cancellation Checks
+
 final class VersionsListStore: ObservableObject, Store {
 
 	typealias State = VersionList.State

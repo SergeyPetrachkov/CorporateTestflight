@@ -1,3 +1,6 @@
+// Plan:
+// Coordination approaches async/sync
+
 @available(iOS 13.0.0, *)
 @MainActor
 public protocol FlowEngine: AnyObject {
@@ -12,8 +15,6 @@ public protocol FlowEngine: AnyObject {
 @MainActor
 public protocol SyncFlowEngine: AnyObject {
 	associatedtype Input
-
-//	init(input: Input)
 
 	func start()
 }

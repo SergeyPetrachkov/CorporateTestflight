@@ -1,3 +1,6 @@
+// Plan:
+// Assembly, container and GCD implementation in a Swift 5 package
+
 public protocol Assembly {
 	/// Provide hook for ``Assembler`` to load Services into the provided container
 	///

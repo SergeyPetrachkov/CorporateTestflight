@@ -1,5 +1,11 @@
 import CorporateTestflightDomain
 
+// Plan:
+// Straight-forward implementation
+// Actor re-entrancy
+// State for an internal task
+// Final implementation
+
 actor TicketsCacheActor: TicketsRepository {
 
 	private enum Cacheable<T> {

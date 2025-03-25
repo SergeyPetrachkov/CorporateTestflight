@@ -1,6 +1,9 @@
 import XCTest
 @testable import SimpleDI
 
+// Plan:
+// Concurrency tests with GCD
+
 final class ContainerTests: XCTestCase {
 
 	func testRegisterAndResolveService() {

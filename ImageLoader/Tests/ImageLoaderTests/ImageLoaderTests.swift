@@ -4,6 +4,11 @@ import TestflightNetworking
 import TestflightNetworkingMock
 import Testing
 
+// Plan:
+// Concurrency tests
+// require vs expect
+// await expect throws
+
 @Suite("Actor Image Cache Tests")
 struct ImageLoaderTests {
 
@@ -117,11 +122,10 @@ struct ImageLoaderTests {
 
 	@Test
 	func threadSafety() async throws {
-		// Given
+
 		let env = Environment()
 		await env.apiService.getResourceMock.returns(env.expectedImage.pngData()!)
 		let sut = env.makeSUT()
-
 
 		await withTaskGroup(of: Void.self) { group in
 			for _ in 0..<100 {

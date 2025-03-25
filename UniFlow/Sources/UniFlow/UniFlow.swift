@@ -1,3 +1,6 @@
+// Plan:
+// One unified interface for each and every screen
+
 @available(iOS 13.0.0, *)
 @MainActor
 public protocol Store: AnyObject {

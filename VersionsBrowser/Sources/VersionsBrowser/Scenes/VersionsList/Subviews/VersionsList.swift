@@ -19,3 +19,33 @@ struct VersionsList: View {
 		}
 	}
 }
+
+#Preview("Behavior-less filled List") {
+	VersionsList(
+		state: [
+			.init(
+				id: UUID(),
+				title: "Title",
+				subtitle: "Subtitle"
+			),
+			.init(
+				id: UUID(),
+				title: "Here's the title",
+				subtitle: "And here's the long subtitle"
+			),
+			.init(
+				id: UUID(),
+				title: "Here's the title",
+				subtitle: "And here's the long long long long long long longest subtitle in the world"
+			),
+		],
+		onItemTap: { _ in }
+	)
+}
+
+#Preview("Behavior-less empty List") {
+	VersionsList(
+		state: [],
+		onItemTap: { _ in }
+	)
+}
