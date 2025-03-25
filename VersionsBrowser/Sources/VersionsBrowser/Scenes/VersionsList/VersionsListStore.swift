@@ -36,7 +36,8 @@ final class VersionsListStore: ObservableObject, Store {
 			environment.output(.qrRequested)
 		case .search, .debouncedSearch:
 			guard let project else {
-				return assertionFailure("❌ the contents are not loaded")
+				state.contentState = .failed(.init(localizedDescription: "No project is loaded. Try refreshing."))
+				return
 			}
 			let filteredVersions = await filterVersions(searchTerm: state.seachTerm, versions: versions)
 			let mappedContent = await map(project: project, versions: filteredVersions)

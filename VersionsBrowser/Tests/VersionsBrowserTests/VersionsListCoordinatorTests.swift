@@ -1,101 +1,109 @@
 import Testing
+import XCTest
+
 import VersionsBrowserInterface
 import SimpleDI
-import UIKit
 import CorporateTestflightDomain
 import MockFunc
 import SwiftUI
+
 @testable import VersionsBrowser
+
+@MainActor
+struct Environment {
+
+	let projectID = 1
+	let container = Container()
+	let parentController = ViewControllerSpy()
+	let mockVersionsRepo = MockVersionsRepository()
+	let mockProjectsRepo = MockProjectsRepository()
+	let mockTicketRepo = MockTicketsRepository()
+	let factory: CachingProxyVersionsBrowserFactory
+
+	init() {
+		self.factory = CachingProxyVersionsBrowserFactory(realFactory: VersionsBrowserFactoryImpl(resolver: container))
+	}
+
+	func makeSUT() -> VersionsListCoordinator {
+
+		container.register(VersionsRepository.self) { _,_ in
+			mockVersionsRepo
+		}
+
+		container.register(ProjectsRepository.self) { _,_ in
+			mockProjectsRepo
+		}
+
+		container.register(TicketsRepository.self) { _,_ in
+			mockTicketRepo
+		}
+
+		return VersionsListCoordinator(
+			input: .init(
+				projectId: projectID,
+				parentViewController: parentController,
+				resolver: container
+			),
+			factory: factory
+		)
+	}
+}
 
 @Suite("Versions list coordinator tests")
 @MainActor
 struct VersionsListCoordinatorTests {
 
-	@MainActor
-	struct Environment {
-
-		let projectID = 1
-		let container = Container()
-		let parentController = ViewControllerSpy()
-		let factory: CachingProxyVersionsBrowserFactory
-
-		init() {
-			self.factory = CachingProxyVersionsBrowserFactory(realFactory: VersionsBrowserFactoryImpl(resolver: container))
-		}
-
-		func makeSUT() -> VersionsListCoordinator {
-
-			container.register(VersionsRepository.self) { _,_ in
-				MockVersionsRepository()
-			}
-
-			container.register(ProjectsRepository.self) { _,_ in
-				MockProjectsRepository()
-			}
-
-			return VersionsListCoordinator(
-				input: .init(
-					projectId: projectID,
-					parentViewController: parentController,
-					resolver: container
-				),
-				factory: factory
-			)
-		}
-	}
-
 	@Test
 	func startShouldSetVC() {
 		let env = Environment()
-		env.parentController.setVCMock.returns()
+		env.parentController.setMock.returns()
 		let sut = env.makeSUT()
 
 		sut.start()
 
-		#expect(env.parentController.setVCMock.input.0.last is UIHostingController<VersionsListContainer>)
-		#expect(env.parentController.setVCMock.input.1)
+		#expect(env.parentController.setMock.input.0.last is UIHostingController<VersionsListContainer>)
+		#expect(env.parentController.setMock.input.1)
 	}
+}
 
-	@Test
-	func outputShouldTriggerNavigation() {
+@MainActor
+final class TraditionalVersionsListCoordinatorTests: XCTestCase {
+
+	func test_output_ShouldTriggerExternalOutput_WhenQRTapped() async {
 		let env = Environment()
-		env.parentController.setVCMock.returns()
+		env.parentController.setMock.returns()
+		let sut = env.makeSUT()
+		let expectation = expectation(description: "output")
+		sut.output = { output in
+			XCTAssertTrue(output == .qrRequested)
+			expectation.fulfill()
+		}
+
+		sut.start()
+
+		let store: VersionsListStore = env.factory[dynamicMember: "store"]
+		await store.send(.tapQR)
+		await fulfillment(of: [expectation], timeout: 0.1)
+	}
+
+	func test_OutputShouldTriggerNavigation_WhenVersionTapped() async {
+		let env = Environment()
+		env.parentController.setMock.returns()
+		env.parentController.pushMock.returns()
+		let uuid = UUID()
+		let expectedProject = Project(id: 1, name: "Proj")
+		let expectedVersion = Version(id: uuid, buildNumber: 2, associatedTicketKeys: [])
+		env.mockProjectsRepo.getProjectMock.returns(expectedProject)
+		env.mockVersionsRepo.getVersionsMock.returns([expectedVersion])
 		let sut = env.makeSUT()
 
 		sut.start()
 
-		// think of a type safe way to retrieve it now
-		let store = env.factory
-		print(store)
-	}
-}
+		let store: VersionsListStore = env.factory[dynamicMember: "store"]
+		await store.send(.start)
+		await store.send(.tapItem(VersionList.RowState(id: uuid, title: "", subtitle: "")))
 
-final class ViewControllerSpy: UINavigationController {
-
-	typealias Input = ([UIViewController], Bool)
-
-	let setVCMock = MockFunc<Input, Void>()
-	override func setViewControllers(_ viewControllers: [UIViewController], animated: Bool) {
-		setVCMock.callAndReturn((viewControllers, animated))
-	}
-}
-
-final class FactoryCachingProxy<FactoryType> {
-
-	private let realFactory: FactoryType
-	private var cache: [String: Any] = [:]
-
-	init(realFactory: FactoryType) {
-		self.realFactory = realFactory
-	}
-
-	private func cached<T>(key: String, create: () -> T) -> T {
-		if let cachedValue = cache[key] as? T {
-			return cachedValue
-		}
-		let newValue = create()
-		cache[key] = newValue
-		return newValue
+		XCTAssertTrue(env.parentController.pushMock.calledOnce)
 	}
 }
 
@@ -156,10 +164,6 @@ final class CachingProxyVersionsBrowserFactory: VersionsBrowserFactory {
 
 	subscript<T>(dynamicMember key: String) -> T {
 		cacheProxy[dynamicMember: key]
-	}
-
-	subscript<T>(dynamicMember keyPath: KeyPath<LazyProxyCachingFactory<VersionsBrowserFactory>, T>) -> T {
-		cacheProxy[keyPath: keyPath]
 	}
 
 	func environment(

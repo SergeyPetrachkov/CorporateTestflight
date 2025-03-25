@@ -124,17 +124,14 @@ struct ImageLoaderTests {
 
 
 		await withTaskGroup(of: Void.self) { group in
-			for i in 0..<100 {
+			for _ in 0..<100 {
 				group.addTask {
-					let url = URL(string: "https://example.com/image\(i/2).jpg")!
+					let url = URL(string: "https://example.com/image.jpg")!
 					_ = try? await sut.load(url: url)
 				}
 			}
-
-			for await _ in group {}
 		}
 		let callsCount = await env.apiService.getResourceMock.count
-		#expect(callsCount == 50)
+		#expect(callsCount == 1)
 	}
 }
-

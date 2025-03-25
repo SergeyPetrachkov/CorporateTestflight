@@ -3,7 +3,6 @@ import CorporateTestflightDomain
 import Foundation
 import Testing
 
-
 @Suite("FetchTicketsUseCase behavioral tests")
 struct FetchTicketsUseCaseTests {
 

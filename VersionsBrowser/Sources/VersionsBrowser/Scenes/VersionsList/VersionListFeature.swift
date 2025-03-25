@@ -44,7 +44,7 @@ enum VersionList {
 		}
 	}
 
-	enum Action: CustomDebugStringConvertible {
+	enum Action: Sendable, CustomDebugStringConvertible {
 		case start
 		case refresh(fromScratch: Bool)
 		case tapItem(RowState)
@@ -84,12 +84,16 @@ enum VersionList {
 
 		let project: Project.ID
 		let usecase: FetchProjectAndVersionsUsecase
-		let mapper: RowMapper
+		let mapper: RowMapping
 
 		let output: @MainActor (Output) -> Void
 	}
 
-	struct RowMapper {
+	protocol RowMapping: Sendable {
+		func map(versions: [Version]) -> [RowState]
+	}
+
+	struct RowMapper: RowMapping {
 		func map(versions: [Version]) -> [RowState] {
 			versions.map { version in
 				let subtitle = buildSubtitle(for: version)
