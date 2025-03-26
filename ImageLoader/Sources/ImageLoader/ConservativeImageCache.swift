@@ -1,8 +1,10 @@
 import Foundation
 import TestflightNetworking
-import Synchronization
 
-@available(iOS 18.0, *)
+// This is an example of a case where thought we were data-race and race-condition free.
+// But as soon as you get `async` keyword next to your function, you immediately introduce a possibility of a race condition
+// And no lock or mutex or whatever can fix that. Only actor + fixing actor-reentrancy
+
 public final class ConservativeImageCache: ImageLoader, @unchecked Sendable {
 
 	public enum ImageCacheError: Error, Equatable {
@@ -11,74 +13,64 @@ public final class ConservativeImageCache: ImageLoader, @unchecked Sendable {
 
 	// MARK: - Injectables
 	private let apiService: TestflightAPIProviding
+	private let lock = NSRecursiveLock()
 
 	// MARK: - State
 	private let cache: NSCache<NSURL, LoadableImage> = {
 		let cache = NSCache<NSURL, LoadableImage>()
 		cache.countLimit = 3
 		cache.evictsObjectsWithDiscardedContent = true
-		cache.name = "com.corporate-testflight.ConservativeImageCache"
+		cache.name = "com.corporate-testflight.ImageCache"
 		return cache
 	}()
 
-	private let registeredTasks = Mutex<[URL: Task<LoadableImage, any Error>]>([:])
+	private var registeredTasks: [URL: Task<LoadableImage, any Error>] = [:]
 
-	// MARK: - Initializers
+	// MARK: - Initializer
 	public init(apiService: TestflightAPIProviding) {
 		self.apiService = apiService
 	}
 
-	// MARK: - Public Interface
+	/// Load an image by a given URL.
 	public func load(url: URL) async throws -> LoadableImage {
-		// Check cache first without lock
 		if let cachedImage = cache.object(forKey: url as NSURL) {
 			return cachedImage
 		}
+		let loadingTask = getOrCreateTask(for: url)
 
-
-		// Race condition here:
-		// Get or create task with mutex
-		let currentActiveTask = registeredTasks.withLock { tasks in
-			tasks[url]
-		}
-
-		if let currentActiveTask {
-			do {
-				let cachedImage = try await currentActiveTask.value
-				return cachedImage
-			} catch {
-				print("Previously cached task for the image \(url) returned error \(error)")
-			}
-		}
-
-		let newLoadingTask = registeredTasks.withLock { tasks in
-			let newTask = createFetchImageTask(for: url)
-			tasks[url] = newTask
-			return newTask
-		}
-
-		return try await newLoadingTask.value
+		return try await loadingTask.value
 	}
 
-	// MARK: - Private Helpers
-	private func createFetchImageTask(for url: URL) -> Task<LoadableImage, any Error> {
+	private func getOrCreateTask(for url: URL) -> Task<LoadableImage, any Error> {
+		lock.lock()
+		defer {
+			lock.unlock()
+		}
+		if let currentActiveTask = registeredTasks[url] {
+			return currentActiveTask
+		} else {
+			let newLoadingTask = fetchImageTask(for: url)
+			registeredTasks[url] = newLoadingTask
+			return newLoadingTask
+		}
+	}
+
+	/// Create a new Task that handles the fetch request and puts it into the cache.
+	private func fetchImageTask(for url: URL) -> Task<LoadableImage, any Error> {
 		Task {
 			defer {
-				// remove the registered task from the local dictionary no matter what
-				registeredTasks.withLock { tasks in
-					tasks[url] = nil
+				lock.withLock {
+					registeredTasks[url] = nil
 				}
 			}
-
 			let responseData = try await apiService.getResource(url: url)
 			guard let image = LoadableImage(data: responseData) else {
 				throw ImageCacheError.failedDownloadingImage(url)
 			}
-			// put data to the cache
+
 			cache.setObject(image, forKey: url as NSURL, cost: responseData.count)
+
 			return image
 		}
 	}
 }
-
-
