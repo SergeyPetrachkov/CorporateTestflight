@@ -35,32 +35,36 @@ public final class ConservativeImageCache: ImageLoader, @unchecked Sendable {
 			return cachedImage
 		}
 
-		// Get or create task with mutex
-		let task = registeredTasks.withLock { tasks in
-			if let existingTask = tasks[url] {
-				return existingTask
-			}
 
+		// Race condition here:
+		// Get or create task with mutex
+		let currentActiveTask = registeredTasks.withLock { tasks in
+			tasks[url]
+		}
+
+		if let currentActiveTask {
+			do {
+				let cachedImage = try await currentActiveTask.value
+				return cachedImage
+			} catch {
+				print("Previously cached task for the image \(url) returned error \(error)")
+			}
+		}
+
+		let newLoadingTask = registeredTasks.withLock { tasks in
 			let newTask = createFetchImageTask(for: url)
 			tasks[url] = newTask
 			return newTask
 		}
 
-		do {
-			return try await task.value
-		} catch {
-			// Clean up failed task
-			registeredTasks.withLock { tasks in
-				tasks[url] = nil
-			}
-			throw error
-		}
+		return try await newLoadingTask.value
 	}
 
 	// MARK: - Private Helpers
 	private func createFetchImageTask(for url: URL) -> Task<LoadableImage, any Error> {
 		Task {
 			defer {
+				// remove the registered task from the local dictionary no matter what
 				registeredTasks.withLock { tasks in
 					tasks[url] = nil
 				}
@@ -70,7 +74,7 @@ public final class ConservativeImageCache: ImageLoader, @unchecked Sendable {
 			guard let image = LoadableImage(data: responseData) else {
 				throw ImageCacheError.failedDownloadingImage(url)
 			}
-
+			// put data to the cache
 			cache.setObject(image, forKey: url as NSURL, cost: responseData.count)
 			return image
 		}
