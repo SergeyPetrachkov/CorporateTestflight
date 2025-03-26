@@ -37,7 +37,7 @@ final class QRReaderFlowFactoryImpl: QRReaderFlowFactory {
 #if targetEnvironment(simulator)
 		QRCodeCaptureSimulatorListener()
 #else
-		QRCodeCaptureListener(session: inputParameters.0, sessionConfigurator:  CaptureSessionConfigurator())
+		QRCodeCaptureListener(session: inputParameters, sessionConfigurator:  CaptureSessionConfigurator())
 #endif
 	}
 

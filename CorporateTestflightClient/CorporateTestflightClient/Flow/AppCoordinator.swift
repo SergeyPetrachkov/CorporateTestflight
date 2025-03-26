@@ -3,7 +3,6 @@ import QRReaderInterface
 import SimpleDI
 import SwiftUI
 import CorporateTestflightDomain
-import TestflightNetworking
 import JiraViewerInterface
 import VersionsBrowserInterface
 import Foundation
