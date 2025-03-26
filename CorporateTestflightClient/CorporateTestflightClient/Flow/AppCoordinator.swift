@@ -9,6 +9,9 @@ import VersionsBrowserInterface
 import Foundation
 import TestflightFoundation
 
+// Plan:
+// Coordinators and async-await
+
 @MainActor
 final class AppCoordinator {
 

@@ -1,6 +1,11 @@
 import AVFoundation
 import Foundation
 
+// Plan:
+// AsyncStream
+// Unchecked Sendable
+// Continuation
+
 protocol QRCodeCaptureListening: AnyObject {
 	func start()
 

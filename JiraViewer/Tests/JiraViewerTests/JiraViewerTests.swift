@@ -7,6 +7,9 @@ import TestflightFoundation
 
 @testable import JiraViewer
 
+// Plan:
+// Parametric tests
+
 @Suite("Jira Viewer Store Tests")
 @MainActor
 struct JiraViewerStoreTests {
