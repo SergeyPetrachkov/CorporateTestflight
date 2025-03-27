@@ -3,7 +3,7 @@ import UIKit
 import UniFlow
 import SimpleDI
 
-public protocol VersionsBrowserCoordinator: SyncFlowEngine {
+public protocol VersionsBrowserCoordinator: SyncFlowEngine where Input == VersionsBrowserFlowInput {
 	var output: ((VersionsBrowserOutput) -> Void)? { get set }
 }
 
