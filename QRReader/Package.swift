@@ -55,6 +55,6 @@ let package = Package(
 				"MockFunc",
 				"SimpleDI"
 			]
-		),
+		)
 	]
 )

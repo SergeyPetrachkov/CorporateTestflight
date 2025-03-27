@@ -36,9 +36,12 @@ struct FetchTicketsUseCaseTests {
 		await ticketsRepository.getTicketMock.throws(URLError(.badServerResponse))
 		let sut = makeSUT()
 
-		await #expect(throws: CancellationError.self, performing: {
-			_ = try await sut.execute(for: version)
-		})
+		await #expect(
+			throws: CancellationError.self,
+			performing: {
+				_ = try await sut.execute(for: version)
+			}
+		)
 
 		await #expect(ticketsRepository.getTicketMock.count == 1)
 		await #expect(ticketsRepository.getTicketMock.input == "Key1")

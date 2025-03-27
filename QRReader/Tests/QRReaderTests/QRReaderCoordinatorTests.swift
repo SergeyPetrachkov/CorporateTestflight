@@ -35,7 +35,6 @@ final class QRReaderCoordinatorTests: XCTestCase {
 		}
 	}
 
-
 	func test_coordinatorPresentsCorrectlyConfiguredView() async {
 		// Given
 		let env = Environment()
@@ -51,7 +50,6 @@ final class QRReaderCoordinatorTests: XCTestCase {
 		XCTAssertTrue(env.parentViewController.presentMock.input.0.wrappedValue?.isModalInPresentation ?? false)
 	}
 
-
 	func test_coordinatorResultsWithCancellation() async {
 
 		let env = Environment()
@@ -63,7 +61,7 @@ final class QRReaderCoordinatorTests: XCTestCase {
 		}
 
 		sut.start()
-		
+
 		await env.factory._store.send(.stop)
 		await fulfillment(of: [exp], timeout: 1)
 	}
@@ -77,7 +75,6 @@ final class QRReaderCoordinatorTests: XCTestCase {
 			XCTAssertTrue(result == .codeRetrieved("Content"))
 			exp.fulfill()
 		}
-
 
 		sut.start()
 
@@ -122,7 +119,8 @@ final class FactoryCachingProxy: QRReaderFlowFactory {
 	}
 
 	private(set) var _environment: QRReader.QRCode.Environment!
-	func environment(inputParameters: (any QRReader.QRCodeCaptureListening, (QRReaderInterface.QRReaderFlowResult) -> Void)) -> QRReader.QRCode.Environment {
+	func environment(inputParameters: (any QRReader.QRCodeCaptureListening, (QRReaderInterface.QRReaderFlowResult) -> Void)) -> QRReader.QRCode.Environment
+	{
 		let value = _environment ?? realFactory.environment(inputParameters: inputParameters)
 		_environment = value
 		return value

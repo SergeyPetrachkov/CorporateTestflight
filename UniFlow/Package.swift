@@ -9,7 +9,7 @@ let package = Package(
 		.library(
 			name: "UniFlow",
 			targets: ["UniFlow"]
-		),
+		)
 	],
 	targets: [
 		.target(name: "UniFlow", swiftSettings: [.swiftLanguageMode(.v6)])

@@ -19,4 +19,3 @@ public struct TicketsRepositoryImpl: TicketsRepository {
 		return try await api.getTicket(key: key)
 	}
 }
-

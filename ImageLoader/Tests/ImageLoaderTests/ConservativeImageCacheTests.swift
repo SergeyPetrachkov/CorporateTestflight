@@ -120,7 +120,6 @@ struct ConservativeImageCacheTests {
 		await env.apiService.getResourceMock.returns(env.expectedImage.pngData()!)
 		let sut = env.makeSUT()
 
-
 		await withTaskGroup(of: Void.self) { group in
 			for _ in 0..<100 {
 				group.addTask {

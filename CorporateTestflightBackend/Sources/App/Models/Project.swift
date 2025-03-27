@@ -3,25 +3,25 @@ import Fluent
 
 final class Project {
 
-    @ID(custom: "id")
-    var id: Int?
+	@ID(custom: "id")
+	var id: Int?
 
-    @Field(key: "name")
-    var name: String
+	@Field(key: "name")
+	var name: String
 
-    @Children(for: \.$project)
-    var versions: [Version]
+	@Children(for: \.$project)
+	var versions: [Version]
 
-    init() {}
+	init() {}
 
-    init(id: Int? = nil, name: String) {
-        self.id = id
-        self.name = name
-    }
+	init(id: Int? = nil, name: String) {
+		self.id = id
+		self.name = name
+	}
 }
 
 extension Project: Model, Content {
-    static var schema: String {
-        "projects"
-    }
+	static var schema: String {
+		"projects"
+	}
 }

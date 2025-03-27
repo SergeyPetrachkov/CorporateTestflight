@@ -43,4 +43,3 @@ public final class TestflightAPIProvider: TestflightAPIProviding {
 		return try await SimpleRequestExecutor(urlSession: session, decoder: decoder).execute(urlRequest)
 	}
 }
-

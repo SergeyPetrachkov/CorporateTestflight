@@ -2,7 +2,7 @@ import SwiftUI
 
 public struct SkeletonView: View {
 
-	public init() { }
+	public init() {}
 
 	public var body: some View {
 		List {

@@ -84,7 +84,7 @@ final class VersionsListStore: ObservableObject, Store {
 		let lowercasedSearchTerm = searchTerm.lowercased()
 		return versions.filter {
 			$0.associatedTicketKeys.contains { $0.lowercased() == lowercasedSearchTerm }
-			|| ($0.releaseNotes ?? "").contains(lowercasedSearchTerm)
+				|| ($0.releaseNotes ?? "").contains(lowercasedSearchTerm)
 		}
 	}
 }

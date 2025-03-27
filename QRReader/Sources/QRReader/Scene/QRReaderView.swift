@@ -30,19 +30,19 @@ struct QRReaderView: View {
 	}
 
 	private var contentView: some View {
-#if targetEnvironment(simulator)
-		ZStack {
-			Image(uiImage: generateImage())
-				.interpolation(.none)
-				.resizable()
-				.scaledToFit()
-				.frame(width: 200, height: 200)
-			overlayView
-		}
-#else
-		ScannerView(captureSession: store.state.session)
-			.overlay(overlayView)
-#endif
+		#if targetEnvironment(simulator)
+			ZStack {
+				Image(uiImage: generateImage())
+					.interpolation(.none)
+					.resizable()
+					.scaledToFit()
+					.frame(width: 200, height: 200)
+				overlayView
+			}
+		#else
+			ScannerView(captureSession: store.state.session)
+				.overlay(overlayView)
+		#endif
 	}
 
 	private var overlayView: some View {

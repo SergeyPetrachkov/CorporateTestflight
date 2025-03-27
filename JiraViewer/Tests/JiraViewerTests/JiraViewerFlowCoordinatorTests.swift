@@ -23,13 +23,13 @@ struct JiraViewerFlowCoordinatorTests {
 
 		func makeSUT() -> JiraViewerFlowCoordinator {
 			parentViewController.presentMock.returns()
-			container.register(TestflightAPIProviding.self) { _,_ in
+			container.register(TestflightAPIProviding.self) { _, _ in
 				TestflightAPIProvidingMock()
 			}
-			container.register(ImageLoader.self) { _,_ in
+			container.register(ImageLoader.self) { _, _ in
 				ImageLoaderMock()
 			}
-			container.register(TicketsRepository.self) { _,_ in
+			container.register(TicketsRepository.self) { _, _ in
 				MockTicketsRepository()
 			}
 

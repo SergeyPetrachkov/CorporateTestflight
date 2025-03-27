@@ -44,7 +44,8 @@ struct VersionDetailsLoadedView: View {
 import CorporateTestflightDomain
 #Preview {
 	VersionDetailsLoadedView(
-		state: VersionDetailsLoadedView
+		state:
+			VersionDetailsLoadedView
 			.State(
 				version: Version(
 					id: UUID(),
@@ -95,4 +96,3 @@ import CorporateTestflightDomain
 		}
 	)
 }
-

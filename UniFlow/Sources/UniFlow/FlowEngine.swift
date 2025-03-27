@@ -10,7 +10,6 @@ public protocol FlowEngine: AnyObject {
 	func start() async -> Output
 }
 
-
 @available(iOS 13.0.0, *)
 @MainActor
 public protocol SyncFlowEngine: AnyObject {

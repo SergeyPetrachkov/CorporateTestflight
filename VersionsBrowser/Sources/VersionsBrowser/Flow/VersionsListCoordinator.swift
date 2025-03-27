@@ -46,7 +46,8 @@ final class VersionsListCoordinator: VersionsBrowserCoordinator {
 			}
 		)
 		let store = VersionDetailsStore(
-			initialState: .initial, environment: environment
+			initialState: .initial,
+			environment: environment
 		)
 		let view = VersionDetailsContainer(store: store)
 		let hostingVC = UIHostingController(rootView: view)
@@ -54,14 +55,16 @@ final class VersionsListCoordinator: VersionsBrowserCoordinator {
 	}
 
 	private func showJiraTicket(_ ticket: Ticket) {
-		guard let coordinator: any JiraViewerFlowCoordinating = input.resolver.resolve(
-			(any JiraViewerFlowCoordinating).self,
-			argument: JiraViewerFlowInput(
-				ticket: ticket,
-				parentViewController: input.parentViewController,
-				resolver: input.resolver
+		guard
+			let coordinator: any JiraViewerFlowCoordinating = input.resolver.resolve(
+				(any JiraViewerFlowCoordinating).self,
+				argument: JiraViewerFlowInput(
+					ticket: ticket,
+					parentViewController: input.parentViewController,
+					resolver: input.resolver
+				)
 			)
-		) else {
+		else {
 			return
 		}
 		coordinator.start()

@@ -17,7 +17,7 @@ struct SyncMockFuncTests {
 
 			sut.loadUrlWithCompletionMock.returns((cachedImageToReturn, imageToReturn))
 
-			sut.load(url: URL.sample, item: cachedImageToReturn) { _,_ in }
+			sut.load(url: URL.sample, item: cachedImageToReturn) { _, _ in }
 
 			#expect(sut.loadUrlWithCompletionMock.called)
 			#expect(sut.loadUrlWithCompletionMock.calledOnce)
@@ -162,7 +162,6 @@ struct SyncMockFuncTests {
 			let sut = MockImageLoader()
 			sut.lastLoadedThrowingMock.returnsNil()
 
-
 			let stream = AsyncThrowingStream { continuation in
 				sut.lastLoadedThrowingMock.whenCalled { _ in
 					continuation.yield()
@@ -187,7 +186,7 @@ struct SyncMockFuncTests {
 			let sut = MockImageLoader()
 			sut.purgeWithCompletionThrowingMock.returns()
 
-			try sut.purgeThrows { }
+			try sut.purgeThrows {}
 
 			#expect(sut.purgeWithCompletionThrowingMock.called)
 			#expect(sut.purgeWithCompletionThrowingMock.calledOnce)

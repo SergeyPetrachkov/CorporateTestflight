@@ -40,11 +40,10 @@ struct LoadedJiraContent: View {
 							image: UIImage(
 								systemName: "square"
 							)!
-						),
+						)
 					]
 				)
 			)
 		)
 	}
 }
-

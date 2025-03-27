@@ -18,7 +18,7 @@ public actor ImageCache: ImageLoader {
 	// MARK: - State
 	private let cache: NSCache<NSURL, LoadableImage> = {
 		let cache = NSCache<NSURL, LoadableImage>()
-		cache.countLimit = 3 // we set it up to play around with loading images
+		cache.countLimit = 3  // we set it up to play around with loading images
 		cache.evictsObjectsWithDiscardedContent = true
 		cache.name = "com.corporate-testflight.ImageCache"
 		return cache

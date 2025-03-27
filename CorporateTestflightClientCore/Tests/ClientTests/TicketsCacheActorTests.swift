@@ -77,7 +77,7 @@ final class TicketsCacheActorTests: XCTestCase {
 					_ = try? await sut.getTicket(key: "TEST-1")
 				}
 			}
-			for await _ in group { }
+			for await _ in group {}
 		}
 
 		// Then

@@ -22,11 +22,11 @@ final class QRReaderFlowFactoryImpl: QRReaderFlowFactory {
 	}
 
 	func capturingListener(inputParameters: AVCaptureSession) -> QRCodeCaptureListening {
-#if targetEnvironment(simulator)
-		QRCodeCaptureSimulatorListener()
-#else
-		QRCodeCaptureListener(session: inputParameters, sessionConfigurator:  CaptureSessionConfigurator())
-#endif
+		#if targetEnvironment(simulator)
+			QRCodeCaptureSimulatorListener()
+		#else
+			QRCodeCaptureListener(session: inputParameters, sessionConfigurator: CaptureSessionConfigurator())
+		#endif
 	}
 
 	func environment(inputParameters: (QRCodeCaptureListening, (QRReaderFlowResult) -> Void)) -> QRCode.Environment {

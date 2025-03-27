@@ -73,6 +73,6 @@ let package = Package(
 				"MockFunc"
 			],
 			swiftSettings: swiftSettings
-		),
+		)
 	]
 )

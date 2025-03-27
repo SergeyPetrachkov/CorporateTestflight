@@ -6,3 +6,6 @@ build_app:
 
 test_app:
 	xcodebuild -workspace CorporateTestflightPlatform.xcworkspace/ -scheme CorporateTestflightClient -testPlan CorporateTestflightClientTests -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' test
+
+format:
+	swift-format format --recursive --parallel --in-place --configuration .swift-format .

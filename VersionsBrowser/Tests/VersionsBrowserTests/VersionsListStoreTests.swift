@@ -22,9 +22,11 @@ struct VersionsListStoreTests {
 
 		func makeSUT() -> VersionsListStore {
 			VersionsListStore(
-				initialState: VersionList
+				initialState:
+					VersionList
 					.State(),
-				environment: VersionsListStore
+				environment:
+					VersionsListStore
 					.Environment(
 						project: projectID,
 						usecase: usecase,
@@ -103,7 +105,7 @@ struct VersionsListStoreTests {
 		let sut = env.makeSUT()
 		sut.state.seachTerm = "Key"
 
-		await sut.send(.start) // to load the project
+		await sut.send(.start)  // to load the project
 		await sut.send(action)
 
 		#expect(env.usecase.executeMock.input == env.projectID)
@@ -155,7 +157,7 @@ struct VersionsListStoreTests {
 		}
 		let sut = env.makeSUT()
 
-		await sut.send(.start) // to load versions
+		await sut.send(.start)  // to load versions
 		await sut.send(.tapItem(existingRow))
 
 		#expect(outputCalledCorrectly)
@@ -212,4 +214,3 @@ struct VersionsListStoreTests {
 		#expect(sut.state.contentState == .loading)
 	}
 }
-

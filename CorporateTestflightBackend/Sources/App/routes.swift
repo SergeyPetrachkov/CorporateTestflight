@@ -15,4 +15,3 @@ func routes(_ app: Application) throws {
 	try app.register(collection: TicketsController())
 	try app.register(collection: ImagesController())
 }
-

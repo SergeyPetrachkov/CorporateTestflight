@@ -4,7 +4,7 @@ import QRReaderInterface
 @MainActor
 public final class QRReaderAssembly: @preconcurrency Assembly {
 
-	public init() { }
+	public init() {}
 
 	public func assemble(container: Container) {
 		container.register((any QRReaderFlowCoordinating).self) { inputParameters, resolver in

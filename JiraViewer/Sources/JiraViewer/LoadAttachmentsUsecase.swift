@@ -16,21 +16,21 @@ struct LoadAttachmentsUsecaseImpl: LoadAttachmentsUsecase {
 			for enumeratedAttachment in attachments.enumerated() {
 				guard let url = URL(string: "http://localhost:8080/images/\(enumeratedAttachment.element)") else { continue }
 				group.addTask {
-//					do {
-						let image = try await imageLoader.load(url: url)
-						return (enumeratedAttachment.offset, url, image)
-//					}
-//					catch {
-//						print(error)
-//						return nil
-//					}
+					//					do {
+					let image = try await imageLoader.load(url: url)
+					return (enumeratedAttachment.offset, url, image)
+					//					}
+					//					catch {
+					//						print(error)
+					//						return nil
+					//					}
 				}
 			}
 			var result: [(Int, URL, LoadableImage)] = []
 			for try await imageResult in group {
-//				if let imageResult {
-					result.append(imageResult)
-//				}
+				//				if let imageResult {
+				result.append(imageResult)
+				//				}
 			}
 			return result.sorted(by: { $0.0 < $1.0 }).map { ($0.1, $0.2) }
 		}

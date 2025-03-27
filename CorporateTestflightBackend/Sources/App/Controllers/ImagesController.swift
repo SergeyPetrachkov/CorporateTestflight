@@ -17,7 +17,8 @@ struct ImagesController: RouteCollection {
 			throw Abort(.badRequest)
 		}
 
-		let res = try await req
+		let res =
+			try await req
 			.fileio
 			.asyncStreamFile(
 				at: req

@@ -43,7 +43,6 @@ let package = Package(
 				.product(name: "MockFunc", package: "MockFunc")
 			],
 			swiftSettings: [.swiftLanguageMode(.v6)]
-		),
+		)
 	]
 )
-

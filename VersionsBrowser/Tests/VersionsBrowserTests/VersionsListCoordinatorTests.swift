@@ -26,15 +26,15 @@ struct Environment {
 
 	func makeSUT() -> VersionsListCoordinator {
 
-		container.register(VersionsRepository.self) { _,_ in
+		container.register(VersionsRepository.self) { _, _ in
 			mockVersionsRepo
 		}
 
-		container.register(ProjectsRepository.self) { _,_ in
+		container.register(ProjectsRepository.self) { _, _ in
 			mockProjectsRepo
 		}
 
-		container.register(TicketsRepository.self) { _,_ in
+		container.register(TicketsRepository.self) { _, _ in
 			mockTicketRepo
 		}
 
@@ -173,7 +173,7 @@ final class CachingProxyVersionsBrowserFactory: VersionsBrowserFactory {
 			realFactory.environment(inputParameters: inputParameters)
 		}
 	}
-	
+
 	func store(inputParameters: (VersionList.State, VersionList.Environment)) -> VersionsListStore {
 		cacheProxy.cachedMethod(key: "store") {
 			realFactory.store(inputParameters: inputParameters)

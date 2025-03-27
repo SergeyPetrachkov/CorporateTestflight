@@ -9,11 +9,11 @@ final class AppAssembly: Assembly {
 
 	func assemble(container: SimpleDI.Container) {
 
-		container.registerSingleton((any TestflightAPIProviding).self) { _,_ in
+		container.registerSingleton((any TestflightAPIProviding).self) { _, _ in
 			TestflightAPIProvider(session: .shared, decoder: JSONDecoder())
 		}
 
-		container.registerSingleton((any ImageLoader).self) { _,resolver in
+		container.registerSingleton((any ImageLoader).self) { _, resolver in
 			guard let api = resolver.resolve((any TestflightAPIProviding).self) else {
 				fatalError("My self-written DI sucks!")
 			}

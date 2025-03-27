@@ -40,4 +40,3 @@ final class QRReaderStore: Store, ObservableObject {
 		}
 	}
 }
-

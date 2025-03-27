@@ -81,7 +81,7 @@ struct QRReaderStoreTests {
 		#expect(env.$output.assignments == [.codeRetrieved(expectedCode)])
 	}
 
-//	@Test("Store removes duplicate QR codes", .timeLimit(.minutes(1))) <---- Only in minutes, why apple?
+	//	@Test("Store removes duplicate QR codes", .timeLimit(.minutes(1))) <---- Only in minutes, why apple?
 	@Test("Store removes duplicate QR codes")
 	func storeRemovesDuplicates() async {
 		await withKnownIssue(isIntermittent: true) {

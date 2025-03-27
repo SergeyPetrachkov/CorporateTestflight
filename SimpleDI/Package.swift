@@ -9,7 +9,7 @@ let package = Package(
 		.library(
 			name: "SimpleDI",
 			targets: ["SimpleDI"]
-		),
+		)
 	],
 	targets: [
 		.target(
@@ -21,4 +21,3 @@ let package = Package(
 		)
 	]
 )
-

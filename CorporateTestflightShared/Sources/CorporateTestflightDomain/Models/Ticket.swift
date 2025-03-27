@@ -21,4 +21,3 @@ public struct Ticket: Sendable, Equatable {
 }
 
 extension Ticket: Codable {}
-

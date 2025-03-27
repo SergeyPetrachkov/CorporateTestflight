@@ -14,7 +14,7 @@ let package = Package(
 			targets: [
 				mockFuncName
 			]
-		),
+		)
 	],
 	targets: [
 		.target(
@@ -33,6 +33,6 @@ let package = Package(
 			swiftSettings: [
 				.swiftLanguageMode(.v6)
 			]
-		),
+		)
 	]
 )

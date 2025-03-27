@@ -47,10 +47,12 @@ final class AppCoordinator {
 			parentViewController: rootNavigationController
 		)
 
-		guard let coordinator: any QRReaderFlowCoordinating = resolver.resolve(
-			(any QRReaderFlowCoordinating).self,
-			argument: input
-		) else {
+		guard
+			let coordinator: any QRReaderFlowCoordinating = resolver.resolve(
+				(any QRReaderFlowCoordinating).self,
+				argument: input
+			)
+		else {
 			return
 		}
 		// Here we start a new Task, it may be not that ellegant.
@@ -65,12 +67,12 @@ final class AppCoordinator {
 		// or
 		// conservative coordinator with the output closure.
 		// we need to retain it in the property, otherwise it will be deallocated as soon as the scope of this function ends
-//		coordinator.output = { [weak self] result in
-//			self?.handleQRFlowResult(result)
-//			self?.qrCoordinator = nil
-//		}
-//		coordinator.start()
-//		qrCoordinator = coordinator
+		//		coordinator.output = { [weak self] result in
+		//			self?.handleQRFlowResult(result)
+		//			self?.qrCoordinator = nil
+		//		}
+		//		coordinator.start()
+		//		qrCoordinator = coordinator
 	}
 
 	private func handleQRFlowResult(_ result: QRReaderFlowResult) {
@@ -95,14 +97,16 @@ final class AppCoordinator {
 	}
 
 	private func showTicket(key: String) {
-		guard let coordinator: any JiraViewerFlowCoordinating = resolver.resolve(
-			(any JiraViewerFlowCoordinating).self,
-			argument: JiraViewerFlowInput(
-				ticket: Ticket(key: key),
-				parentViewController: rootNavigationController,
-				resolver: resolver
+		guard
+			let coordinator: any JiraViewerFlowCoordinating = resolver.resolve(
+				(any JiraViewerFlowCoordinating).self,
+				argument: JiraViewerFlowInput(
+					ticket: Ticket(key: key),
+					parentViewController: rootNavigationController,
+					resolver: resolver
+				)
 			)
-		) else {
+		else {
 			return
 		}
 		coordinator.start()

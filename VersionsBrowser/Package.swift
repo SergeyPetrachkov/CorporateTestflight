@@ -64,6 +64,6 @@ let package = Package(
 				"MockFunc",
 				domainDependency
 			]
-		),
+		)
 	]
 )

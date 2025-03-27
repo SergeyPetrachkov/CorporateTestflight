@@ -64,8 +64,7 @@ final class JiraViewerStore: Store, ObservableObject {
 						)
 					)
 				}
-			}
-			catch {
+			} catch {
 				if Task.isCancelled {
 					print("Task is cancelled, no error will be displayed")
 					return

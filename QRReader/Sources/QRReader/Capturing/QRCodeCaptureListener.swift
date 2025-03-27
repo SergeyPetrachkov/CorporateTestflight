@@ -15,18 +15,18 @@ protocol QRCodeCaptureListening: AnyObject {
 }
 
 #if targetEnvironment(simulator)
-final class QRCodeCaptureSimulatorListener: QRCodeCaptureListening {
-	func start() {}
+	final class QRCodeCaptureSimulatorListener: QRCodeCaptureListening {
+		func start() {}
 
-	func stop() {}
+		func stop() {}
 
-	func startStream() -> AsyncStream<String> {
-		AsyncStream { continuation in
-			continuation.yield("ticket:JIRA-1")
-			continuation.finish()
+		func startStream() -> AsyncStream<String> {
+			AsyncStream { continuation in
+				continuation.yield("ticket:JIRA-1")
+				continuation.finish()
+			}
 		}
 	}
-}
 #endif
 
 final class QRCodeCaptureListener: NSObject, QRCodeCaptureListening, AVCaptureMetadataOutputObjectsDelegate, @unchecked Sendable {
