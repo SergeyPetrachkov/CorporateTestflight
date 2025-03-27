@@ -1,5 +1,5 @@
 import XCTest
-@testable import CorporateTestflightClient
+@testable import Client
 
 final class QRCodeParserTests: XCTestCase {
 	func testParseTicketCode() throws {

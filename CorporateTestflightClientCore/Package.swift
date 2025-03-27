@@ -55,6 +55,18 @@ let testflightFoundation = "TestflightFoundation"
 let testflightFoundationTarget = Target.target(name: testflightFoundation, path: path(for: testflightFoundation), swiftSettings: swiftSettings)
 let testflightFoundationProduct = Product.library(name: testflightFoundation, targets: [testflightFoundation])
 
+let client = "Client"
+let clientTarget = Target.target(
+	name: client,
+	dependencies: [
+		domainTargetDependency,
+		testflightNetworkingDependency
+	],
+	path: path(for: client),
+	swiftSettings: swiftSettings
+)
+let clientProduct = Product.library(name: client, targets: [client])
+
 let package = Package(
 	name: "CorporateTestflightClientCore",
 	platforms: [.macOS(.v13), .iOS(.v16)],
@@ -63,6 +75,7 @@ let package = Package(
 		testflightNetworkingProduct,
 		testflightUIKitProduct,
 		testflightFoundationProduct,
+		clientProduct,
 		// Mocks
 		testflightNetworkingMockProduct
 	],
@@ -76,6 +89,8 @@ let package = Package(
 		testflightUIKitTarget,
 		testflightFoundationTarget,
 		testflightNetworkingMockTarget,
+		clientTarget,
+		.testTarget(name: "ClientTests", dependencies: ["Client", mockFuncDependency])
 	]
 )
 

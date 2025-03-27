@@ -3,6 +3,7 @@ import Foundation
 import SimpleDI
 import TestflightNetworking
 import ImageLoader
+import Client
 
 final class AppAssembly: Assembly {
 

@@ -21,6 +21,20 @@
     },
     {
       "target" : {
+        "containerPath" : "container:..\/SimpleDI",
+        "identifier" : "SimpleDITests",
+        "name" : "SimpleDITests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:..\/CorporateTestflightClientCore",
+        "identifier" : "ClientTests",
+        "name" : "ClientTests"
+      }
+    },
+    {
+      "target" : {
         "containerPath" : "container:..\/ImageLoader",
         "identifier" : "ImageLoaderTests",
         "name" : "ImageLoaderTests"
@@ -35,20 +49,6 @@
     },
     {
       "target" : {
-        "containerPath" : "container:..\/VersionsBrowser",
-        "identifier" : "VersionsBrowserTests",
-        "name" : "VersionsBrowserTests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:..\/SimpleDI",
-        "identifier" : "SimpleDITests",
-        "name" : "SimpleDITests"
-      }
-    },
-    {
-      "target" : {
         "containerPath" : "container:..\/MockFunc",
         "identifier" : "MockFuncTests",
         "name" : "MockFuncTests"
@@ -56,9 +56,9 @@
     },
     {
       "target" : {
-        "containerPath" : "container:CorporateTestflightClient.xcodeproj",
-        "identifier" : "39C3C0002B10B07C00F5D10D",
-        "name" : "CorporateTestflightClientTests"
+        "containerPath" : "container:..\/VersionsBrowser",
+        "identifier" : "VersionsBrowserTests",
+        "name" : "VersionsBrowserTests"
       }
     }
   ],

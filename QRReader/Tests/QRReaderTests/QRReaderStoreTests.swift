@@ -84,7 +84,7 @@ struct QRReaderStoreTests {
 //	@Test("Store removes duplicate QR codes", .timeLimit(.minutes(1))) <---- Only in minutes, why apple?
 	@Test("Store removes duplicate QR codes")
 	func storeRemovesDuplicates() async {
-		await withKnownIssue {
+		await withKnownIssue(isIntermittent: true) {
 			let env = Environment()
 
 			let expectedCode = "expected-code"

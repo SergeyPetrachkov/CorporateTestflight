@@ -7,6 +7,7 @@ import JiraViewerInterface
 import VersionsBrowserInterface
 import Foundation
 import TestflightFoundation
+import Client
 
 // Plan:
 // Coordinators and async-await

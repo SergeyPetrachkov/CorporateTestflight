@@ -1,13 +1,13 @@
 import Foundation
 import CorporateTestflightDomain
 
-enum QRCodeParseResult: Equatable {
+public enum QRCodeParseResult: Equatable {
 	case ticket(String)
 	case version(Version.ID)
 	case invalid
 }
 
-enum QRCodeParser {
+public enum QRCodeParser {
 	enum ParsingError: LocalizedError {
 		case invalidFormat
 
@@ -19,7 +19,7 @@ enum QRCodeParser {
 		}
 	}
 
-	static func parse(_ code: String) throws -> QRCodeParseResult {
+	public static func parse(_ code: String) throws -> QRCodeParseResult {
 		let components = code.split(separator: ":")
 		guard components.count == 2 else {
 			throw ParsingError.invalidFormat

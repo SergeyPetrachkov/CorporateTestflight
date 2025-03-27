@@ -1,7 +1,7 @@
 import XCTest
 import MockFunc
 import CorporateTestflightDomain
-@testable import CorporateTestflightClient
+import Client
 
 final class TicketsCacheActorTests: XCTestCase {
 

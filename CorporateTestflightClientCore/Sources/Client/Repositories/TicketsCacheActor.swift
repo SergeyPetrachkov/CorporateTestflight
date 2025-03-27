@@ -6,7 +6,7 @@ import CorporateTestflightDomain
 // State for an internal task
 // Final implementation
 
-actor TicketsCacheActor: TicketsRepository {
+public actor TicketsCacheActor: TicketsRepository {
 
 	private enum Cacheable<T> {
 		case cached(T)
@@ -19,12 +19,12 @@ actor TicketsCacheActor: TicketsRepository {
 	/// Tickets property stores the cached Tickets or Tasks-in-progress to retrieve tickets
 	private var tickets: [String: Cacheable<Ticket>] = [:]
 
-	init(repository: any TicketsRepository) {
+	public init(repository: any TicketsRepository) {
 		self.repository = repository
 	}
 
 	// We don't care about cache here, thus it's just a proxy call
-	func getTickets() async throws -> [CorporateTestflightDomain.Ticket] {
+	public func getTickets() async throws -> [CorporateTestflightDomain.Ticket] {
 		try await repository.getTickets()
 	}
 
@@ -37,7 +37,7 @@ actor TicketsCacheActor: TicketsRepository {
 	//   3. Await the value of the fetching Task
 	//      3.1 If the task succeeds, update the `tickets` property with `.cached(T)`
 	//      3.2 If the task fails, evict the record from the `ticketsz property, so it can be re-tried
-	func getTicket(key: String) async throws -> CorporateTestflightDomain.Ticket {
+	public func getTicket(key: String) async throws -> CorporateTestflightDomain.Ticket {
 		print("Entering actor for \(key)")
 		switch tickets[key] {
 		case .cached(let ticket):
