@@ -54,6 +54,6 @@ This way a module is a black-box and one can only work with it via inputs and ou
 To start, you need to checkout `workshop` branch. Main branch is the reference. 
 We only gonna work in the Horizontals and Verticals of the project. Backend and the shared codebase are not in the scope of the workshop.
 
-We will be filling in the blanks together during the live-coding sessions via TDD.
-We will also do the opposite: write tests for the existing code and compare Swift Testing with XCTest.
-In the end there will be Q&A session.
+* We will be filling in the blanks together during the live-coding sessions via TDD.
+* We will also do the opposite: write tests for the existing code and compare Swift Testing with XCTest.
+* In the end there will be Q&A session.
