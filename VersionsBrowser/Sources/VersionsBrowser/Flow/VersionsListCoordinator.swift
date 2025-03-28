@@ -23,6 +23,7 @@ final class VersionsListCoordinator: VersionsBrowserCoordinator {
 		self.factory = factory
 	}
 
+	// MARK: - Module flow
 	func start() {
 		let output: @MainActor (VersionList.Environment.Output) -> Void = { [weak self] action in
 			switch action {
@@ -39,37 +40,33 @@ final class VersionsListCoordinator: VersionsBrowserCoordinator {
 	}
 
 	private func showVersionDetails(_ version: Version) {
-		let environment = VersionDetails.Environment(
-			version: version,
-			fetchTicketsUsecase: FetchTicketsUseCase(
-				ticketsRepository: input.resolver.resolve(TicketsRepository.self)!
-			),
-			onTickedTapped: { [weak self] ticket in
-				self?.showJiraTicket(ticket)
-			}
+		let detailsVC = factory.versionDetailsController(
+			inputParameters: (
+				version: version,
+				onTicketTapped: { [weak self] ticket in
+					self?.showJiraTicket(
+						ticket
+					)
+				}
+			)
 		)
-		let store = VersionDetailsStore(
-			initialState: .initial,
-			environment: environment
-		)
-		let view = VersionDetailsContainer(store: store)
-		let hostingVC = UIHostingController(rootView: view)
-		input.parentViewController.pushViewController(hostingVC, animated: true)
+		input.parentViewController
+			.pushViewController(
+				detailsVC,
+				animated: true
+			)
 	}
 
+	// MARK: - External flow
 	private func showJiraTicket(_ ticket: Ticket) {
-		guard
-			let coordinator: any JiraViewerFlowCoordinating = input.resolver.resolve(
-				(any JiraViewerFlowCoordinating).self,
-				argument: JiraViewerFlowInput(
+		let coordinator = factory
+			.jiraFlowCoordinator(
+				inputParameters: JiraViewerFlowInput(
 					ticket: ticket,
 					parentViewController: input.parentViewController,
 					resolver: input.resolver
 				)
 			)
-		else {
-			return
-		}
 		coordinator.start()
 	}
 }

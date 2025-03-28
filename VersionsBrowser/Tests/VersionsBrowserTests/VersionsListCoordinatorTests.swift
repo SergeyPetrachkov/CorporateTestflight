@@ -2,6 +2,7 @@ import Testing
 import XCTest
 
 import VersionsBrowserInterface
+import JiraViewerInterface
 import SimpleDI
 import CorporateTestflightDomain
 import MockFunc
@@ -154,6 +155,7 @@ final class LazyProxyCachingFactory<Factory> {
 
 @dynamicMemberLookup
 final class CachingProxyVersionsBrowserFactory: VersionsBrowserFactory {
+
 	private let realFactory: VersionsBrowserFactory
 	private let cacheProxy: LazyProxyCachingFactory<VersionsBrowserFactory>
 
@@ -177,6 +179,18 @@ final class CachingProxyVersionsBrowserFactory: VersionsBrowserFactory {
 	func store(inputParameters: (VersionList.State, VersionList.Environment)) -> VersionsListStore {
 		cacheProxy.cachedMethod(key: "store") {
 			realFactory.store(inputParameters: inputParameters)
+		}
+	}
+
+	func versionDetailsController(inputParameters: (version: CorporateTestflightDomain.Version, onTicketTapped: (CorporateTestflightDomain.Ticket) -> Void)) -> UIViewController {
+		cacheProxy.cachedMethod(key: "versionDetailsController") {
+			realFactory.versionDetailsController(inputParameters: inputParameters)
+		}
+	}
+
+	func jiraFlowCoordinator(inputParameters: JiraViewerInterface.JiraViewerFlowInput) -> any JiraViewerInterface.JiraViewerFlowCoordinating {
+		cacheProxy.cachedMethod(key: "jiraFlowCoordinator") {
+			realFactory.jiraFlowCoordinator(inputParameters: inputParameters)
 		}
 	}
 }

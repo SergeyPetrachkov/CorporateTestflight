@@ -1,6 +1,9 @@
 import SimpleDI
 import VersionsBrowserInterface
 import CorporateTestflightDomain
+import JiraViewerInterface
+import UIKit
+import SwiftUI
 
 // Plan: 8
 // Factory vs Resolver and actor isolation
@@ -9,6 +12,10 @@ import CorporateTestflightDomain
 protocol VersionsBrowserFactory {
 	func environment(inputParameters: (VersionsBrowserFlowInput, @MainActor (VersionList.Environment.Output) -> Void)) -> VersionList.Environment
 	func store(inputParameters: (VersionList.State, VersionList.Environment)) -> VersionsListStore
+	
+	func versionDetailsController(inputParameters: (version: Version, onTicketTapped: (Ticket) -> Void)) -> UIViewController
+
+	func jiraFlowCoordinator(inputParameters: JiraViewerFlowInput) -> any JiraViewerFlowCoordinating
 }
 
 final class VersionsBrowserFactoryImpl: VersionsBrowserFactory {
@@ -33,5 +40,28 @@ final class VersionsBrowserFactoryImpl: VersionsBrowserFactory {
 
 	func store(inputParameters: (VersionList.State, VersionList.Environment)) -> VersionsListStore {
 		VersionsListStore(initialState: inputParameters.0, environment: inputParameters.1)
+	}
+
+	func versionDetailsController(inputParameters: (version: Version, onTicketTapped: (Ticket) -> Void)) -> UIViewController {
+		let environment = VersionDetails.Environment(
+			version: inputParameters.version,
+			fetchTicketsUsecase: FetchTicketsUseCase(
+				ticketsRepository: resolver.resolve(TicketsRepository.self)!
+			),
+			onTickedTapped: inputParameters.onTicketTapped
+		)
+		let store = VersionDetailsStore(
+			initialState: .initial,
+			environment: environment
+		)
+		let view = VersionDetailsContainer(store: store)
+		return UIHostingController(rootView: view)
+	}
+
+	func jiraFlowCoordinator(inputParameters: JiraViewerFlowInput) -> any JiraViewerFlowCoordinating {
+		resolver.resolve(
+			(any JiraViewerFlowCoordinating).self,
+			argument: inputParameters
+		)!
 	}
 }
