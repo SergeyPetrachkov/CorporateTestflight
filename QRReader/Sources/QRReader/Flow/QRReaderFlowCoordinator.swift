@@ -3,8 +3,10 @@ import QRReaderInterface
 import SwiftUI
 import SimpleDI
 
-// Plan:
-// Async cooridnator
+// Plan: 11 Async Coordinator
+// Walk through the module
+// Discuss the traditional output thingy
+// Show the async-await version
 
 final class QRReaderFlowCoordinator: QRReaderFlowCoordinating {
 

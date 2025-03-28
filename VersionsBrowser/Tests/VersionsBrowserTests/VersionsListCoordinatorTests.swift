@@ -10,6 +10,11 @@ import SwiftUI
 
 @testable import VersionsBrowser
 
+// Plan: 10 Coordinator tests
+
+// Create a test for the start function
+// How do I test this output thingy? Testing closures.
+
 @MainActor
 struct Environment {
 

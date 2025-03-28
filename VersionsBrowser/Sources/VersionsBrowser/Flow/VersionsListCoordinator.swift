@@ -6,8 +6,8 @@ import SimpleDI
 import UniFlow
 import VersionsBrowserInterface
 
-// Plan: 9
-// Starting a coordinator
+// Plan: 9 VersionsListCoordinator
+// Starting a coordinator is simple. But how do I test it? Coordinator is a blackbox with a single interface function.
 
 final class VersionsListCoordinator: VersionsBrowserCoordinator {
 

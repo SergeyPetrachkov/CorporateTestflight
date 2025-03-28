@@ -1,4 +1,4 @@
-// Plan: 4
+// Plan: 4 Uni Store
 // The SwiftUI uniflow arch. Opinionated solution, but acts as a guardrail to unify the codebase
 
 @available(iOS 13.0.0, *)

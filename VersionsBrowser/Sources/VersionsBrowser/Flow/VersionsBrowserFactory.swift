@@ -5,7 +5,7 @@ import JiraViewerInterface
 import UIKit
 import SwiftUI
 
-// Plan: 8
+// Plan: 8 Factory
 // Factory vs Resolver and actor isolation
 
 @MainActor
