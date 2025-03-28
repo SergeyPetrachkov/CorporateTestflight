@@ -42,16 +42,14 @@ final class JiraViewerStore: Store, ObservableObject {
 						description: fullTicket.description
 					)
 				}
-				if Task.isCancelled {
-					print("Task is cancelled, no attachments will be loaded")
-					return
-				}
+
+				try Task.checkCancellation()
+
 				if let attachmentsToLoad = environment.ticket.attachments {
 					let attachments = try await environment.attachmentLoader.execute(attachments: attachmentsToLoad)
-					if Task.isCancelled {
-						print("Task is cancelled, no attachments will be displayed")
-						return
-					}
+
+					try Task.checkCancellation()
+
 					state.footer = .loaded(
 						JiraViewer.TicketAttachmentsState(
 							images: attachments.map { JiraViewer.LoadedImage(resourceURL: $0.0, image: $0.1) }
@@ -64,11 +62,10 @@ final class JiraViewerStore: Store, ObservableObject {
 						)
 					)
 				}
-			} catch {
-				if Task.isCancelled {
-					print("Task is cancelled, no error will be displayed")
-					return
-				}
+			} catch is CancellationError {
+				print("Task is cancelled, no error will be displayed")
+			}
+			catch {
 				state.footer = .failed(.init(description: error.localizedDescription))
 			}
 		}
