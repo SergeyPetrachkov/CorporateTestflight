@@ -2,6 +2,9 @@ import SimpleDI
 import VersionsBrowserInterface
 import CorporateTestflightDomain
 
+// Plan: 8
+// Factory vs Resolver and actor isolation
+
 @MainActor
 protocol VersionsBrowserFactory {
 	func environment(inputParameters: (VersionsBrowserFlowInput, @MainActor (VersionList.Environment.Output) -> Void)) -> VersionList.Environment

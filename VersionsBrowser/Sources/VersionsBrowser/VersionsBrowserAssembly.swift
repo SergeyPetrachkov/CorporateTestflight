@@ -2,6 +2,9 @@ import SimpleDI
 import VersionsBrowserInterface
 import CorporateTestflightDomain
 
+// Plan 7:
+// An assembly of the versions browser. MainActor, preconcurrency.
+
 @MainActor
 public final class VersionsBrowserAssembly: @preconcurrency Assembly {
 

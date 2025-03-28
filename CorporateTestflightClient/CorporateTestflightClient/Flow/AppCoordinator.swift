@@ -9,8 +9,8 @@ import Foundation
 import TestflightFoundation
 import Client
 
-// Plan:
-// Coordinators and async-await
+// Plan: 3 The root navigation of the app.
+// Coordinators being sync entities could also be async, but it's not necessary.
 
 @MainActor
 final class AppCoordinator {

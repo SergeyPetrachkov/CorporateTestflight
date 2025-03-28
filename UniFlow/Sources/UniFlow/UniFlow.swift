@@ -1,5 +1,5 @@
-// Plan:
-// One unified interface for each and every screen
+// Plan: 4
+// The SwiftUI uniflow arch. Opinionated solution, but acts as a guardrail to unify the codebase
 
 @available(iOS 13.0.0, *)
 @MainActor

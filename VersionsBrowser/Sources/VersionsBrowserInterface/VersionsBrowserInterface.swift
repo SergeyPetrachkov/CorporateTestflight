@@ -3,6 +3,8 @@ import UIKit
 import UniFlow
 import SimpleDI
 
+// Plan 6:
+// Interface of the VersionsBrowser
 public protocol VersionsBrowserCoordinator: SyncFlowEngine where Input == VersionsBrowserFlowInput {
 	var output: ((VersionsBrowserOutput) -> Void)? { get set }
 }

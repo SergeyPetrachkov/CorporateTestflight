@@ -6,6 +6,9 @@ import SimpleDI
 import UniFlow
 import VersionsBrowserInterface
 
+// Plan: 9
+// Starting a coordinator
+
 final class VersionsListCoordinator: VersionsBrowserCoordinator {
 
 	typealias Input = VersionsBrowserFlowInput
