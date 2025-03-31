@@ -1,6 +1,6 @@
 import CorporateTestflightDomain
 
-// Plan:
+// Plan: 7.3 First actor TDD
 // Straight-forward implementation
 // Actor re-entrancy
 // State for an internal task

@@ -1,7 +1,7 @@
 import XCTest
 @testable import SimpleDI
 
-// Plan:
+// Plan: 0 GCD + Concurrency tests
 // Concurrency tests with GCD
 
 final class ContainerTests: XCTestCase {

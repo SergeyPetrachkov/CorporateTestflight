@@ -2,10 +2,11 @@ import SwiftUI
 import CorporateTestflightDomain
 import TestflightUIKit
 
-// Plan:
-// Container for behavior/plain dumb views for the rest
-// .task {}
-// .onChange
+// Plan: 6 SwiftUI
+// Explain the concept of Container and Behaviorless views. What should be tested and whatnot.
+// Start with just .start and .tapItem and .tapQR, later implement Search feature
+// .task {} as an entry point to the concurrency, State task to debounce successfully
+// .onChange as a search. Don't forget debouncing and cancellation
 
 struct VersionsListContainer: View {
 
@@ -63,13 +64,7 @@ struct VersionsListContainer: View {
 			}
 			.navigationTitle(content.projectTitle)
 			.toolbar {
-				ToolbarItem(placement: .primaryAction) {
-					Button("QR") {
-						Task {
-							await store.send(.tapQR)
-						}
-					}
-				}
+				toolbarContent
 			}
 		case .failed(let error):
 			ContentUnavailableView {
@@ -87,12 +82,16 @@ struct VersionsListContainer: View {
 			}
 			.navigationTitle("Oops...")
 			.toolbar {
-				ToolbarItem(placement: .primaryAction) {
-					Button("QR") {
-						Task {
-							await store.send(.tapQR)
-						}
-					}
+				toolbarContent
+			}
+		}
+	}
+
+	private var toolbarContent: some ToolbarContent {
+		ToolbarItem(placement: .primaryAction) {
+			Button("QR") {
+				Task {
+					await store.send(.tapQR)
 				}
 			}
 		}

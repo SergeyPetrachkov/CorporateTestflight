@@ -2,9 +2,9 @@ import Combine
 import CorporateTestflightDomain
 import UniFlow
 
-// Plan:
-// Implement Store
-// Nonisolated async
+// Plan: 7 Store implementation
+// Implement Store. Start from the empty store.
+// Introduce Nonisolated async as an optimisation
 // Cancellation Checks
 
 final class VersionsListStore: ObservableObject, Store {
@@ -13,7 +13,7 @@ final class VersionsListStore: ObservableObject, Store {
 	typealias Environment = VersionList.Environment
 	typealias Action = VersionList.Action
 
-	private(set) var environment: VersionList.Environment
+	let environment: VersionList.Environment
 
 	@Published var state: State
 
@@ -57,23 +57,25 @@ final class VersionsListStore: ObservableObject, Store {
 				state.contentState = .loading
 			}
 			let (project, builds) = try await environment.usecase.execute(projectId: environment.project)
-			if Task.isCancelled {
-				return
-			}
+
+			try Task.checkCancellation()
+
 			let mappedContent = await map(project: project, versions: builds)
-			if Task.isCancelled {
-				return
-			}
+
+			try Task.checkCancellation()
+
 			versions = builds
 			self.project = project
 			state.contentState = .loaded(mappedContent)
+		} catch is CancellationError {
+			print("Store cancelled")
 		} catch {
 			state.contentState = .failed(.init(localizedDescription: error.localizedDescription))
 		}
 	}
 
 	nonisolated private func map(project: Project, versions: [Version]) async -> VersionList.State.Content {
-		let rows = await environment.mapper.map(versions: versions)
+		let rows = environment.mapper.map(versions: versions)
 		return .init(projectTitle: project.name, versions: rows)
 	}
 

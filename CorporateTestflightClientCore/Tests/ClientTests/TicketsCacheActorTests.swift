@@ -3,6 +3,9 @@ import MockFunc
 import CorporateTestflightDomain
 import Client
 
+// Plan: 7.3: Actor tests
+// Define the criteria: Caching, Reusing existing tasks, Evicting failed tasks
+
 final class TicketsCacheActorTests: XCTestCase {
 
 	final class MockTicketsRepository: TicketsRepository {

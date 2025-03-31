@@ -11,6 +11,7 @@ import Client
 
 // Plan: 3 The root navigation of the app.
 // Coordinators being sync entities could also be async, but it's not necessary.
+// Just show the class and promise that we'll get to the async coordinators later.
 
 @MainActor
 final class AppCoordinator {

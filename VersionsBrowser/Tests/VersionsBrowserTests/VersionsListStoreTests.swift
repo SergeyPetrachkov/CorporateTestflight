@@ -4,7 +4,7 @@ import CorporateTestflightDomain
 import Foundation
 @testable import VersionsBrowser
 
-// Plan:
+// Plan: 7.1 Store tests
 // Parametric tests
 // Cancellation
 // Single interface function testing

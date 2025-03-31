@@ -1,6 +1,8 @@
 import Foundation
 import TestflightNetworking
 
+// Plan: 7.4 Actors in depth Intro
+
 // This is an example of a case where thought we were data-race and race-condition free.
 // But as soon as you get `async` keyword next to your function, you immediately introduce a possibility of a race condition
 // And no lock or mutex or whatever can fix that. Only actor + fixing actor-reentrancy

@@ -2,6 +2,9 @@ import CorporateTestflightDomain
 import Foundation
 import UniFlow
 
+// Plan: 7.2 Next scene
+// Just a walkthrough of the concurrent loading of tickets and move on to the caching and actor topic
+
 final class VersionDetailsStore: ObservableObject, Store {
 
 	typealias Environment = VersionDetails.Environment
@@ -52,11 +55,13 @@ final class VersionDetailsStore: ObservableObject, Store {
 			let version = environment.version
 			let tickets = try await environment.fetchTicketsUsecase.execute(for: version)
 			loadedTickets = tickets
-			if !Task.isCancelled {
-				state = .loaded(.init(version: version, tickets: tickets))
-			} else {
-				print("Store is stopped. State won't be published")
-			}
+
+			try Task.checkCancellation()
+
+			state = .loaded(.init(version: version, tickets: tickets))
+		}
+		catch is CancellationError {
+			print("Store is stopped. State won't be published")
 		} catch {
 			state = .failed(State.ErrorViewModel(message: error.localizedDescription))
 		}

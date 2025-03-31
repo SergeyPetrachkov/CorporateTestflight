@@ -17,6 +17,11 @@ protocol QRCodeCaptureListening: AnyObject {
 
 #if targetEnvironment(simulator)
 	final class QRCodeCaptureSimulatorListener: QRCodeCaptureListening {
+
+		deinit {
+			print("❌ deinit \(self)")
+		}
+
 		func start() {}
 
 		func stop() {}

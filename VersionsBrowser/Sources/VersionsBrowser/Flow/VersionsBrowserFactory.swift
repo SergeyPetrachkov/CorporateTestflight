@@ -6,7 +6,7 @@ import UIKit
 import SwiftUI
 
 // Plan: 8 Factory
-// Factory vs Resolver and actor isolation
+// Moving on to the Navigation and Coordination. Factory vs Resolver and actor isolation
 
 @MainActor
 protocol VersionsBrowserFactory {

@@ -4,7 +4,7 @@ import TestflightNetworking
 import TestflightNetworkingMock
 import Testing
 
-// Plan:
+// Plan: 7.4 ImageLoader Tests
 // Concurrency tests
 // require vs expect
 // await expect throws
