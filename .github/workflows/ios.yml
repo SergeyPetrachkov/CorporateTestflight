@@ -1,0 +1,22 @@
+name: iOS HealthCheck
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: Build and Test app
+    runs-on: macos-15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Select Xcode version
+        run: sudo xcode-select -s '/Applications/Xcode_16.2.app/Contents/Developer/'
+      - name: Build
+        run: make build_app
+      - name: Test
+        run: make test_app
