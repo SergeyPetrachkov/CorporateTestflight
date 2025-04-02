@@ -1,7 +1,7 @@
 import Vapor
 import Fluent
 
-final class Project {
+final class Project: @unchecked Sendable {
 
 	@ID(custom: "id")
 	var id: Int?

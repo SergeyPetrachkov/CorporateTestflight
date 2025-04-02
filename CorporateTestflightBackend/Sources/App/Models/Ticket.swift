@@ -1,7 +1,7 @@
 import Vapor
 import Fluent
 
-final class Ticket: Model, Content {
+final class Ticket: Model, Content, @unchecked Sendable {
 
 	static var schema: String {
 		"tickets"

@@ -1,7 +1,7 @@
 import Vapor
 import Fluent
 
-final class Version: Model, Content {
+final class Version: Model, Content, @unchecked Sendable {
 
 	static var schema: String {
 		"versions"
