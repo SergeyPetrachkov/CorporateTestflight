@@ -11,7 +11,6 @@ import TestflightUIKit
 struct VersionsListContainer: View {
 
 	@ObservedObject private var store: VersionsListStore
-	@State private var currentSearchTask: Task<Void, any Error>?
 
 	init(store: VersionsListStore) {
 		self.store = store
@@ -41,15 +40,12 @@ struct VersionsListContainer: View {
 			}
 			.searchable(text: $store.state.seachTerm, prompt: "Jira keys or release notes")
 			.onSubmit(of: .search) {
-				currentSearchTask?.cancel()
-				currentSearchTask = Task {
+				Task {
 					await store.send(.search)
 				}
 			}
 			.onChange(of: store.state.seachTerm) {
-				// here: we hold a reference to a task, we cancel the existing one and we also debounce via Task sleep
-				currentSearchTask?.cancel()
-				currentSearchTask = Task {
+				Task {
 					await store.send(.debouncedSearch)
 				}
 			}
