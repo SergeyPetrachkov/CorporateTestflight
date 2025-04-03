@@ -7,7 +7,7 @@ import TestflightFoundation
 
 @testable import JiraViewer
 
-// Plan:
+// Plan: 16
 // Parametric tests
 
 @Suite("Jira Viewer Store Tests")

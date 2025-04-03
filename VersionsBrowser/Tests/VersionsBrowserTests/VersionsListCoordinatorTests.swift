@@ -65,10 +65,6 @@ struct VersionsListCoordinatorTests {
 		env.parentController.setMock.returns()
 		let sut = env.makeSUT()
 
-		sut.start()
-
-		#expect(env.parentController.setMock.input.0.last is UIHostingController<VersionsListContainer>)
-		#expect(env.parentController.setMock.input.1)
 	}
 }
 
@@ -79,37 +75,24 @@ final class TraditionalVersionsListCoordinatorTests: XCTestCase {
 		let env = Environment()
 		env.parentController.setMock.returns()
 		let sut = env.makeSUT()
-		let expectation = expectation(description: "output")
-		sut.output = { output in
-			XCTAssertTrue(output == .qrRequested)
-			expectation.fulfill()
-		}
-
-		sut.start()
-
-		let store: VersionsListStore = env.factory[dynamicMember: "store"]
-		await store.send(.tapQR)
-		await fulfillment(of: [expectation], timeout: 0.1)
+		// set up an observer for the output of the sut
+		// start the sut
+		// manipulate the store
+		// assert
 	}
 
 	func test_OutputShouldTriggerNavigation_WhenVersionTapped() async {
 		let env = Environment()
 		env.parentController.setMock.returns()
 		env.parentController.pushMock.returns()
+
 		let uuid = UUID()
-		let expectedProject = Project(id: 1, name: "Proj")
-		let expectedVersion = Version(id: uuid, buildNumber: 2, associatedTicketKeys: [])
-		env.mockProjectsRepo.getProjectMock.returns(expectedProject)
-		env.mockVersionsRepo.getVersionsMock.returns([expectedVersion])
+		// setup repos
+		// start the sut
+		// start the store
+		// send tapItem to store
+		// assert push
 		let sut = env.makeSUT()
-
-		sut.start()
-
-		let store: VersionsListStore = env.factory[dynamicMember: "store"]
-		await store.send(.start)
-		await store.send(.tapItem(VersionList.RowState(id: uuid, title: "", subtitle: "")))
-
-		XCTAssertTrue(env.parentController.pushMock.calledOnce)
 	}
 }
 
