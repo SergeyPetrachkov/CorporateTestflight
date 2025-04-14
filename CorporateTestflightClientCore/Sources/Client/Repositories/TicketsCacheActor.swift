@@ -15,16 +15,8 @@ import CorporateTestflightDomain
 
 public actor TicketsCacheActor: TicketsRepository {
 
-	private enum Cacheable<T> {
-		case cached(T)
-		case inProgress(Task<T, any Error>)
-	}
-
 	/// The underlying repo implementation, that does the actual fetching
 	private let repository: any TicketsRepository
-
-	/// Tickets property stores the cached Tickets or Tasks-in-progress to retrieve tickets
-	private var tickets: [String: Cacheable<Ticket>] = [:]
 
 	public init(repository: any TicketsRepository) {
 		self.repository = repository
