@@ -77,16 +77,13 @@ final class ContainerTests: XCTestCase {
 
 	func testThreadSafety() {
 		let container = Container()
-		let expectation = self.expectation(description: "Thread safety test")
 		let iterations = 1000
 
 		DispatchQueue.concurrentPerform(iterations: iterations) { index in
+			print("\(Thread.current) <--> \(index)")
 			container.register(String.self) { (_, resolver) in "TestString\(index)" }
 			let resolvedString: String? = container.resolve(String.self)
 			XCTAssertNotNil(resolvedString)
 		}
-
-		expectation.fulfill()
-		wait(for: [expectation], timeout: 5.0)
 	}
 }
