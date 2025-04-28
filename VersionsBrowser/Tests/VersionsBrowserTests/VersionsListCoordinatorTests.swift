@@ -96,18 +96,12 @@ final class TraditionalVersionsListCoordinatorTests: XCTestCase {
 		let env = Environment()
 		env.parentController.setMock.returns()
 		env.parentController.pushMock.returns()
-		let uuid = UUID()
-		let expectedProject = Project(id: 1, name: "Proj")
-		let expectedVersion = Version(id: uuid, buildNumber: 2, associatedTicketKeys: [])
-		env.mockProjectsRepo.getProjectMock.returns(expectedProject)
-		env.mockVersionsRepo.getVersionsMock.returns([expectedVersion])
 		let sut = env.makeSUT()
 
 		sut.start()
 
-		let store: VersionsListStore = env.factory[dynamicMember: "store"]
-		await store.send(.start)
-		await store.send(.tapItem(VersionList.RowState(id: uuid, title: "", subtitle: "")))
+		let environment: VersionsListStore.Environment = env.factory[dynamicMember: "environment"]
+		environment.output(.selectedVersion(Version(id: UUID(), buildNumber: 1, associatedTicketKeys: [])))
 
 		XCTAssertTrue(env.parentController.pushMock.calledOnce)
 	}
