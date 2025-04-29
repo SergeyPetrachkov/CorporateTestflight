@@ -36,22 +36,17 @@ final class QRReaderCoordinatorTests: XCTestCase {
 	}
 
 	func test_coordinatorPresentsCorrectlyConfiguredView() async {
-		// Given
 		let env = Environment()
 		let sut = env.makeSUT()
 
-		// When
-
 		sut.start()
 
-		// Then
 		XCTAssertTrue(env.parentViewController.presentMock.calledOnce)
 		XCTAssertTrue(env.parentViewController.presentMock.input.0.wrappedValue is UIHostingController<QRReaderView>)
 		XCTAssertTrue(env.parentViewController.presentMock.input.0.wrappedValue?.isModalInPresentation ?? false)
 	}
 
 	func test_coordinatorResultsWithCancellation() async {
-
 		let env = Environment()
 		let sut = env.makeSUT()
 		let exp = expectation(description: "Output called")
@@ -62,12 +57,11 @@ final class QRReaderCoordinatorTests: XCTestCase {
 
 		sut.start()
 
-		await env.factory._store.send(.stop)
+		env.factory._environment.output(.cancelled)
 		await fulfillment(of: [exp], timeout: 1)
 	}
 
 	func test_coordinatorResultsWithQRCode() async {
-
 		let env = Environment()
 		let sut = env.makeSUT()
 		let exp = expectation(description: "Output called")
@@ -78,19 +72,18 @@ final class QRReaderCoordinatorTests: XCTestCase {
 
 		sut.start()
 
-		await env.factory._store.send(.tapScannedContent("Content"))
+		env.factory._environment.output(.codeRetrieved("Content"))
 		await fulfillment(of: [exp], timeout: 1)
 	}
 
 	func test_asyncStart() async throws {
-
 		let env = Environment()
 		let sut = env.makeSUT()
 
 		async let startTask = sut.startAsync()
 		try await Task.sleep(nanoseconds: 10_000)
 
-		await env.factory._store.send(.tapScannedContent("Content"))
+		env.factory._environment.output(.codeRetrieved("Content"))
 		let result = await startTask
 		XCTAssertTrue(result == .codeRetrieved("Content"))
 	}
@@ -119,8 +112,7 @@ final class FactoryCachingProxy: QRReaderFlowFactory {
 	}
 
 	private(set) var _environment: QRReader.QRCode.Environment!
-	func environment(inputParameters: (any QRReader.QRCodeCaptureListening, (QRReaderInterface.QRReaderFlowResult) -> Void)) -> QRReader.QRCode.Environment
-	{
+	func environment(inputParameters: (any QRReader.QRCodeCaptureListening, (QRReaderInterface.QRReaderFlowResult) -> Void)) -> QRReader.QRCode.Environment {
 		let value = _environment ?? realFactory.environment(inputParameters: inputParameters)
 		_environment = value
 		return value
