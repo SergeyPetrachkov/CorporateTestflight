@@ -19,18 +19,17 @@ struct VersionDetailsLoadedView: View {
 					.font(.title2)
 				Divider()
 				LazyVGrid(
-					columns: [GridItem(.adaptive(minimum: 80, maximum: 300))],
+					columns: [
+						GridItem(.adaptive(minimum: 85), spacing: 8),
+					],
 					alignment: .leading,
 					spacing: 8
 				) {
-					GridRow(alignment: .top) {
-						ForEach(state.ticketsModels) { ticket in
-							TicketView(state: ticket)
-								.fixedSize(horizontal: true, vertical: true)
-								.onTapGesture {
-									onTicketTapped(ticket)
-								}
-						}
+					ForEach(state.ticketsModels) { ticket in
+						TicketView(state: ticket)
+							.onTapGesture {
+								onTicketTapped(ticket)
+							}
 					}
 				}
 			}
@@ -50,42 +49,43 @@ import CorporateTestflightDomain
 				version: Version(
 					id: UUID(),
 					buildNumber: 1,
+					releaseNotes: "Something something",
 					associatedTicketKeys: ["Jira-1"]
 				),
 				tickets: [
 					.init(
 						id: UUID(),
-						key: "Jira-1",
+						key: "JIRA-1",
 						title: "title",
 						description: "descr"
 					),
 					.init(
 						id: UUID(),
-						key: "Jira-2",
+						key: "JIRA-22",
 						title: "title",
 						description: "descr"
 					),
 					.init(
 						id: UUID(),
-						key: "Jira-3",
+						key: "JIRA-3",
 						title: "title",
 						description: "descr"
 					),
 					.init(
 						id: UUID(),
-						key: "Jira-4",
+						key: "JIRA-4",
 						title: "title",
 						description: "descr"
 					),
 					.init(
 						id: UUID(),
-						key: "Jira-5",
+						key: "JIRA-5",
 						title: "title",
 						description: "descr"
 					),
 					.init(
 						id: UUID(),
-						key: "Jira-6",
+						key: "JIRA-655",
 						title: "title",
 						description: "descr"
 					)
@@ -95,4 +95,5 @@ import CorporateTestflightDomain
 			_ in
 		}
 	)
+	.padding()
 }

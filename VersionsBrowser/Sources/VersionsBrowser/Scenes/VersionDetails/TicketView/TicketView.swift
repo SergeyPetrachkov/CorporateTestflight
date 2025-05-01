@@ -8,10 +8,12 @@ struct TicketView: View {
 		Text(state.key)
 			.foregroundColor(.white)
 			.fontWeight(.bold)
+			.monospaced()
 			.padding(.vertical, 8)
 			.padding(.horizontal, 16)
 			.background(Color.blue)
 			.background(in: .capsule)
+			.fixedSize()
 	}
 }
 
