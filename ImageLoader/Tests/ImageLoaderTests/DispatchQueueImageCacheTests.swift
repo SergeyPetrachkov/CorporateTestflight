@@ -4,16 +4,16 @@ import TestflightNetworking
 import TestflightNetworkingMock
 import Testing
 
-@Suite("Conservative Image Cache Tests")
-struct ConservativeImageCacheTests {
+@Suite("DispatchQueue Image Cache Tests")
+struct DispatchQueueImageCacheTests {
 
 	struct Environment {
 		let url = URL(string: "https://example.com/image.jpg")!
 		let expectedImage = LoadableImage(systemName: "circle", variableValue: 0)!
 		let apiService = TestflightAPIProvidingMock()
 
-		func makeSUT() -> ConservativeImageCache {
-			ConservativeImageCache(apiService: apiService)
+		func makeSUT() -> DispatchQueueImageCache {
+			DispatchQueueImageCache(apiService: apiService)
 		}
 	}
 
@@ -60,7 +60,7 @@ struct ConservativeImageCacheTests {
 		await env.apiService.getResourceMock.returns(Data("invalid image data".utf8))
 		let sut = env.makeSUT()
 
-		await #expect(throws: ConservativeImageCache.ImageCacheError.failedDownloadingImage(env.url)) {
+		await #expect(throws: DispatchQueueImageCache.ImageCacheError.failedDownloadingImage(env.url)) {
 			_ = try await sut.load(url: env.url)
 		}
 	}
