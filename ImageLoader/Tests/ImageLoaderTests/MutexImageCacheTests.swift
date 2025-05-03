@@ -7,6 +7,7 @@ import Testing
 @Suite("Mutex Image Cache Tests")
 struct MutexImageCacheTests {
 
+	@available(iOS 18.0, *)
 	struct Environment {
 		let url = URL(string: "https://example.com/image.jpg")!
 		let expectedImage = LoadableImage(systemName: "circle", variableValue: 0)!
@@ -18,6 +19,7 @@ struct MutexImageCacheTests {
 	}
 
 	@Test
+	@available(iOS 18.0, *)
 	func returnsImageWhenImageExists() async throws {
 		let env = Environment()
 
@@ -30,6 +32,7 @@ struct MutexImageCacheTests {
 	}
 
 	@Test
+	@available(iOS 18.0, *)
 	func returnsCachedImageWhenImageWasLoadedBefore() async throws {
 		let env = Environment()
 		await env.apiService.getResourceMock.returns(env.expectedImage.pngData()!)
@@ -42,6 +45,7 @@ struct MutexImageCacheTests {
 	}
 
 	@Test
+	@available(iOS 18.0, *)
 	func reusesSameTaskWhenLoadingImageConcurrently() async throws {
 		let env = Environment()
 		await env.apiService.getResourceMock.returns(env.expectedImage.pngData()!)
@@ -55,6 +59,7 @@ struct MutexImageCacheTests {
 	}
 
 	@Test
+	@available(iOS 18.0, *)
 	func throwsErrorWhenImageDataIsInvalid() async throws {
 		let env = Environment()
 		await env.apiService.getResourceMock.returns(Data("invalid image data".utf8))
@@ -66,6 +71,7 @@ struct MutexImageCacheTests {
 	}
 
 	@Test
+	@available(iOS 18.0, *)
 	func createsNewTaskWhenPreviousTaskFailed() async throws {
 		let env = Environment()
 		let expectedError = NSError(domain: "test", code: -1)
@@ -83,6 +89,7 @@ struct MutexImageCacheTests {
 	}
 
 	@Test
+	@available(iOS 18.0, *)
 	func evictsCacheWhenLimitExceeded() async throws {
 		let env = Environment()
 		await env.apiService.getResourceMock.returns(env.expectedImage.pngData()!)
@@ -99,6 +106,7 @@ struct MutexImageCacheTests {
 	}
 
 	@Test
+	@available(iOS 18.0, *)
 	func handlesMutexCleanupCorrectly() async throws {
 		let env = Environment()
 		let expectedError = NSError(domain: "test", code: -1)
@@ -113,6 +121,7 @@ struct MutexImageCacheTests {
 	}
 
 	@Test
+	@available(iOS 18.0, *)
 	func threadSafety() async throws {
 		let env = Environment()
 		await env.apiService.getResourceMock.returns(env.expectedImage.pngData()!)

@@ -2,6 +2,7 @@ import Foundation
 import Synchronization
 import TestflightNetworking
 
+@available(iOS 18.0, *)
 public final class MutexImageCache: ImageLoader, @unchecked Sendable {
 
 	public enum ImageCacheError: Error, Equatable {
