@@ -46,7 +46,8 @@ struct VersionsListContainer: View {
 			}
 			.searchable(text: $store.state.seachTerm, prompt: "Jira keys or release notes")
 			.onSubmit(of: .search) {
-				Task {
+				currentSearchTask?.cancel()
+				currentSearchTask = Task {
 					await store.send(.search)
 				}
 			}
@@ -54,8 +55,6 @@ struct VersionsListContainer: View {
 				// here: we hold a reference to a task, we cancel the existing one and we also debounce via Task sleep
 				currentSearchTask?.cancel()
 				currentSearchTask = Task {
-					try await Task.sleep(for: .milliseconds(300))
-					try Task.checkCancellation()
 					await store.send(.debouncedSearch)
 				}
 			}

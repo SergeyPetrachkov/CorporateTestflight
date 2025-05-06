@@ -39,14 +39,16 @@ final class VersionsListStore: ObservableObject, Store {
 			environment.output(.selectedVersion(version))
 		case .tapQR:
 			environment.output(.qrRequested)
-		case .search, .debouncedSearch:
-			guard let project else {
-				state.contentState = .failed(.init(localizedDescription: "No project is loaded. Try refreshing."))
-				return
+		case .search:
+			await searchData()
+		case .debouncedSearch:
+			do {
+				try await Task.sleep(for: .milliseconds(environment.debounceMilliseconds))
+				try Task.checkCancellation()
+				await searchData()
+			} catch {
+				print(error)
 			}
-			let filteredVersions = await filterVersions(searchTerm: state.seachTerm, versions: versions)
-			let mappedContent = await map(project: project, versions: filteredVersions)
-			state.contentState = .loaded(mappedContent)
 		}
 		print("state >> '\(state)'")
 	}
@@ -72,6 +74,16 @@ final class VersionsListStore: ObservableObject, Store {
 		} catch {
 			state.contentState = .failed(.init(localizedDescription: error.localizedDescription))
 		}
+	}
+
+	private func searchData() async {
+		guard let project else {
+			state.contentState = .failed(.init(localizedDescription: "No project is loaded. Try refreshing."))
+			return
+		}
+		let filteredVersions = await filterVersions(searchTerm: state.seachTerm, versions: versions)
+		let mappedContent = await map(project: project, versions: filteredVersions)
+		state.contentState = .loaded(mappedContent)
 	}
 
 	nonisolated private func map(project: Project, versions: [Version]) async -> VersionList.State.Content {

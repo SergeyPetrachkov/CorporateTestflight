@@ -85,8 +85,23 @@ enum VersionList {
 		let project: Project.ID
 		let usecase: FetchProjectAndVersionsUsecase
 		let mapper: RowMapping
+		let debounceMilliseconds: Int
 
 		let output: @MainActor (Output) -> Void
+
+		init(
+			project: Project.ID,
+			usecase: FetchProjectAndVersionsUsecase,
+			mapper: RowMapping,
+			debounceMilliseconds: Int = 300,
+			output: @escaping @MainActor (Output) -> Void
+		) {
+			self.project = project
+			self.usecase = usecase
+			self.mapper = mapper
+			self.debounceMilliseconds = debounceMilliseconds
+			self.output = output
+		}
 	}
 
 	protocol RowMapping: Sendable {

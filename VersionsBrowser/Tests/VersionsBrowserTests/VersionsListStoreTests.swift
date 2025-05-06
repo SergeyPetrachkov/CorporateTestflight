@@ -31,6 +31,7 @@ struct VersionsListStoreTests {
 						project: projectID,
 						usecase: usecase,
 						mapper: mapper,
+						debounceMilliseconds: 0,
 						output: output
 					)
 			)
