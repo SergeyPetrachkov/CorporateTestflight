@@ -44,7 +44,6 @@ final class VersionsListStore: ObservableObject, Store {
 		case .debouncedSearch:
 			do {
 				try await Task.sleep(for: .milliseconds(environment.debounceMilliseconds))
-				try Task.checkCancellation()
 				await searchData()
 			} catch {
 				print(error)
