@@ -25,15 +25,10 @@ struct VersionsListContainer: View {
 	private var contentView: some View {
 		switch store.state.contentState {
 		case .loading:
-			skeleton
+			SkeletonView()
 				.navigationBarTitleDisplayMode(.inline)
 				.toolbar {
-					ToolbarItem(placement: .principal) {
-						HStack {
-							ProgressView()
-							Text("Loading").font(.headline)
-						}
-					}
+					loadingToolbarContent
 				}
 				.task {
 					await store.send(.start)
@@ -86,6 +81,15 @@ struct VersionsListContainer: View {
 		}
 	}
 
+	private var loadingToolbarContent: some ToolbarContent {
+		ToolbarItem(placement: .principal) {
+			HStack {
+				ProgressView()
+				Text("Loading").font(.headline)
+			}
+		}
+	}
+
 	private var toolbarContent: some ToolbarContent {
 		ToolbarItem(placement: .primaryAction) {
 			Button("QR") {
@@ -94,9 +98,5 @@ struct VersionsListContainer: View {
 				}
 			}
 		}
-	}
-
-	private var skeleton: some View {
-		SkeletonView()
 	}
 }
