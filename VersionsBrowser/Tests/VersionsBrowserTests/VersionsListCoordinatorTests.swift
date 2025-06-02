@@ -16,7 +16,7 @@ import SwiftUI
 // How do I test this output thingy? Testing closures.
 
 @MainActor
-struct Environment {
+private struct Environment {
 
 	let projectID = 1
 	let container = Container()
