@@ -87,14 +87,14 @@ enum VersionList {
 		let mapper: RowMapping
 		let debounceMilliseconds: Int
 
-		let output: @MainActor (Output) -> Void
+		let output: (Output) -> Void
 
 		init(
 			project: Project.ID,
 			usecase: FetchProjectAndVersionsUsecase,
 			mapper: RowMapping,
 			debounceMilliseconds: Int = 300,
-			output: @escaping @MainActor (Output) -> Void
+			output: @escaping (Output) -> Void
 		) {
 			self.project = project
 			self.usecase = usecase
@@ -104,10 +104,12 @@ enum VersionList {
 		}
 	}
 
+	// Make the protocol Sendable so conforming mappers can be passed across actors.
 	protocol RowMapping: Sendable {
 		func map(versions: [Version]) -> [RowState]
 	}
 
+	// RowMapper is a value type with no mutable shared state; it is safely Sendable.
 	struct RowMapper: RowMapping {
 		func map(versions: [Version]) -> [RowState] {
 			versions.map { version in

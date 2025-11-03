@@ -4,11 +4,6 @@ import TestflightNetworking
 import TestflightNetworkingMock
 import Testing
 
-// Plan: 7.4 ImageLoader Tests
-// Concurrency tests
-// require vs expect
-// await expect throws
-
 @Suite("Actor Image Cache Tests")
 struct ImageLoaderTests {
 

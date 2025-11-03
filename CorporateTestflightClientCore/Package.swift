@@ -1,4 +1,4 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.2
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -8,7 +8,11 @@ let domainTargetDependency = Target.Dependency.product(name: "CorporateTestfligh
 let mockFuncPackage = Package.Dependency.package(name: "MockFunc", path: "../MockFunc")
 let mockFuncDependency = Target.Dependency.product(name: "MockFunc", package: "MockFunc")
 
-let swiftSettings = [SwiftSetting.swiftLanguageMode(.v6)]
+let swiftSettings = [
+	SwiftSetting.swiftLanguageMode(.v6),
+	SwiftSetting.defaultIsolation(.none),
+	.strictMemorySafety()
+]
 
 let coreNetworking = "CoreNetworking"
 let coreNetworkingTarget = Target.target(

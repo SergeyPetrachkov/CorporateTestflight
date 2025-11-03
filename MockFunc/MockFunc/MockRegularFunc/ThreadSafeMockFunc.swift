@@ -1,25 +1,28 @@
 import Foundation
 
-/// This is a class that encapsulates Mock logic for any non-throwing non-async function that receives input of a certain type and produces output of a given type.
+/// This is an actor that encapsulates Mock logic for any non-throwing async function that receives input of a certain type and produces output of a given type.
 ///
-///	- Note: This mock can be used for async functions, but it's important to understand that the Mock class is not thread-safe and is only safe to use outside of highly concurrent contexts.
+///	- Note: This mock is recommended to use when you are testing highly concurrent code. The state mutation will be controlled via actor's executor.
 ///
-/// To start using mock, one needs to provide the `result` closure.
+/// To start using mock, one needs to provide the `result` closure using one of the convenience methods
+/// like `returns(_:)`, `succeeds(_:)`, `fails(_:)`.
 ///
-/// There are two ways to use it: by manually specifying types for the mock or by using convenience function `mock` that will make compiler infer the type.
-/// Sometimes (when dealing with closures) latter approach won't work, so it's recommended to use former.
 /// ```swift
 /// final class MockSomeAPI: SomeAPIProtocol {
 ///
-///   let searchMock = MockFunc<(String, [String: String]?), SearchResponse>()
-///   func search(query: String, attributes: [String: String]?, completion: @escaping (SearchResponse) -> Void) {
-///	     searchMock.callAndReturn((query, attributes), completion: completion)
+///   let lookupMock = ThreadSafeMockFunc<String, Result<SearchResponse, Error>>()
+///   func lookup(id: String) async -> Result<SearchResponse, Error> {
+///	     await lookupMock.callAndReturn(id)
 ///   }
 /// }
 /// ```
-public final class MockFunc<Input, Output>: MockFuncInvoking, @unchecked Sendable {
+public actor ThreadSafeMockFunc<Input, Output>: AsyncMockFuncInvoking, WhenCalledIsolatedConfigurable {
 
 	// MARK: - Properties
+
+	/// A result container that will be called to generate the mock's output.
+	/// This is a required property to set up before using the mock function.
+	private var result: ResultContainer<Input, Output>
 
 	/// A callback that is triggered when the mocked function is called.
 	private var didCall: (Input) -> Void = { _ in }
@@ -27,25 +30,12 @@ public final class MockFunc<Input, Output>: MockFuncInvoking, @unchecked Sendabl
 	/// A list of all arguments passed to the mocked function.
 	public private(set) var invocations: [Input] = []
 
-	/// A list of all completion closures called from the mocked function.
-	public private(set) var completions: [(Output) -> Void] = []
-
-	/// A way to inject the result. This is a required property to set up before using the mock function.
-	public private(set) var result: (Input) -> Output
-
-	/// When testing closure-based functions, this flag indicates if the completion closure should be triggered immediately (if set to true) or just put into `completions` if set to false.
+	/// The result of the mocked function.
 	///
-	/// Default value is true.
-	public var callsCompletionImmediately = true
-
-	/// The result of the mocked function
+	/// This computed property calls the result container with the provided input,
+	/// effectively executing the configured mock behavior.
 	public var output: Output {
 		result(input)
-	}
-
-	/// The last completion closure
-	public var completion: (Output) -> Void {
-		completions[count - 1]
 	}
 
 	// MARK: - Init
@@ -55,7 +45,7 @@ public final class MockFunc<Input, Output>: MockFuncInvoking, @unchecked Sendabl
 	///		- function: in our setup the #function will return the name of the Mock as all the mocks will be instantiated during the allocation of the mocked entity.
 	///		- line: line that will point to the exact place in file where this Mock was instantiated.
 	public init(function: StaticString = #function, line: Int = #line) {
-		result = { _ in fatalError("You must provide a result handler before using MockFunc instantiated at line: \(line) of \(function)") }
+		result = ResultContainer<Input, Output> { _ in fatalError("You must provide a result handler before using MockFunc instantiated at line: \(line) of \(function)") }
 	}
 
 	// MARK: - Class interface
@@ -72,27 +62,10 @@ public final class MockFunc<Input, Output>: MockFuncInvoking, @unchecked Sendabl
 	///	```
 	///	- Parameters:
 	/// 	- input: arguments of the mocked function.
-	public func callAndReturn(_ input: Input) -> Output {
-		call(with: input)
+	public func callAndReturn(_ input: sending Input) -> Output {
+		invocations.append(input)
+		didCall(input)
 		return output
-	}
-
-	/// Use this function when mocking closure-based function.
-	///
-	/// Triggering this function will:
-	/// 1) append input to the list of invocations
-	/// 2) trigger `didCall` callback
-	/// 3) append completion to the `completions`
-	/// 4) then trigger `result` when passing `output` to the completion if `callsCompletionImmediately` is set to true.
-	///
-	///	- Parameters:
-	/// 	- input: arguments of the mocked function.
-	public func callAndReturn(
-		_ input: Input,
-		completion: @escaping @isolated(any) (Output) -> Void
-	) {
-		call(with: input)
-		storeCompletionAndCallIfNeeded(completion, output: output)
 	}
 
 	/// Get notified when a function is called. The function's input will be provided inside the closure.
@@ -100,35 +73,14 @@ public final class MockFunc<Input, Output>: MockFuncInvoking, @unchecked Sendabl
 	///	- Note: This is a good place to put your `expectation.fulfill()` call if you need one.
 	/// - Parameters:
 	/// 	- closure: A callback that will be triggered when the mocked function is called.
-	public func whenCalled(closure: @escaping @isolated(any) (Input) -> Void) {
+	public func whenCalled(closure: sending @escaping (Input) -> Void) {
 		didCall = closure
-	}
-
-	// MARK: - Private mock logic
-
-	/// Triggering this function will append input to the list of invocations and trigger `didCall` callback.
-	///
-	///	- Parameters:
-	/// 	- input: arguments of the mocked function.
-	private func call(with input: Input) {
-		invocations.append(input)
-		didCall(input)
-	}
-
-	private func storeCompletionAndCallIfNeeded(
-		_ completion: @escaping (Output) -> Void,
-		output: @autoclosure () -> Output
-	) {
-		completions.append(completion)
-		if callsCompletionImmediately {
-			completion(output())
-		}
 	}
 }
 
 // MARK: - Convenience
 
-public extension MockFunc {
+public extension ThreadSafeMockFunc {
 
 	/// Set the result of the mocked function.
 	///
@@ -137,7 +89,7 @@ public extension MockFunc {
 	/// searchMock.returns(SearchResult(id: "1"))
 	/// ```
 	func returns(_ value: Output) {
-		result = { _ in value }
+		result = ResultContainer<Input, Output> { _ in value }
 	}
 
 	/// Set the result of the mocked function. For Void functions it's still necessary to provide the result, otherwise the mock is not considered configured.
@@ -149,7 +101,7 @@ public extension MockFunc {
 	/// searchMock.returns()
 	/// ```
 	func returns() where Output == Void {
-		result = { _ in () }
+		result = ResultContainer<Input, Output> { _ in () }
 	}
 
 	/// Set the result of the mocked function to `nil`.
@@ -160,8 +112,8 @@ public extension MockFunc {
 	/// ```swift
 	/// searchMock.returnsNil()
 	/// ```
-	func returnsNil<T>() where Output == T? {
-		result = { _ in nil }
+	func returnsNil<T>() where Output == Optional<T> {
+		result = ResultContainer<Input, Output> { _ in nil }
 	}
 
 	/// Set the successful result of the mocked function to the specified value.
@@ -177,7 +129,7 @@ public extension MockFunc {
 	/// searchMock.succeeds(SearchResult(id: "1"))
 	/// ```
 	func succeeds<T, Error>(_ value: T) where Output == Result<T, Error> {
-		result = { _ in .success(value) }
+		result = ResultContainer<Input, Output> { _ in .success(value) }
 	}
 
 	/// Set the successful result of the mocked function.  For Void functions it's still necessary to provide the result, otherwise the mock is not considered configured.
@@ -189,7 +141,7 @@ public extension MockFunc {
 	/// searchMock.succeeds()
 	/// ```
 	func succeeds<Error>() where Output == Result<Void, Error> {
-		result = { _ in .success(()) }
+		result = ResultContainer<Input, Output> { _ in .success(()) }
 	}
 
 	/// Set the result of the mocked function to the provided error.
@@ -205,19 +157,14 @@ public extension MockFunc {
 	/// searchMock.fails(Error.testError)
 	/// ```
 	func fails<T, Error>(_ error: Error) where Output == Result<T, Error> {
-		result = { _ in .failure(error) }
+		result = ResultContainer<Input, Output> { _ in .failure(error) }
 	}
 }
 
-public extension MockFunc where Input == Void {
-	/// A shorthand of `call(with: Input)` for functions without arguments.
-	func call() {
-		call(with: ())
-	}
+public extension ThreadSafeMockFunc where Input == Void {
 
 	/// A shorthand of `callAndReturn(with: Input) -> Output` for functions without arguments.
 	func callAndReturn() -> Output {
-		call(with: ())
-		return output
+		callAndReturn(())
 	}
 }

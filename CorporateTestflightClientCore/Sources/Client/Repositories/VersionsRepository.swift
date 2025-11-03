@@ -6,7 +6,7 @@ public struct VersionsRepositoryImpl: VersionsRepository {
 
 	private let api: any TestflightAPIProviding
 
-	public init(api: any TestflightAPIProviding) {
+	public init(api: some TestflightAPIProviding) {
 		self.api = api
 	}
 

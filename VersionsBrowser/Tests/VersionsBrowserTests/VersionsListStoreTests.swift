@@ -4,11 +4,6 @@ import CorporateTestflightDomain
 import Foundation
 @testable import VersionsBrowser
 
-// Plan: 7.1 Store tests
-// Parametric tests
-// Cancellation
-// Single interface function testing
-
 @Suite("Versions List Store")
 @MainActor
 struct VersionsListStoreTests {

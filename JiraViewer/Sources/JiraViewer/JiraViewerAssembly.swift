@@ -2,7 +2,7 @@ import JiraViewerInterface
 import SimpleDI
 
 @MainActor
-public final class JiraViewerAssembly: @preconcurrency Assembly {
+public final class JiraViewerAssembly: @MainActor Assembly {
 
 	public init() {}
 

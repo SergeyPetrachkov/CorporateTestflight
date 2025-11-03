@@ -4,11 +4,6 @@ import Foundation
 import TestflightFoundation
 import UniFlow
 
-// Plan:
-// Simple Store
-// Refreshable + Cancellation
-// Interface module
-
 final class JiraViewerStore: Store, ObservableObject {
 
 	typealias State = JiraViewer.State

@@ -1,12 +1,6 @@
 import AVFoundation
 import Foundation
 
-// Plan: 13 Async <-> Legacy bridge
-// Just a demonstration. Nothing to be written here
-// AsyncStream
-// Unchecked Sendable
-// Continuation
-
 protocol QRCodeCaptureListening: AnyObject {
 	func start()
 

@@ -12,7 +12,7 @@ enum VersionDetails {
 	enum Action: CustomDebugStringConvertible {
 		case start
 		case refresh
-		case tap(TicketView.State)
+		case tap(TicketViewState)
 
 		var debugDescription: String {
 			switch self {

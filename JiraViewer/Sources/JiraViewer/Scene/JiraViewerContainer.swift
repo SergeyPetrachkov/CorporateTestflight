@@ -14,13 +14,13 @@ struct JiraViewerContainer: View {
 			List {
 				switch store.state.footer {
 				case .loading:
-					Section {
+					Section("Ticket details") {
 						JiraTicketHeader(state: store.state.header)
 							.id(store.state.header.key)
 					}
 					.id(store.state.header.key)
-					Section {
-						ProgressView()
+					Section("Attachments") {
+						ProgressView().frame(maxWidth: .infinity)
 					}
 				case .loaded(let loadedFooter):
 					LoadedJiraContent(state: JiraViewer.LoadedState(header: store.state.header, footer: loadedFooter))
@@ -46,6 +46,7 @@ struct JiraViewerContainer: View {
 				}
 			}
 			.navigationTitle("Jira")
+			.navigationBarTitleDisplayMode(.inline)
 			.refreshable {
 				await store.send(.refresh)
 			}

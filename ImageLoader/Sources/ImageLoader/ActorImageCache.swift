@@ -1,10 +1,6 @@
 import Foundation
 import TestflightNetworking
 
-// Plan: 7.4 Actors in depth
-// Actor re-entrancy
-// NSCache
-
 public actor ImageCache: ImageLoader {
 
 	public enum ImageCacheError: Error, Equatable {

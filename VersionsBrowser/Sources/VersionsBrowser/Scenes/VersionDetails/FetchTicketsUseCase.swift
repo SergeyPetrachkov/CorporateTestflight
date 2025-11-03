@@ -1,7 +1,8 @@
 import CorporateTestflightDomain
 import Foundation
 
-protocol FetchTicketsUseCaseProtocol: Sendable {
+nonisolated protocol FetchTicketsUseCaseProtocol: Sendable {
+	@concurrent
 	func execute(for version: Version) async throws -> [Ticket]
 }
 

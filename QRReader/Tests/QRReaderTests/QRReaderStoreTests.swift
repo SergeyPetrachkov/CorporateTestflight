@@ -4,11 +4,6 @@ import QRReaderInterface
 import MockFunc
 @testable import QRReader
 
-// Plan: 14 QR Store Tests
-// start coverage
-// async stream (starts immediately!)
-// output testing? MockFunc and @Mock to the rescue again
-
 @Suite("QR Reader Store Tests")
 @MainActor
 struct QRReaderStoreTests {

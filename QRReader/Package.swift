@@ -1,11 +1,15 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.2
 
 import PackageDescription
 
 let moduleName = "QRReader"
 let interfaceModuleName = "\(moduleName)Interface"
 
-let swiftSettings = [SwiftSetting.swiftLanguageMode(.v6)]
+let swiftSettings = [
+	SwiftSetting.swiftLanguageMode(.v6),
+	.defaultIsolation(.none),
+	.strictMemorySafety()
+]
 
 let uniFlowDependency = Target.Dependency.product(name: "UniFlow", package: "UniFlow")
 let simpleDIDependency = Target.Dependency.product(name: "SimpleDI", package: "SimpleDI")

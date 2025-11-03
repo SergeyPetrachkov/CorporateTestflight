@@ -33,7 +33,8 @@ public final class Mock<T> {
 	public var projectedValue = MockVar<T>()
 	public var wrappedValue: T {
 		get {
-			projectedValue.return()
+			projectedValue.getCount += 1
+			return projectedValue.return()
 		}
 		set {
 			projectedValue.assign(newValue)
@@ -86,6 +87,13 @@ public final class MockVar<T> {
 	}
 
 	// MARK: - Properties
+
+	/// Returns how many times the setter was called
+	public var setCount: Int {
+		assignments.count
+	}
+	/// Returns how many times the getter was called
+	public fileprivate(set) var getCount = 0
 
 	/// An array of all values that were assigned to the mocked property.
 	public private(set) var assignments = [T]()

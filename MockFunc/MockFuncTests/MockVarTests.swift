@@ -69,4 +69,22 @@ struct MockVarTests {
 		await iterator.next()
 		#expect(sut.$intValue.assignments.last == 2)
 	}
+
+	@Test
+	func setterAccessIsCalculatedCorrectly() {
+		let sut = MockTestProtocol()
+		sut.intValue = 1
+		sut.intValue = 2
+		sut.intValue = 3
+		#expect(sut.$intValue.setCount == 3)
+	}
+
+	@Test
+	func getterAccessIsCalculatedCorrectly() {
+		let sut = MockTestProtocol()
+		sut.$intValue.returns(1)
+		_ = sut.intValue
+		_ = sut.intValue
+		#expect(sut.$intValue.getCount == 2)
+	}
 }

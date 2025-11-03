@@ -6,9 +6,6 @@ import SimpleDI
 import UniFlow
 import VersionsBrowserInterface
 
-// Plan: 9 VersionsListCoordinator
-// Starting a coordinator is simple. But how do I test it? Coordinator is a blackbox with a single interface function.
-
 final class VersionsListCoordinator: VersionsBrowserCoordinator {
 
 	typealias Input = VersionsBrowserFlowInput
@@ -25,7 +22,7 @@ final class VersionsListCoordinator: VersionsBrowserCoordinator {
 
 	// MARK: - Module flow
 	func start() {
-		let output: @MainActor (VersionList.Environment.Output) -> Void = { [weak self] action in
+		let output: (VersionList.Environment.Output) -> Void = { [weak self] action in
 			switch action {
 			case .selectedVersion(let version):
 				self?.showVersionDetails(version)
