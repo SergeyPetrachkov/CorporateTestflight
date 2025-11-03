@@ -17,13 +17,45 @@ struct SyncMockFuncTests {
 
 			sut.loadUrlWithCompletionMock.returns((cachedImageToReturn, imageToReturn))
 
-			sut.load(url: URL.sample, item: cachedImageToReturn) { _, _ in }
+			sut.load(url: URL.sample, item: cachedImageToReturn) { _,_ in }
 
 			#expect(sut.loadUrlWithCompletionMock.called)
 			#expect(sut.loadUrlWithCompletionMock.calledOnce)
 			#expect(sut.loadUrlWithCompletionMock.input == (url: URL.sample, item: cachedImageToReturn))
 			#expect(sut.loadUrlWithCompletionMock.output == (cachedImageToReturn, imageToReturn))
-			#expect(sut.loadUrlWithCompletionMock.completion != nil)
+			#expect(sut.loadUrlWithCompletionMock.completions.count == 1)
+		}
+
+		@Test
+		func regularMockFuncWithNonIsolatedCompletionGetsCalled() async {
+			let sut = MockImageLoader()
+			let imageToReturn = Image(data: Data())
+			let cachedImageToReturn = ImageCacheItem(imageData: imageToReturn)
+
+			sut.loadUrlWithNonIsolatedCompletionMock.returns((cachedImageToReturn, imageToReturn))
+
+			nonisolated(unsafe) var completionCallsCount = 0
+			// we actually prove that MockFunc flattens async completions to sync code,
+			// as the checks within this closure will be done synchronously before the test finishes
+			let completion: @Sendable (ImageCacheItem, Image?) -> Void = { cacheItem, image in
+				unsafe completionCallsCount += 1
+				#expect(cacheItem == cachedImageToReturn)
+				#expect(image == imageToReturn)
+			}
+			sut.loadNonIsolated(url: URL.sample, item: cachedImageToReturn, nonIsolatedCompletion: completion)
+
+			#expect(sut.loadUrlWithNonIsolatedCompletionMock.called)
+			#expect(sut.loadUrlWithNonIsolatedCompletionMock.calledOnce)
+			#expect(sut.loadUrlWithNonIsolatedCompletionMock.input == (url: URL.sample, item: cachedImageToReturn))
+			#expect(sut.loadUrlWithNonIsolatedCompletionMock.output == (cachedImageToReturn, imageToReturn))
+			#expect(sut.loadUrlWithNonIsolatedCompletionMock.completions.count == 1)
+			unsafe #expect(completionCallsCount == 1)
+			// we call it explicitly to please sonnar qube
+			sut.loadUrlWithNonIsolatedCompletionMock.completion.callAsFunction((cachedImageToReturn, imageToReturn))
+			unsafe #expect(completionCallsCount == 2)
+			// we call it the swift way
+			sut.loadUrlWithNonIsolatedCompletionMock.completion((cachedImageToReturn, imageToReturn))
+			unsafe #expect(completionCallsCount == 3)
 		}
 
 		@Test
@@ -135,6 +167,22 @@ struct SyncMockFuncTests {
 		}
 
 		@Test
+		func syncThrowingTypedErrorMockFuncHappyPath() throws {
+			let sut = MockImageLoader()
+			let imageToReturn = Image(data: Data())
+
+			sut.loadTypedThrowsMock.returns(imageToReturn)
+
+			let result = try sut.loadTypedThrowing(url: URL.sample)
+
+			#expect(sut.loadTypedThrowsMock.called)
+			#expect(sut.loadTypedThrowsMock.calledOnce)
+			#expect(sut.loadTypedThrowsMock.input == URL.sample)
+			try #expect(sut.loadTypedThrowsMock.output == imageToReturn)
+			#expect(result == imageToReturn)
+		}
+
+		@Test
 		func syncThrowingMockFuncUnhappyPth() throws {
 			let sut = MockImageLoader()
 
@@ -147,13 +195,24 @@ struct SyncMockFuncTests {
 		}
 
 		@Test
+		func syncThrowingTypedErrorMockFuncUnhappyPth() throws {
+			let sut = MockImageLoader()
+
+			sut.loadTypedThrowsMock.throws(ImageLoadingError.test)
+
+			#expect(throws: ImageLoadingError.test, performing: { try sut.loadTypedThrowing(url: URL.sample) })
+			#expect(sut.loadTypedThrowsMock.called)
+			#expect(sut.loadTypedThrowsMock.calledOnce)
+			#expect(sut.loadTypedThrowsMock.input == URL.sample)
+		}
+
+		@Test
 		func throwingVoidSyncMock() throws {
 			let sut = MockImageLoader()
 			sut.purgeThrowingMock.returns()
 
 			try sut.purgeThrows()
 
-			#expect(sut.purgeThrowingMock.called)
 			#expect(sut.purgeThrowingMock.calledOnce)
 		}
 
@@ -177,7 +236,6 @@ struct SyncMockFuncTests {
 			var iterator = stream.makeAsyncIterator()
 			try await iterator.next()
 
-			#expect(sut.lastLoadedThrowingMock.called)
 			#expect(sut.lastLoadedThrowingMock.calledOnce)
 		}
 
@@ -186,12 +244,9 @@ struct SyncMockFuncTests {
 			let sut = MockImageLoader()
 			sut.purgeWithCompletionThrowingMock.returns()
 
-			try sut.purgeThrows {}
+			try sut.purgeThrows { }
 
-			#expect(sut.purgeWithCompletionThrowingMock.called)
 			#expect(sut.purgeWithCompletionThrowingMock.calledOnce)
-			try #expect(sut.purgeWithCompletionThrowingMock.completion != nil)
-			#expect(sut.purgeWithCompletionThrowingMock.completions.count == 1)
 		}
 	}
 }

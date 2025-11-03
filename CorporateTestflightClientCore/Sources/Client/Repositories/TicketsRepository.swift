@@ -6,7 +6,7 @@ public struct TicketsRepositoryImpl: TicketsRepository {
 
 	private let api: any TestflightAPIProviding
 
-	public init(api: any TestflightAPIProviding) {
+	public init(api: some TestflightAPIProviding) {
 		self.api = api
 	}
 

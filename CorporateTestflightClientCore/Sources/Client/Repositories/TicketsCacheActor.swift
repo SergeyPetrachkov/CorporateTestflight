@@ -1,11 +1,5 @@
 import CorporateTestflightDomain
 
-// Plan: 7.3 First actor TDD
-// Straight-forward implementation
-// Actor re-entrancy
-// State for an internal task
-// Final implementation
-
 public actor TicketsCacheActor: TicketsRepository {
 
 	private enum Cacheable<T> {
@@ -19,7 +13,7 @@ public actor TicketsCacheActor: TicketsRepository {
 	/// Tickets property stores the cached Tickets or Tasks-in-progress to retrieve tickets
 	private var tickets: [String: Cacheable<Ticket>] = [:]
 
-	public init(repository: any TicketsRepository) {
+	public init(repository: some TicketsRepository) {
 		self.repository = repository
 	}
 

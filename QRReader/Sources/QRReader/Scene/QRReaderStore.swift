@@ -3,11 +3,6 @@ import Combine
 import UniFlow
 import AsyncAlgorithms
 
-// Plan: 12 QR Store
-// Async algorithms
-// Simple Store
-// Show View Layer
-
 final class QRReaderStore: Store, ObservableObject {
 	typealias State = QRCode.State
 	typealias Environment = QRCode.Environment

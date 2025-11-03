@@ -16,6 +16,7 @@ struct AsyncMockFuncTests {
 					await sut.purgeAsync()
 				}
 			}
+			for await _ in group { }
 		}
 
 		#expect(await sut.purgeAsyncMock.invocations.count == 1000)
@@ -32,6 +33,7 @@ struct AsyncMockFuncTests {
 					await sut.purgeAsync()
 				}
 			}
+			for await _ in group { }
 		}
 
 		#expect(await sut.purgeAsyncMock.invocations.count == 1000)

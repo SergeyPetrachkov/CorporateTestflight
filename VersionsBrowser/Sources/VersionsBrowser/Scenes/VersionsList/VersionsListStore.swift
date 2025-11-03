@@ -2,11 +2,6 @@ import Combine
 import CorporateTestflightDomain
 import UniFlow
 
-// Plan: 7 Store implementation
-// Implement Store. Start from the empty store.
-// Introduce Nonisolated async as an optimisation
-// Cancellation Checks
-
 final class VersionsListStore: ObservableObject, Store {
 
 	typealias State = VersionList.State
@@ -61,7 +56,7 @@ final class VersionsListStore: ObservableObject, Store {
 
 			try Task.checkCancellation()
 
-			let mappedContent = await map(project: project, versions: builds)
+			let mappedContent = await map(project: project, versions: builds, mapper: environment.mapper)
 
 			try Task.checkCancellation()
 
@@ -81,16 +76,20 @@ final class VersionsListStore: ObservableObject, Store {
 			return
 		}
 		let filteredVersions = await filterVersions(searchTerm: state.seachTerm, versions: versions)
-		let mappedContent = await map(project: project, versions: filteredVersions)
+		// Capture mapper on the main actor and pass it in.
+		let mapper = environment.mapper
+		let mappedContent = await map(project: project, versions: filteredVersions, mapper: mapper)
 		state.contentState = .loaded(mappedContent)
 	}
 
-	nonisolated private func map(project: Project, versions: [Version]) async -> VersionList.State.Content {
-		let rows = environment.mapper.map(versions: versions)
+	@concurrent
+	private func map(project: Project, versions: [Version], mapper: VersionList.RowMapping) async -> VersionList.State.Content {
+		let rows = await mapper.map(versions: versions)
 		return .init(projectTitle: project.name, versions: rows)
 	}
 
-	nonisolated private func filterVersions(searchTerm: String, versions: [Version]) async -> [Version] {
+	@concurrent
+	private func filterVersions(searchTerm: String, versions: [Version]) async -> [Version] {
 		guard !searchTerm.isEmpty else {
 			return versions
 		}

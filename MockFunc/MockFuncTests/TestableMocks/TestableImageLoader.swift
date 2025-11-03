@@ -9,6 +9,10 @@ struct Image: Equatable {
 	let data: Data
 }
 
+enum ImageLoadingError: Error, Equatable {
+	case test
+}
+
 /// This is a Mock that will be tested. It contains all sorts of nonsense functions, don't mind them.
 ///
 /// This is also marked as unchecked Sendable to be able to do the thread safety test with the task group. Swift 6 compiler is very strict about it.
@@ -27,6 +31,11 @@ final class MockImageLoader: @unchecked Sendable {
 		loadUrlWithCompletionMock.callAndReturn((url, item), completion: completion)
 	}
 
+	let loadUrlWithNonIsolatedCompletionMock = MockFunc<LoadUrlItemCompletionInput, (ImageCacheItem, Image?)>()
+	func loadNonIsolated(url: URL, item: ImageCacheItem, nonIsolatedCompletion: @escaping @Sendable (ImageCacheItem, Image?) -> Void) {
+		loadUrlWithNonIsolatedCompletionMock.callAndReturn((url, item), completion: nonIsolatedCompletion)
+	}
+
 	let loadUrlMock = MockFunc<URL, Image>()
 	func load(url: URL) -> Image {
 		loadUrlMock.callAndReturn(url)
@@ -35,6 +44,12 @@ final class MockImageLoader: @unchecked Sendable {
 	let loadUrlThrowingMock = MockThrowingFunc<URL, Image>()
 	func loadThrowing(url: URL) throws -> Image {
 		try loadUrlThrowingMock.callAndReturn(url)
+	}
+
+
+	let loadTypedThrowsMock = MockThrowingTypedErrorFunc<URL, Image, ImageLoadingError>()
+	func loadTypedThrowing(url: URL) throws(ImageLoadingError) -> Image {
+		try loadTypedThrowsMock.callAndReturn(url)
 	}
 
 	let loadResultMock = MockFunc<URL, Result<Image, Error>>()
@@ -67,9 +82,9 @@ final class MockImageLoader: @unchecked Sendable {
 		try lastLoadedThrowingMock.callAndReturn(())
 	}
 
-	let purgeWithCompletionThrowingMock = MockThrowingFunc<Void, Void>()
+	let purgeWithCompletionThrowingMock = MockThrowingFunc<() -> Void, Void>()
 	func purgeThrows(onFinish: @escaping () -> Void) throws {
-		try purgeWithCompletionThrowingMock.callAndReturn((), completion: onFinish)
+		try purgeWithCompletionThrowingMock.callAndReturn(onFinish)
 	}
 
 	// MARK: - Async API
@@ -91,7 +106,7 @@ final class MockImageLoader: @unchecked Sendable {
 
 	let purgeAsyncMock = ThreadSafeMockFunc<Void, Void>()
 	func purgeAsync() async {
-		await purgeAsyncMock.call()
+		await purgeAsyncMock.callAndReturn()
 	}
 
 	let purgeAsyncThrowingMock = ThreadSafeMockThrowingFunc<Void, Void>()
@@ -121,6 +136,6 @@ actor ActorMock {
 	let purgeAsyncMock = ThreadSafeMockFunc<Void, Void>()
 
 	func purgeAsync() async {
-		await purgeAsyncMock.call()
+		await purgeAsyncMock.callAndReturn()
 	}
 }

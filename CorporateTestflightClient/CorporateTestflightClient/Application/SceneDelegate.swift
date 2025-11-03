@@ -4,8 +4,6 @@ import QRReader
 import JiraViewer
 import VersionsBrowser
 
-// Plan: 1. SceneDelegate, a place where everything starts.
-
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 	var window: UIWindow?

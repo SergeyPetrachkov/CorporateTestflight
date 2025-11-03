@@ -5,12 +5,8 @@ import JiraViewerInterface
 import UIKit
 import SwiftUI
 
-// Plan: 8 Factory
-// Moving on to the Navigation and Coordination. Factory vs Resolver and actor isolation
-
-@MainActor
 protocol VersionsBrowserFactory {
-	func environment(inputParameters: (VersionsBrowserFlowInput, @MainActor (VersionList.Environment.Output) -> Void)) -> VersionList.Environment
+	func environment(inputParameters: (VersionsBrowserFlowInput, (VersionList.Environment.Output) -> Void)) -> VersionList.Environment
 	func store(inputParameters: (VersionList.State, VersionList.Environment)) -> VersionsListStore
 	
 	func versionDetailsController(inputParameters: (version: Version, onTicketTapped: (Ticket) -> Void)) -> UIViewController
@@ -26,7 +22,7 @@ final class VersionsBrowserFactoryImpl: VersionsBrowserFactory {
 		self.resolver = resolver
 	}
 
-	func environment(inputParameters: (VersionsBrowserFlowInput, @MainActor (VersionList.Environment.Output) -> Void)) -> VersionList.Environment {
+	func environment(inputParameters: (VersionsBrowserFlowInput, (VersionList.Environment.Output) -> Void)) -> VersionList.Environment {
 		VersionsListStore.Environment(
 			project: inputParameters.0.projectId,
 			usecase: FetchProjectAndVersionsUsecaseImpl(

@@ -7,22 +7,18 @@ struct VersionDetailsContainer: View {
 
 	var body: some View {
 		contentView(for: store.state)
-			.padding(.horizontal, 16)
 	}
 
 	@ViewBuilder
 	private func contentView(for state: VersionDetailsStore.State) -> some View {
-
 		switch store.state {
 		case .loading(let state):
 			loadingView(versionPreview: state)
 		case .loaded(let state):
-			ScrollView {
-				loadedView(detailsModel: state)
-			}
-			.refreshable {
-				await store.send(.refresh)
-			}
+			loadedView(detailsModel: state)
+				.refreshable {
+					await store.send(.refresh)
+				}
 		case .failed(let error):
 			ContentUnavailableView(
 				label: {

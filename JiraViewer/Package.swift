@@ -1,11 +1,15 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.2
 
 import PackageDescription
 
 let moduleName = "JiraViewer"
 let interfaceModuleName = "\(moduleName)Interface"
 
-let swiftSettings = [SwiftSetting.swiftLanguageMode(.v6)]
+let swiftSettings = [
+	SwiftSetting.swiftLanguageMode(.v6),
+	.defaultIsolation(.none),
+	.strictMemorySafety()
+]
 
 let uniFlowDependency = Target.Dependency.product(name: "UniFlow", package: "UniFlow")
 let simpleDIDependency = Target.Dependency.product(name: "SimpleDI", package: "SimpleDI")
@@ -17,7 +21,7 @@ let imageLoaderMockDependency = Target.Dependency.product(name: "ImageLoaderMock
 
 let package = Package(
 	name: moduleName,
-	platforms: [.iOS(.v17), .macOS(.v15)],
+	platforms: [.iOS(.v26), .macOS(.v26)],
 	products: [
 		.library(
 			name: interfaceModuleName,

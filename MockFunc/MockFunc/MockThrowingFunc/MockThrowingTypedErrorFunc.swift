@@ -1,36 +1,50 @@
 import Foundation
 
-/// This is an actor that encapsulates Mock logic for any throwing async function that receives input of a certain type and produces output of a given type.
+/// This is a class that encapsulates Mock logic for any throwing non-async function that receives input of a certain type and produces output of a given type.
 /// There is a separate object for throwing functions because otherwise if we used one universal object for all cases it would become less convenient to work with for non-throwing cases.
 ///
-///	- Note: This mock is recommended to use when you are testing highly concurrent code. The state mutation will be controlled via actors executor.
+///	- Note: This mock can be used for async functions, but it's important to understand that the Mock class is not thread-safe and is only safe to use outside of highly concurrent contexts. For concurrent scenarios, use `ThreadSafeMockThrowingTypedErrorFunc` instead.
 ///
-/// To start using mock, one needs to provide the `result` closure.
+/// To start using mock, one needs to provide the `result` closure using one of the convenience methods
+/// like `returns(_:)`, `throws(_:)`.
 ///
+/// There are two ways to use it: by manually specifying types for the mock or by using convenience function `mock` that will make compiler infer the type.
+/// Sometimes (when dealing with closures) latter approach won't work, so it's recommended to use former.
 /// ```swift
 /// final class MockSomeAPI: SomeAPIProtocol {
+///   let searchTypedThrowsMock = MockThrowingTypedErrorFunc<String, SearchResponse, SearchError>()
+///   func search(query: String) throws(SearchError) -> SearchResponse {
+///	     try searchTypedThrowsMock.callAndReturn(query)
+///   }
 ///
-///   let lookupMock = MockThrowingFunc<String, SearchResponse>()
-///   func lookup(id: String) async throws -> SearchResponse {
-///	     try lookupMock.callAndReturn(id)
+///   let asyncLookupMock = MockThrowingTypedErrorFunc<String, SearchResponse, APIError>()
+///   func asyncLookup(id: String) async throws(APIError) -> SearchResponse {
+///	     try asyncLookupMock.callAndReturn(id)
 ///   }
 /// }
 /// ```
-public actor ThreadSafeMockThrowingFunc<Input, Output>: AsyncMockFuncInvoking {
+public final class MockThrowingTypedErrorFunc<Input, Output, ErrorType: Swift.Error>: MockFuncInvoking, WhenCalledConfigurable, @unchecked Sendable {
+
+	public typealias ResultContainer = ThrowingResultContainer<Input, ErrorType, Output>
 
 	// MARK: - Properties
+
+	/// A result container that will be called to generate the mock's output.
+	/// This is a required property to set up before using the mock function.
+	private var result: ResultContainer
+
 	/// A callback that is triggered when the mocked function is called.
-	private var didCall: (Input) throws -> Void = { _ in }
+	private var didCall: (Input) -> Void = { _ in }
 
 	/// A list of all arguments passed to the mocked function.
 	public private(set) var invocations: [Input] = []
 
-	/// A way to inject the result. This is a required property to set up before using the mock function.
-	public private(set) var result: (Input) throws -> Output
-
-	/// The result of the mocked function
+	/// The result of the mocked function.
+	///
+	/// This computed property calls the result container with the provided input,
+	/// effectively executing the configured mock behavior.
 	public var output: Output {
-		get throws {
+		get throws(ErrorType) {
 			try result(input)
 		}
 	}
@@ -42,7 +56,7 @@ public actor ThreadSafeMockThrowingFunc<Input, Output>: AsyncMockFuncInvoking {
 	///		- function: in our setup the #function will return the name of the Mock as all the mocks will be instantiated during the allocation of the mocked entity.
 	///		- line: line that will point to the exact place in file where this Mock was instantiated.
 	public init(function: StaticString = #function, line: Int = #line) {
-		result = { _ in fatalError("You must provide a result handler before using MockFunc instantiated at line: \(line) of \(function)") }
+		result = ResultContainer { _ in fatalError("You must provide a result handler before using MockFunc instantiated at line: \(line) of \(function)") }
 	}
 
 	// MARK: - Class interface
@@ -59,8 +73,9 @@ public actor ThreadSafeMockThrowingFunc<Input, Output>: AsyncMockFuncInvoking {
 	///	```
 	///	- Parameters:
 	/// 	- input: arguments of the mocked function.
-	public func callAndReturn(_ input: Input) throws -> Output {
-		try call(with: input)
+	public func callAndReturn(_ input: Input) throws(ErrorType) -> Output {
+		invocations.append(input)
+		didCall(input)
 		return try output
 	}
 
@@ -69,25 +84,14 @@ public actor ThreadSafeMockThrowingFunc<Input, Output>: AsyncMockFuncInvoking {
 	///	- Note: This is a good place to put your `expectation.fulfill()` call if you need one.
 	/// - Parameters:
 	/// 	- closure: A callback that will be triggered when the mocked function is called.
-	public func whenCalled(closure: @escaping (Input) throws -> Void) {
+	public func whenCalled(closure: @escaping (Input) -> Void) {
 		didCall = closure
-	}
-
-	// MARK: - Private mock logic
-
-	/// Triggering this function will append input to the list of invocations and trigger `didCall` callback.
-	///
-	///	- Parameters:
-	/// 	- input: arguments of the mocked function.
-	private func call(with input: Input) throws {
-		invocations.append(input)
-		try didCall(input)
 	}
 }
 
 // MARK: - Convenience
 
-public extension ThreadSafeMockThrowingFunc {
+public extension MockThrowingTypedErrorFunc {
 
 	/// Set the result of the mocked function.
 	///
@@ -96,7 +100,7 @@ public extension ThreadSafeMockThrowingFunc {
 	/// searchMock.returns(SearchResult(id: "1"))
 	/// ```
 	func returns(_ value: Output) {
-		result = { _ in value }
+		result = ResultContainer { _ in value }
 	}
 
 	/// Set the result of the mocked function. For Void functions it's still necessary to provide the result, otherwise the mock is not considered configured.
@@ -106,7 +110,7 @@ public extension ThreadSafeMockThrowingFunc {
 	/// searchMock.returns()
 	/// ```
 	func returns() where Output == Void {
-		result = { _ in () }
+		result = ResultContainer { _ in () }
 	}
 
 	/// Set the result of the mocked function to `nil`.
@@ -117,8 +121,8 @@ public extension ThreadSafeMockThrowingFunc {
 	/// ```swift
 	/// searchMock.returnsNil()
 	/// ```
-	func returnsNil<T>() where Output == Optional<T> {
-		result = { _ in nil }
+	func returnsNil<T>() where Output == T? {
+		result = ResultContainer { _ in nil }
 	}
 
 	/// Set the error that must be thrown instead of the result of the mocked function.
@@ -127,7 +131,9 @@ public extension ThreadSafeMockThrowingFunc {
 	/// ```swift
 	/// searchMock.throws(Error.testError)
 	/// ```
-	func `throws`(_ error: Error) {
-		result = { _ in throw error }
+	func `throws`(_ error: ErrorType) {
+		result = ResultContainer { _ throws(ErrorType) in
+			throw error
+		}
 	}
 }

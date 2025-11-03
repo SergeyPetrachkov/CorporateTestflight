@@ -1,6 +1,7 @@
 import CorporateTestflightDomain
 
-protocol FetchProjectAndVersionsUsecase: Sendable {
+nonisolated protocol FetchProjectAndVersionsUsecase: Sendable {
+	@concurrent
 	func execute(projectId: Int) async throws -> (project: Project, versions: [Version])
 }
 

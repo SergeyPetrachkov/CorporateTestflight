@@ -1,13 +1,11 @@
 import Foundation
 import TestflightNetworking
 
-// Plan: 7.4 Actors in depth Intro
-
 // This is an example of a case where thought we were data-race and race-condition free.
 // But as soon as you get `async` keyword next to your function, you immediately introduce a possibility of a race condition
 // And no lock or mutex or whatever can fix that. Only actor + fixing actor-reentrancy
 
-public final class ConservativeImageCache: ImageLoader, @unchecked Sendable {
+public final class ConservativeImageCache: ImageLoader {
 
 	public enum ImageCacheError: Error, Equatable {
 		case failedDownloadingImage(URL)
@@ -18,7 +16,7 @@ public final class ConservativeImageCache: ImageLoader, @unchecked Sendable {
 	private let lock = NSRecursiveLock()
 
 	// MARK: - State
-	private let cache: NSCache<NSURL, LoadableImage> = {
+	private nonisolated(unsafe) let cache: NSCache<NSURL, LoadableImage> = {
 		let cache = NSCache<NSURL, LoadableImage>()
 		cache.countLimit = 3
 		cache.evictsObjectsWithDiscardedContent = true
@@ -26,7 +24,7 @@ public final class ConservativeImageCache: ImageLoader, @unchecked Sendable {
 		return cache
 	}()
 
-	private var registeredTasks: [URL: Task<LoadableImage, any Error>] = [:]
+	private nonisolated(unsafe) var registeredTasks: [URL: Task<LoadableImage, any Error>] = [:]
 
 	// MARK: - Initializer
 	public init(apiService: TestflightAPIProviding) {
@@ -35,7 +33,7 @@ public final class ConservativeImageCache: ImageLoader, @unchecked Sendable {
 
 	/// Load an image by a given URL.
 	public func load(url: URL) async throws -> LoadableImage {
-		if let cachedImage = cache.object(forKey: url as NSURL) {
+		if let cachedImage = unsafe cache.object(forKey: url as NSURL) {
 			return cachedImage
 		}
 		let loadingTask = getOrCreateTask(for: url)
@@ -48,11 +46,11 @@ public final class ConservativeImageCache: ImageLoader, @unchecked Sendable {
 		defer {
 			lock.unlock()
 		}
-		if let currentActiveTask = registeredTasks[url] {
+		if let currentActiveTask = unsafe registeredTasks[url] {
 			return currentActiveTask
 		} else {
 			let newLoadingTask = fetchImageTask(for: url)
-			registeredTasks[url] = newLoadingTask
+			unsafe registeredTasks[url] = newLoadingTask
 			return newLoadingTask
 		}
 	}
@@ -62,7 +60,7 @@ public final class ConservativeImageCache: ImageLoader, @unchecked Sendable {
 		Task {
 			defer {
 				lock.withLock {
-					registeredTasks[url] = nil
+					unsafe registeredTasks[url] = nil
 				}
 			}
 			let responseData = try await apiService.getResource(url: url)
@@ -70,7 +68,7 @@ public final class ConservativeImageCache: ImageLoader, @unchecked Sendable {
 				throw ImageCacheError.failedDownloadingImage(url)
 			}
 
-			cache.setObject(image, forKey: url as NSURL, cost: responseData.count)
+			unsafe cache.setObject(image, forKey: url as NSURL, cost: responseData.count)
 
 			return image
 		}

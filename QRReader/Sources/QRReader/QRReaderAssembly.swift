@@ -2,7 +2,7 @@ import SimpleDI
 import QRReaderInterface
 
 @MainActor
-public final class QRReaderAssembly: @preconcurrency Assembly {
+public final class QRReaderAssembly: @MainActor Assembly {
 
 	public init() {}
 

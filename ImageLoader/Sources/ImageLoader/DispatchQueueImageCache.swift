@@ -1,7 +1,7 @@
 import Foundation
 import TestflightNetworking
 
-public final class DispatchQueueImageCache: ImageLoader, @unchecked Sendable {
+public final class DispatchQueueImageCache: ImageLoader {
 
 	public enum ImageCacheError: Error, Equatable {
 		case failedDownloadingImage(URL)
@@ -12,7 +12,7 @@ public final class DispatchQueueImageCache: ImageLoader, @unchecked Sendable {
 	private let queue = DispatchQueue(label: "DispatchQueueImageCache.syncQueue")
 
 	// MARK: - State
-	private let cache: NSCache<NSURL, LoadableImage> = {
+	private nonisolated(unsafe) let cache: NSCache<NSURL, LoadableImage> = {
 		let cache = NSCache<NSURL, LoadableImage>()
 		cache.countLimit = 3
 		cache.evictsObjectsWithDiscardedContent = true
@@ -20,7 +20,7 @@ public final class DispatchQueueImageCache: ImageLoader, @unchecked Sendable {
 		return cache
 	}()
 
-	private var registeredTasks: [URL: Task<LoadableImage, any Error>] = [:]
+	private nonisolated(unsafe) var registeredTasks: [URL: Task<LoadableImage, any Error>] = [:]
 
 	// MARK: - Initializer
 	public init(apiService: TestflightAPIProviding) {
@@ -29,7 +29,7 @@ public final class DispatchQueueImageCache: ImageLoader, @unchecked Sendable {
 
 	/// Load an image by a given URL.
 	public func load(url: URL) async throws -> LoadableImage {
-		if let cachedImage = cache.object(forKey: url as NSURL) {
+		if let cachedImage = unsafe cache.object(forKey: url as NSURL) {
 			return cachedImage
 		}
 		let loadingTask = getOrCreateTask(for: url)
@@ -39,11 +39,11 @@ public final class DispatchQueueImageCache: ImageLoader, @unchecked Sendable {
 
 	private func getOrCreateTask(for url: URL) -> Task<LoadableImage, any Error> {
 		queue.sync {
-			if let currentActiveTask = registeredTasks[url] {
+			if let currentActiveTask = unsafe registeredTasks[url] {
 				return currentActiveTask
 			} else {
 				let newLoadingTask = fetchImageTask(for: url)
-				registeredTasks[url] = newLoadingTask
+				unsafe registeredTasks[url] = newLoadingTask
 				return newLoadingTask
 			}
 		}
@@ -54,7 +54,7 @@ public final class DispatchQueueImageCache: ImageLoader, @unchecked Sendable {
 		Task {
 			defer {
 				queue.sync {
-					registeredTasks[url] = nil
+					unsafe registeredTasks[url] = nil
 				}
 			}
 			let responseData = try await apiService.getResource(url: url)
@@ -62,7 +62,7 @@ public final class DispatchQueueImageCache: ImageLoader, @unchecked Sendable {
 				throw ImageCacheError.failedDownloadingImage(url)
 			}
 
-			cache.setObject(image, forKey: url as NSURL, cost: responseData.count)
+			unsafe cache.setObject(image, forKey: url as NSURL, cost: responseData.count)
 
 			return image
 		}

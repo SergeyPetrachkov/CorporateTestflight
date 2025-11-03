@@ -5,8 +5,6 @@ import TestflightNetworking
 import ImageLoader
 import Client
 
-// Plan: 2. AppAssembly, a place where we register all the dependencies.
-
 final class AppAssembly: Assembly {
 
 	func assemble(container: SimpleDI.Container) {

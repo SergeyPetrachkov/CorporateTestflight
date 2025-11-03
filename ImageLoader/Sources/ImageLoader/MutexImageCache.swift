@@ -3,7 +3,7 @@ import Synchronization
 import TestflightNetworking
 
 @available(iOS 18.0, *)
-public final class MutexImageCache: ImageLoader, @unchecked Sendable {
+public final class MutexImageCache: ImageLoader, Sendable {
 
 	public enum ImageCacheError: Error, Equatable {
 		case failedDownloadingImage(URL)
@@ -13,7 +13,7 @@ public final class MutexImageCache: ImageLoader, @unchecked Sendable {
 	private let apiService: TestflightAPIProviding
 
 	// MARK: - State
-	private let cache: NSCache<NSURL, LoadableImage> = {
+	private nonisolated(unsafe) let cache: NSCache<NSURL, LoadableImage> = {
 		let cache = NSCache<NSURL, LoadableImage>()
 		cache.countLimit = 3
 		cache.evictsObjectsWithDiscardedContent = true
@@ -30,7 +30,7 @@ public final class MutexImageCache: ImageLoader, @unchecked Sendable {
 
 	/// Load an image by a given URL.
 	public func load(url: URL) async throws -> LoadableImage {
-		if let cachedImage = cache.object(forKey: url as NSURL) {
+		if let cachedImage = unsafe cache.object(forKey: url as NSURL) {
 			return cachedImage
 		}
 		let loadingTask = getOrCreateTask(for: url)
@@ -63,7 +63,7 @@ public final class MutexImageCache: ImageLoader, @unchecked Sendable {
 				throw ImageCacheError.failedDownloadingImage(url)
 			}
 
-			cache.setObject(image, forKey: url as NSURL, cost: responseData.count)
+			unsafe cache.setObject(image, forKey: url as NSURL, cost: responseData.count)
 
 			return image
 		}

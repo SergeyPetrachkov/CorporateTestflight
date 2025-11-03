@@ -2,12 +2,6 @@ import SwiftUI
 import CorporateTestflightDomain
 import TestflightUIKit
 
-// Plan: 6 SwiftUI
-// Explain the concept of Container and Behaviorless views. What should be tested and whatnot.
-// Start with just .start and .tapItem and .tapQR, later implement Search feature
-// .task {} as an entry point to the concurrency, State task to debounce successfully
-// .onChange as a search. Don't forget debouncing and cancellation
-
 struct VersionsListContainer: View {
 
 	@ObservedObject private var store: VersionsListStore
@@ -64,7 +58,7 @@ struct VersionsListContainer: View {
 			ContentUnavailableView {
 				Label("An error has occured", systemImage: "exclamationmark.triangle")
 			} description: {
-				Text("Error details: \(error).\nTry again.")
+				Text("Error details: \(error.localizedDescription).\nTry again.")
 			} actions: {
 				Button("Reload") {
 					Task {

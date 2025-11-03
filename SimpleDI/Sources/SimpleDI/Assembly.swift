@@ -1,4 +1,3 @@
-// Plan: -1 SimpleDI walkthrough
 // This is a package that mimicks Swinject. Assembly, container and GCD implementation in a Swift 5 package. No async-await, no Combine.
 
 public protocol Assembly {

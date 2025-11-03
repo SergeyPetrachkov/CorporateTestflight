@@ -1,6 +1,12 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.2
 
 import PackageDescription
+
+let swiftSettings: [SwiftSetting] = [
+	.swiftLanguageMode(.v6),
+	.defaultIsolation(.none),
+	.strictMemorySafety(),
+]
 
 let package = Package(
 	name: "ImageLoader",
@@ -25,7 +31,7 @@ let package = Package(
 			dependencies: [
 				.product(name: "TestflightNetworking", package: "CorporateTestflightClientCore")
 			],
-			swiftSettings: [.swiftLanguageMode(.v6)]
+			swiftSettings: swiftSettings
 		),
 		.target(
 			name: "ImageLoaderMock",
@@ -33,7 +39,7 @@ let package = Package(
 				"ImageLoader",
 				"MockFunc"
 			],
-			swiftSettings: [.swiftLanguageMode(.v6)]
+			swiftSettings: swiftSettings
 		),
 		.testTarget(
 			name: "ImageLoaderTests",
@@ -42,7 +48,7 @@ let package = Package(
 				.product(name: "TestflightNetworkingMock", package: "CorporateTestflightClientCore"),
 				.product(name: "MockFunc", package: "MockFunc")
 			],
-			swiftSettings: [.swiftLanguageMode(.v6)]
+			swiftSettings: swiftSettings
 		)
 	]
 )

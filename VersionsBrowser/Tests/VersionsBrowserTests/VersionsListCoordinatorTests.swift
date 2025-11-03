@@ -10,10 +10,6 @@ import SwiftUI
 
 @testable import VersionsBrowser
 
-// Plan: 10 Coordinator tests
-
-// Create a test for the start function
-// How do I test this output thingy? Testing closures.
 
 @MainActor
 private struct Environment {
@@ -168,7 +164,7 @@ final class CachingProxyVersionsBrowserFactory: VersionsBrowserFactory {
 	}
 
 	func environment(
-		inputParameters: (VersionsBrowserFlowInput, @MainActor @Sendable (VersionList.Environment.Output) -> Void)
+		inputParameters: (VersionsBrowserFlowInput, (VersionList.Environment.Output) -> Void)
 	) -> VersionList.Environment {
 		cacheProxy.cachedMethod(key: "environment") {
 			realFactory.environment(inputParameters: inputParameters)

@@ -1,11 +1,15 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.2
 
 import PackageDescription
 
 let moduleName = "VersionsBrowser"
 let interfaceModuleName = "\(moduleName)Interface"
 
-let swiftSettings = [SwiftSetting.swiftLanguageMode(.v6)]
+let swiftSettings = [
+	SwiftSetting.swiftLanguageMode(.v6),
+	SwiftSetting.defaultIsolation(MainActor.self),
+	.strictMemorySafety()
+]
 
 let uniFlowDependency = Target.Dependency.product(name: "UniFlow", package: "UniFlow")
 let simpleDIDependency = Target.Dependency.product(name: "SimpleDI", package: "SimpleDI")
@@ -15,7 +19,7 @@ let jiraViewerInterface = Target.Dependency.product(name: "JiraViewerInterface",
 
 let package = Package(
 	name: moduleName,
-	platforms: [.iOS(.v18), .macOS(.v15)],
+	platforms: [.iOS(.v26), .macOS(.v26)],
 	products: [
 		.library(
 			name: interfaceModuleName,

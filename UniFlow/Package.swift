@@ -1,4 +1,4 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.2
 
 import PackageDescription
 
@@ -12,6 +12,13 @@ let package = Package(
 		)
 	],
 	targets: [
-		.target(name: "UniFlow", swiftSettings: [.swiftLanguageMode(.v6)])
+		.target(
+			name: "UniFlow",
+			swiftSettings: [
+				.swiftLanguageMode(.v6),
+				.defaultIsolation(.none),
+				.strictMemorySafety()
+			]
+		)
 	]
 )
