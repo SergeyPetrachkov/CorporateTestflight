@@ -16,7 +16,7 @@ let package = Package(
 			name: "UniFlow",
 			swiftSettings: [
 				.swiftLanguageMode(.v6),
-				.defaultIsolation(.none),
+				.defaultIsolation(.none), // even if we set MainActor.self, the protocols here won't be isolated in the modularized proj
 				.strictMemorySafety()
 			]
 		)
