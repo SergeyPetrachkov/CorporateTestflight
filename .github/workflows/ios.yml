@@ -16,20 +16,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Select Xcode version
-        run: sudo xcode-select -s '/Applications/Xcode_16.2.app/Contents/Developer/'
       - name: Build
         run: make build_app
       - name: Test
         run: make test_app
   backend:
     name: Build Backend
-    runs-on: macos-15
+    runs-on: macos-26
+    strategy:
+      matrix:
+        xcode: ['26.0']
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Select Xcode version
-        run: sudo xcode-select -s '/Applications/Xcode_16.2.app/Contents/Developer/'
       - name: Build
         run: swift build --package-path ./CorporateTestflightBackend
