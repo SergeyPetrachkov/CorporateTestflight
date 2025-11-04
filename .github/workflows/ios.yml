@@ -8,8 +8,11 @@ on:
 
 jobs:
   build:
-    name: Build and Test app
-    runs-on: macos-15
+	name: "Build and Test the app"
+    runs-on: macos-26
+    strategy:
+      matrix:
+        xcode: ['26.0']
 
     steps:
       - name: Checkout
