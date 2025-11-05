@@ -1,4 +1,5 @@
 # Corporate Testflight
+[![iOS HealthCheck](https://github.com/SergeyPetrachkov/CorporateTestflight/actions/workflows/ios.yml/badge.svg)](https://github.com/SergeyPetrachkov/CorporateTestflight/actions/workflows/ios.yml)
 
 The purpose of this repo is not to create a system, but to serve a sample project for mastering the new Swift Concurrency.
 
@@ -6,7 +7,7 @@ The purpose of this repo is not to create a system, but to serve a sample projec
 
 * macOS
 * admin access
-* Xcode 16.1
+* Xcode 26
 * basic knowledge of the Swift Concurrency
 * basic knowledge of SwiftUI
 
